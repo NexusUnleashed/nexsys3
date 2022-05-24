@@ -5,7 +5,7 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 
 import { eventStream } from './base/eventStream.js'
-import nexSys from './NexSys';
+import nexSys from './nexSys';
 
 window.eventStream = eventStream;
 console.log(eventStream);
