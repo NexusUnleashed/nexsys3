@@ -1,21 +1,21 @@
-import logo from './logo.svg';
+import piedpiper from './piedpiper.svg'
 import './App.css';
 
 function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
+        <img src={piedpiper} className="App-logo" alt="logo" />
         <p>
-          Edit <code>src/App.js</code> and save to reload.
+          nexSys 2.0.
         </p>
         <a
           className="App-link"
-          href="https://reactjs.org"
+          href="https://github.com/Log-Wall/nexsys2"
           target="_blank"
           rel="noopener noreferrer"
         >
-          Learn React
+          nexSys2 on github
         </a>
       </header>
     </div>
