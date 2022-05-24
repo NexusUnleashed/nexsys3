@@ -1,0 +1,44 @@
+export class EventStream extends EventTarget {
+    constructor() {
+        super()
+        this.stream = {}
+        this.controller = new AbortController()
+        this.gmcpBackLog = []
+    }
+
+    registerEvent(event, callback, once = false, signal = this.controller) {
+        if (typeof this.stream[event] === 'undefined') {
+            this.stream[event] = []
+        }
+        this.addEventListener(event, callback, {
+            once: once,
+            signal: signal.signal,
+        })
+        this.stream[event].push(callback)
+    }
+
+    raiseEvent(event, data) {
+        this.dispatchEvent(new CustomEvent(event, { detail: data }))
+    }
+
+    removeListener(event, listener) {
+        const streamEvent = this.stream[event]
+        if (typeof streamEvent === 'undefined') {
+            return
+        }
+
+        if (typeof listener === 'string') {
+            const listenerIndex = streamEvent.findIndex(
+                (e) => e.name === listener
+            )
+            if (listenerIndex >= 0) {
+                this.removeEventListener(event, streamEvent[listenerIndex])
+                streamEvent.splice(listenerIndex, 1)
+            }
+        } else {
+            this.removeEventListener(event, listener)
+        }
+    }
+}
+
+export const eventStream = new EventStream();
