@@ -22,7 +22,7 @@ export class EventStream extends EventTarget {
     }
 
     removeListener(event, listener) {
-        const streamEvent = this.stream[event]
+        let streamEvent = this.stream[event];
         if (typeof streamEvent === 'undefined') {
             return
         }
@@ -36,8 +36,10 @@ export class EventStream extends EventTarget {
                 streamEvent.splice(listenerIndex, 1)
             }
         } else {
+            streamEvent = streamEvent.filter(e => e !== listener);
             this.removeEventListener(event, listener)
         }
+        this.stream[event] = streamEvent;
     }
 }
 
