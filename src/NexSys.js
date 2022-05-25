@@ -1,5 +1,5 @@
 import { Echo, EchoLine, EchoLinePrefix } from "./base/echo";
-import { eventStream } from "./base/eventStream";
+import { eventStream } from "./base/eventstream";
 import {
   curArea,
   curRoom,
@@ -14,7 +14,7 @@ import {
   sendCmd,
   sendInline,
   timeDiffNow,
-} from "./base/utilityFunctions";
+} from "./base/utilities";
 import {
   affPrioSwap,
   Affs,
@@ -38,7 +38,7 @@ import {
   serversideDefencePriorityListStart,
   serversideSettings,
 } from "./create/serverside";
-import { dirMap, dirs, limbs, oppDirs, shortDirs } from "./tables/commonTable";
+import { dirMap, dirs, limbs, oppDirs, shortDirs } from "./tables/commontable";
 import { Queue } from "./base/queue";
 import {
   loadCustomSettings,

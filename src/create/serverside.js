@@ -1,8 +1,8 @@
 /* global set_variable, echo */
 import { AffDef } from '../base/aff'
 import { sys } from '../base/sys'
-import { sendCmd, sendInline } from '../base/utilityFunctions'
-import { eventStream } from '../base/eventStream'
+import { sendCmd, sendInline } from '../base/utilities'
+import { eventStream } from '../base/eventstream'
 import { Defs } from './defs'
 
 export let serversideSettings = {

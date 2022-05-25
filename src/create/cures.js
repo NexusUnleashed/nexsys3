@@ -1,6 +1,6 @@
-import { cureTable } from '../tables/cureTable.js'
+import { cureTable } from '../tables/curetable.js'
 import Cure from '../base/cure.js'
-import { eventStream } from '../base/eventStream.js'
+import { eventStream } from '../base/eventstream.js'
 import { Affs } from './affs.js'
 
 

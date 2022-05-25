@@ -1,5 +1,5 @@
 /* global GMCP */
-import { eventStream } from './eventStream.js'
+import { eventStream } from './eventstream.js'
 
 if (typeof window.GMCP === 'undefined') {
     window.GMCP = {}

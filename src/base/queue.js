@@ -1,5 +1,5 @@
-import { eventStream } from './eventStream.js'
-import { sendCmd, sendInline } from './utilityFunctions.js'
+import { eventStream } from './eventstream.js'
+import { sendCmd, sendInline } from './utilities.js'
 import { sys } from './sys.js'
 
 export class Queue {

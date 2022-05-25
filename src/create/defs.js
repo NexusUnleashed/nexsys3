@@ -1,7 +1,7 @@
 import { Def, DefServerside } from '../base/def.js'
-import { defTable, defPrios } from '../tables/defTable.js'
-import { limbs } from '../tables/commonTable.js'
-import { eventStream } from '../base/eventStream.js'
+import { defTable, defPrios } from '../tables/deftable.js'
+import { limbs } from '../tables/commontable.js'
+import { eventStream } from '../base/eventstream.js'
 import { sys, sysLog } from '../base/sys.js'
 import { serversideSettings } from './serverside.js'
 

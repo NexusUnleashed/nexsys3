@@ -1,6 +1,6 @@
 import Trackable from './trackable'
 import Countable from './countable'
-import { eventStream } from './eventStream.js'
+import { eventStream } from './eventstream.js'
 
 export class Cache extends Trackable {
     constructor(name, amount = 0, obj) {

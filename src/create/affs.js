@@ -1,6 +1,6 @@
 import { Aff, AffCountable, AffTimed, AffDef } from '../base/aff.js'
-import { affTable } from '../tables/affTable'
-import { eventStream } from '../base/eventStream.js'
+import { affTable } from '../tables/afftable'
+import { eventStream } from '../base/eventstream.js'
 
 export const Affs = {}
 

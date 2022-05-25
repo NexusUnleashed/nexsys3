@@ -1,12 +1,12 @@
 /* global get_variable, set_variable */
-import { affTable } from '../tables/affTable'
-import { defTable, defPrios } from '../tables/defTable'
-import { balanceTable } from '../tables/balanceTable'
-import { cacheTable } from '../tables/cacheTable'
-import { cureTable } from '../tables/cureTable'
+import { affTable } from '../tables/afftable'
+import { defTable, defPrios } from '../tables/deftable'
+import { balanceTable } from '../tables/balancetable'
+import { cacheTable } from '../tables/cachetable'
+import { cureTable } from '../tables/curetable'
 import { whiteList } from './lust'
 import { sys } from '../base/sys'
-import { eventStream } from '../base/eventStream'
+import { eventStream } from '../base/eventstream'
 
 export const updateList = function (list, newList) {
     if (newList) {

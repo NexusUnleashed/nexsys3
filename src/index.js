@@ -4,8 +4,8 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
-import { eventStream } from './base/eventStream.js'
-import nexSys from './nexSys';
+import { eventStream } from './base/eventstream.js'
+import nexSys from './nexsys';
 
 window.eventStream = eventStream;
 console.log(eventStream);
