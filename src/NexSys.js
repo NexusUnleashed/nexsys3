@@ -5,15 +5,16 @@ import {
   curRoom,
   curRoomArea,
   curRoomName,
-  gmcpHandler,
+  gmcpHandler
 } from "./base/gmcp";
+import { Queue } from "./base/queue";
 import { sys, sysLog, sysLogging, sysLoggingToggle } from "./base/sys";
 import {
   psend,
   rsend,
   sendCmd,
   sendInline,
-  timeDiffNow,
+  timeDiffNow
 } from "./base/utilities";
 import {
   affPrioSwap,
@@ -21,39 +22,38 @@ import {
   getCurrentAffs,
   haveAff,
   haveAffs,
-  haveAnAff,
+  haveAnAff
 } from "./create/affs";
 import { Bals, haveABal, haveBal, haveBals } from "./create/balances";
 import { Caches, getCacheOutputs, getMissingCache } from "./create/caches";
 import { Cures } from "./create/cures";
-import {
-  Defs,
-  getCurrentDefs,
-  getDefOutputs,
-  getMissingDefs,
-} from "./create/defs";
-import { getLustCommands, rejectList, whiteList } from "./create/lust";
-import {
-  serverside,
-  serversideDefencePriorityListStart,
-  serversideSettings,
-} from "./create/serverside";
-import { dirMap, dirs, limbs, oppDirs, shortDirs } from "./tables/commontable";
-import { Queue } from "./base/queue";
 import {
   loadCustomSettings,
   saveCustomSettings,
   saveModel,
   updateAndSaveModel,
   updateList,
-  updateModel,
+  updateModel
 } from "./create/customsettings";
+import {
+  Defs,
+  getCurrentDefs,
+  getDefOutputs,
+  getMissingDefs
+} from "./create/defs";
+import { getLustCommands, rejectList, whiteList } from "./create/lust";
+import {
+  serverside,
+  serversideDefencePriorityListStart,
+  serversideSettings
+} from "./create/serverside";
+import { dirMap, dirs, limbs, oppDirs, shortDirs } from "./tables/commontable";
 
 window.eventStream = eventStream;
 const nexSys = {
   sys: sys,
-  sysLog: sysLog,
   sysLogging: sysLogging,
+  sysLog: sysLog,
   sysLoggingToggle: sysLoggingToggle,
 
   Cures: Cures,
