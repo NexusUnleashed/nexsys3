@@ -1,0 +1,16 @@
+{
+  "files": {
+    "main.css": "/nexsys2/static/css/main.073c9b0a.css",
+    "main.js": "/nexsys2/static/js/main.26678a04.js",
+    "static/js/787.5558011e.chunk.js": "/nexsys2/static/js/787.5558011e.chunk.js",
+    "static/media/piedpiper.svg": "/nexsys2/static/media/piedpiper.243d65282e39764d21b9c5000c1a1be7.svg",
+    "index.html": "/nexsys2/index.html",
+    "main.073c9b0a.css.map": "/nexsys2/static/css/main.073c9b0a.css.map",
+    "main.26678a04.js.map": "/nexsys2/static/js/main.26678a04.js.map",
+    "787.5558011e.chunk.js.map": "/nexsys2/static/js/787.5558011e.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.073c9b0a.css",
+    "static/js/main.26678a04.js"
+  ]
+}
