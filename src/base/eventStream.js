@@ -1,18 +1,20 @@
+/* need a better implementation for the abort controller(s) */
+
 export class EventStream extends EventTarget {
     constructor() {
         super()
         this.stream = {}
-        this.controller = new AbortController()
+        //this.controller = new AbortController()
         this.gmcpBackLog = []
     }
 
-    registerEvent(event, callback, once = false, signal = this.controller) {
+    registerEvent(event, callback, once = false, /*signal = this.controller*/) {
         if (typeof this.stream[event] === 'undefined') {
             this.stream[event] = []
         }
-        this.addEventListener(event, callback, {
+        this.addEventListener(event, async ({detail})=>{callback(detail)}, {
             once: once,
-            signal: signal.signal,
+            //signal: signal.signal,
         })
         this.stream[event].push(callback)
     }
