@@ -1,12 +1,12 @@
-/* global GMCP */
+/* global GMCP, nexSys */
 import { eventStream } from './eventStream.js'
 
 if (typeof window.GMCP === 'undefined') {
     window.GMCP = {}
 }
 export function gmcpHandler() {
-    while (eventStream.gmcpBackLog && eventStream.gmcpBackLog.length > 0) {
-        const current_args = eventStream.gmcpBackLog.shift()
+    while (nexSys.gmcpBackLog && nexSys.gmcpBackLog.length > 0) {
+        const current_args = nexSys.gmcpBackLog.shift()
         if (current_args.gmcp_method) {
             Object.setAtString(
                 window.GMCP,
