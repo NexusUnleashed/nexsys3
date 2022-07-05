@@ -1,5 +1,5 @@
 import { Echo, EchoLine, EchoLinePrefix } from "./base/echo";
-import { eventStream } from "./base/eventstream";
+import { eventStream } from "./base/eventStream";
 import {
   curArea,
   curRoom,
@@ -47,7 +47,7 @@ import {
   serversideDefencePriorityListStart,
   serversideSettings
 } from "./create/serverside";
-import { dirMap, dirs, limbs, oppDirs, shortDirs } from "./tables/commontable";
+import { dirMap, dirs, limbs, oppDirs, shortDirs } from "./tables/commonTable";
 
 window.eventStream = eventStream;
 const nexSys = {

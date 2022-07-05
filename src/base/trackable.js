@@ -1,4 +1,4 @@
-import { eventStream } from './eventstream.js'
+import { eventStream } from './eventStream.js'
 
 class Trackable {
     constructor(name) {

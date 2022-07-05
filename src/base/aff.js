@@ -2,7 +2,7 @@ import Trackable from './trackable.js'
 import Priority from './priority.js'
 import Countable from './countable.js'
 import Timer from './timer.js'
-import { eventStream } from './eventstream.js'
+import { eventStream } from './eventStream.js'
 
 class Aff extends Trackable {
     constructor(name, prio = 0, uncurable = false) {

@@ -1,4 +1,4 @@
-import { eventStream } from './eventstream.js'
+import { eventStream } from './eventStream.js'
 import { sys } from './sys.js'
 
 export class Echo {

@@ -7,7 +7,7 @@ import { getCureOutputs } from '../create/cures'
 import { getDefOutputs } from '../create/defs'
 import { Balance } from './balance'
 import { getLustCommands } from '../create/lust'
-import { eventStream } from './eventstream.js'
+import { eventStream } from './eventStream.js'
 import { sendCmd } from './utilities'
 
 export const sys = {
