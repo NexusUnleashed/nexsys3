@@ -1,3 +1,5 @@
+/** global linechunk_text, linechunk_color, linechunks_create, convert_bgcolor */
+
 // Tael's display_notice extension
 //
 // Adds support for multi-chunk display notices.
@@ -31,10 +33,10 @@
 //     Example of printing "Oh no!" in red on blue followed by " Anything but that!" in orange, then " This is madness!" in default colours, then " Why?!" in red.
 //         display_notice("Oh no!", "red", "blue", " Anything but that!", "orange", "", " This is madness!", "reset", "", " Why?!", "red");
 
-client.display_notice = function (...args) {
+export const display_notice = function (...args) {
   let selector = '#output_main';
  
-  if (args[0].indexOf('#') != -1) {
+  if (args[0].indexOf('#') !== -1) {
     selector = args.splice(0,1)[0];
   }
   
@@ -54,7 +56,7 @@ client.display_notice = function (...args) {
       text = e[0];
       fg = e[1];
       bg = e[2];
-      bg = client.convert_bgcolor(bg);
+      bg = convert_bgcolor(bg);
       chunk.push(linechunk_color(fg, bg));
       chunk.push(linechunk_text(text));
   }
@@ -62,18 +64,18 @@ client.display_notice = function (...args) {
   line.parsed_line = linechunks_create(chunk);
   line.no_triggers = true;
 
-  if (client.current_block) {
-      let idx = client.current_block.length;
-      if (client.current_line) idx = client.current_block.indexOf(client.current_line) + 1;
-      client.current_block.splice(idx, 0, line);
+  if (current_block) {
+      let idx = current_block.length;
+      if (current_line) idx = current_block.indexOf(current_line) + 1;
+      current_block.splice(idx, 0, line);
   } else {
       let lines = [];
       lines.push(line);
-      client.display_text_block(lines, selector);
+      display_text_block(lines, selector);
   }
 };
 
-client.display_text_block = function(lines, selector = '#output_main') {
+display_text_block = function(lines, selector = '#output_main') {
   var block = generate_text_block(lines);
   update_text_completion(lines);
   if (block.length)
