@@ -1,12 +1,12 @@
 /* global set_current_target */
 
-import { Affs, getCurrentAffs } from '../create/affs'
-import { getCurrentBals } from '../create/balances'
-import { getCacheOutputs } from '../create/caches'
-import { getCureOutputs } from '../create/cures'
-import { getDefOutputs } from '../create/defs'
+import { Affs, getCurrentAffs } from '../generators/affs'
+import { getCurrentBals } from '../generators/balances'
+import { getCacheOutputs } from '../generators/caches'
+import { getCureOutputs } from '../generators/cures'
+import { getDefOutputs } from '../generators/defs'
 import { Balance } from './balance'
-import { getLustCommands } from '../create/lust'
+import { getLustCommands } from '../generators/lust'
 import { eventStream } from './eventStream.js'
 import { sendCmd } from './utilities'
 

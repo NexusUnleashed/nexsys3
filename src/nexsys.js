@@ -23,10 +23,10 @@ import {
   haveAff,
   haveAffs,
   haveAnAff
-} from "./create/affs";
-import { Bals, haveABal, haveBal, haveBals } from "./create/balances";
-import { Caches, getCacheOutputs, getMissingCache } from "./create/caches";
-import { Cures } from "./create/cures";
+} from "./generators/affs";
+import { Bals, haveABal, haveBal, haveBals } from "./generators/balances";
+import { Caches, getCacheOutputs, getMissingCache } from "./generators/caches";
+import { Cures } from "./generators/cures";
 import {
   loadCustomSettings,
   saveCustomSettings,
@@ -34,19 +34,19 @@ import {
   updateAndSaveModel,
   updateList,
   updateModel
-} from "./create/customsettings";
+} from "./generators/customsettings";
 import {
   Defs,
   getCurrentDefs,
   getDefOutputs,
   getMissingDefs
-} from "./create/defs";
-import { getLustCommands, rejectList, whiteList } from "./create/lust";
+} from "./generators/defs";
+import { getLustCommands, rejectList, whiteList } from "./generators/lust";
 import {
   serverside,
   serversideDefencePriorityListStart,
   serversideSettings
-} from "./create/serverside";
+} from "./generators/serverside";
 import { dirMap, dirs, limbs, oppDirs, shortDirs } from "./tables/commonTable";
 
 window.eventStream = eventStream;
