@@ -60,6 +60,8 @@ import { dirMap, dirs, limbs, oppDirs, shortDirs } from "./tables/commonTable";
 
 window.eventStream = eventStream;
 const nexSys = {
+  gmcpBacklog: [],
+  
   sys: sys,
   sysLogging: sysLogging,
   sysLog: sysLog,
