@@ -1,3 +1,5 @@
+/* global nexusclient */
+
 import { eventStream } from './eventStream.js'
 import { sys } from './sys.js'
 
@@ -10,7 +12,7 @@ export class Echo {
     }
 
     echo(text) {
-        window.display_notice(this._selector, text, this._fg, this._bg)
+        nexusclient.display_notice(this._selector, text, this._fg, this._bg)
     }
 }
 
@@ -33,7 +35,7 @@ export class EchoWithPrefix extends Echo {
     }
 
     echo(text) {
-        window.display_notice(
+        nexusclient.display_notice(
             this._selector,
             this._prefix,
             this._prefixFg,
@@ -143,7 +145,7 @@ const lostDef = function (data) {
 // CUSTOM to replace balance and equilibrium messages
 const gotBalance = function (data) {
     if (['equilibrium', 'balance'].includes(data.name)) {
-        window.display_notice(
+        nexusclient.display_notice(
             'You have recovered ' + data.name,
             '#00ccff',
             'black',
