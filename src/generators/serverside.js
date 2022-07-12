@@ -1,4 +1,4 @@
-/* global set_variable, echo */
+/* global nexusclient, echo */
 import { AffDef } from '../base/aff'
 import { sys } from '../base/sys'
 import { sendCmd, sendInline } from '../base/utilities'
@@ -181,7 +181,7 @@ export function serverside() {
             separatorSet = true
             if (args) {
                 sys.settings.sep = args
-                set_variable('commandSeparator', args)
+                nexusclient.variables().set('commandSeparator', args)
             }
             sys.pause()
             const startupCommands = [
@@ -199,7 +199,7 @@ export function serverside() {
             for (let i = 0; i < startupCommands.length; i++) {
                 sendCmd(startupCommands[i])
             }
-            window.send_GMCP('IRE.Rift.Request', '')
+            nexusclient.datahandler().send_GMCP('IRE.Rift.Request', '')
         }
     }
 

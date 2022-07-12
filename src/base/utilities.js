@@ -3,7 +3,7 @@ import { sys } from './sys'
 
 export function sendCmd(cmd) {
     if (cmd) {
-        window.send_direct(cmd)
+        window.nexusclient.send_commands(cmd)
     }
     eventStream.raiseEvent('SendCommandEvent', cmd)
 }

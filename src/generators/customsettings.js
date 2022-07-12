@@ -1,4 +1,4 @@
-/* global get_variable, set_variable */
+/* global nexusclient */
 import { affTable } from '../tables/affTable'
 import { defTable, defPrios } from '../tables/defTable'
 import { balanceTable } from '../tables/balanceTable'
@@ -30,7 +30,7 @@ export const updateModel = function (model, newModel) {
 
 export const saveModel = function (name, model) {
     if (model) {
-        set_variable(name, model)
+        nexusclient.variables().set(name, model)
         eventStream.raiseEvent(name + 'ModelSavedEvent', model)
     } else {
         console.log(name + ' model was null in saveModel')
@@ -43,12 +43,12 @@ export const updateAndSaveModel = function (name, model, newModel) {
 }
 
 const loadSystemSettings = function () {
-    const model = get_variable('CustomSystemSettings')
+    const model = nexusclient.variables().get('CustomSystemSettings')
     updateAndSaveModel('CustomSystemSettings', sys.settings, model)
 }
 
 const loadAffSettings = function () {
-    const model = get_variable('CustomAffSettings')
+    const model = nexusclient.variables().get('CustomAffSettings')
     if (model) {
         updateList(affTable.list, model.list)
         updateModel(affTable.prios, model.prios)
@@ -65,12 +65,12 @@ const loadAffSettings = function () {
 }
 
 const loadDefTable = function () {
-    const model = get_variable('CustomDefTable')
+    const model = nexusclient.variables().get('CustomDefTable')
     updateAndSaveModel('CustomDefTable', defTable, model)
 }
 
 const loadDefSettings = function () {
-    const model = get_variable('CustomDefSettings')
+    const model = nexusclient.variables().get('CustomDefSettings')
     if (model) {
         updateModel(defPrios.keepup, model.keepup)
         updateModel(defPrios.static, model.static)
@@ -80,22 +80,22 @@ const loadDefSettings = function () {
 }
 
 const loadBalanceTable = function () {
-    const model = get_variable('CustomBalanceTable')
+    const model = nexusclient.variables().get('CustomBalanceTable')
     updateAndSaveModel('CustomBalanceTable', balanceTable, model)
 }
 
 const loadCacheSettings = function () {
-    const model = get_variable('CustomCacheSettings')
+    const model = nexusclient.variables().get('CustomCacheSettings')
     updateAndSaveModel('CustomCacheSettings', cacheTable, model)
 }
 
 const loadCureTable = function () {
-    const model = get_variable('CustomCureTable')
+    const model = nexusclient.variables().get('CustomCureTable')
     updateAndSaveModel('CustomCureTable', cureTable, model)
 }
 
 const loadLustList = function () {
-    whiteList = get_variable('LustWhiteList') || whiteList
+    whiteList = nexusclient.variables().get('LustWhiteList') || whiteList
     saveModel('LustWhiteList', whiteList)
 }
 

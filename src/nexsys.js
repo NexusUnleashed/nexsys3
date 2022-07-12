@@ -1,3 +1,12 @@
+/* 
+  Breaking changes from 2.0 to 3.0:
+    GMCP > nexusclient.datahandler().GMCP
+    get_variable > nexusclient.variables().get()
+    set_variable > nexusclient.variables().set()
+    run_function > nexusclient.reflexes().run_function()
+    $
+*/
+
 import { Echo, EchoLine, EchoLinePrefix } from "./base/echo";
 import { eventStream } from "./base/eventStream";
 import {
@@ -107,13 +116,13 @@ const nexSys = {
   serversideSettings: serversideSettings,
   serversideDefencePriorityListStart: serversideDefencePriorityListStart,
 
-  EqBalQueue: new Queue({
+  eqbalQueue: new Queue({
     name: "eqBal",
     prefix: "queue addclear eqbal ",
     pre: false,
     clear: "clearqueue eqbal",
   }),
-  ClassQueue: new Queue({
+  classQueue: new Queue({
     name: "class",
     prefix: "queue addclear class ",
     pre: false,
