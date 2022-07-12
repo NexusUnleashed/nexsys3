@@ -1,10 +1,12 @@
 /* 
   Breaking changes from 2.0 to 3.0:
     GMCP > nexusclient.datahandler().GMCP
-    get_variable > nexusclient.variables().get()
-    set_variable > nexusclient.variables().set()
-    run_function > nexusclient.reflexes().run_function()
-    $
+    get_variable() > nexusclient.variables().get()
+    set_variable() > nexusclient.variables().set()
+    run_function() > nexusclient.reflexes().run_function()
+    display_notice() > nexusclient.display_notice()
+    print() > nexusclient.add_html_line()
+    $ > all jquery implementation
 */
 
 import { Echo, EchoLine, EchoLinePrefix } from "./base/echo";
@@ -56,11 +58,14 @@ import {
   serversideDefencePriorityListStart,
   serversideSettings
 } from "./generators/serverside";
+import { affTable } from "./tables/affTable";
+import { cacheTable } from "./tables/cacheTable";
 import { dirMap, dirs, limbs, oppDirs, shortDirs } from "./tables/commonTable";
+import { defPrios } from "./tables/defTable";
 
 window.eventStream = eventStream;
 const nexSys = {
-  gmcpBacklog: [],
+  gmcpBackLog: [],
   
   sys: sys,
   sysLogging: sysLogging,
@@ -69,6 +74,7 @@ const nexSys = {
 
   Cures: Cures,
   Affs: Affs,
+  affTable: affTable,
   getCurrentAffs: getCurrentAffs,
   haveAff: haveAff,
   haveAffs: haveAffs,
@@ -81,11 +87,13 @@ const nexSys = {
   haveBals: haveBals,
 
   Defs: Defs,
+  defPrios: defPrios,
   getCurrentDefs: getCurrentDefs,
   getDefOutputs: getDefOutputs,
   getMissingDefs: getMissingDefs,
 
   Caches: Caches,
+  cacheTable: cacheTable,
   getCacheOutputs: getCacheOutputs,
   getMissingCache: getMissingCache,
 
