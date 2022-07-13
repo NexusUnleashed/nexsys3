@@ -32,7 +32,22 @@
 //         display_notice("Oh no!", "red", "blue", "", "reset", "", " Anything but that!", "", "blue");
 //     Example of printing "Oh no!" in red on blue followed by " Anything but that!" in orange, then " This is madness!" in default colours, then " Why?!" in red.
 //         display_notice("Oh no!", "red", "blue", " Anything but that!", "orange", "", " This is madness!", "reset", "", " Why?!", "red");
+window.nexusclient.display_notice = function(text, fg, bg, channel=null)
+    {
+        if ((!text) || (!text.length)) return;
 
+        if (fg === undefined) fg = this.settings().get_ansi_color(7, false);
+        bg = this.settings().convert_bgcolor(bg);
+
+        let parser = new LineParser (this.settings(), this.datahandler());
+        var line = {};
+        line.parsed_line = parser.colorLine (text, fg, bg);
+        line.timestamp_ms = Util.get_time(true);
+        line.timestamp = Util.get_time(false);
+        line.no_triggers = true;
+
+        this._add_line(line, channel);
+    }
 export const display_notice = function (...args) {
   let selector = '#output_main';
  

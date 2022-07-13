@@ -97,9 +97,9 @@ const nexSys = {
   getCacheOutputs: getCacheOutputs,
   getMissingCache: getMissingCache,
 
-  echo: new Echo("white"),
-  echoLine: new EchoLine("white"),
-  echoInfoLine: new EchoLinePrefix({ text: "[Info]: ", fg: "yellow" }, "white"),
+  echo: new Echo("white").echo,
+  echoLine: new EchoLine("white").echo,
+  echoInfoLine: new EchoLinePrefix({ text: "[Info]: ", fg: "yellow" }, "white").echo,
 
   gmcpHandler: gmcpHandler,
   curArea: curArea,
