@@ -7,6 +7,7 @@
     display_notice() > nexusclient.display_notice()
     print() > nexusclient.add_html_line()
     $ > all jquery implementation
+    gag_current_line() > nexusclient.current_line.gag = true
 */
 
 import { Echo, EchoLine, EchoLinePrefix } from "./base/echo";

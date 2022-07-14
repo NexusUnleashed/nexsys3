@@ -2,6 +2,7 @@
 
 import { eventStream } from './eventStream.js'
 import { sys } from './sys.js'
+import { display_notice } from './utilities.js'
 
 export class Echo {
     constructor(fg, bg, selector) {
@@ -12,7 +13,7 @@ export class Echo {
     }
 
     echo(text) {
-        nexusclient.display_notice(this._selector, text, this._fg, this._bg)
+        display_notice(text, this._fg, this._bg)
     }
 }
 
@@ -35,8 +36,7 @@ export class EchoWithPrefix extends Echo {
     }
 
     echo(text) {
-        nexusclient.display_notice(
-            this._selector,
+        display_notice(
             this._prefix,
             this._prefixFg,
             this._prefixBg,
@@ -145,7 +145,7 @@ const lostDef = function (data) {
 // CUSTOM to replace balance and equilibrium messages
 const gotBalance = function (data) {
     if (['equilibrium', 'balance'].includes(data.name)) {
-        nexusclient.display_notice(
+        display_notice(
             'You have recovered ' + data.name,
             '#00ccff',
             'black',
