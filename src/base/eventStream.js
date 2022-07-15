@@ -37,6 +37,8 @@ export class EventStream extends EventTarget {
                 this.removeEventListener(event, streamEvent[listenerIndex])
                 streamEvent.splice(listenerIndex, 1)
             }
+        } else if (typeof listener === 'number' && listener < streamEvent.length) {
+            streamEvent.splice(listener, 1);
         } else {
             streamEvent = streamEvent.filter(e => e !== listener);
             this.removeEventListener(event, listener)
