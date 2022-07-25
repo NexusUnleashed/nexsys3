@@ -1,5 +1,5 @@
-import nexSys from "./nexsys";
-import { eventStream } from "./base/eventStream"
+import nexSys from "../nexsys";
+import { eventStream } from "../base/eventStream"
 
 describe('basic eventStream functionality', () => {
   test('eventStream loaded', () => {

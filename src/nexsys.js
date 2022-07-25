@@ -10,6 +10,7 @@
     gag_current_line() > nexusclient.current_line.gag = true
 */
 
+import { display_notice } from "./base/clientoverrides";
 import { Echo, EchoLine, EchoLinePrefix } from "./base/echo";
 import { eventStream } from "./base/eventStream";
 import {
@@ -63,6 +64,7 @@ import { affTable } from "./tables/affTable";
 import { cacheTable } from "./tables/cacheTable";
 import { dirMap, dirs, limbs, oppDirs, shortDirs } from "./tables/commonTable";
 import { defPrios } from "./tables/defTable";
+import {generateEchos} from './generators/echos.js';
 
 window.eventStream = eventStream;
 const nexSys = {
@@ -147,6 +149,9 @@ const nexSys = {
   loadCustomSettings: loadCustomSettings,
   saveCustomSettings: saveCustomSettings,
 };
+
+generateEchos();
+window.display_notice = display_notice;
 serverside();
 
 export default nexSys;
