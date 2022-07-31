@@ -1,4 +1,4 @@
-/* global GMCP, eventStream */
+/* global eventStream */
 
 export let curRoom = 0
 export let curRoomName = ''

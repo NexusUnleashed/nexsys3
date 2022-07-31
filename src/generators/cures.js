@@ -2,7 +2,6 @@
 
 import { cureTable } from '../tables/cureTable.js'
 import Cure from '../classes/Cure.js'
-import { Affs } from './affs.js'
 
 
 export const Cures = {}

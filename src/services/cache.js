@@ -1,3 +1,7 @@
+import { Caches } from "../generators/caches"
+import { Affs } from "../generators/affs"
+import { Defs } from "../generators/defs"
+
 export function getMissingCache() {
   const caches = Caches
   const current_cache = []

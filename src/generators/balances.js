@@ -1,4 +1,4 @@
-/*global eventStream */
+/*global */
 
 import { Balance, BalExtended } from '../classes/Balance.js'
 import { balanceTable as balances } from '../tables/balanceTable.js'

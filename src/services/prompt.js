@@ -1,7 +1,4 @@
-nexSys.prompt = nexSys.prompt || {};
-
-Object.assign(nexSys.prompt, {
-    get_formatted_prompt(...args) {
+export const get_formatted_prompt = (...args) => {
         if (!args[0] || !args[0].length) {
             if(args[0] !== "") { // some variables will send in "", just pretend we're formatting no text
                 return;
@@ -27,44 +24,43 @@ Object.assign(nexSys.prompt, {
         line.no_triggers = true;
 
         return line;
-    },
+    };
     
-    getCustomPrompt() {
-        let vars = nexSys.prompt.vars;
-        let diffh = vars.diffh;
-        let diffm = vars.diffm;
+export const getCustomPrompt = () => {
+    let vars = nexSys.prompt.vars;
+    let diffh = vars.diffh;
+    let diffm = vars.diffm;
 
-        vars.diffh = "";
-        vars.diffm = "";
+    vars.diffh = "";
+    vars.diffm = "";
 
-        if(vars.blackout) {
-            return nexSys.prompt.get_formatted_prompt('-', "reset", "");
-        }
-
-        return nexSys.prompt.get_formatted_prompt(
-            vars.paused + "", "red", "",
-            vars.aeon + "", "red", "",
-            vars.retard + "", "blue", "",
-            vars.h + "", vars.hcolor, "",
-            "(" + vars.ph + "), ", vars.hcolor, "",
-            vars.m + "", vars.mcolor, "",
-            "(" + vars.pm + "), ", vars.mcolor, "",
-            vars.rage + "", "green", "",
-            vars.w + ", ", vars.wcolor, "",
-            vars.e + " ", vars.ecolor, "",
-            vars.eq + vars.bal + "|", "reset", "",
-            vars.c + vars.k + vars.d + vars.b + " ", "reset", "",
-            vars.target + " ", "green", "",
-            vars.kai + "", "reset", "",
-            vars.kaitrance + "", "blue", "",
-            vars.vitality + "", "purple", "",
-            vars.stance + " ", "white", "",
-            vars.affString + " ", "brown", "",
-            diffh + " ", vars.diffhcolor, "",
-            diffm + " ", vars.diffmcolor, ""
-        );
+    if(vars.blackout) {
+        return nexSys.prompt.get_formatted_prompt('-', "reset", "");
     }
-});
+
+    return nexSys.prompt.get_formatted_prompt(
+        vars.paused + "", "red", "",
+        vars.aeon + "", "red", "",
+        vars.retard + "", "blue", "",
+        vars.h + "", vars.hcolor, "",
+        "(" + vars.ph + "), ", vars.hcolor, "",
+        vars.m + "", vars.mcolor, "",
+        "(" + vars.pm + "), ", vars.mcolor, "",
+        vars.rage + "", "green", "",
+        vars.w + ", ", vars.wcolor, "",
+        vars.e + " ", vars.ecolor, "",
+        vars.eq + vars.bal + "|", "reset", "",
+        vars.c + vars.k + vars.d + vars.b + " ", "reset", "",
+        vars.target + " ", "green", "",
+        vars.kai + "", "reset", "",
+        vars.kaitrance + "", "blue", "",
+        vars.vitality + "", "purple", "",
+        vars.stance + " ", "white", "",
+        vars.affString + " ", "brown", "",
+        diffh + " ", vars.diffhcolor, "",
+        diffm + " ", vars.diffmcolor, ""
+    );
+};
 
 nexSys.prompt.vars = {
     blackout: false,
@@ -232,11 +228,9 @@ nexSys.prompt.affAbbrev = {
     wristfractures: 'wf'
 };
 
-Object.assign(nexSys.prompt, {
-    colorPercentage(perc) {
+const colorPercentage = (perc) => {
         return perc > 75 ? 'green' : (perc >= 33 ? 'yellow' : 'red');
-    }
-});
+    };
 
 let setPromptVitals = function(vitals) {
     let vars = nexSys.prompt.vars;

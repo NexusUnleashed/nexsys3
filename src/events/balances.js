@@ -1,25 +1,28 @@
+/* global eventStream */
+import {haveBal} from '../services/bals'
+
 let eventGmcpBalances = function(vitals) {
-  if (vitals.bal == '1') {
+  if (vitals.bal === '1') {
       // CUSTOM event for recovering eqbal tracking
-      if (!nexSys.haveBal('balance') && nexSys.haveBal('equilibrium')) {
-          nexSys.eventStream.raiseEvent('eqBalRecoveredEvent');
+      if (!haveBal('balance') && haveBal('equilibrium')) {
+          eventStream.raiseEvent('eqBalRecoveredEvent');
       }
-      nexSys.eventStream.raiseEvent('balanceGotBalEvent');
+      eventStream.raiseEvent('balanceGotBalEvent');
   }
   else {
-      nexSys.eventStream.raiseEvent('balanceLostBalEvent');
+      eventStream.raiseEvent('balanceLostBalEvent');
   }
   
   if(vitals.eq == '1') {
       // CUSTOM event for recovering eqbal tracking
-      if (!nexSys.haveBal('equilibrium') && nexSys.haveBal('balance')) {
-          nexSys.eventStream.raiseEvent('eqBalRecoveredEvent');
+      if (!haveBal('equilibrium') && haveBal('balance')) {
+          eventStream.raiseEvent('eqBalRecoveredEvent');
       }
-      nexSys.eventStream.raiseEvent('equilibriumGotBalEvent');
+      eventStream.raiseEvent('equilibriumGotBalEvent');
   }
   else {
-      nexSys.eventStream.raiseEvent('equilibriumLostBalEvent');
+      eventStream.raiseEvent('equilibriumLostBalEvent');
   }
 };
 
-nexSys.eventStream.registerEvent('Char.Vitals', eventGmcpBalances);
+eventStream.registerEvent('Char.Vitals', eventGmcpBalances);

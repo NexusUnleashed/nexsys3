@@ -1,4 +1,4 @@
-/*global eventStream */
+/*global */
 
 import { Def, DefServerside } from '../classes/Def.js'
 import { defTable, defPrios } from '../tables/defTable.js'

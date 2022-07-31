@@ -1,3 +1,11 @@
+/* global eventStream */
+
+import { Defs } from "../generators/defs"
+import { sysLog } from "./sys"
+import { limbs } from "../tables/commonTable"
+import { sys } from "./sys"
+import { defPrios } from '../tables/defTable.js'
+
 export function getCurrentDefs() {
   const defs = Defs
   const current_defs = []

@@ -1,27 +1,35 @@
+/* global eventStream */
+
+import {getCurrentDefs, parry} from '../services/defs'
+import { Defs } from '../generators/defs'
+import { sys } from '../generators/sys'
+import limbs from '../tables/commonTable'
+import { defPrios } from "./tables/defTable";
+import { serversideSettings } from "../generators/serverside";
 
 let eventGmcpDefList = function(list) {
-  let prev_list = nexSys.getCurrentDefs();
+  let prev_list = getCurrentDefs();
   let new_list = {};
 
-  for (i in list) {
+  for (let i in list) {
       let def = list[i].name;
       def = def.replace('\(', '');
       def = def.replace('\)', '');
       // maintain new list, to compare to old list when done
       new_list[def] = true;
 
-      nexSys.eventStream.raiseEvent(def+'GotDefEvent');
+      eventStream.raiseEvent(def+'GotDefEvent');
   }
 
   // compare new list to old list and remove defs that are no longer there
   for (let i in prev_list) {
       if(new_list[prev_list[i]] === undefined) {
-          nexSys.eventStream.raiseEvent(prev_list[i]+'LostDefEvent');
+          eventStream.raiseEvent(prev_list[i]+'LostDefEvent');
       }
   }
 };
 
-nexSys.eventStream.registerEvent('Char.Defences.List', eventGmcpDefList);
+eventStream.registerEvent('Char.Defences.List', eventGmcpDefList);
 
 
 let eventGmcpDefAdd = function(obj) {
@@ -30,10 +38,10 @@ let eventGmcpDefAdd = function(obj) {
   def = def.replace('\(', '');
   def = def.replace('\)', '');
 
-  nexSys.eventStream.raiseEvent(def+'GotDefEvent');
+  eventStream.raiseEvent(def+'GotDefEvent');
 };
 
-nexSys.eventStream.registerEvent('Char.Defences.Add', eventGmcpDefAdd);
+eventStream.registerEvent('Char.Defences.Add', eventGmcpDefAdd);
 
 let eventGmcpDefRemove = function(def) {
   def = def[0];
@@ -41,10 +49,10 @@ let eventGmcpDefRemove = function(def) {
   def = def.replace('\(', '');
   def = def.replace('\)', '');
 
-  nexSys.eventStream.raiseEvent(def+'LostDefEvent');
+  eventStream.raiseEvent(def+'LostDefEvent');
 };
 
-nexSys.eventStream.registerEvent('Char.Defences.Remove', eventGmcpDefRemove);
+eventStream.registerEvent('Char.Defences.Remove', eventGmcpDefRemove);
 
 export function repop(args) {
   if (serversideSettings.loaded) {

@@ -1,3 +1,5 @@
+import { Affs } from "../generators/affs"
+
 export function getCurrentAffs() {
   const affs = Affs
 

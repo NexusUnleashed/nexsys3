@@ -1,3 +1,6 @@
+import { Affs } from "../generators/affs"
+import { Cures } from "../generators/cures"
+
 export function getCureOutputs(affList, balList) {
   let cureOutputs = []
   let affCurable = true

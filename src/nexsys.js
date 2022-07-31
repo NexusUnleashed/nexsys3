@@ -146,5 +146,6 @@ const nexSys = {
 
 export default nexSys;
 
+//send_GMCP('IRE.Rift.Request')
 //nexSys.loadCustomSettings();
 //run_function('CustomSettingsFromPackage', {}, 'ALL');

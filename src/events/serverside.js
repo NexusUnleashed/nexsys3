@@ -3,14 +3,7 @@ import { AffDef } from "../classes/Aff";
 import { Defs } from "../generators/defs";
 import { sys } from "../services/sys";
 import { sendCmd, sendInline } from "../services/utilities";
-
-export let serversideSettings = {
-  loaded: false,
-  status: {},
-  affs: {},
-  defs: {},
-};
-export const serversideDefencePriorityListStart = false;
+import { serversideSettings } from "../generators/serverside";
 
 const serversideSlowModeOn = function (args) {
   sendInline([

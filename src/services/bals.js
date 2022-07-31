@@ -1,3 +1,5 @@
+import { Bals } from "../generators/balances"
+
 export function getCurrentBals() {
   const bals = Bals
   const currentBals = []
