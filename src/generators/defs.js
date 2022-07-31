@@ -2,9 +2,6 @@
 
 import { Def, DefServerside } from '../classes/Def.js'
 import { defTable, defPrios } from '../tables/defTable.js'
-import { limbs } from '../tables/commonTable.js'
-import { sys, sysLog } from '../services/sys.js'
-import { serversideSettings } from '../events/serverside.js'
 
 export const Defs = {}
 
