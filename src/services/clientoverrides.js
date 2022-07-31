@@ -9,7 +9,7 @@ const generate_chunk = (text, fg, bg) => {
   return result;
 }
 //nexusclient.display_notice()
-export const display_notice = function(...args) {
+const display_notice = function(...args) {
   let htmlLine = document.createElement('span');
   let chunks = [];
   let fg, bg, text;
@@ -27,7 +27,7 @@ export const display_notice = function(...args) {
 }
 
 //nexusclient.ui().buffer().add_block
-export const add_block = function(block) {
+const add_block = function(block) {
   let count = 0;
   let gags = 0;
   for (let idx = 0; idx < block.length; ++idx)
@@ -62,4 +62,9 @@ export const add_block = function(block) {
   }
   let pruned = this.prune_lines();
   if (count || pruned) this.on_lines_changed();
+}
+
+export const applyClientOverrides = () => {
+  nexusclient.display_notice = display_notice;
+  nexusclient.ui().buffer().add_block = add_block;
 }

@@ -10,25 +10,24 @@
     gag_current_line() > nexusclient.current_line.gag = true
 */
 
-import { display_notice } from "./base/clientoverrides";
-import { Echo, EchoLine, EchoLinePrefix } from "./base/echo";
-import { curArea, curRoom, curRoomArea, curRoomName } from "./base/gmcp";
-import { Queue } from "./base/queue";
-import { sys, sysLog, sysLogging, sysLoggingToggle } from "./base/sys";
+import { applyClientOverrides } from "./services/clientoverrides";
+import { curArea, curRoom, curRoomArea, curRoomName } from "./events/gmcp";
+import { Queue } from "./classes/Queue";
+import { sys, sysLog, sysLogging, sysLoggingToggle } from "./services/sys";
 import {
   psend,
   rsend,
   sendCmd,
   sendInline,
-  timeDiffNow,
-} from "./base/utilities";
+  timeDiffNow
+} from "./services/utilities";
 import {
   affPrioSwap,
   Affs,
   getCurrentAffs,
   haveAff,
   haveAffs,
-  haveAnAff,
+  haveAnAff
 } from "./generators/affs";
 import { Bals, haveABal, haveBal, haveBals } from "./generators/balances";
 import { Caches, getCacheOutputs, getMissingCache } from "./generators/caches";
@@ -39,25 +38,26 @@ import {
   saveModel,
   updateAndSaveModel,
   updateList,
-  updateModel,
+  updateModel
 } from "./generators/customsettings";
 import {
   Defs,
   getCurrentDefs,
   getDefOutputs,
-  getMissingDefs,
+  getMissingDefs
 } from "./generators/defs";
-import { generateEchos } from "./generators/echos.js";
-import { getLustCommands, rejectList, whiteList } from "./generators/lust";
+import { generateEchos } from "./events/echos.js";
+import { getLustCommands, rejectList, whiteList } from "./events/lust";
 import {
-  serverside,
   serversideDefencePriorityListStart,
-  serversideSettings,
-} from "./generators/serverside";
+  serversideEvents,
+  serversideSettings
+} from "./events/serverside";
 import { affTable } from "./tables/affTable";
 import { cacheTable } from "./tables/cacheTable";
 import { dirMap, dirs, limbs, oppDirs, shortDirs } from "./tables/commonTable";
 import { defPrios } from "./tables/defTable";
+import { echoInfoLine, echoLine, echo } from "./generators/echos";
 
 const nexSys = {
   sys: sys,
@@ -91,9 +91,10 @@ const nexSys = {
   getCacheOutputs: getCacheOutputs,
   getMissingCache: getMissingCache,
 
-  echo: new Echo("white").echo,
-  echoLine: new EchoLine("white").echo,
-  echoInfoLine: new EchoLinePrefix({ text: "[Info]: ", fg: "yellow" }, "white").echo,
+  echo: echo,
+  echoLine: echoLine,
+  echoInfoLine: echoInfoLine,
+  generateEchos: generateEchos, // startup Function
 
   curArea: curArea,
   curRoom: curRoom,
@@ -118,6 +119,7 @@ const nexSys = {
 
   serversideSettings: serversideSettings,
   serversideDefencePriorityListStart: serversideDefencePriorityListStart,
+  serversideEvents: serversideEvents, // startup Function
 
   updateModel: updateModel,
   updateList: updateList,
@@ -138,11 +140,9 @@ const nexSys = {
     pre: false,
     clear: "clearqueue class",
   }),
-};
 
-generateEchos();
-window.display_notice = display_notice;
-serverside();
+  applyClientOverrides: applyClientOverrides,
+};
 
 export default nexSys;
 

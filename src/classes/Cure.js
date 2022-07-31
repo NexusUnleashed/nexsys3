@@ -1,5 +1,5 @@
 /*global eventStream */
-import Priority from './priority.js'
+import Priority from './Priority.js'
 
 class Cure {
     constructor(name, prio = 0, obj) {

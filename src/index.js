@@ -7,7 +7,6 @@ import nexSys from './nexsys';
 import reportWebVitals from './reportWebVitals';
 
 console.log(window.eventStream);
-
 window.nexSys = nexSys;
 console.log(window.nexSys);
 

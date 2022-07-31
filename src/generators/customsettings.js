@@ -5,8 +5,8 @@ import { defTable, defPrios } from '../tables/defTable'
 import { balanceTable } from '../tables/balanceTable'
 import { cacheTable } from '../tables/cacheTable'
 import { cureTable } from '../tables/cureTable'
-import { whiteList } from './lust'
-import { sys } from '../base/sys'
+import { whiteList } from '../events/lust'
+import { sys } from '../services/sys'
 
 export const updateList = function (list, newList) {
     if (newList) {

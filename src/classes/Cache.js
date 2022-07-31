@@ -1,6 +1,6 @@
 /*global eventStream */
-import Trackable from './trackable'
-import Countable from './countable'
+import Trackable from './Trackable'
+import Countable from './Countable'
 
 export class Cache extends Trackable {
     constructor(name, amount = 0, obj) {

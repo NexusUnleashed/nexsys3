@@ -1,7 +1,7 @@
 /*global eventStream */
 
-import { sendCmd, sendInline } from './utilities.js'
-import { sys } from './sys.js'
+import { sendCmd, sendInline } from '../services/utilities.js'
+import { sys } from '../services/sys.js'
 
 export class Queue {
     constructor(obj) {

@@ -1,5 +1,4 @@
-/* global */
-import { display_notice } from "./clientoverrides"
+/* global nexusclient */
 
 export class Echo {
     constructor(fg, bg, selector) {
@@ -10,7 +9,7 @@ export class Echo {
     }
 
     echo(text) {
-        display_notice(text, this._fg, this._bg)
+        nexusclient.display_notice(text, this._fg, this._bg)
     }
 }
 
@@ -33,7 +32,7 @@ export class EchoWithPrefix extends Echo {
     }
 
     echo(text) {
-        display_notice(
+        nexusclient.display_notice(
             this._prefix,
             this._prefixFg,
             this._prefixBg,

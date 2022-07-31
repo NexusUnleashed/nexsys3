@@ -1,8 +1,8 @@
 /*global eventStream */
-import Trackable from './trackable.js'
-import Priority from './priority.js'
-import Countable from './countable.js'
-import Timer from './timer.js'
+import Trackable from './Trackable.js'
+import Priority from './Priority.js'
+import Countable from './Countable.js'
+import Timer from './Timer.js'
 
 class Aff extends Trackable {
     constructor(name, prio = 0, uncurable = false) {
