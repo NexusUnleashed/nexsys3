@@ -1,6 +1,6 @@
+/*global eventStream */
 import Priority from './priority.js'
 import Trackable from './trackable.js'
-import { eventStream } from './eventStream.js'
 
 export class Def extends Trackable {
     constructor(name, prio = 0, obj) {

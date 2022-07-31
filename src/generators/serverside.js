@@ -1,8 +1,7 @@
-/* global nexusclient, echo */
+/* global nexusclient, echo, eventStream */
 import { AffDef } from '../base/aff'
 import { sys } from '../base/sys'
 import { sendCmd, sendInline } from '../base/utilities'
-import { eventStream } from '../base/eventStream'
 import { Defs } from './defs'
 
 export let serversideSettings = {

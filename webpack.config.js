@@ -35,4 +35,7 @@ module.exports = {
       }),
     ],
   },
+  externals: {
+    'nexevent': 'eventStream', // Case matters here 
+   }
 };

@@ -1,4 +1,4 @@
-import { eventStream } from "../base/eventStream"
+/*global eventStream */
 
 export const whiteList = []
 

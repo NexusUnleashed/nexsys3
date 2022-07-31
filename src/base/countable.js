@@ -1,4 +1,4 @@
-import { eventStream } from './eventStream.js'
+/*global eventStream */
 
 class Countable {
     constructor(name, min = 0, max = 0) {

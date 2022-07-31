@@ -1,4 +1,5 @@
-import { eventStream } from './eventStream.js'
+/*global eventStream */
+
 import { sys } from './sys'
 
 export function sendCmd(cmd) {

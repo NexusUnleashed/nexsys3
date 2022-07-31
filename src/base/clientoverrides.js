@@ -1,4 +1,4 @@
-/* global nexSys */
+/* global nexSys, nexusclient */
 
 const generate_chunk = (text, fg, bg) => {
   let result = document.createElement('span');
@@ -10,7 +10,7 @@ const generate_chunk = (text, fg, bg) => {
 }
 //nexusclient.display_notice()
 export const display_notice = function(...args) {
-  let htmlLine = document.createElement('p');
+  let htmlLine = document.createElement('span');
   let chunks = [];
   let fg, bg, text;
   chunks.length = Math.ceil(args.length / 3);
@@ -22,6 +22,7 @@ export const display_notice = function(...args) {
       htmlLine.appendChild(generate_chunk(text, fg, bg))
   }
   
+  nexusclient.add_html_line(htmlLine.outerHTML);
   return htmlLine.outerHTML;
 }
 
@@ -51,11 +52,8 @@ export const add_block = function(block) {
       this.lineid++;
       l.id = this.lineid;
       if (l.is_prompt && nexSys.customPromptEnabled) {
-          l = {
-              is_prompt: true,
-              parsed_line: {
-                  formatted() {return 'NEED NEXSYS PROMPT FUNCTION HERE nexSys.prompt.getCustomPrompt();'},
-              }
+          l.parsed_line = {
+                  formatted() {return 'PUT THE NEXSYS PROMPT FUNCTION HERE'}
           }
       }
                         

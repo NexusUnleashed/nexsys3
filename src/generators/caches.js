@@ -1,8 +1,9 @@
+/*global eventStream */
+
 import { cacheTable, herb_name_to_herb } from '../tables/cacheTable'
 import { Cache } from '../base/cache'
 import { Affs } from './affs'
 import { Defs } from './defs'
-import { eventStream } from '../base/eventStream.js'
 
 export const Caches = {}
 

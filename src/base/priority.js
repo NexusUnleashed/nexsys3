@@ -1,4 +1,4 @@
-import { eventStream } from './eventStream.js'
+/*global eventStream */
 
 class Priority {
     constructor(name, prio = 0) {

@@ -1,6 +1,6 @@
+/*global eventStream */
 import Trackable from './trackable'
 import Timer from './timer'
-import { eventStream } from './eventStream.js'
 
 export class Balance extends Trackable {
     constructor(name, length = 60) {

@@ -1,4 +1,5 @@
-import { eventStream } from './eventStream.js'
+/*global eventStream */
+
 import { sendCmd, sendInline } from './utilities.js'
 import { sys } from './sys.js'
 

@@ -1,16 +1,16 @@
+import 'nexevent';
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
+import App from './components/App';
+import './styles/index.css';
+import nexSys from './nexsys';
 import reportWebVitals from './reportWebVitals';
 
-import { eventStream } from './base/eventStream.js'
-import nexSys from './nexsys';
+console.log(window.eventStream);
 
-window.eventStream = eventStream;
-console.log(eventStream);
 window.nexSys = nexSys;
-console.log(nexSys);
+console.log(window.nexSys);
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   //<React.StrictMode>

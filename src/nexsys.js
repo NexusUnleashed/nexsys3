@@ -12,14 +12,7 @@
 
 import { display_notice } from "./base/clientoverrides";
 import { Echo, EchoLine, EchoLinePrefix } from "./base/echo";
-import { eventStream } from "./base/eventStream";
-import {
-  curArea,
-  curRoom,
-  curRoomArea,
-  curRoomName,
-  gmcpHandler
-} from "./base/gmcp";
+import { curArea, curRoom, curRoomArea, curRoomName } from "./base/gmcp";
 import { Queue } from "./base/queue";
 import { sys, sysLog, sysLogging, sysLoggingToggle } from "./base/sys";
 import {
@@ -27,7 +20,7 @@ import {
   rsend,
   sendCmd,
   sendInline,
-  timeDiffNow
+  timeDiffNow,
 } from "./base/utilities";
 import {
   affPrioSwap,
@@ -35,7 +28,7 @@ import {
   getCurrentAffs,
   haveAff,
   haveAffs,
-  haveAnAff
+  haveAnAff,
 } from "./generators/affs";
 import { Bals, haveABal, haveBal, haveBals } from "./generators/balances";
 import { Caches, getCacheOutputs, getMissingCache } from "./generators/caches";
@@ -46,36 +39,34 @@ import {
   saveModel,
   updateAndSaveModel,
   updateList,
-  updateModel
+  updateModel,
 } from "./generators/customsettings";
 import {
   Defs,
   getCurrentDefs,
   getDefOutputs,
-  getMissingDefs
+  getMissingDefs,
 } from "./generators/defs";
+import { generateEchos } from "./generators/echos.js";
 import { getLustCommands, rejectList, whiteList } from "./generators/lust";
 import {
   serverside,
   serversideDefencePriorityListStart,
-  serversideSettings
+  serversideSettings,
 } from "./generators/serverside";
 import { affTable } from "./tables/affTable";
 import { cacheTable } from "./tables/cacheTable";
 import { dirMap, dirs, limbs, oppDirs, shortDirs } from "./tables/commonTable";
 import { defPrios } from "./tables/defTable";
-import {generateEchos} from './generators/echos.js';
 
-window.eventStream = eventStream;
 const nexSys = {
-  gmcpBackLog: [],
-  
   sys: sys,
   sysLogging: sysLogging,
   sysLog: sysLog,
   sysLoggingToggle: sysLoggingToggle,
 
   Cures: Cures,
+
   Affs: Affs,
   affTable: affTable,
   getCurrentAffs: getCurrentAffs,
@@ -104,7 +95,6 @@ const nexSys = {
   echoLine: new EchoLine("white").echo,
   echoInfoLine: new EchoLinePrefix({ text: "[Info]: ", fg: "yellow" }, "white").echo,
 
-  gmcpHandler: gmcpHandler,
   curArea: curArea,
   curRoom: curRoom,
   curRoomArea: curRoomArea,
@@ -129,6 +119,13 @@ const nexSys = {
   serversideSettings: serversideSettings,
   serversideDefencePriorityListStart: serversideDefencePriorityListStart,
 
+  updateModel: updateModel,
+  updateList: updateList,
+  saveModel: saveModel,
+  updateAndSaveModel: updateAndSaveModel,
+  loadCustomSettings: loadCustomSettings,
+  saveCustomSettings: saveCustomSettings,
+
   eqbalQueue: new Queue({
     name: "eqBal",
     prefix: "queue addclear eqbal ",
@@ -141,13 +138,6 @@ const nexSys = {
     pre: false,
     clear: "clearqueue class",
   }),
-
-  updateModel: updateModel,
-  updateList: updateList,
-  saveModel: saveModel,
-  updateAndSaveModel: updateAndSaveModel,
-  loadCustomSettings: loadCustomSettings,
-  saveCustomSettings: saveCustomSettings,
 };
 
 generateEchos();
@@ -155,3 +145,6 @@ window.display_notice = display_notice;
 serverside();
 
 export default nexSys;
+
+//nexSys.loadCustomSettings();
+//run_function('CustomSettingsFromPackage', {}, 'ALL');

@@ -1,6 +1,7 @@
+/*global eventStream */
+
 import { Balance, BalExtended } from '../base/balance.js'
 import { balanceTable as balances } from '../tables/balanceTable.js'
-import { eventStream } from '../base/eventStream.js'
 
 export const Bals = {}
 

@@ -1,14 +1,15 @@
 {
-  "name": "nexsys2",
+  "name": "nexsys3",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://Log-Wall.github.io/nexsys2",
+  "homepage": "https://Log-Wall.github.io/nexsys3",
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.4",
     "@testing-library/react": "^13.2.0",
     "@testing-library/user-event": "^13.5.0",
     "husky": "^8.0.1",
     "lint-staged": "^12.4.2",
+    "nexevent": "^1.0.5",
     "prettier": "^2.6.2",
     "react": "^18.1.0",
     "react-dom": "^18.1.0",

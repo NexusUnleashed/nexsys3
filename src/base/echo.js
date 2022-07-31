@@ -1,4 +1,5 @@
-import { display_notice } from './utilities.js'
+/* global */
+import { display_notice } from "./clientoverrides"
 
 export class Echo {
     constructor(fg, bg, selector) {

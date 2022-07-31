@@ -1,6 +1,7 @@
+/*global eventStream */
+
 import { display_notice } from "../base/clientoverrides.js";
 import { Echo, EchoLinePrefix } from "../base/echo.js";
-import { eventStream } from "../base/eventStream.js";
 import { sys } from "../base/sys.js";
 
 export const generateEchos = () => {

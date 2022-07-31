@@ -1,6 +1,7 @@
+/*global eventStream */
+
 import { cureTable } from '../tables/cureTable.js'
 import Cure from '../base/cure.js'
-import { eventStream } from '../base/eventStream.js'
 import { Affs } from './affs.js'
 
 

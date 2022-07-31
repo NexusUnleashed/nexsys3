@@ -1,4 +1,4 @@
-/* global set_current_target */
+/* global set_current_target, eventStream */
 
 import { Affs, getCurrentAffs } from '../generators/affs'
 import { getCurrentBals } from '../generators/balances'
@@ -7,7 +7,6 @@ import { getCureOutputs } from '../generators/cures'
 import { getDefOutputs } from '../generators/defs'
 import { Balance } from './balance'
 import { getLustCommands } from '../generators/lust'
-import { eventStream } from './eventStream.js'
 import { sendCmd } from './utilities'
 
 export const sys = {
