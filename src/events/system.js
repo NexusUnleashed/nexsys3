@@ -1,13 +1,15 @@
 /* global eventStream */
 
-import { Affs, getCurrentAffs } from '../generators/affs'
-import { getCurrentBals } from '../generators/balances'
-import { getCacheOutputs } from '../generators/caches'
-import { getCureOutputs } from '../generators/cures'
-import { getDefOutputs } from '../generators/defs'
-import { Balance } from './balance'
-import { getLustCommands } from '../generators/lust'
-import { sendCmd } from '../services/utilities'
+import { Affs } from '../generators/affs'
+import { getCurrentAffs } from '../functions/affs'
+import { getCurrentBals } from '../functions/bals'
+import { getCacheOutputs } from '../functions/cache'
+import { getCureOutputs } from '../functions/cures'
+import { getDefOutputs } from '../functions/defs'
+import { Balance } from '../classes/Balance'
+import { getLustCommands } from './lust'
+import { sendCmd } from '../functions/utilities'
+import {sys} from '../functions/sys'
 
 let outputInProgress = false
 let outputPending = false

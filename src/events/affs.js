@@ -1,6 +1,6 @@
 /*global eventStream */
 import { Affs } from '../generators/affs'
-import { getCurrentAffs } from '../services/affs'
+import { getCurrentAffs } from '../functions/affs'
 
 let eventGmcpAffList = function(list) {
   let prev_list = getCurrentAffs();

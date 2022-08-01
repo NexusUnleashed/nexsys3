@@ -1,8 +1,8 @@
 /* global nexusclient, echo, eventStream */
 import { AffDef } from "../classes/Aff";
 import { Defs } from "../generators/defs";
-import { sys } from "../services/sys";
-import { sendCmd, sendInline } from "../services/utilities";
+import { sys } from "../functions/sys";
+import { sendCmd, sendInline } from "../functions/utilities";
 import { serversideSettings } from "../generators/serverside";
 
 const serversideSlowModeOn = function (args) {

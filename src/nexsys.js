@@ -10,27 +10,23 @@
     gag_current_line() > nexusclient.current_line.gag = true
 */
 
-import { applyClientOverrides } from "./services/clientoverrides";
-import { curArea, curRoom, curRoomArea, curRoomName } from "./events/gmcp";
 import { Queue } from "./classes/Queue";
-import { sys, sysLog, sysLogging, sysLoggingToggle } from "./services/sys";
+import { curArea, curRoom, curRoomArea, curRoomName } from "./events/gmcp";
+import { getLustCommands, rejectList, whiteList } from "./events/lust";
 import {
-  psend,
-  rsend,
-  sendCmd,
-  sendInline,
-  timeDiffNow
-} from "./services/utilities";
-import {
-  affPrioSwap,
-  Affs,
+  serversideDefencePriorityListStart,
+  serversideSettings
+} from "./generators/serverside";
+import { Affs } from "./generators/affs";
+import {affPrioSwap,
   getCurrentAffs,
   haveAff,
   haveAffs,
-  haveAnAff
-} from "./generators/affs";
-import { Bals, haveABal, haveBal, haveBals } from "./generators/balances";
-import { Caches, getCacheOutputs, getMissingCache } from "./generators/caches";
+  haveAnAff} from "./functions/affs"
+import { Bals } from "./generators/balances";
+import {haveABal, haveBal, haveBals} from "./functions/bals"
+import { Caches } from "./generators/caches";
+import {getCacheOutputs, getMissingCache} from "./functions/cache"
 import { Cures } from "./generators/cures";
 import {
   loadCustomSettings,
@@ -40,24 +36,24 @@ import {
   updateList,
   updateModel
 } from "./generators/customsettings";
-import {
-  Defs,
-  getCurrentDefs,
+import { Defs } from "./generators/defs";
+import {  getCurrentDefs,
   getDefOutputs,
-  getMissingDefs
-} from "./generators/defs";
-import { generateEchos } from "./events/echos.js";
-import { getLustCommands, rejectList, whiteList } from "./events/lust";
+  getMissingDefs} from "./functions/defs"
+import { echo, echoInfoLine, echoLine } from "./generators/echos";
+import { applyClientOverrides } from "./functions/clientoverrides";
+import { sys, sysLog, sysLogging, sysLoggingToggle } from "./functions/sys";
 import {
-  serversideDefencePriorityListStart,
-  serversideEvents,
-  serversideSettings
-} from "./events/serverside";
+  psend,
+  rsend,
+  sendCmd,
+  sendInline,
+  timeDiffNow
+} from "./functions/utilities";
 import { affTable } from "./tables/affTable";
 import { cacheTable } from "./tables/cacheTable";
 import { dirMap, dirs, limbs, oppDirs, shortDirs } from "./tables/commonTable";
 import { defPrios } from "./tables/defTable";
-import { echoInfoLine, echoLine, echo } from "./generators/echos";
 
 const nexSys = {
   sys: sys,
@@ -94,7 +90,6 @@ const nexSys = {
   echo: echo,
   echoLine: echoLine,
   echoInfoLine: echoInfoLine,
-  generateEchos: generateEchos, // startup Function
 
   curArea: curArea,
   curRoom: curRoom,
@@ -119,7 +114,6 @@ const nexSys = {
 
   serversideSettings: serversideSettings,
   serversideDefencePriorityListStart: serversideDefencePriorityListStart,
-  serversideEvents: serversideEvents, // startup Function
 
   updateModel: updateModel,
   updateList: updateList,

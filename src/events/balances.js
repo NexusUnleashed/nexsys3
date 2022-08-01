@@ -1,5 +1,5 @@
 /* global eventStream */
-import {haveBal} from '../services/bals'
+import {haveBal} from '../functions/bals'
 
 let eventGmcpBalances = function(vitals) {
   if (vitals.bal === '1') {

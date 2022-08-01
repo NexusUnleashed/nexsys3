@@ -1,10 +1,10 @@
 /* global eventStream */
 
-import {getCurrentDefs, parry} from '../services/defs'
+import {getCurrentDefs, parry} from '../functions/defs'
 import { Defs } from '../generators/defs'
-import { sys } from '../generators/sys'
-import limbs from '../tables/commonTable'
-import { defPrios } from "./tables/defTable";
+import { sys } from '../functions/sys'
+import {limbs} from '../tables/commonTable'
+import { defPrios } from "../tables/defTable";
 import { serversideSettings } from "../generators/serverside";
 
 let eventGmcpDefList = function(list) {

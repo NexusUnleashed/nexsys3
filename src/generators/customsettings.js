@@ -6,7 +6,7 @@ import { balanceTable } from '../tables/balanceTable'
 import { cacheTable } from '../tables/cacheTable'
 import { cureTable } from '../tables/cureTable'
 import { whiteList } from '../events/lust'
-import { sys } from '../services/sys'
+import { sys } from '../functions/sys'
 
 export const updateList = function (list, newList) {
     if (newList) {
