@@ -64,7 +64,5 @@ const add_block = function(block) {
   if (count || pruned) this.on_lines_changed();
 }
 
-export const applyClientOverrides = () => {
-  nexusclient.display_notice = display_notice;
-  nexusclient.ui().buffer().add_block = add_block;
-}
+nexusclient.display_notice = display_notice;
+nexusclient.ui().buffer().add_block = add_block;

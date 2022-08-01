@@ -9,6 +9,7 @@ import "./events/gmcp";
 import "./events/lust";
 import "./events/serverside";
 import "./events/system";
+import './functions/clientoverrides';
 
 window.nexSys = nexSys;
 nexSys.applyClientOverrides();
