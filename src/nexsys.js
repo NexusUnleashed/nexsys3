@@ -8,6 +8,8 @@
     print() > nexusclient.add_html_line()
     $ > all jquery implementation
     gag_current_line() > nexusclient.current_line.gag = true
+    reflex_disable() > nexusclient.reflexes().disable_reflex();
+    reflex_find_by_name() > nexusclient.reflexes().find_by_name("group", "Aliases", false, false, "nexmap3")
 */
 
 import { Queue } from "./classes/Queue";
