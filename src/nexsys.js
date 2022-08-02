@@ -1,6 +1,7 @@
 /* 
   Breaking changes from 2.0 to 3.0:
     GMCP > nexusclient.datahandler().GMCP
+    send_GMCP() > nexusclient.datahandler().send_GMCP()
     get_variable() > nexusclient.variables().get()
     set_variable() > nexusclient.variables().set()
     run_function() > nexusclient.reflexes().run_function()
