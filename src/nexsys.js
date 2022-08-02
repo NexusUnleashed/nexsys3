@@ -15,19 +15,30 @@ import { Queue } from "./classes/Queue";
 import { curArea, curRoom, curRoomArea, curRoomName } from "./events/gmcp";
 import { getLustCommands, rejectList, whiteList } from "./events/lust";
 import {
-  serversideDefencePriorityListStart,
-  serversideSettings
-} from "./generators/serverside";
-import { Affs } from "./generators/affs";
-import {affPrioSwap,
+  affPrioSwap,
   getCurrentAffs,
   haveAff,
   haveAffs,
-  haveAnAff} from "./functions/affs"
+  haveAnAff
+} from "./functions/affs";
+import { haveABal, haveBal, haveBals } from "./functions/bals";
+import { getCacheOutputs, getMissingCache } from "./functions/cache";
+import {
+  getCurrentDefs,
+  getDefOutputs,
+  getMissingDefs
+} from "./functions/defs";
+import { sys, sysLog, sysLogging, sysLoggingToggle } from "./functions/sys";
+import {
+  psend,
+  rsend,
+  sendCmd,
+  sendInline,
+  timeDiffNow
+} from "./functions/utilities";
+import { Affs } from "./generators/affs";
 import { Bals } from "./generators/balances";
-import {haveABal, haveBal, haveBals} from "./functions/bals"
 import { Caches } from "./generators/caches";
-import {getCacheOutputs, getMissingCache} from "./functions/cache"
 import { Cures } from "./generators/cures";
 import {
   loadCustomSettings,
@@ -38,19 +49,11 @@ import {
   updateModel
 } from "./generators/customsettings";
 import { Defs } from "./generators/defs";
-import {  getCurrentDefs,
-  getDefOutputs,
-  getMissingDefs} from "./functions/defs"
 import { echo, echoInfoLine, echoLine } from "./generators/echos";
-import { applyClientOverrides } from "./functions/clientoverrides";
-import { sys, sysLog, sysLogging, sysLoggingToggle } from "./functions/sys";
 import {
-  psend,
-  rsend,
-  sendCmd,
-  sendInline,
-  timeDiffNow
-} from "./functions/utilities";
+  serversideDefencePriorityListStart,
+  serversideSettings
+} from "./generators/serverside";
 import { affTable } from "./tables/affTable";
 import { cacheTable } from "./tables/cacheTable";
 import { dirMap, dirs, limbs, oppDirs, shortDirs } from "./tables/commonTable";
@@ -134,9 +137,7 @@ const nexSys = {
     prefix: "queue addclear class ",
     pre: false,
     clear: "clearqueue class",
-  }),
-
-  applyClientOverrides: applyClientOverrides,
+  })
 };
 
 export default nexSys;
