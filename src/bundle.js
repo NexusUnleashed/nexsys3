@@ -9,8 +9,10 @@ import "./events/gmcp";
 import "./events/lust";
 import "./events/serverside";
 import "./events/system";
+import "./functions/helpers";
 
 window.nexSys = nexSys;
+nexusclient.datahandler().send_GMCP("IRE.Rift.Request");
 nexSys.applyClientOverrides();
 nexSys.loadCustomSettings();
 nexusclient.reflexes().run_function("CustomSettingsFromPackage", {}, "ALL");
