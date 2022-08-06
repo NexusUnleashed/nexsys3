@@ -1,5 +1,5 @@
 /* global nexusclient */
-import nexSys from "./nexsys";
+import nexsys from "./nexsys";
 import "./events/affs";
 import "./events/balances";
 import "./events/cache";
@@ -12,8 +12,6 @@ import "./events/system";
 import "./functions/helpers";
 import './functions/clientoverrides';
 
-window.nexSys = nexSys;
+window.nexsys = nexsys;
 nexusclient.datahandler().send_GMCP("IRE.Rift.Request");
-nexSys.applyClientOverrides();
-nexSys.loadCustomSettings();
 nexusclient.reflexes().run_function("CustomSettingsFromPackage", {}, "ALL");

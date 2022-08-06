@@ -20,9 +20,9 @@ export function getCurrentDefs() {
 
 /** ORIGNAL Nexsys function **
 getMissingDefs() {
-  let defs = nexSys.Defs;
+  let defs = nexsys.Defs;
   let missing_defs = [];
-  let queue = new nexSys.PriorityQueue();
+  let queue = new nexsys.PriorityQueue();
   for(let def in defs) {
       let cur_def = defs[def];
       if(!cur_def.have && !cur_def.isIgnored && !cur_def.isServerSide) {
@@ -65,7 +65,7 @@ export function getMissingDefs() {
 export function haveDef(def) {
   const curDef = Defs[def]
   if (def === undefined || curDef === undefined) {
-      sysLog('Called nexSys.haveDef with a def that does not exist: ' + def)
+      sysLog('Called nexsys.haveDef with a def that does not exist: ' + def)
       return false
   } else {
       return curDef.have
@@ -76,7 +76,7 @@ export function defPrioSwap(def, prio) {
   const curDef = Defs[def]
   if (def === undefined || curDef === undefined) {
       sysLog(
-          'Called nexSys.defPrioSwap with an def that does not exist: ' + def
+          'Called nexsys.defPrioSwap with an def that does not exist: ' + def
       )
   } else {
       curDef.set_prio(prio)

@@ -7,7 +7,7 @@ function App() {
       <header className="App-header">
         <img src={piedpiper} className="App-logo" alt="logo" />
         <p>
-          nexSys 3.0.
+          nexsys 3.0.
         </p>
         <a
           className="App-link"
@@ -15,7 +15,7 @@ function App() {
           target="_blank"
           rel="noopener noreferrer"
         >
-          nexSys3 on github
+          nexsys3 on github
         </a>
       </header>
     </div>

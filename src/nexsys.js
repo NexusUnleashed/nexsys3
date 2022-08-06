@@ -63,7 +63,7 @@ import { cacheTable } from "./tables/cacheTable";
 import { dirMap, dirs, limbs, oppDirs, shortDirs } from "./tables/commonTable";
 import { defPrios } from "./tables/defTable";
 
-const nexSys = {
+const nexsys = {
   sys: sys,
   sysLogging: sysLogging,
   sysLog: sysLog,
@@ -144,8 +144,8 @@ const nexSys = {
   })
 };
 
-export default nexSys;
+export default nexsys;
 
 //send_GMCP('IRE.Rift.Request')
-//nexSys.loadCustomSettings();
+//nexsys.loadCustomSettings();
 //run_function('CustomSettingsFromPackage', {}, 'ALL');
