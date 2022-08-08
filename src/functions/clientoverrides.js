@@ -14,6 +14,10 @@ const display_notice = function(...args) {
   let chunks = [];
   let fg, bg, text;
   chunks.length = Math.ceil(args.length / 3);
+  for (let i = 0; i < chunks.length; i++) {
+    const element = chunks[i];
+    
+  }
   chunks = chunks.fill().map((ignore, i) => args.slice(i * 3, i * 3 + 3));
   for (let e of chunks) {
       text = e[0];

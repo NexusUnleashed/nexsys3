@@ -35,10 +35,10 @@ export const getCustomPrompt = () => {
     vars.diffm = "";
 
     if(vars.blackout) {
-        return nexsys.prompt.get_formatted_prompt('-', "reset", "");
+        return get_formatted_prompt('-', "reset", "");
     }
 
-    return nexsys.prompt.get_formatted_prompt(
+    return get_formatted_prompt(
         vars.paused + "", "red", "",
         vars.aeon + "", "red", "",
         vars.retard + "", "blue", "",
