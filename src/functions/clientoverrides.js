@@ -11,19 +11,9 @@ const generate_chunk = (text, fg, bg) => {
 //nexusclient.display_notice()
 const display_notice = function(...args) {
   let htmlLine = document.createElement('span');
-  let chunks = [];
-  let fg, bg, text;
-  chunks.length = Math.ceil(args.length / 3);
-  for (let i = 0; i < chunks.length; i++) {
-    const element = chunks[i];
-    
-  }
-  chunks = chunks.fill().map((ignore, i) => args.slice(i * 3, i * 3 + 3));
-  for (let e of chunks) {
-      text = e[0];
-      fg = e[1];
-      bg = e[2];
-      htmlLine.appendChild(generate_chunk(text, fg, bg))
+
+  for (let i = 0; i < args.length; i+= 3) {
+      htmlLine.appendChild(generate_chunk(args[i], args[i+1], args[i+2]))
   }
   
   nexusclient.add_html_line(htmlLine.outerHTML);

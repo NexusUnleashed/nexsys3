@@ -32,6 +32,7 @@ import {
   getDefOutputs,
   getMissingDefs
 } from "./functions/defs";
+import { getCustomPrompt, prompt } from "./functions/prompt";
 import { sys, sysLog, sysLogging, sysLoggingToggle } from "./functions/sys";
 import {
   psend,
@@ -141,7 +142,9 @@ const nexsys = {
     prefix: "queue addclear class ",
     pre: false,
     clear: "clearqueue class",
-  })
+  }),
+
+  prompt: prompt,
 };
 
 export default nexsys;
