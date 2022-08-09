@@ -33,6 +33,8 @@ export const getCustomPrompt = () => {
         return get_formatted_prompt('-', "reset", "");
     }
 
+    let promptLine = document.createElement('span');
+    promptLine.appendChild(generate_chunk(vars.paused, vars.paused.fg, vars.paused.bg))
     return get_formatted_prompt(
         vars.paused, vars.paused.fg, vars.paused.bg,
         vars.aeon, vars.aeon.fg, vars.aeon.bg,
@@ -85,9 +87,9 @@ prompt.vars = {
     b: {text: "", fg: "", bg: ""},
     affs: {},
     affString: {text: "", fg: "brown", bg: ""},
-    paused: {text: "", fg: "", bg: ""},
-    retard: {text: "", fg: "", bg: ""},
-    aeon: {text: "", fg: "", bg: ""},
+    paused: {text: "", fg: "red", bg: ""},
+    retard: {text: "", fg: "blue", bg: ""},
+    aeon: {text: "", fg: "red", bg: ""},
     kai: {text: "", fg: "", bg: ""},
     vitality: {text: "", fg: "purple", bg: ""},
     kaitrance: {text: "", fg: "blue", bg: ""},
