@@ -8,6 +8,7 @@ import "./events/gmcp";
 import "./events/lust";
 import "./events/serverside";
 import "./events/system";
+import "./events/prompt";
 import "./functions/helpers";
 import './functions/clientoverrides';
 

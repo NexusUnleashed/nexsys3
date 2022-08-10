@@ -1,5 +1,7 @@
 /* global nexsys, nexusclient */
 
+import nexsys from "../nexsys";
+
 const generate_chunk = (text, fg, bg) => {
   let result = document.createElement('span');
   result.style.color = fg;
@@ -47,7 +49,7 @@ const add_block = function(block) {
       l.id = this.lineid;
       if (l.is_prompt && nexsys.customPromptEnabled) {
           l.parsed_line = {
-                  formatted() {return 'PUT THE NEXSYS PROMPT FUNCTION HERE'}
+                  formatted() {return nexsys.prompt.getCustomPrompt()}
           }
       }
                         
