@@ -1,10 +1,4 @@
-/* global nexsys, eventStream */
-
-export const prompt = {
-    generate_chunk: generate_chunk,
-    colorPercentage: colorPercentage,
-    getCustomPrompt: getCustomPrompt,
-};
+/* global nexsys */
 
 const generate_chunk = (text, fg, bg) => {
     let result = document.createElement('span');
@@ -85,6 +79,12 @@ const getCustomPrompt = () => {
         diffm.text + " ", vars.diffm.fg, vars.diffm.bg,
     ]);
     */
+};
+
+export const prompt = {
+    generate_chunk: generate_chunk,
+    colorPercentage: colorPercentage,
+    getCustomPrompt: getCustomPrompt,
 };
 
 prompt.vars = {
