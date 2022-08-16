@@ -1,5 +1,6 @@
 /* 
   Breaking changes from 2.0 to 3.0:
+    send_direct() > nexusclient.send_commands()
     GMCP > nexusclient.datahandler().GMCP
     current_block > nexusclient.current_block
     current_line > nexusclient.current_line
