@@ -11,6 +11,7 @@ import { getLustCommands } from './lust'
 import { sendCmd } from '../functions/utilities'
 import {sys} from '../functions/sys'
 
+//#region System Output
 let outputInProgress = false
 let outputPending = false
 let output = []
@@ -150,6 +151,7 @@ const systemOutputComplete = function () {
 
 eventStream.registerEvent('SystemOutputCompleteEvent', systemOutputComplete)
 eventStream.registerEvent('stunLostAffEvent', sendOutput)
+//#endregion
 
 const setCharVitals = function (vitals) {
     const sysChar = sys.char

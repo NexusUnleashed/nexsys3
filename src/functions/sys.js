@@ -1,8 +1,8 @@
-/* global set_current_target, eventStream */
+/* global set_current_target, eventStream, nexusclient */
 
 export const sys = {
     settings: {
-        sep: '|',
+        sep: nexusclient.variables().get('commandSeparator'),
         overrideTab: false,
         overrideUpDown: false,
         customPrompt: false,

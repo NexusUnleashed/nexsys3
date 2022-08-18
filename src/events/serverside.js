@@ -171,7 +171,7 @@ const initiateStartup = function (args) {
       "def",
       "echo SystemEvent CuringStartupCompleteEvent",
     ];
-
+    
     for (let i = 0; i < startupCommands.length; i++) {
       sendCmd(startupCommands[i]);
     }
@@ -296,6 +296,8 @@ eventStream.registerEvent("CuringStartupCompleteEvent", curingStartupComplete);
 eventStream.registerEvent("ServersideSettingsCaptured", setCuringStatusVars);
 
 /*
+serversideDefencePriorityListStart = false;
+
 let disableTriggersOnPrompt = function() {
   if(serversideDefencePriorityListStart) {
       client.reflex_disable(client.reflex_find_by_name("trigger", "Curing Defence Priority List Line", true, true, "System"));

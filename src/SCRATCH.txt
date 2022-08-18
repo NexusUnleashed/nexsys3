@@ -1,0 +1,21 @@
+
+run_function('cureService', {}, 'nexSys2.0');  DO WE NEED THIS FUNCTION AT ALL? WHAT DOES IT DO?
+run_function('defService', {}, 'nexSys2.0');  THIS COULD BE REFINED / STREAMLINED FOR SERVERSIDE
+run_function('systemOutput', {}, 'nexSys2.0'); GET A BETTER GRASP ON HOW THIS WORKS
+
+run_function('serversideEvents', {}, 'nexSys2.0');
+//run_function('ServersidePrioritySwapping', {}, 'nexSys2.0'); // CUSTOM: Moved this to the allLoaded event. nexSys2.0 was prio swapping on prompt during startup initialization.
+run_function('PrioSwapTrackables', {}, 'nexSys2.0');
+
+run_function('CustomSettingsService', {}, 'nexSys2.0');
+run_function('CustomSettingsFromServer', {}, 'nexSys2.0');
+run_function('CustomSettingsFromPackage', {}, 'ALL');
+
+run_function('systemCreate', {}, 'nexSys2.0');
+run_function('balanceCreate', {}, 'nexSys2.0');
+run_function('affCreate', {}, 'nexSys2.0');
+run_function('defCreate', {}, 'nexSys2.0');
+run_function('cureCreate', {}, 'nexSys2.0');
+run_function('cacheCreate', {}, 'nexSys2.0');
+
+run_function('allLoaded', {}, 'nexSys2.0');
