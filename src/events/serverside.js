@@ -257,7 +257,9 @@ const serversideAffPrioSet = function (args) {
 };
 
 const serversideDefPrioSet = function (args) {
+  console.log('serversideDefPrioSet event: ' + args);
   serversideSettings.defs[args.def] = args.prio;
+  console.log(serversideSettings)
 };
 
 eventStream.registerEvent("CuringStatusEvent", curingStatus);
