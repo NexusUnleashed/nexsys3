@@ -3,12 +3,17 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './components/App';
 import './styles/index.css';
-import nexsys from './nexsys';
 import reportWebVitals from './reportWebVitals';
 
-console.log(window.eventStream);
-window.nexsys = nexsys;
-console.log(window.nexsys);
+window.nexusclient = {
+  variables() {
+    return {
+      get() {
+        return false;
+      }
+    }
+  }
+}
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

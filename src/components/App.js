@@ -1,7 +1,20 @@
 import piedpiper from '../styles/piedpiper.svg'
 import '../styles/App.css';
+import nexsys from '../nexsys';
+import * as React from 'react';
+
+window.nexusclient = {
+  variables() {
+    return {
+      get() {
+        return false;
+      }
+    }
+  }
+}
 
 function App() {
+  const startup = React.useMemo(() => {window.nexsys = nexsys;});
   return (
     <div className="App">
       <header className="App-header">

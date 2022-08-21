@@ -156,9 +156,9 @@ export function defup() {
               ) {
                   cur_def.set_prio(staticPrios[def])
               }
-              // else { // CUSTOM
-              //    cur_def.set_default_prio(0);
-              // }
+              else {
+                cur_def.set_default_prio(0);
+              }
           } else if (!sys.isClass(cur_def.skills)) {
               cur_def.set_default_prio(0)
           }

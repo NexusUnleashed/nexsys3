@@ -29,7 +29,6 @@ const serversideSlowModeOff = function (args) {
 };
 
 const serversideDefencePrio = function (def) {
-  // console.log(def.name);
   if (def instanceof AffDef) {
     if (def.isServerSide && def.prio !== serversideSettings.defs[def.name]) {
       if (def.isIgnored) {
@@ -66,6 +65,7 @@ const serversideDefencePrio = function (def) {
           );
         } else {
           serversideSettings.defs[def.name] = def.prio;
+          console.log('DEBUGGGG')
           eventStream.raiseEvent(
             "SystemOutputAdd",
             "curing priority defence " + def.name + " " + def.prio
@@ -257,9 +257,7 @@ const serversideAffPrioSet = function (args) {
 };
 
 const serversideDefPrioSet = function (args) {
-  console.log('serversideDefPrioSet event: ' + args);
   serversideSettings.defs[args.def] = args.prio;
-  console.log(serversideSettings)
 };
 
 eventStream.registerEvent("CuringStatusEvent", curingStatus);
@@ -307,4 +305,5 @@ let disableTriggersOnPrompt = function() {
   serversideDefencePriorityListStart = false;
 };
 
-eventStream.registerEvent('PromptEvent', disableTriggersOnPrompt);*/
+eventStream.registerEvent('PromptEvent', disableTriggersOnPrompt);
+*/

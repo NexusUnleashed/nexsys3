@@ -54,7 +54,7 @@ import {
   updateList,
   updateModel
 } from "./generators/customsettings";
-import { Defs } from "./generators/defs";
+import { Defs, defsCreate } from "./generators/defs";
 import { echo, echoInfoLine, echoLine } from "./generators/echos";
 import {
   serversideDefencePriorityListStart,
@@ -88,6 +88,7 @@ const nexsys = {
 
   Defs: Defs,
   defPrios: defPrios,
+  defsCreate: defsCreate,
   getCurrentDefs: getCurrentDefs,
   getDefOutputs: getDefOutputs,
   getMissingDefs: getMissingDefs,

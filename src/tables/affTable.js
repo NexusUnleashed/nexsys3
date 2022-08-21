@@ -155,7 +155,7 @@ const affs = {
     "slimeobscure",
     "solarburn" /**/,
     "spiritburn" /**/,
-    /* 'spiritdisrupt',*/
+    /*'spiritdisrupt', //This affliction is removed from the game*/
     "stun",
     "stupidity",
     "stuttering",
@@ -181,7 +181,6 @@ const affs = {
     "voidfisted",
     "voyria",
     "waterbonds" /**/,
-    /* 'waterdisrupt',*/
     "weakenedmind",
     "weariness",
     "webbed",
@@ -303,11 +302,9 @@ const affs = {
     stupidity: 9,
     voyria: 9,
 
-    airdisrupt: 10,
     brokenleftarm: 10,
     brokenrightarm: 10,
     slickness: 10,
-    waterdisrupt: 10,
     wristfractures: 10,
 
     indifference: 11,
