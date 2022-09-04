@@ -1,4 +1,6 @@
 /* global set_current_target, eventStream, nexusclient */
+
+/* This function is strictly for localhost simulations */
 if (typeof nexusclient === "undefined") {
   window.nexusclient = {
     variables() {

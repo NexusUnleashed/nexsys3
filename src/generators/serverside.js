@@ -1,4 +1,4 @@
-export let serversideSettings = {
+export const serversideSettings = {
   loaded: false,
   status: {},
   affs: {},

@@ -120,5 +120,3 @@ export function saveCustomSettings() {
     saveModel('CustomCureTable', cureTable)
     saveModel('LustWhiteList', whiteList)
 }
-
-// loadCustomSettings()

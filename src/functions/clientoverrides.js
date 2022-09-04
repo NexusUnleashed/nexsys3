@@ -1,4 +1,4 @@
-/* global nexsys, nexusclient */
+/* global nexusclient */
 
 import nexsys from "../nexsys";
 
@@ -10,6 +10,8 @@ const generate_chunk = (text, fg, bg) => {
 
   return result;
 }
+
+// Override display_notice() for multi color options.
 //nexusclient.display_notice()
 const display_notice = function(...args) {
   let htmlLine = document.createElement('span');
@@ -22,6 +24,7 @@ const display_notice = function(...args) {
   return htmlLine.outerHTML;
 }
 
+// Override the add_block to substitute nexsys custom prompts in.
 //nexusclient.ui().buffer().add_block
 const add_block = function(block) {
   let count = 0;
