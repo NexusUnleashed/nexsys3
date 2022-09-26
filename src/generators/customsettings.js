@@ -8,6 +8,9 @@ import { cureTable } from '../tables/cureTable'
 import { whiteList } from '../events/lust'
 import { sys } from '../functions/sys'
 
+// Khaseem: Removed the CustomCureTable, CustomBalanceTable, and CustomDefTable
+// these should be static entries. I do not see the need to store these variables.
+
 export const updateList = function (list, newList) {
     if (newList) {
         for (let i = 0; i < newList.length; i++) {
@@ -30,7 +33,9 @@ export const updateModel = function (model, newModel) {
 
 export const saveModel = function (name, model) {
     if (model) {
-        nexusclient.variables().set(name, model)
+        let settings = nexusclient.variables().get('nexsysSettings');
+        settings[name] = model;
+        nexusclient.variables().set('nexsysSettings', settings);
         eventStream.raiseEvent(name + 'ModelSavedEvent', model)
     } else {
         console.log(name + ' model was null in saveModel')
@@ -43,12 +48,12 @@ export const updateAndSaveModel = function (name, model, newModel) {
 }
 
 const loadSystemSettings = function () {
-    const model = nexusclient.variables().get('CustomSystemSettings')
-    updateAndSaveModel('CustomSystemSettings', sys.settings, model)
+    const model = nexusclient.variables().get('nexsysSettings').systemSettings; //nexusclient.variables().get('CustomSystemSettings')
+    updateAndSaveModel('systemSettings', sys.settings, model)
 }
 
 const loadAffSettings = function () {
-    const model = nexusclient.variables().get('CustomAffSettings')
+    const model = nexusclient.variables().get('nexsysSettings').affSettings; //nexusclient.variables().get('CustomAffSettings')
     if (model) {
         updateList(affTable.list, model.list)
         updateModel(affTable.prios, model.prios)
@@ -61,37 +66,22 @@ const loadAffSettings = function () {
         }
     }
 
-    saveModel('CustomAffSettings', affTable)
-}
-
-const loadDefTable = function () {
-    const model = nexusclient.variables().get('CustomDefTable')
-    updateAndSaveModel('CustomDefTable', defTable, model)
+    saveModel('affSettings', affTable)
 }
 
 const loadDefSettings = function () {
-    const model = nexusclient.variables().get('CustomDefSettings')
+    const model = nexusclient.variables().get('nexsysSettings').defSettings; //nexusclient.variables().get('CustomDefSettings')
     if (model) {
         updateModel(defPrios.keepup, model.keepup)
         updateModel(defPrios.static, model.static)
     }
 
-    saveModel('CustomDefSettings', defPrios)
-}
-
-const loadBalanceTable = function () {
-    const model = nexusclient.variables().get('CustomBalanceTable')
-    updateAndSaveModel('CustomBalanceTable', balanceTable, model)
+    saveModel('defSettings', defPrios)
 }
 
 const loadCacheSettings = function () {
-    const model = nexusclient.variables().get('CustomCacheSettings')
-    updateAndSaveModel('CustomCacheSettings', cacheTable, model)
-}
-
-const loadCureTable = function () {
-    const model = nexusclient.variables().get('CustomCureTable')
-    updateAndSaveModel('CustomCureTable', cureTable, model)
+    const model = nexusclient.variables().get('nexsysSettings').cacheSettings; //nexusclient.variables().get('CustomCacheSettings')
+    updateAndSaveModel('cacheSettings', cacheTable, model)
 }
 
 const loadLustList = function () {
@@ -102,21 +92,15 @@ const loadLustList = function () {
 export function loadCustomSettings() {
     loadSystemSettings()
     loadAffSettings()
-    loadDefTable()
     loadDefSettings()
-    loadBalanceTable()
     loadCacheSettings()
-    loadCureTable()
     loadLustList()
 }
 
 export function saveCustomSettings() {
     saveModel('CustomSystemSettings', sys.settings)
     saveModel('CustomAffSettings', affTable)
-    saveModel('CustomDefTable', defTable)
     saveModel('CustomDefSettings', defPrios)
-    saveModel('CustomBalanceTable', balanceTable)
     saveModel('CustomCacheSettings', cacheTable)
-    saveModel('CustomCureTable', cureTable)
     saveModel('LustWhiteList', whiteList)
 }
