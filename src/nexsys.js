@@ -16,36 +16,36 @@
     reflex_find_by_name() > nexusclient.reflexes().find_by_name("group", "Aliases", false, false, "nexmap3")
 */
 
-import { Queue } from "./classes/Queue";
-import { curArea, curRoom, curRoomArea, curRoomName } from "./events/gmcp";
-import { getLustCommands, rejectList, whiteList } from "./events/lust";
+import { prompt } from "./base/clientOverrides/prompt";
+import { getLustCommands, rejectList, whiteList } from "./base/utilities/lust";
+import { Queue } from "./base/queues/Queue";
+import { curArea, curRoom, curRoomArea, curRoomName } from "./base/system/gmcp";
 import {
   affPrioSwap,
   getCurrentAffs,
   haveAff,
   haveAffs,
   haveAnAff
-} from "./functions/affs";
-import { haveABal, haveBal, haveBals } from "./functions/bals";
-import { getCacheOutputs, getMissingCache } from "./functions/cache";
+} from "./base/affs/affService";
+import { haveABal, haveBal, haveBals } from "./base/balances/balanceService";
+import { getCacheOutputs, getMissingCache } from "./base/cache/cacheService";
 import {
   getCurrentDefs,
   getDefOutputs,
   getMissingDefs
-} from "./functions/defs";
-import { getCustomPrompt, prompt } from "./functions/prompt";
-import { sys, sysLog, sysLogging, sysLoggingToggle } from "./functions/sys";
+} from "./base/defs/defService";
+import { sys, sysLog, sysLogging, sysLoggingToggle } from "./base/system/sys";
 import {
   psend,
   rsend,
   sendCmd,
   sendInline,
   timeDiffNow
-} from "./functions/utilities";
-import { Affs } from "./generators/affs";
-import { Bals } from "./generators/balances";
-import { Caches } from "./generators/caches";
-import { Cures } from "./generators/cures";
+} from "./base/system/sysService";
+import { affs } from "./base/affs/affs";
+import { bals } from "./base/balances/balances";
+import { caches } from "./base/cache/caches";
+import { cures } from "./base/cures/cures";
 import {
   loadCustomSettings,
   saveCustomSettings,
@@ -53,17 +53,17 @@ import {
   updateAndSaveModel,
   updateList,
   updateModel
-} from "./generators/customsettings";
-import { Defs, defsCreate } from "./generators/defs";
-import { echo, echoInfoLine, echoLine } from "./generators/echos";
+} from "./base/system/customsettings";
+import { defs, defsCreate } from "./base/defs/defs";
+import { echo, echoInfoLine, echoLine } from "./base/echo/echos";
 import {
   serversideDefencePriorityListStart,
   serversideSettings
-} from "./generators/serverside";
-import { affTable } from "./tables/affTable";
-import { cacheTable } from "./tables/cacheTable";
-import { dirMap, dirs, limbs, oppDirs, shortDirs } from "./tables/commonTable";
-import { defPrios } from "./tables/defTable";
+} from "./base/serverside/serverside";
+import { affTable } from "./base/affs/affTable";
+import { cacheTable } from "./base/cache/cacheTable";
+import { dirMap, dirs, limbs, oppDirs, shortDirs } from "./base/utilities/commonTable";
+import { defPrios } from "./base/defs/defTable";
 
 const nexsys = {
   sys: sys,
@@ -71,9 +71,9 @@ const nexsys = {
   sysLog: sysLog,
   sysLoggingToggle: sysLoggingToggle,
 
-  Cures: Cures,
+  cures: cures,
 
-  Affs: Affs,
+  affs: affs,
   affTable: affTable,
   getCurrentAffs: getCurrentAffs,
   haveAff: haveAff,
@@ -81,19 +81,19 @@ const nexsys = {
   haveAnAff: haveAnAff,
   affPrioSwap: affPrioSwap,
 
-  Bals: Bals,
+  bals: bals,
   haveABal: haveABal,
   haveBal: haveBal,
   haveBals: haveBals,
 
-  Defs: Defs,
+  defs: defs,
   defPrios: defPrios,
   defsCreate: defsCreate,
   getCurrentDefs: getCurrentDefs,
   getDefOutputs: getDefOutputs,
   getMissingDefs: getMissingDefs,
 
-  Caches: Caches,
+  caches: caches,
   cacheTable: cacheTable,
   getCacheOutputs: getCacheOutputs,
   getMissingCache: getMissingCache,
