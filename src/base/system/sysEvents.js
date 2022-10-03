@@ -1,16 +1,16 @@
 /* global eventStream */
 
-import { Affs } from '../generators/affs'
-import { getCurrentAffs } from '../functions/affs'
-import { getCurrentBals } from '../functions/bals'
-import { getCacheOutputs } from '../functions/cache'
-import { getCureOutputs } from '../functions/cures'
-import { getDefOutputs } from '../functions/defs'
-import { Balance } from '../classes/Balance'
+import { affs } from '../affs/affs'
+import { getCurrentAffs } from '../affs/affService'
+import { getCurrentBals } from '../balances/balanceService'
+import { getCacheOutputs } from '../cache/cacheService'
+import { getCureOutputs } from '../cures/cureService'
+import { getDefOutputs } from '../defs/defService'
+import { Balance } from '../balances/Balance'
 import { getLustCommands } from '../utilities/lust'
-import { sendCmd } from '../functions/utilities'
-import {sys} from '../functions/sys'
-import { serversideSettings } from '../generators/serverside'
+import { sendCmd } from './sysService'
+import {sys} from './sys'
+import { serversideSettings } from '../serverside/serverside'
 
 //#region System Output
 let outputInProgress = false
@@ -56,7 +56,7 @@ const populateOutput = function () {
             outputInProgress ||
             sys.isPaused() ||
             sys.isSlowMode() ||
-            Affs.aeon.have
+            affs.aeon.have
         ) {
             outputPending = true
         } else {

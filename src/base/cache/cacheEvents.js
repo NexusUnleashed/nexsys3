@@ -1,5 +1,5 @@
 /* global eventStream */
-import {herb_name_to_herb} from '../tables/cacheTable'
+import {herb_name_to_herb} from './cacheTable'
 
 let filterHerbAndAmount = function(herb) {
   if(herb.location === "inv") {

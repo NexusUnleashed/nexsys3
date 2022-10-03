@@ -1,7 +1,7 @@
 /*global eventStream, nexusclient */
 
-import { Echo, EchoLinePrefix } from "../classes/Echo.js";
-import { sys } from "../functions/sys.js";
+import { Echo, EchoLinePrefix } from "./Echo.js";
+import { sys } from "../system/sys.js";
 
 const TrackableEchoGot = new EchoLinePrefix(
   { text: " + ", fg: "white" },

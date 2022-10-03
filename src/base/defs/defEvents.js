@@ -1,7 +1,7 @@
 /* global eventStream */
 
 import {getCurrentDefs, parry} from './defService'
-import { Defs } from './defs'
+import { defs } from './defs'
 import { sys } from '../system/sys'
 import {limbs} from '../utilities/commonTable'
 import { defPrios } from "./defTable";
@@ -56,7 +56,6 @@ eventStream.registerEvent('Char.Defences.Remove', eventGmcpDefRemove);
 
 export function repop(args) {
   if (serversideSettings.loaded) {
-      const defs = Defs
       // console.log(defs)
       const keepupPrios = defPrios.keepup
       // console.log(keepupPrios);
@@ -77,11 +76,11 @@ export function repop(args) {
           }
       }
       for (const limb in limbs.long) {
-          if (!Defs['parrying ' + limb].isIgnored) {
+          if (!defs['parrying ' + limb].isIgnored) {
               parry(limb)
           }
-          if (Defs['guarding ' + limb]) {
-              if (!Defs['guarding ' + limb].isIgnored) {
+          if (defs['guarding ' + limb]) {
+              if (!defs['guarding ' + limb].isIgnored) {
                   parry(limb)
               }
           }

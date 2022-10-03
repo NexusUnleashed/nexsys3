@@ -1,8 +1,8 @@
 /* global nexusclient, echo, eventStream */
-import { AffDef } from "../classes/Aff";
-import { Defs } from "../generators/defs";
-import { sys } from "../functions/sys";
-import { sendCmd, sendInline } from "../functions/utilities";
+import { AffDef } from "../affs/Aff";
+import { defs } from "../defs/defs";
+import { sys } from "../system/sys";
+import { sendCmd, sendInline } from "../system/sysService";
 import { serversideSettings } from "./serverside";
 
 const serversideSlowModeOn = function (args) {
@@ -226,7 +226,6 @@ const curingPriorityAffs = function (args) {
 };
 
 const curingPriorityDefs = function (args) {
-  const defs = Defs;
   const prio = args.prio;
   const defname = args.def;
   if (defname.length >= 15) {

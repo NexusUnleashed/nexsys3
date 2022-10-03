@@ -1,5 +1,5 @@
-import { Affs } from "../affs/affs"
-import { Cures } from "./cures"
+import { affs } from "../affs/affs"
+import { cures } from "./cures"
 
 export function getCureOutputs(affList, balList) {
   let cureOutputs = []
@@ -8,11 +8,11 @@ export function getCureOutputs(affList, balList) {
   while (affCurable) {
       affCurable = false
       for (let i = 0; i < affList.length && !affCurable; i++) {
-          const aff = Affs[affList[i]]
+          const aff = affs[affList[i]]
           const cures = aff.cures
           for (let j = 0; j < cures.length; j++) {
               let canPerform = true
-              const cure = Cures[cures[j]]
+              const cure = cures[cures[j]]
               if (
                   !cure.isIgnored &&
                   !Array.arraysIntersect(cure.blocks, affList)
@@ -72,11 +72,11 @@ export function getCureOutputs(affList, balList) {
   while (affCurable) {
       affCurable = false
       for (let i = 0; i < affList.length && !affCurable; i++) {
-          const aff = Affs[affList[i]]
+          const aff = affs[affList[i]]
           const cures = aff.cures
           for (let j = 0; j < cures.length; j++) {
               let canPerform = true
-              const cure = Cures[cures[j]]
+              const cure = cures[cures[j]]
               if (
                   !cure.isIgnored &&
                   !Array.arraysIntersect(cure.blocks, affList)

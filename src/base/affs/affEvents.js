@@ -1,5 +1,5 @@
 /*global eventStream */
-import { Affs } from './affs'
+import { affs } from './affs'
 import { getCurrentAffs } from './affService'
 
 let eventGmcpAffList = function(list) {
@@ -93,7 +93,6 @@ eventStream.registerEvent('DeathEvent', deathEvent);
 
 
 let setAffPrios = function() {
-  let affs = Affs;
   for(let aff in affs) {
       let curAff = affs[aff];
       curAff.set_prio(curAff.prio);
