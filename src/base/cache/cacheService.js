@@ -2,7 +2,7 @@ import { caches } from "./caches"
 import { affs } from "../affs/affs"
 import { defs } from "../defs/defs"
 
-export function getMissingCache() {
+function getMissingCache() {
   const current_cache = []
   for (const cache in caches) {
       if (caches[cache].needToOutr) {

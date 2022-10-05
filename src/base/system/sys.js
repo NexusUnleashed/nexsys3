@@ -12,6 +12,7 @@ if (typeof nexusclient === "undefined") {
     },
   };
 }
+
 export const sys = {
   settings: {
     sep: nexusclient.variables().get("commandSeparator") || undefined,

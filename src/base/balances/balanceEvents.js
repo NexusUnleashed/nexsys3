@@ -13,7 +13,7 @@ let eventGmcpBalances = function(vitals) {
       eventStream.raiseEvent('balanceLostBalEvent');
   }
   
-  if(vitals.eq == '1') {
+  if(vitals.eq === '1') {
       // CUSTOM event for recovering eqbal tracking
       if (!haveBal('equilibrium') && haveBal('balance')) {
           eventStream.raiseEvent('eqBalRecoveredEvent');
