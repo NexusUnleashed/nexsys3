@@ -96,7 +96,6 @@ const nexsys = {
   caches: caches,
   cacheTable: cacheTable,
   getCacheOutputs: getCacheOutputs,
-  getMissingCache: getMissingCache,
 
   echo: echo,
   echoLine: echoLine,
