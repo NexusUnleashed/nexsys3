@@ -20,6 +20,7 @@ const getCustomPrompt = () => {
     let diffm = vars.diffm;
 
     let add = (txt, fg, bg) => {
+        if (txt.length === 0) { return; }
         promptLine.appendChild(nexsys.prompt.generate_chunk(txt, fg, bg))
     }
 
@@ -43,13 +44,8 @@ const getCustomPrompt = () => {
     add(vars.w.text + ", ", vars.w.fg, vars.w.bg);
     add(vars.e.text + " ", vars.ecolor, "");
     add(vars.eq.text + vars.bal.text + "|", vars.eq.fg, vars.eq.bg);
-    add(vars.c.text + vars.k + vars.d + vars.b + " ", vars.c.fg, vars.c.bg);
-    add(vars.target.text + " ", vars.target.fg, vars.target.bg);
-    add(vars.kai.text, vars.kai.fg, vars.kai.bg);
-    add(vars.kaitrance.text, vars.kaitrance.fg, vars.kaitrance.bg);
-    add(vars.vitality.text, vars.vitality.fg, vars.vitality.bg);
-    add(vars.stance.text + " ", vars.stance.fg, vars.stance.bg);
-    promptLine.appendChild(nexsys.prompt.affString);
+    add(vars.c.text + vars.k.text + vars.d.text + vars.b.text + " ", vars.c.fg, vars.c.bg);
+    promptLine.appendChild(vars.affString);
     add(diffh.text + " ", vars.diffh.fg, vars.diffh.bg);
     add(diffm.text + " ", vars.diffm.fg, vars.diffm.bg);
 
@@ -115,7 +111,7 @@ prompt.vars = {
     d: { text: "", fg: "", bg: "" },
     b: { text: "", fg: "", bg: "" },
     affs: {},
-    affString: { text: "", fg: "brown", bg: "" },
+    affString: document.createElement('span'),
     paused: { text: "", fg: "red", bg: "" },
     retard: { text: "", fg: "blue", bg: "" },
     aeon: { text: "", fg: "red", bg: "" },

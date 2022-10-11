@@ -78,15 +78,15 @@ let lostPromptAff = function (aff) {
 };
 
 let setPromptDefs = function (args) {
-    nexsys.prompt.vars.c.text = nexsys.Defs.cloak.have ? "c" : "";
-    nexsys.prompt.vars.k.text = nexsys.Defs.kola.have ? "k" : "";
-    nexsys.prompt.vars.d.text = nexsys.Affs.deafness.have ? "" : "d";
-    nexsys.prompt.vars.b.text = nexsys.Affs.blindness.have ? "" : "b";
+    nexsys.prompt.vars.c.text = nexsys.defs.cloak.have ? "c" : "";
+    nexsys.prompt.vars.k.text = nexsys.defs.kola.have ? "k" : "";
+    nexsys.prompt.vars.d.text = nexsys.affs.deafness.have ? "" : "d";
+    nexsys.prompt.vars.b.text = nexsys.affs.blindness.have ? "" : "b";
 };
 
 let setPromptBals = function (args) {
-    nexsys.prompt.vars.eq.text = nexsys.Bals.balance.have ? "x" : "";
-    nexsys.prompt.vars.bal.text = nexsys.Bals.equilibrium.have ? "e" : "";
+    nexsys.prompt.vars.eq.text = nexsys.bals.balance.have ? "x" : "";
+    nexsys.prompt.vars.bal.text = nexsys.bals.equilibrium.have ? "e" : "";
 };
 
 let setHealthDiffPrompt = function (args) {

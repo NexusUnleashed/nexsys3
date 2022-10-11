@@ -28,7 +28,7 @@ import {
   haveAnAff
 } from "./base/affs/affService";
 import { haveABal, haveBal, haveBals } from "./base/balances/balanceService";
-import { getCacheOutputs, getMissingCache } from "./base/cache/cacheService";
+import { getCacheOutputs } from "./base/cache/cacheService";
 import {
   getCurrentDefs,
   getDefOutputs,
@@ -54,7 +54,7 @@ import {
   updateList,
   updateModel
 } from "./base/system/customsettings";
-import { defs, defsCreate } from "./base/defs/defs";
+import { defs } from "./base/defs/defs";
 import { echo, echoInfoLine, echoLine } from "./base/echo/echos";
 import {
   serversideDefencePriorityListStart,
@@ -64,8 +64,10 @@ import { affTable } from "./base/affs/affTable";
 import { cacheTable } from "./base/cache/cacheTable";
 import { dirMap, dirs, limbs, oppDirs, shortDirs } from "./base/utilities/commonTable";
 import { defPrios } from "./base/defs/defTable";
+import Trackable from "./base/classes/Trackable";
 
 const nexsys = {
+  customPromptEnabled: false,
   sys: sys,
   sysLogging: sysLogging,
   sysLog: sysLog,
@@ -81,6 +83,8 @@ const nexsys = {
   haveAnAff: haveAnAff,
   affPrioSwap: affPrioSwap,
 
+  snapTrack: new Trackable('Snapped'),
+
   bals: bals,
   haveABal: haveABal,
   haveBal: haveBal,
@@ -88,7 +92,7 @@ const nexsys = {
 
   defs: defs,
   defPrios: defPrios,
-  defsCreate: defsCreate,
+  //defsCreate: defsCreate,
   getCurrentDefs: getCurrentDefs,
   getDefOutputs: getDefOutputs,
   getMissingDefs: getMissingDefs,
@@ -96,7 +100,6 @@ const nexsys = {
   caches: caches,
   cacheTable: cacheTable,
   getCacheOutputs: getCacheOutputs,
-  getMissingCache: getMissingCache,
 
   echo: echo,
   echoLine: echoLine,

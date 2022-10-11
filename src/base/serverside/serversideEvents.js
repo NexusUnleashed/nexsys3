@@ -33,16 +33,10 @@ const serversideDefencePrio = function (def) {
     if (def.isServerSide && def.prio !== serversideSettings.defs[def.name]) {
       if (def.isIgnored) {
         serversideSettings.defs[def.name] = undefined;
-        eventStream.raiseEvent(
-          "SystemOutputAdd",
-          "curing priority defence " + def.name + " reset"
-        );
+        eventStream.raiseEvent('PriorityDefOutputAdd', def.name + ' reset');
       } else {
         serversideSettings.defs[def.name] = def.prio;
-        eventStream.raiseEvent(
-          "SystemOutputAdd",
-          "curing priority defence " + def.name + " " + def.prio
-        );
+        eventStream.raiseEvent('PriorityDefOutputAdd', def.name + ' ' + def.prio);
       }
     }
   } else if (
@@ -52,24 +46,15 @@ const serversideDefencePrio = function (def) {
     if (!(def.isIgnored && serversideSettings.defs[def.name] === undefined)) {
       if (def.isIgnored) {
         serversideSettings.defs[def.name] = undefined;
-        eventStream.raiseEvent(
-          "SystemOutputAdd",
-          "curing priority defence " + def.name + " reset"
-        );
+        eventStream.raiseEvent('PriorityDefOutputAdd', def.name + ' reset');
       } else {
         if (def.preempt) {
           serversideSettings.defs[def.name] = def.prio;
-          eventStream.raiseEvent(
-            "SystemOutputAdd",
-            "curing priority defence " + def.name + " " + def.prio + " preempt"
-          );
+          eventStream.raiseEvent('PriorityDefOutputAdd', def.name + ' ' + def.prio + ' preempt');
         } else {
           serversideSettings.defs[def.name] = def.prio;
           console.log('DEBUGGGG')
-          eventStream.raiseEvent(
-            "SystemOutputAdd",
-            "curing priority defence " + def.name + " " + def.prio
-          );
+          eventStream.raiseEvent('PriorityDefOutputAdd', def.name + ' ' + def.prio);
         }
       }
     }
@@ -83,16 +68,10 @@ const serversideAffPrio = function (aff) {
 
     if (prio === 0 || prio === reset) {
       serversideSettings.affs[aff.name] = 26;
-      eventStream.raiseEvent(
-        "SystemOutputAdd",
-        "curing priority " + aff.name + " " + reset
-      );
+      eventStream.raiseEvent('PriorityAffOutputAdd', aff.name+ ' '+reset);
     } else {
       serversideSettings.affs[aff.name] = prio;
-      eventStream.raiseEvent(
-        "SystemOutputAdd",
-        "curing priority " + aff.name + " " + prio
-      );
+      eventStream.raiseEvent('PriorityAffOutputAdd', aff.name+ ' ' +prio);
     }
   }
 };

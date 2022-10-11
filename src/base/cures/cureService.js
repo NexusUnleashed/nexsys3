@@ -1,5 +1,5 @@
 import { affs } from "../affs/affs"
-import { cures } from "./cures"
+import { cures as Cures } from "./cures"
 
 export function getCureOutputs(affList, balList) {
   let cureOutputs = []
@@ -12,7 +12,7 @@ export function getCureOutputs(affList, balList) {
           const cures = aff.cures
           for (let j = 0; j < cures.length; j++) {
               let canPerform = true
-              const cure = cures[cures[j]]
+              const cure = Cures[cures[j]]
               if (
                   !cure.isIgnored &&
                   !Array.arraysIntersect(cure.blocks, affList)
@@ -76,7 +76,7 @@ export function getCureOutputs(affList, balList) {
           const cures = aff.cures
           for (let j = 0; j < cures.length; j++) {
               let canPerform = true
-              const cure = cures[cures[j]]
+              const cure = Cures[cures[j]]
               if (
                   !cure.isIgnored &&
                   !Array.arraysIntersect(cure.blocks, affList)
