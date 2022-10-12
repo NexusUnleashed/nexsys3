@@ -72,6 +72,7 @@ const getItemStyle = (isDragging, draggableStyle) => ({
 
 const PriorityList = ({ affs }) => {
   const [state, setState] = React.useState({ affs });
+  
   const onDragEnd = (result) => {
     const {source, destination} = result;
     if (!result.destination) {
@@ -109,7 +110,7 @@ const PriorityList = ({ affs }) => {
 
   return (
     <DragDropContext onDragEnd={onDragEnd}>
-      <Droppable droppableId={0} direction="horizontal">
+      <Droppable droppableId="one" direction="horizontal">
         {(provided, snapshot) => (
           <div
             style={getListStyle(snapshot.isDraggingOver)}
@@ -121,7 +122,7 @@ const PriorityList = ({ affs }) => {
           </div>
         )}
       </Droppable>
-      <Droppable droppableId={1} direction="horizontal">
+      <Droppable droppableId="two" direction="horizontal">
         {(provided, snapshot) => (
           <div
             style={getListStyle(snapshot.isDraggingOver)}
