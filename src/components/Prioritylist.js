@@ -32,7 +32,6 @@ const reorder = (list, startIndex, endIndex) => {
   const result = [...list];
   const [removed] = result.splice(startIndex, 1);
   result.splice(endIndex, 0, removed);
-
   return result;
 };
 
@@ -69,7 +68,7 @@ const getItemStyle = (isDragging, draggableStyle) => ({
   // styles we need to apply on draggables
   ...draggableStyle,
 });
-
+const droppableIdMap = ["one", "two", "three"]
 const PriorityList = ({ affs }) => {
   const [state, setState] = React.useState({ affs });
   
@@ -81,30 +80,25 @@ const PriorityList = ({ affs }) => {
 
     if (source.droppableId === destination.droppableId) {
       const items = reorder(
-        affs[source.droppableId],
+        state.affs[droppableIdMap.indexOf(source.droppableId)],
         source.index,
         destination.index
       );
 
-      let state = { items };
+      state.affs[droppableIdMap.indexOf(source.droppableId)] = items;
 
-      if (source.droppableId === "droppable2") {
-        state = { selected: items };
-      }
 
-      this.setState(state);
+      setState(state);
     } else {
       const result = move(
-        affs[source.droppableId],
-        affs[destination.droppableId],
+        state.affs[droppableIdMap.indexOf(source.droppableId)],
+        state.affs[droppableIdMap.indexOf(destination.droppableId)],
         source,
         destination
       );
-
-      setState({
-        items: result.droppable,
-        selected: result.droppable2,
-      });
+        console.log(result)
+      setState(state
+      );
     }
   };
 
