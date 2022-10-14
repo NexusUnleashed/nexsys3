@@ -7,6 +7,7 @@ import TabPanel from "@mui/lab/TabPanel";
 
 import Precache from "./Precache";
 import PriorityList from "./Prioritylist";
+import Dndkit from "./Dndkit";
 
 const Configuration = () => {
   const [value, setValue] = React.useState("one");
@@ -14,6 +15,34 @@ const Configuration = () => {
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
+
+  const affs = Array.from(Array(26)).fill([],0);
+  affs[0] = ["bound",
+  "brokenleftarm",
+  "brokenrightarm",
+  "brokenleftleg",
+  "brokenrightleg",
+  "bruisedribs",
+  "burning",
+  "cadmuscurse",
+  "calcifiedskull",
+  "calcifiedtorso",
+  "claustrophobia",
+    ];
+  affs[1] = ["addiction",
+  "aeon",
+  "agoraphobia",
+  "airfisted",
+  "amnesia",
+  "anorexia",
+  "asphyxiating" /**/,
+  "asthma",
+  "blackout",
+  "bleeding",
+  "blindness",
+  "blistered" /**/,
+  "bloodfire" /**/,
+    ];
 
   return (
     <Box sx={{ width: "100%", typography: "body1" }}>
@@ -29,33 +58,12 @@ const Configuration = () => {
         <TabPanel value="1">Item One</TabPanel>
         <TabPanel value="2">
           <PriorityList
-            affs={[
-              [
-                {
-                  id: "paralysis",
-                },
-                {
-                  id: "asthma",
-                },
-                {
-                  id: "nausea",
-                },
-              ],
-              [
-                {
-                  id: "weariness",
-                },
-                {
-                  id: "darkshade",
-                },
-                {
-                  id: "hallucinations",
-                },
-              ],
-            ]}
+            affs={affs}
           />
         </TabPanel>
-        <TabPanel value="3">Item Three</TabPanel>
+        <TabPanel value="3">
+          <Dndkit/>
+        </TabPanel>
         <TabPanel value="4">
           <Precache />
         </TabPanel>

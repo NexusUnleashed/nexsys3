@@ -4,7 +4,7 @@ import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 
 const AffItem = ({ aff, index }) => {
   return (
-    <Draggable key={aff.id} draggableId={aff.id} index={index}>
+    <Draggable key={aff} draggableId={aff} index={index}>
       {(provided, snapshot) => (
         <div
           ref={provided.innerRef}
@@ -15,7 +15,7 @@ const AffItem = ({ aff, index }) => {
             provided.draggableProps.style
           )}
         >
-          {aff.id}
+          {aff}
         </div>
       )}
     </Draggable>
@@ -24,8 +24,29 @@ const AffItem = ({ aff, index }) => {
 
 const AffList = React.memo(function AffList({ affs }) {
   return affs.map((aff, index) => (
-    <AffItem aff={aff} index={index} key={aff.id} />
+    <AffItem aff={aff} index={index} key={aff} />
   ));
+});
+
+const getListStyle = (isDraggingOver) => ({
+  background: isDraggingOver ? "lightblue" : "lightgrey",
+  display: "flex",
+  "flex-wrap": "wrap",
+  padding: 16,
+  overflow: "auto",
+});
+
+const getItemStyle = (isDragging, draggableStyle) => ({
+  // some basic styles to make the items look a bit nicer
+  userSelect: "none",
+  padding: 8 * 2,
+  margin: `0 ${8}px 0 0`,
+
+  // change background colour if dragging
+  background: isDragging ? "lightgreen" : "grey",
+
+  // styles we need to apply on draggables
+  ...draggableStyle,
 });
 
 const reorder = (list, startIndex, endIndex) => {
@@ -49,31 +70,13 @@ const move = (source, destination, droppableSource, droppableDestination) => {
   return result;
 };
 
-const getListStyle = (isDraggingOver) => ({
-  background: isDraggingOver ? "lightblue" : "lightgrey",
-  display: "flex",
-  padding: 16,
-  overflow: "auto",
-});
+const droppableIdMap = ["one", "two", "three", "four", "five", "six"];
 
-const getItemStyle = (isDragging, draggableStyle) => ({
-  // some basic styles to make the items look a bit nicer
-  userSelect: "none",
-  padding: 8 * 2,
-  margin: `0 ${8}px 0 0`,
-
-  // change background colour if dragging
-  background: isDragging ? "lightgreen" : "grey",
-
-  // styles we need to apply on draggables
-  ...draggableStyle,
-});
-const droppableIdMap = ["one", "two", "three"]
 const PriorityList = ({ affs }) => {
   const [state, setState] = React.useState({ affs });
-  
+
   const onDragEnd = (result) => {
-    const {source, destination} = result;
+    const { source, destination } = result;
     if (!result.destination) {
       return;
     }
@@ -87,7 +90,6 @@ const PriorityList = ({ affs }) => {
 
       state.affs[droppableIdMap.indexOf(source.droppableId)] = items;
 
-
       setState(state);
     } else {
       const result = move(
@@ -96,38 +98,36 @@ const PriorityList = ({ affs }) => {
         source,
         destination
       );
-        console.log(result)
-      setState(state
-      );
+      Object.keys(result).forEach((key) => {
+        state.affs[droppableIdMap.indexOf(key)] = result[key];
+      });
+      setState(state);
     }
   };
 
   return (
     <DragDropContext onDragEnd={onDragEnd}>
-      <Droppable droppableId="one" direction="horizontal">
-        {(provided, snapshot) => (
-          <div
-            style={getListStyle(snapshot.isDraggingOver)}
-            ref={provided.innerRef}
-            {...provided.droppableProps}
-          >
-            <AffList affs={state.affs[0]} />
-            {provided.placeholder}
-          </div>
-        )}
-      </Droppable>
-      <Droppable droppableId="two" direction="horizontal">
-        {(provided, snapshot) => (
-          <div
-            style={getListStyle(snapshot.isDraggingOver)}
-            ref={provided.innerRef}
-            {...provided.droppableProps}
-          >
-            <AffList affs={state.affs[1]} />
-            {provided.placeholder}
-          </div>
-        )}
-      </Droppable>
+      {droppableIdMap.map((id) => {
+        console.log(id)
+        return (
+          <Droppable droppableId={id} direction="horizontal">
+            {(provided, snapshot) => (
+              <div>
+                {id}
+              <div
+                style={getListStyle(snapshot.isDraggingOver)}
+                ref={provided.innerRef}
+                {...provided.droppableProps}
+              >
+                {id}
+                <AffList affs={state.affs[droppableIdMap.indexOf(id)] ?? []} />
+                {provided.placeholder}
+              </div>
+              </div>
+            )}
+          </Droppable>
+        );
+      })}
     </DragDropContext>
   );
 };
