@@ -6,11 +6,10 @@ import TabList from "@mui/lab/TabList";
 import TabPanel from "@mui/lab/TabPanel";
 
 import Precache from "./Precache";
-import PriorityList from "./Prioritylist";
 import Dndkit from "./Dndkit";
 
 const Configuration = () => {
-  const [value, setValue] = React.useState("one");
+  const [value, setValue] = React.useState("1");
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -57,9 +56,7 @@ const Configuration = () => {
         </Box>
         <TabPanel value="1">Item One</TabPanel>
         <TabPanel value="2">
-          <PriorityList
-            affs={affs}
-          />
+
         </TabPanel>
         <TabPanel value="3">
           <Dndkit/>

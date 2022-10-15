@@ -18,7 +18,6 @@
     "nexevent": "^1.0.5",
     "prettier": "^2.6.2",
     "react": "^18.1.0",
-    "react-beautiful-dnd": "^13.1.1",
     "react-dom": "^18.1.0",
     "react-scripts": "5.0.1",
     "web-vitals": "^2.1.4"
