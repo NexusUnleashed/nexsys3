@@ -50,7 +50,7 @@ const add_block = function(block) {
       count++;
       this.lineid++;
       l.id = this.lineid;
-      if (l.is_prompt && nexsys.customPromptEnabled) {
+      if (l.is_prompt && nexsys.sys.settings.customPrompt) {
           l.parsed_line = {
                   formatted() {return nexsys.prompt.getCustomPrompt()}
           }

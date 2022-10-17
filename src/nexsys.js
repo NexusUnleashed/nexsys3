@@ -67,7 +67,6 @@ import { defPrios } from "./base/defs/defTable";
 import Trackable from "./base/classes/Trackable";
 
 const nexsys = {
-  customPromptEnabled: false,
   sys: sys,
   sysLogging: sysLogging,
   sysLog: sysLog,
