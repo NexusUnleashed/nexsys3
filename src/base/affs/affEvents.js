@@ -1,4 +1,4 @@
-/*global eventStream */
+/*global eventStream, nexsys */
 import { affs } from './affs'
 import { getCurrentAffs } from './affService'
 

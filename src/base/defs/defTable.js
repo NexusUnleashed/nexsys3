@@ -1233,10 +1233,10 @@ export const defTable = {
     },
 }
 
-export const defPrios = {}
+export const defPrios = {
 
 // default keepup essentially
-defPrios.keepup = {
+keepup: {
     // Normal defences
     alertness: 0,
     curseward: 0,
@@ -1380,10 +1380,10 @@ defPrios.keepup = {
     'guarding head': 0,
     'guarding torso': 0,
     'guarding right leg': 0,
-}
+},
 
 // what gets set when deffing up
-defPrios.static = {
+static: {
     // Regular
     mindseye: 0,
     lifevision: 0,
@@ -1426,4 +1426,5 @@ defPrios.static = {
     secondsight: 0,
     weaving: 0,
     shroud: 0,
+}
 }

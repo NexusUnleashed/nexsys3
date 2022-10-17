@@ -1,9 +1,10 @@
-/* global nexusclient, echo, eventStream */
+/* global nexusclient, eventStream */
 import { AffDef } from "../affs/Aff";
 import { defs } from "../defs/defs";
 import { sys } from "../system/sys";
 import { sendCmd, sendInline } from "../system/sysService";
 import { serversideSettings } from "./serverside";
+import { echo } from "../echo/echos";
 
 const serversideSlowModeOn = function (args) {
   sendInline([
@@ -29,14 +30,19 @@ const serversideSlowModeOff = function (args) {
 };
 
 const serversideDefencePrio = function (def) {
+  if (!serversideSettings.loaded) { return; }
+
   if (def instanceof AffDef) {
     if (def.isServerSide && def.prio !== serversideSettings.defs[def.name]) {
       if (def.isIgnored) {
         serversideSettings.defs[def.name] = undefined;
-        eventStream.raiseEvent('PriorityDefOutputAdd', def.name + ' reset');
+        eventStream.raiseEvent("PriorityDefOutputAdd", def.name + " reset");
       } else {
         serversideSettings.defs[def.name] = def.prio;
-        eventStream.raiseEvent('PriorityDefOutputAdd', def.name + ' ' + def.prio);
+        eventStream.raiseEvent(
+          "PriorityDefOutputAdd",
+          def.name + " " + def.prio
+        );
       }
     }
   } else if (
@@ -46,15 +52,21 @@ const serversideDefencePrio = function (def) {
     if (!(def.isIgnored && serversideSettings.defs[def.name] === undefined)) {
       if (def.isIgnored) {
         serversideSettings.defs[def.name] = undefined;
-        eventStream.raiseEvent('PriorityDefOutputAdd', def.name + ' reset');
+        eventStream.raiseEvent("PriorityDefOutputAdd", def.name + " reset");
       } else {
         if (def.preempt) {
           serversideSettings.defs[def.name] = def.prio;
-          eventStream.raiseEvent('PriorityDefOutputAdd', def.name + ' ' + def.prio + ' preempt');
+          eventStream.raiseEvent(
+            "PriorityDefOutputAdd",
+            def.name + " " + def.prio + " preempt"
+          );
         } else {
           serversideSettings.defs[def.name] = def.prio;
-          console.log('DEBUGGGG')
-          eventStream.raiseEvent('PriorityDefOutputAdd', def.name + ' ' + def.prio);
+          console.log("DEBUGGGG");
+          eventStream.raiseEvent(
+            "PriorityDefOutputAdd",
+            def.name + " " + def.prio
+          );
         }
       }
     }
@@ -62,16 +74,18 @@ const serversideDefencePrio = function (def) {
 };
 
 const serversideAffPrio = function (aff) {
+  if (!serversideSettings.loaded) { return; }
+
   if (aff.isServerSide && aff.prio !== serversideSettings.affs[aff.name]) {
     const prio = aff.prio;
     const reset = 26;
 
     if (prio === 0 || prio === reset) {
       serversideSettings.affs[aff.name] = 26;
-      eventStream.raiseEvent('PriorityAffOutputAdd', aff.name+ ' '+reset);
+      eventStream.raiseEvent("PriorityAffOutputAdd", aff.name + " " + reset);
     } else {
       serversideSettings.affs[aff.name] = prio;
-      eventStream.raiseEvent('PriorityAffOutputAdd', aff.name+ ' ' +prio);
+      eventStream.raiseEvent("PriorityAffOutputAdd", aff.name + " " + prio);
     }
   }
 };
@@ -150,7 +164,7 @@ const initiateStartup = function (args) {
       "def",
       "echo SystemEvent CuringStartupCompleteEvent",
     ];
-    
+
     for (let i = 0; i < startupCommands.length; i++) {
       sendCmd(startupCommands[i]);
     }
@@ -161,12 +175,11 @@ const initiateStartup = function (args) {
 eventStream.registerEvent("CommandSeparatorSetOnStartup", initiateStartup);
 
 const systemStartupServerside = function () {
-  serversideSettings = {
-    loaded: false,
-    status: {},
-    affs: {},
-    defs: {},
-  };
+  serversideSettings.loaded = false;
+  serversideSettings.status = {};
+  serversideSettings.affs = {};
+  serversideSettings.defs ={};
+
   const separator = sys.settings.sep;
   sys.pause();
   if (separator) {
@@ -259,6 +272,7 @@ const curingStartupComplete = function (args) {
   eventStream.raiseEvent("ServersideSettingsCaptured");
   sys.unpause();
 };
+eventStream.registerEvent("CuringStartupCompleteEvent", curingStartupComplete);
 
 const setCuringStatusVars = function () {
   for (const status in serversideSettings.status) {
@@ -269,8 +283,6 @@ const setCuringStatusVars = function () {
     }
   }
 };
-
-eventStream.registerEvent("CuringStartupCompleteEvent", curingStartupComplete);
 eventStream.registerEvent("ServersideSettingsCaptured", setCuringStatusVars);
 
 /*

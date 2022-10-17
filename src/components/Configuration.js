@@ -56,10 +56,10 @@ const Configuration = () => {
         </Box>
         <TabPanel value="1">Item One</TabPanel>
         <TabPanel value="2">
-
+        <Dndkit/>
         </TabPanel>
         <TabPanel value="3">
-          <Dndkit/>
+          
         </TabPanel>
         <TabPanel value="4">
           <Precache />

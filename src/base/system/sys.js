@@ -180,7 +180,7 @@ export const sys = {
 */
 export const sys = {
   settings: {
-    sep: nexusclient.variables().get("commandSeparator") || undefined,
+    sep: nexusclient.variables().get('nexsysSettings')?.commandSeparator ?? false,
     customPrompt: false,
     echoAffGot: false,
     echoAffLost: false,
@@ -195,7 +195,7 @@ export const sys = {
   state: {
     paused: false,
     slowMode: false,
-    sep: nexusclient.variables().get("commandSeparator") || undefined,
+    sep: nexusclient.variables().get('nexsysSettings')?.commandSeparator ?? false,
     curingMethod: "Transmutation",
     sipPriority: "Health",
     sipHealthAt: 80,

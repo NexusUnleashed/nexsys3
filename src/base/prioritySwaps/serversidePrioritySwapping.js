@@ -354,13 +354,13 @@ eventStream.registerEvent('ClassChanged', checkPrioritySwapsOnPrompt);
 
 
 let cadmusGained = function(aff) {
-    if(aff.name == "cadmuscurse") {
+    if(aff.name === "cadmuscurse") {
         nexsys.sendCmd('curing focus off');
     }
 };
 
 let cadmusLost = function(aff) {
-    if(aff.name == "cadmuscurse") {
+    if(aff.name === "cadmuscurse") {
         nexsys.sendCmd('curing focus on');
     }
 };

@@ -32,6 +32,7 @@ class Priority {
         this._prev = this.prio
         this._current = prio
         if (this._current !== this._prev) {
+            console.log(`${this._name} ${this._current} ${this._prev}`)
             this.raiseEventPrioSet()
         }
     }
@@ -47,6 +48,12 @@ class Priority {
         this._default = prio
         this.setPrio(prio)
         this.raiseEventPrioSetDefault()
+    }
+
+    initialize(prio) {
+        this._default = prio
+        this._current = prio
+        this._prev = prio
     }
 }
 

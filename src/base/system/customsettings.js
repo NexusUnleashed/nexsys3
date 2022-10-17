@@ -1,12 +1,13 @@
 /* global nexusclient, eventStream */
 
 import { affTable } from '../affs/affTable'
-import { defTable, defPrios } from '../defs/defTable'
-import { balanceTable } from '../balances/balanceTable'
+import { defPrios } from '../defs/defTable'
 import { cacheTable } from '../cache/cacheTable'
-import { cureTable } from '../cures/cureTable'
 import { whiteList } from '../utilities/lust'
 import { sys } from './sys'
+import { defs } from '../defs/defs'
+import { affs } from '../affs/affs'
+
 
 // Khaseem: Removed the CustomCureTable, CustomBalanceTable, and CustomDefTable
 // these should be static entries. I do not see the need to store these variables.
@@ -48,6 +49,9 @@ export const updateAndSaveModel = function (name, model, newModel) {
 }
 
 const loadSystemSettings = function () {
+    if (typeof nexusclient.variables().get('nexsysSettings') === 'undefined') {
+        nexusclient.variables().set('nexsysSettings', {});
+    }
     const model = nexusclient.variables().get('nexsysSettings').systemSettings; //nexusclient.variables().get('CustomSystemSettings')
     updateAndSaveModel('systemSettings', sys.settings, model)
 }
@@ -57,6 +61,9 @@ const loadAffSettings = function () {
     if (model) {
         updateList(affTable.list, model.list)
         updateModel(affTable.prios, model.prios)
+        for(let aff in affTable.prios) {
+            affs[aff]?._prio.initialize(affTable.prios[aff]);
+        }
         if (model.types) {
             updateModel(affTable.types.defs, model.types.defs)
             updateModel(affTable.types.countable, model.types.countable)
@@ -74,6 +81,9 @@ const loadDefSettings = function () {
     if (model) {
         updateModel(defPrios.keepup, model.keepup)
         updateModel(defPrios.static, model.static)
+        for(let def in defPrios.keepup) {
+            defs[def]._prio.initialize(defPrios.keepup[def]);
+        }
     }
 
     saveModel('defSettings', defPrios)

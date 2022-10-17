@@ -1,4 +1,4 @@
-/* global eventStream */
+/* global eventStream, nexsys */
 
 import {getCurrentDefs, parry} from './defService'
 import { defs } from './defs'
@@ -56,9 +56,9 @@ eventStream.registerEvent('Char.Defences.Remove', eventGmcpDefRemove);
 
 export function repop(args) {
   if (serversideSettings.loaded) {
-      // console.log(defs)
+
       const keepupPrios = defPrios.keepup
-      // console.log(keepupPrios);
+
       for (const def in defs) {
           const cur_def = defs[def]
           if (
@@ -67,6 +67,7 @@ export function repop(args) {
               cur_def.skills.length === 0
           ) {
               if (keepupPrios[def]) {
+                console.log('1 + ' + def)
                   cur_def.set_default_prio(keepupPrios[def])
               } else {
                   cur_def.set_default_prio(0)
@@ -75,6 +76,7 @@ export function repop(args) {
               cur_def.set_default_prio(0)
           }
       }
+
       for (const limb in limbs.long) {
           if (!defs['parrying ' + limb].isIgnored) {
               parry(limb)
@@ -85,6 +87,7 @@ export function repop(args) {
               }
           }
       }
+
       eventStream.raiseEvent('ForcePopulateEvent')
   }
 }
