@@ -4,85 +4,85 @@ import { sendCmd, sendInline } from '../system/sysService.js'
 import { sys } from '../system/sys.js'
 
 export class Queue {
-    constructor(obj) {
-        this._name = obj.name
-        this._prefix = obj.prefix || ''
-        this._pre = obj.pre || ''
-        this._clear = obj.clear || ''
-        this._queue = []
-        this._prepend = []
-        this._gagged = false
+  constructor(obj) {
+    this._name = obj.name
+    this._prefix = obj.prefix || ''
+    this._pre = obj.pre || ''
+    this._clear = obj.clear || ''
+    this._queue = []
+    this._prepend = []
+    this._gagged = false
 
-        const queueFired = function (queue) {
-            queue.clear()
-        }
-        eventStream.registerEvent(this._name + 'QueueFired', queueFired)
+    const queueFired = function (queue) {
+      queue.clear()
+    }
+    eventStream.registerEvent(this._name + 'QueueFired', queueFired)
+  }
+
+  get queue() {
+    return this._queue
+  }
+
+  /*get prepend() {
+      return this._prepend
+  }*/
+
+  isQueued(cmd) {
+    if (this._queue.indexOf(cmd) !== -1) return true
+    if (this._prepend.indexOf(cmd) !== -1) return true
+
+    return false
+  }
+
+  add(cmd) {
+    const tempQ = Array.isArray(cmd) ? cmd : cmd.split(sys.settings.sep)
+
+    if (Array.equals(tempQ, this._queue)) {
+      return
     }
 
-    get queue() {
-        return this._queue
+    this._queue = tempQ
+
+    this.send()
+  }
+
+  prepend(cmd) {
+    const tempQ = Array.isArray(cmd) ? cmd : cmd.split(sys.settings.sep)
+
+    if (Array.equals(tempQ, this._prepend)) {
+      return
     }
 
-    /*get prepend() {
-        return this._prepend
-    }*/
+    this._prepend = this._prepend.concat(tempQ)
 
-    isQueued(cmd) {
-        if (this._queue.indexOf(cmd) !== -1) return true
-        if (this._prepend.indexOf(cmd) !== -1) return true
+    this.send()
+  }
 
-        return false
+  send() {
+    const tempQueue = this._prepend.concat(this._queue)
+
+    if (tempQueue.length < 1) {
+      return
     }
 
-    add(cmd) {
-        const tempQ = Array.isArray(cmd) ? cmd : cmd.split(sys.settings.sep)
-
-        if (Array.equals(tempQ, this._queue)) {
-            return
-        }
-
-        this._queue = tempQ
-
-        this.send()
+    if (this._pre) {
+      tempQueue.unshift(this._pre)
     }
 
-    prepend(cmd) {
-        const tempQ = Array.isArray(cmd) ? cmd : cmd.split(sys.settings.sep)
+    tempQueue[0] = this._prefix + tempQueue[0]
 
-        if (Array.equals(tempQ, this._prepend)) {
-            return
-        }
+    sendInline(tempQueue)
+  }
 
-        this._prepend = this._prepend.concat(tempQ)
+  clearQueue() {
+    this._queue = []
+    this._prepend = []
+    sendCmd(this._clear)
+    eventStream.raiseEvent(this._name + 'QueueCleared', this)
+  }
 
-        this.send()
-    }
-
-    send() {
-        const tempQueue = this._prepend.concat(this._queue)
-
-        if (tempQueue.length < 1) {
-            return
-        }
-
-        if (this._pre) {
-            tempQueue.unshift(this._pre)
-        }
-
-        tempQueue[0] = this._prefix + tempQueue[0]
-
-        sendInline(tempQueue)
-    }
-
-    clearQueue() {
-        this._queue = []
-        this._prepend = []
-        sendCmd(this._clear)
-        eventStream.raiseEvent(this._name + 'QueueCleared', this)
-    }
-
-    clear() {
-        this._queue = []
-        this._prepend = []
-    }
+  clear() {
+    this._queue = []
+    this._prepend = []
+  }
 }

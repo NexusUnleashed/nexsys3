@@ -4,6 +4,7 @@ import ReactDOM from 'react-dom/client';
 import App from './components/App';
 import './styles/index.css';
 import reportWebVitals from './reportWebVitals';
+import './base/queues/QueueNEW';
 
 window.nexusclient = {
   variables() {
