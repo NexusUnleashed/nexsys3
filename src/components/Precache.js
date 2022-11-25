@@ -38,6 +38,12 @@ const GroupedButtons = () => {
         setState(state => ({ counter: state.counter - 1 }));
     };
 
+    React.useEffect(() => {
+      // Update the document title using the browser API
+      window.precache = state;
+      console.log(window.precache)
+    });
+
     return (
         <ButtonGroup size="small" aria-label="small outlined button group">
         <Button onClick={handleIncrement}>+</Button>

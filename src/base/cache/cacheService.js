@@ -20,7 +20,8 @@ export function getCacheOutputs(affList) {
 
       for (let i = 0; i < missingCache.length; i++) {
           const cache = missingCache[i]
-
+          
+          //if (!affList.some(aff => cache.blocks.flat().indexOf(aff) > -1)) {
           if (!Array.arraysIntersect(cache.blocks, affList)) {
               cacheOutputs = cacheOutputs.concat(cache.command)
           }
