@@ -16,55 +16,66 @@
     reflex_find_by_name() > nexusclient.reflexes().find_by_name("group", "Aliases", false, false, "nexmap3")
 */
 
-import { prompt } from "./base/clientOverrides/prompt";
-import { getLustCommands, rejectList, whiteList } from "./base/utilities/lust";
-import { Queue } from "./base/queues/Queue";
-import { curArea, curRoom, curRoomArea, curRoomName } from "./base/system/gmcp";
+import { affs } from "./base/affs/affs";
 import {
   affPrioSwap,
   getCurrentAffs,
   haveAff,
   haveAffs,
-  haveAnAff
+  haveAnAff,
 } from "./base/affs/affService";
+import { affTable } from "./base/affs/affTable";
+import { bals } from "./base/balances/balances";
 import { haveABal, haveBal, haveBals } from "./base/balances/balanceService";
+import { caches } from "./base/cache/caches";
 import { getCacheOutputs } from "./base/cache/cacheService";
+import { cacheTable } from "./base/cache/cacheTable";
+import Trackable from "./base/classes/Trackable";
+import { prompt } from "./base/clientOverrides/prompt";
+import { cures } from "./base/cures/cures";
+import { defs } from "./base/defs/defs";
 import {
+  defoff,
+  defPrioSwap,
+  defup,
   getCurrentDefs,
   getDefOutputs,
-  getMissingDefs
+  getMissingDefs,
+  haveDef,
+  parry,
 } from "./base/defs/defService";
-import { sys, sysLog, sysLogging, sysLoggingToggle } from "./base/system/sys";
+import { defPrios } from "./base/defs/defTable";
+import { echo, echoInfoLine, echoLine } from "./base/echo/echos";
+import { createQueue } from "./base/queues/Queue";
 import {
-  psend,
-  rsend,
-  sendCmd,
-  sendInline,
-  timeDiffNow
-} from "./base/system/sysService";
-import { affs } from "./base/affs/affs";
-import { bals } from "./base/balances/balances";
-import { caches } from "./base/cache/caches";
-import { cures } from "./base/cures/cures";
+  serversideDefencePriorityListStart,
+  serversideSettings,
+} from "./base/serverside/serverside";
 import {
   loadCustomSettings,
   saveCustomSettings,
   saveModel,
   updateAndSaveModel,
   updateList,
-  updateModel
+  updateModel,
 } from "./base/system/customsettings";
-import { defs } from "./base/defs/defs";
-import { echo, echoInfoLine, echoLine } from "./base/echo/echos";
+import { curArea, curRoom, curRoomArea, curRoomName } from "./base/system/gmcp";
+import { sys, sysLog, sysLogging, sysLoggingToggle } from "./base/system/sys";
 import {
-  serversideDefencePriorityListStart,
-  serversideSettings
-} from "./base/serverside/serverside";
-import { affTable } from "./base/affs/affTable";
-import { cacheTable } from "./base/cache/cacheTable";
-import { dirMap, dirs, limbs, oppDirs, shortDirs } from "./base/utilities/commonTable";
-import { defPrios } from "./base/defs/defTable";
-import Trackable from "./base/classes/Trackable";
+  psend,
+  rsend,
+  sendCmd,
+  sendInline,
+  timeDiffNow,
+} from "./base/system/sysService";
+import {
+  dirMap,
+  dirs,
+  limbs,
+  oppDirs,
+  shortDirs,
+} from "./base/utilities/commonTable";
+import { getLustCommands, rejectList, whiteList } from "./base/utilities/lust";
 
 const nexsys = {
   sys: sys,
@@ -82,7 +93,7 @@ const nexsys = {
   haveAnAff: haveAnAff,
   affPrioSwap: affPrioSwap,
 
-  snapTrack: new Trackable('Snapped'),
+  snapTrack: new Trackable("Snapped"),
 
   bals: bals,
   haveABal: haveABal,
@@ -95,6 +106,11 @@ const nexsys = {
   getCurrentDefs: getCurrentDefs,
   getDefOutputs: getDefOutputs,
   getMissingDefs: getMissingDefs,
+  haveDef: haveDef,
+  defPrioSwap: defPrioSwap,
+  defup: defup,
+  defoff: defoff,
+  parry: parry,
 
   caches: caches,
   cacheTable: cacheTable,
@@ -120,10 +136,10 @@ const nexsys = {
   getLustCommands: getLustCommands,
 
   sendCmd: sendCmd,
+  sendInline: sendInline,
   psend: psend,
   rsend: rsend,
   timeDiffNow: timeDiffNow,
-  sendInline: sendInline,
 
   serversideSettings: serversideSettings,
   serversideDefencePriorityListStart: serversideDefencePriorityListStart,
@@ -135,24 +151,30 @@ const nexsys = {
   loadCustomSettings: loadCustomSettings,
   saveCustomSettings: saveCustomSettings,
 
-  eqbalQueue: new Queue({
-    name: "eqBal",
-    prefix: "queue addclear eqbal ",
-    pre: false,
-    clear: "clearqueue eqbal",
-  }),
-  classQueue: new Queue({
+  classQueue: createQueue({
     name: "class",
-    prefix: "queue addclear class ",
-    pre: false,
-    clear: "clearqueue class",
+    type: "c!p!t!w",
+    pre: "touch soul|stand",
+    exclusions: ["fullQueue"],
   }),
+  freeQueue: createQueue({
+    name: "free",
+    type: "free",
+    pre: "touch soul|stand",
+    exclusions: ["fullQueue"],
+  }),
+  fullQueue: createQueue({
+    name: "full",
+    type: "ebc!w!p!t",
+    pre: "touch soul|stand",
+    exclusions: ["freeQueue", "classQueue"],
+  }),
+  stunQueue: createQueue({ name: "stun", type: "!t", pre: "touch soul" }),
 
   prompt: prompt,
 };
 
 export default nexsys;
 
-//send_GMCP('IRE.Rift.Request')
 //nexsys.loadCustomSettings();
 //run_function('CustomSettingsFromPackage', {}, 'ALL');
