@@ -1,4 +1,4 @@
-import nexsys from "./nexsys";
+import "./nexsys";
 import "./base/affs/affEvents";
 import "./base/balances/balanceEvents";
 import "./base/cache/cacheEvents";
@@ -17,4 +17,4 @@ import "./base/utilities/helpers";
 // package from nexsys to be stand alone. Nexsys needs to be loaded in
 // THEN events loaded.
 
-window.nexsys = nexsys;
+//window.nexsys = nexsys;

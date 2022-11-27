@@ -2,6 +2,7 @@
 
 
 import {sys} from './sys'
+import { bals } from '../balances/balances'
 
 const setCharVitals = function (vitals) {
     const sysChar = sys.char
@@ -144,3 +145,20 @@ const lifevisionCheck = function () {
     sys.lifevision = false
 }
 eventStream.registerEvent('PromptEvent', lifevisionCheck)
+
+let occultistStatsGmcpBalance = function(vitals) {
+    if (!sys.isClass('Occultist')) { return; }
+    
+    let re = /Karma: (\d+)%/g;
+    let re2 = /(\d+)/g;
+    if (vitals.charstats.length > 2 && vitals.charstats[2].match(re)) {
+    	sys.char.karma = parseInt(vitals.charstats[2].match(re2)[0]);
+    }
+    if (vitals.charstats.includes("Entity: Yes") && !bals["entity"].have) {
+        eventStream.raiseEvent('entityGotBalEvent');
+    }
+    else if (vitals.charstats.includes("Entity: No") && bals["entity"].have) {
+    	eventStream.raiseEvent('entityLostBalEvent');
+    }
+};
+eventStream.registerEvent('Char.Vitals', occultistStatsGmcpBalance);

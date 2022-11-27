@@ -85,18 +85,6 @@ const lostDef = function (data) {
 
 // CUSTOM to replace balance and equilibrium messages
 const gotBalance = function (data) {
-  if (["equilibrium", "balance"].includes(data.name)) {
-    nexusclient.display_notice(
-      "You have recovered " + data.name,
-      "#00ccff",
-      "black",
-      " (" + data.duration.toFixed(2) + ")",
-      "#33cc33",
-      "black"
-    );
-    return;
-  }
-
   if (sys.settings.echoBalanceGot && data.name !== "SystemOutput") {
     BalanceEchoGot.echo(data.name + "(" + data.duration.toFixed(2) + ")");
   }

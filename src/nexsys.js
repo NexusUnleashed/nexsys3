@@ -14,8 +14,9 @@
     gag_current_line() > nexusclient.current_line.gag = true
     reflex_disable() > nexusclient.reflexes().disable_reflex();
     reflex_find_by_name() > nexusclient.reflexes().find_by_name("group", "Aliases", false, false, "nexmap3")
+    set_current_target() > nexusclient.datahandler().set_current_target()
 */
-
+/* global globalThis */
 import { affs } from "./base/affs/affs";
 import {
   affPrioSwap,
@@ -174,7 +175,26 @@ const nexsys = {
   prompt: prompt,
 };
 
-export default nexsys;
+const generate_chunk = (text, fg, bg) => {
+  let result = document.createElement("span");
+  result.style.color = fg;
+  result.style.backgroundColor = bg;
+  result.innerHTML = text;
 
-//nexsys.loadCustomSettings();
-//run_function('CustomSettingsFromPackage', {}, 'ALL');
+  return result;
+};
+
+nexsys.replace = (...args) => {
+  let htmlLine = document.createElement("span");
+
+  for (let i = 0; i < args.length; i += 3) {
+    htmlLine.appendChild(generate_chunk(args[i], args[i + 1], args[i + 2]));
+  }
+  globalThis.nexusclient.current_line.parsed_line.formatted = () => {
+    return htmlLine.outerHTML;
+  };
+
+  return true;
+};
+
+globalThis.nexsys = nexsys;

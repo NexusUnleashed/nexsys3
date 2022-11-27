@@ -1,4 +1,6 @@
+/* global globalThis */
 import Configuration from "./Configuration"
+import { createTheme } from "@mui/material/styles";
 
 window.nexusclient = {
   variables() {
@@ -10,9 +12,15 @@ window.nexusclient = {
   }
 }
 
+const darkTheme = createTheme({
+  palette: {
+    mode: "dark",
+  },
+});
+
 function App() {
   return (
-    <Configuration />
+    <Configuration theme={darkTheme} nexsys={globalThis.nexsys}/>
   );
 }
 

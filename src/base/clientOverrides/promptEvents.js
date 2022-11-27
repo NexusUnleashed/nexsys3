@@ -31,18 +31,20 @@ let setPromptVitals = function (vitals) {
     vars.pw.text = percw.toFixed(1) + "%";
 };
 /********** */
-let setPromptAffs = function () {
-    let affs = nexsys.prompt.vars.affs;
+let setPromptAffs = function (affs) {
+    //let affs = nexsys.prompt.vars.affs;
 
-    if (Object.keys(affs).length === 0) { return; }
+    let affLine = document.createElement('span');
+
+    if (Object.keys(affs).length === 0) { return affLine; }
 
     let affAbbrev = nexsys.prompt.affAbbrev;
-    let affLine = document.createElement('span');
 
     let add = (txt, fg, bg) => {
         affLine.appendChild(nexsys.prompt.generate_chunk(txt, fg, bg))
     }
-
+    
+    add("[");
     for (let aff in affs) {
         if (affs[aff] === true) {
             if (affAbbrev[aff]) {
@@ -59,22 +61,24 @@ let setPromptAffs = function () {
             }
         }
     }
+    add("]");
 
-    nexsys.prompt.vars.affString = affLine;
+    return affLine;
 };
 /**********/
 let gotPromptAff = function (aff) {
     let affs = nexsys.prompt.vars.affs;
     affs[aff.name] = aff.count || true;
 
-    setPromptAffs();
+    nexsys.prompt.vars.affString = setPromptAffs(affs);
 };
 
 let lostPromptAff = function (aff) {
     let affs = nexsys.prompt.vars.affs;
-    affs[aff.name] = false;
+    delete affs[aff.name];
+    //affs[aff.name] = false;
 
-    setPromptAffs();
+    nexsys.prompt.vars.affString = setPromptAffs(affs);
 };
 
 let setPromptDefs = function (args) {
