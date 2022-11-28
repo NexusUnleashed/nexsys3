@@ -4,73 +4,14 @@ import Tab from "@mui/material/Tab";
 import TabContext from "@mui/lab/TabContext";
 import TabList from "@mui/lab/TabList";
 import TabPanel from "@mui/lab/TabPanel";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { ThemeProvider } from "@mui/material/styles";
 
 import Precache from "./Precache";
 import Dndkit from "./Dndkit";
 import { CssBaseline } from "@mui/material";
 import SystemSettings from "./SystemSettings";
 
-const darkTheme = createTheme({
-  palette: {
-    mode: "dark",
-    text: {
-      primary: "#FFF5D6",
-      //secondary: 'green'
-    },
-  },
-  typography: {
-    fontSize: 12 * (14 / 16), // conversion for px
-    fontFamily: ["Arial"],
-  },
-  components: {
-    MuiList: {
-      defaultProps: {
-        sx: { color: "#FFF5D6" },
-      },
-    },
-    MuiFormControlLabel: {
-      defaultProps: {
-        sx: { color: "#FFF5D6" },
-      },
-    },
-    MuiSwitch: {
-      defaultProps: {
-        size: "small",
-      },
-    },
-    MuiSelect: {
-      defaultProps: {
-        size: "small",
-      },
-    },
-    MuiTextField: {
-      defaultProps: {
-        size: "small",
-      },
-    },
-    MuiPopover: {
-      styleOverrides: {
-        // Name of the slot
-        paper: {
-          // Some CSS
-          background: "black",
-          border: "1px solid white",
-        },
-      },
-    },
-    MuiLinearProgress: {
-      styleOverrides: {
-        determinate: {
-          transition: "none",
-          background: "blue",
-        },
-      },
-    },
-  },
-});
-
-const Configuration = ({ nexsys }) => {
+const Configuration = ({ nexsys, theme }) => {
   const [value, setValue] = React.useState("1");
 
   const handleChange = (event, newValue) => {
@@ -108,9 +49,9 @@ const Configuration = ({ nexsys }) => {
   ];
 
   return (
-    <ThemeProvider theme={darkTheme}>
+    <ThemeProvider theme={theme}>
       <CssBaseline />
-      <Box sx={{ width: "600px" }}>
+      <Box sx={{ width: "500px", height: '600px' }}>
         <TabContext value={value}>
           <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
             <TabList
@@ -129,7 +70,7 @@ const Configuration = ({ nexsys }) => {
             <SystemSettings settings={nexsys.sys.settings} />
           </TabPanel>
           <TabPanel value="2">
-            <Dndkit />
+            Dndkit {/*<Dndkit />*/}
           </TabPanel>
           <TabPanel value="3"></TabPanel>
           <TabPanel value="4">

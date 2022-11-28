@@ -17,6 +17,7 @@ module.exports = {
           cacheDirectory: true,
           presets: [
             '@babel/preset-env',
+            "@babel/preset-react"
           ],
         },
         loader: 'babel-loader',
@@ -38,5 +39,7 @@ module.exports = {
   },
   externals: {
     'nexevent': 'eventStream', // Case matters here 
+    'react': 'React', 
+    'react-dom': 'ReactDOM'
    }
 };

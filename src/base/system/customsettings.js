@@ -53,7 +53,8 @@ const loadSystemSettings = function () {
     nexusclient.variables().set("nexsysSettings", {});
   }
   const model = nexusclient.variables().get("nexsysSettings").systemSettings; //nexusclient.variables().get('CustomSystemSettings')
-  updateAndSaveModel("systemSettings", sys.settings, model);
+  //updateAndSaveModel("systemSettings", sys.settings, model);
+  updateModel(sys.settings, model);
 };
 
 const loadAffSettings = function () {
@@ -73,7 +74,7 @@ const loadAffSettings = function () {
     }
   }
 
-  saveModel("affSettings", affTable);
+  //saveModel("affSettings", affTable);
 };
 
 const loadDefSettings = function () {
@@ -86,7 +87,7 @@ const loadDefSettings = function () {
     }
   }
 
-  saveModel("defSettings", defPrios);
+  //saveModel("defSettings", defPrios);
 };
 
 const loadCacheSettings = function () {
@@ -97,12 +98,12 @@ const loadCacheSettings = function () {
       caches[curative]._amount = cacheTable[curative];
     }
   }
-  saveModel("cacheSettings", cacheTable);
+  //saveModel("cacheSettings", cacheTable);
 };
 
 const loadLustList = function () {
   whiteList = nexusclient.variables().get("LustWhiteList") || whiteList;
-  saveModel("LustWhiteList", whiteList);
+  //saveModel("LustWhiteList", whiteList);
 };
 
 export function loadCustomSettings() {
@@ -113,7 +114,7 @@ export function loadCustomSettings() {
   loadLustList();
 }
 
-export function saveCustomSettings() {
+function saveCustomSettings() {
   saveModel("CustomSystemSettings", sys.settings);
   saveModel("CustomAffSettings", affTable);
   saveModel("CustomDefSettings", defPrios);

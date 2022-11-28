@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import * as React from "react";
 import {
   DndContext,
   closestCenter,
@@ -12,7 +12,7 @@ import { arrayMove, sortableKeyboardCoordinates } from "@dnd-kit/sortable";
 import { Priority } from "./Priority";
 
 function Dndkit() {
-  const [items, setItems] = useState({
+  const [items, setItems] = React.useState({
     one: [
       "addiction",
       "aeon",
@@ -30,7 +30,7 @@ function Dndkit() {
     ],
     two: [],
   });
-  const [activeId, setActiveId] = useState();
+  const [activeId, setActiveId] = React.useState(false);
   const sensors = useSensors(
     useSensor(PointerSensor),
     useSensor(KeyboardSensor, {

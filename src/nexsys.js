@@ -23,7 +23,7 @@ import {
   getCurrentAffs,
   haveAff,
   haveAffs,
-  haveAnAff,
+  haveAnAff
 } from "./base/affs/affService";
 import { affTable } from "./base/affs/affTable";
 import { bals } from "./base/balances/balances";
@@ -43,22 +43,21 @@ import {
   getDefOutputs,
   getMissingDefs,
   haveDef,
-  parry,
+  parry
 } from "./base/defs/defService";
 import { defPrios } from "./base/defs/defTable";
 import { echo, echoInfoLine, echoLine } from "./base/echo/echos";
 import { createQueue } from "./base/queues/Queue";
 import {
   serversideDefencePriorityListStart,
-  serversideSettings,
+  serversideSettings
 } from "./base/serverside/serverside";
 import {
   loadCustomSettings,
-  saveCustomSettings,
   saveModel,
   updateAndSaveModel,
   updateList,
-  updateModel,
+  updateModel
 } from "./base/system/customsettings";
 import { curArea, curRoom, curRoomArea, curRoomName } from "./base/system/gmcp";
 import { sys, sysLog, sysLogging, sysLoggingToggle } from "./base/system/sys";
@@ -67,18 +66,23 @@ import {
   rsend,
   sendCmd,
   sendInline,
-  timeDiffNow,
+  timeDiffNow
 } from "./base/system/sysService";
 import {
   dirMap,
   dirs,
   limbs,
   oppDirs,
-  shortDirs,
+  shortDirs
 } from "./base/utilities/commonTable";
 import { getLustCommands, rejectList, whiteList } from "./base/utilities/lust";
+import { startup } from "./base/utilities/startup";
+import NexDialog from "./components/NexDialog";
 
 const nexsys = {
+  evt: new EventTarget(),
+  component: NexDialog,
+  
   sys: sys,
   sysLogging: sysLogging,
   sysLog: sysLog,
@@ -150,7 +154,7 @@ const nexsys = {
   saveModel: saveModel,
   updateAndSaveModel: updateAndSaveModel,
   loadCustomSettings: loadCustomSettings,
-  saveCustomSettings: saveCustomSettings,
+  //saveCustomSettings: saveCustomSettings,
 
   classQueue: createQueue({
     name: "class",
@@ -198,3 +202,4 @@ nexsys.replace = (...args) => {
 };
 
 globalThis.nexsys = nexsys;
+startup();

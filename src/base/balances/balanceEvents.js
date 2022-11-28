@@ -7,6 +7,7 @@ let eventGmcpBalances = function(vitals) {
       if (!haveBal('balance') && haveBal('equilibrium')) {
           eventStream.raiseEvent('eqBalRecoveredEvent');
       }
+      
       eventStream.raiseEvent('balanceGotBalEvent');
   }
   else {
@@ -18,6 +19,7 @@ let eventGmcpBalances = function(vitals) {
       if (!haveBal('equilibrium') && haveBal('balance')) {
           eventStream.raiseEvent('eqBalRecoveredEvent');
       }
+
       eventStream.raiseEvent('equilibriumGotBalEvent');
   }
   else {
