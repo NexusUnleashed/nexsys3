@@ -1,4 +1,15 @@
 
+if (nexSys.Bals.balance.duration > 0.25 && nexSys.haveBal('balance') == false) {
+    nexSys.eventStream.raiseEvent('balanceGotBalEvent');
+    nexSys.eventStream.raiseEvent('balanceLostBalEvent');
+}
+if (nexSys.Bals.equilibrium.duration > 0.25 && nexSys.haveBal('equilibrium') == false) {
+    nexSys.eventStream.raiseEvent('equilibriumGotBalEvent');
+    nexSys.eventStream.raiseEvent('equilibriumLostBalEvent');
+}
+nexSys.eventStream.raiseEvent('eqBalQueueFired', nexSys.EqBalQueue);
+
+
 run_function('cureService', {}, 'nexSys2.0');  DO WE NEED THIS FUNCTION AT ALL? WHAT DOES IT DO?
 run_function('defService', {}, 'nexSys2.0');  THIS COULD BE REFINED / STREAMLINED FOR SERVERSIDE
 run_function('systemOutput', {}, 'nexSys2.0'); GET A BETTER GRASP ON HOW THIS WORKS
