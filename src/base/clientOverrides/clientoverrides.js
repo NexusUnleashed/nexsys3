@@ -22,9 +22,35 @@ const display_notice = function (...args) {
   return htmlLine.outerHTML;
 };
 
+const prepend_notice = function (...args) {
+  let htmlLine = document.createElement("span");
+
+  for (let i = 0; i < args.length; i += 3) {
+    htmlLine.appendChild(generate_chunk(args[i], args[i + 1], args[i + 2]));
+  }
+
+  nexsys.prepend_line = {
+    timestamp: nexusclient.current_block[1].timestamp,
+    timestamp_ms: nexusclient.current_block[1].timestamp_ms,
+    parsed_line: {
+      text() {
+        return htmlLine.outerHTML;
+      },
+      formatted() {
+        return htmlLine.outerHTML;
+      },
+    },
+  };
+  return htmlLine.outerHTML;
+};
+
 // Override the add_block to substitute nexsys custom prompts in.
 //nexusclient.ui().buffer().add_block
 const add_block = function (block) {
+  if (nexsys.prepend_line) {
+    block.unshift(nexsys.prepend_line);
+    nexsys.prepend_line = false;
+  }
   let count = 0;
   let gags = 0;
   for (let idx = 0; idx < block.length; ++idx) {
@@ -50,9 +76,9 @@ const add_block = function (block) {
     if (l.is_prompt && nexsys.sys.settings.customPrompt) {
       let nexsysPromptString = nexsys.prompt.getCustomPrompt();
       l.parsed_line.formatted = () => {
-          return nexsysPromptString;
-        }
+        return nexsysPromptString;
       };
+    }
 
     this.lines.push(l);
     this.unread = true;
@@ -63,3 +89,4 @@ const add_block = function (block) {
 
 nexusclient.display_notice = display_notice;
 nexusclient.ui().buffer().add_block = add_block;
+nexsys.prepend_notice = prepend_notice;
