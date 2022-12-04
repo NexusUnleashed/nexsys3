@@ -94,7 +94,6 @@ const NexDialog = ({ evt, nexSys }) => {
           open={open}
           onClose={handleClickClose}
           hideBackdrop={true}
-          style={{ pointerEvents: "none" }}
           maxWidth="md"
         >
           <DialogTitle>Nexsys Configuration Options</DialogTitle>
