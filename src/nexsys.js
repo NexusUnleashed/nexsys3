@@ -179,6 +179,7 @@ const nexSys = {
   prompt: prompt,
 };
 
+// TODO: We should probably move this somewhere else
 const generate_chunk = (text, fg, bg) => {
   let result = document.createElement("span");
   result.style.color = fg;
