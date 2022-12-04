@@ -12,7 +12,7 @@ const SystemSettings = ({ settings }) => {
 
   React.useEffect(() => {
     console.log("useEffect");
-    globalThis.nexsys.sys.settings = { ...stateSettings };
+    globalThis.nexSys.sys.settings = { ...stateSettings };
   }, [stateSettings]);
 
   return (

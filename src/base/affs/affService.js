@@ -12,8 +12,8 @@ export function getCurrentAffs() {
 export function haveAff(aff) {
   const curAff = affs[aff]
   if (aff === undefined || curAff === undefined) {
-      /* nexsys.sysLog(
-          'Called nexsys.haveAff with an aff that does not exist: ' + aff
+      /* nexSys.sysLog(
+          'Called nexSys.haveAff with an aff that does not exist: ' + aff
       )*/
       return false
   } else {
@@ -58,8 +58,8 @@ export function haveAnAff(affs) {
 export function affPrioSwap(aff, prio) {
   const curAff = affs[aff]
   if (aff === undefined || curAff === undefined) {
-      /* nexsys.sysLog(
-          'Called nexsys.affPrioSwap with an aff that does not exist: ' + aff
+      /* nexSys.sysLog(
+          'Called nexSys.affPrioSwap with an aff that does not exist: ' + aff
       )*/
   } else {
       curAff.set_prio(prio)

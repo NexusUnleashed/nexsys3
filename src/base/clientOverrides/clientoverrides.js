@@ -1,4 +1,4 @@
-/* global nexusclient, nexsys */
+/* global nexusclient, nexSys */
 
 const generate_chunk = (text, fg, bg) => {
   let result = document.createElement("span");
@@ -29,7 +29,7 @@ const prepend_notice = function (...args) {
     htmlLine.appendChild(generate_chunk(args[i], args[i + 1], args[i + 2]));
   }
 
-  nexsys.prepend_line = {
+  nexSys.prepend_line = {
     timestamp: nexusclient.current_block[1].timestamp,
     timestamp_ms: nexusclient.current_block[1].timestamp_ms,
     parsed_line: {
@@ -44,12 +44,12 @@ const prepend_notice = function (...args) {
   return htmlLine.outerHTML;
 };
 
-// Override the add_block to substitute nexsys custom prompts in.
+// Override the add_block to substitute nexSys custom prompts in.
 //nexusclient.ui().buffer().add_block
 const add_block = function (block) {
-  if (nexsys.prepend_line) {
-    block.unshift(nexsys.prepend_line);
-    nexsys.prepend_line = false;
+  if (nexSys.prepend_line) {
+    block.unshift(nexSys.prepend_line);
+    nexSys.prepend_line = false;
   }
   let count = 0;
   let gags = 0;
@@ -73,10 +73,10 @@ const add_block = function (block) {
     count++;
     this.lineid++;
     l.id = this.lineid;
-    if (l.is_prompt && nexsys.sys.settings.customPrompt) {
-      let nexsysPromptString = nexsys.prompt.getCustomPrompt();
+    if (l.is_prompt && nexSys.sys.settings.customPrompt) {
+      let nexSysPromptString = nexSys.prompt.getCustomPrompt();
       l.parsed_line.formatted = () => {
-        return nexsysPromptString;
+        return nexSysPromptString;
       };
     }
 
@@ -89,4 +89,4 @@ const add_block = function (block) {
 
 nexusclient.display_notice = display_notice;
 nexusclient.ui().buffer().add_block = add_block;
-nexsys.prepend_notice = prepend_notice;
+nexSys.prepend_notice = prepend_notice;

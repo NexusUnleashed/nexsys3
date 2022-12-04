@@ -66,10 +66,10 @@ const darkTheme = createTheme({
   },
 });
 
-const NexDialog = ({ evt, nexsys }) => {
+const NexDialog = ({ evt, nexSys }) => {
   const [open, setOpen] = React.useState(false);
 
-  evt.addEventListener("nexsys-config-dialog", ({ detail }) => {
+  evt.addEventListener("nexSys-config-dialog", ({ detail }) => {
     setOpen(detail);
   });
 
@@ -82,8 +82,8 @@ const NexDialog = ({ evt, nexsys }) => {
   };
 
   const handleClickSave = () => {
-    nexsys.saveModel("cacheSettings", nexsys.cacheTable);
-    nexsys.saveModel("systemSettings", nexsys.sys.settings);
+    nexSys.saveModel("cacheSettings", nexSys.cacheTable);
+    nexSys.saveModel("systemSettings", nexSys.sys.settings);
     handleClickClose()
   };
 
@@ -99,7 +99,7 @@ const NexDialog = ({ evt, nexsys }) => {
         >
           <DialogTitle>Nexsys Configuration Options</DialogTitle>
           <DialogContent>
-            <Configuration theme={darkTheme} nexsys={nexsys} />
+            <Configuration theme={darkTheme} nexSys={nexSys} />
           </DialogContent>
           <DialogActions>
             <Button autoFocus onClick={handleClickClose}>Cancel</Button>

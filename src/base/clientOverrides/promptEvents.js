@@ -1,7 +1,7 @@
-/* global eventStream, nexsys */
+/* global eventStream, nexSys */
 
 let setPromptVitals = function (vitals) {
-    let vars = nexsys.prompt.vars;
+    let vars = nexSys.prompt.vars;
     vars.h.text = vitals.h;
     vars.m.text = vitals.m;
     vars.e.text = vitals.e;
@@ -20,10 +20,10 @@ let setPromptVitals = function (vitals) {
     let perce = vitals.e * 100 / vitals.maxe;
     let percw = vitals.w * 100 / vitals.maxw;
 
-    vars.h.fg = nexsys.prompt.colorPercentage(perch);
-    vars.m.fg = nexsys.prompt.colorPercentage(percm);
-    vars.e.fg = nexsys.prompt.colorPercentage(perce);
-    vars.w.fg = nexsys.prompt.colorPercentage(percw);
+    vars.h.fg = nexSys.prompt.colorPercentage(perch);
+    vars.m.fg = nexSys.prompt.colorPercentage(percm);
+    vars.e.fg = nexSys.prompt.colorPercentage(perce);
+    vars.w.fg = nexSys.prompt.colorPercentage(percw);
 
     vars.ph.text = perch.toFixed(1) + "%";
     vars.pm.text = percm.toFixed(1) + "%";
@@ -32,16 +32,16 @@ let setPromptVitals = function (vitals) {
 };
 /********** */
 let setPromptAffs = function (affs) {
-    //let affs = nexsys.prompt.vars.affs;
+    //let affs = nexSys.prompt.vars.affs;
 
     let affLine = document.createElement('span');
 
     if (Object.keys(affs).length === 0) { return affLine; }
 
-    let affAbbrev = nexsys.prompt.affAbbrev;
+    let affAbbrev = nexSys.prompt.affAbbrev;
 
     let add = (txt, fg, bg) => {
-        affLine.appendChild(nexsys.prompt.generate_chunk(txt, fg, bg))
+        affLine.appendChild(nexSys.prompt.generate_chunk(txt, fg, bg))
     }
     
     add("[");
@@ -67,40 +67,40 @@ let setPromptAffs = function (affs) {
 };
 /**********/
 let gotPromptAff = function (aff) {
-    let affs = nexsys.prompt.vars.affs;
+    let affs = nexSys.prompt.vars.affs;
     affs[aff.name] = aff.count || true;
 
-    nexsys.prompt.vars.affString = setPromptAffs(affs);
+    nexSys.prompt.vars.affString = setPromptAffs(affs);
 };
 
 let lostPromptAff = function (aff) {
-    let affs = nexsys.prompt.vars.affs;
+    let affs = nexSys.prompt.vars.affs;
     delete affs[aff.name];
     //affs[aff.name] = false;
 
-    nexsys.prompt.vars.affString = setPromptAffs(affs);
+    nexSys.prompt.vars.affString = setPromptAffs(affs);
 };
 
 let setPromptDefs = function (args) {
-    nexsys.prompt.vars.c.text = nexsys.defs.cloak.have ? "c" : "";
-    nexsys.prompt.vars.k.text = nexsys.defs.kola.have ? "k" : "";
-    nexsys.prompt.vars.d.text = nexsys.affs.deafness.have ? "" : "d";
-    nexsys.prompt.vars.b.text = nexsys.affs.blindness.have ? "" : "b";
+    nexSys.prompt.vars.c.text = nexSys.defs.cloak.have ? "c" : "";
+    nexSys.prompt.vars.k.text = nexSys.defs.kola.have ? "k" : "";
+    nexSys.prompt.vars.d.text = nexSys.affs.deafness.have ? "" : "d";
+    nexSys.prompt.vars.b.text = nexSys.affs.blindness.have ? "" : "b";
 };
 
 let setPromptBals = function (args) {
-    nexsys.prompt.vars.eq.text = nexsys.bals.balance.have ? "x" : "";
-    nexsys.prompt.vars.bal.text = nexsys.bals.equilibrium.have ? "e" : "";
+    nexSys.prompt.vars.eq.text = nexSys.bals.balance.have ? "x" : "";
+    nexSys.prompt.vars.bal.text = nexSys.bals.equilibrium.have ? "e" : "";
 };
 
 let setHealthDiffPrompt = function (args) {
-    nexsys.prompt.vars.diffh.text = args.diff < 0 ? "(" + args.diff + ")h" : "(+" + args.diff + ")h";
-    nexsys.prompt.vars.diffh.fg = args.diff < 0 ? "red" : "green";
+    nexSys.prompt.vars.diffh.text = args.diff < 0 ? "(" + args.diff + ")h" : "(+" + args.diff + ")h";
+    nexSys.prompt.vars.diffh.fg = args.diff < 0 ? "red" : "green";
 };
 
 let setManaDiffPrompt = function (args) {
-    nexsys.prompt.vars.diffm.text = args.diff < 0 ? "(" + args.diff + ")m" : "(+" + args.diff + ")m";
-    nexsys.prompt.vars.diffm.fg = args.diff < 0 ? "red" : "green";
+    nexSys.prompt.vars.diffm.text = args.diff < 0 ? "(" + args.diff + ")m" : "(+" + args.diff + ")m";
+    nexSys.prompt.vars.diffm.fg = args.diff < 0 ? "red" : "green";
 };
 
 
@@ -115,9 +115,9 @@ eventStream.registerEvent('BalanceLost', setPromptBals);
 eventStream.registerEvent('SystemCharVitalsUpdated', setPromptVitals);
 eventStream.registerEvent('HealthUpdated', setHealthDiffPrompt);
 eventStream.registerEvent('ManaUpdated', setManaDiffPrompt);
-eventStream.registerEvent('SystemPaused', function (args) { nexsys.prompt.vars.paused.text = "(p)"; });
-eventStream.registerEvent('SystemUnpaused', function (args) { nexsys.prompt.vars.paused.text = ""; });
-eventStream.registerEvent('aeonLostAffEvent', function (args) { nexsys.prompt.vars.aeon.text = ""; });
-eventStream.registerEvent('aeonGotAffEvent', function (args) { nexsys.prompt.vars.aeon.text = "(a)"; });
-eventStream.registerEvent('SystemSlowModeOn', function (args) { nexsys.prompt.vars.retard.text = "(r)"; });
-eventStream.registerEvent('SystemSlowModeOff', function (args) { nexsys.prompt.vars.retard.text = ""; });
+eventStream.registerEvent('SystemPaused', function (args) { nexSys.prompt.vars.paused.text = "(p)"; });
+eventStream.registerEvent('SystemUnpaused', function (args) { nexSys.prompt.vars.paused.text = ""; });
+eventStream.registerEvent('aeonLostAffEvent', function (args) { nexSys.prompt.vars.aeon.text = ""; });
+eventStream.registerEvent('aeonGotAffEvent', function (args) { nexSys.prompt.vars.aeon.text = "(a)"; });
+eventStream.registerEvent('SystemSlowModeOn', function (args) { nexSys.prompt.vars.retard.text = "(r)"; });
+eventStream.registerEvent('SystemSlowModeOff', function (args) { nexSys.prompt.vars.retard.text = ""; });

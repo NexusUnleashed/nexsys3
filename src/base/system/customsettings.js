@@ -34,9 +34,9 @@ export const updateModel = function (model, newModel) {
 
 export const saveModel = function (name, model) {
   if (model) {
-    let settings = nexusclient.variables().get("nexsysSettings");
+    let settings = nexusclient.variables().get("nexSysSettings");
     settings[name] = model;
-    nexusclient.variables().set("nexsysSettings", settings);
+    nexusclient.variables().set("nexSysSettings", settings);
     eventStream.raiseEvent(name + "ModelSavedEvent", model);
   } else {
     console.log(name + " model was null in saveModel");
@@ -49,16 +49,16 @@ export const updateAndSaveModel = function (name, model, newModel) {
 };
 
 const loadSystemSettings = function () {
-  if (typeof nexusclient.variables().get("nexsysSettings") === "undefined") {
-    nexusclient.variables().set("nexsysSettings", {});
+  if (typeof nexusclient.variables().get("nexSysSettings") === "undefined") {
+    nexusclient.variables().set("nexSysSettings", {});
   }
-  const model = nexusclient.variables().get("nexsysSettings").systemSettings; //nexusclient.variables().get('CustomSystemSettings')
+  const model = nexusclient.variables().get("nexSysSettings").systemSettings; //nexusclient.variables().get('CustomSystemSettings')
   //updateAndSaveModel("systemSettings", sys.settings, model);
   updateModel(sys.settings, model);
 };
 
 const loadAffSettings = function () {
-  const model = nexusclient.variables().get("nexsysSettings").affSettings; //nexusclient.variables().get('CustomAffSettings')
+  const model = nexusclient.variables().get("nexSysSettings").affSettings; //nexusclient.variables().get('CustomAffSettings')
   if (model) {
     updateList(affTable.list, model.list);
     updateModel(affTable.prios, model.prios);
@@ -78,7 +78,7 @@ const loadAffSettings = function () {
 };
 
 const loadDefSettings = function () {
-  const model = nexusclient.variables().get("nexsysSettings").defSettings; //nexusclient.variables().get('CustomDefSettings')
+  const model = nexusclient.variables().get("nexSysSettings").defSettings; //nexusclient.variables().get('CustomDefSettings')
   if (model) {
     updateModel(defPrios.keepup, model.keepup);
     updateModel(defPrios.static, model.static);
@@ -91,7 +91,7 @@ const loadDefSettings = function () {
 };
 
 const loadCacheSettings = function () {
-  const model = nexusclient.variables().get("nexsysSettings").cacheSettings; //nexusclient.variables().get('CustomCacheSettings')
+  const model = nexusclient.variables().get("nexSysSettings").cacheSettings; //nexusclient.variables().get('CustomCacheSettings')
   if (model) {
     updateModel(cacheTable, model);
     for (const curative in cacheTable) {

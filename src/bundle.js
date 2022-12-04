@@ -1,4 +1,4 @@
-import "./nexsys";
+import "./nexSys";
 import "./base/affs/affEvents";
 import "./base/balances/balanceEvents";
 import "./base/cache/cacheEvents";
@@ -13,8 +13,8 @@ import "./base/clientOverrides/prompt";
 import './base/clientOverrides/clientoverrides';
 import './base/clientOverrides/promptEvents';
 import "./base/utilities/helpers";
-// Two stage importing for nexsys because we decoupled the eventStream
-// package from nexsys to be stand alone. Nexsys needs to be loaded in
+// Two stage importing for nexSys because we decoupled the eventStream
+// package from nexSys to be stand alone. Nexsys needs to be loaded in
 // THEN events loaded.
 
-//window.nexsys = nexsys;
+//window.nexSys = nexSys;

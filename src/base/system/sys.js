@@ -15,7 +15,7 @@ if (typeof nexusclient === "undefined") {
 
 export const sys = {
   settings: {
-    sep: nexusclient.variables().get('nexsysSettings')?.commandSeparator ?? false,
+    sep: nexusclient.variables().get('nexSysSettings')?.commandSeparator ?? false,
     customPrompt: false,
     echoAffGot: false,
     echoAffLost: false,
@@ -30,7 +30,7 @@ export const sys = {
   state: {
     paused: false,
     slowMode: false,
-    sep: nexusclient.variables().get('nexsysSettings')?.commandSeparator ?? false,
+    sep: nexusclient.variables().get('nexSysSettings')?.commandSeparator ?? false,
     curingMethod: "Transmutation",
     sipPriority: "Health",
     sipHealthAt: 80,

@@ -46,7 +46,7 @@ export const createQueue = ({ name, type, pre = false, exclusions = false }) => 
             let clears = []
             if (this.exclusions.length > 0) {
                 this.exclusions.forEach(element => {
-                    let q = globalThis.nexsys[element];
+                    let q = globalThis.nexSys[element];
                     if (q.queued()) {
                         q.clear();
                         clears.push(`clearqueue ${q.type}`);

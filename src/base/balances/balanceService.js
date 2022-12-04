@@ -14,7 +14,7 @@ export function getCurrentBals() {
 export function haveBal(bal) {
   const curBal = bals[bal]
   if (bal === undefined || curBal === undefined) {
-      // nexsys.sysLog('Called nexsys.haveBal with a balance that does not exist: ' + bal);
+      // nexSys.sysLog('Called nexSys.haveBal with a balance that does not exist: ' + bal);
       return false
   } else {
       return curBal.have

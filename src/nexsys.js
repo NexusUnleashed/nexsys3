@@ -79,7 +79,7 @@ import { getLustCommands, rejectList, whiteList } from "./base/utilities/lust";
 import { startup } from "./base/utilities/startup";
 import NexDialog from "./components/NexDialog";
 
-const nexsys = {
+const nexSys = {
   evt: new EventTarget(),
   component: NexDialog,
   
@@ -188,7 +188,7 @@ const generate_chunk = (text, fg, bg) => {
   return result;
 };
 
-nexsys.replace = (...args) => {
+nexSys.replace = (...args) => {
   let htmlLine = document.createElement("span");
 
   for (let i = 0; i < args.length; i += 3) {
@@ -201,5 +201,5 @@ nexsys.replace = (...args) => {
   return true;
 };
 
-globalThis.nexsys = nexsys;
+globalThis.nexSys = nexSys;
 startup();

@@ -1,4 +1,4 @@
-/* global nexsys */
+/* global nexSys */
 
 import * as React from "react";
 import Button from "@mui/material/Button";
@@ -20,7 +20,7 @@ const GroupedButtons = ({ curative, precache }) => {
   };
 
   React.useEffect(() => {
-    nexsys.cacheTable[curative] = cache;
+    nexSys.cacheTable[curative] = cache;
   }, [cache, curative]);
 
   return (

@@ -1,4 +1,4 @@
-/* global ReactDOM, React, nexsys */
+/* global ReactDOM, React, nexSys */
 
 export const startup = () => {
   if (typeof ReactDOM === 'undefined') { return; }
@@ -12,9 +12,9 @@ export const startup = () => {
   }
 
   ReactDOM.render(
-    React.createElement(nexsys.component, { evt: nexsys.evt, nexsys: nexsys }),
+    React.createElement(nexSys.component, { evt: nexSys.evt, nexSys: nexSys }),
     document.getElementById("modal-root")
   );
 
-  //nexsys.evt.dispatchEvent(new CustomEvent('nexsys-config-dialog', {detail: true}))
+  //nexSys.evt.dispatchEvent(new CustomEvent('nexSys-config-dialog', {detail: true}))
 };

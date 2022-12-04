@@ -1,4 +1,4 @@
-/* global eventStream, nexsys */
+/* global eventStream, nexSys */
 
 import {getCurrentDefs, parry} from './defService'
 import { defs } from './defs'

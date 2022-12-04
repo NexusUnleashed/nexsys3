@@ -89,7 +89,7 @@ const populateOutput = function () {
             // add commands that have been accumulated from other events
             addToOutput(eventOutput)
 
-            // This is from the doCommands function in nexsys
+            // This is from the doCommands function in nexSys
             //addToOutput(getCommandsToDo(affList, balList))
 
             sendOutput()

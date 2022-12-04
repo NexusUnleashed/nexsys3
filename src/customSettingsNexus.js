@@ -1,4 +1,4 @@
-/* global nexsys */
+/* global nexSys */
 let mySysSettings = {
     sep: '|',
     customPrompt: true,
@@ -28,7 +28,7 @@ let mySysSettings = {
     batch: true
 };
 
-nexsys.updateAndSaveModel('CustomSystemSettings', nexsys.sys.settings, mySysSettings);
+nexSys.updateAndSaveModel('CustomSystemSettings', nexSys.sys.settings, mySysSettings);
 
 /*
 Need to add priority for these
@@ -188,8 +188,8 @@ let myAffPrios = {
     swiftcurse: 100,
 };
 
-nexsys.updateModel(nexsys.affTable.prios, myAffPrios);
-nexsys.saveModel('CustomAffSettings', nexsys.affTable);
+nexSys.updateModel(nexSys.affTable.prios, myAffPrios);
+nexSys.saveModel('CustomAffSettings', nexSys.affTable);
 
 let myDefKeepupPrios = {
     // Normal defences
@@ -281,9 +281,9 @@ let myDefStaticPrios = {
     lifevision: 20,
 };
 
-nexsys.updateModel(nexsys.defPrios.keepup, myDefKeepupPrios);
-nexsys.updateModel(nexsys.defPrios.static, myDefStaticPrios);
-nexsys.saveModel('CustomDefSettings', nexsys.defPrios);
+nexSys.updateModel(nexSys.defPrios.keepup, myDefKeepupPrios);
+nexSys.updateModel(nexSys.defPrios.static, myDefStaticPrios);
+nexSys.saveModel('CustomDefSettings', nexSys.defPrios);
 
 let myCacheSettings = {
     magnesium: 2,
@@ -323,7 +323,7 @@ let myCacheSettings = {
     kola: 0,
     cohosh: 0
 };
-nexsys.updateAndSaveModel('CustomCacheSettings', nexsys.cacheTable, myCacheSettings);
+nexSys.updateAndSaveModel('CustomCacheSettings', nexSys.cacheTable, myCacheSettings);
 
-nexsys.whiteList = ['Imyrr', 'Makenna', 'Grandue', 'Theosis', 'Kierra', 'Nyar', 'Senzu', 'Dalran', 'Dunn', 'Mizik', 'Irimon', 'Paine'];
-nexsys.saveModel('LustWhiteList', nexsys.whiteList);
+nexSys.whiteList = ['Imyrr', 'Makenna', 'Grandue', 'Theosis', 'Kierra', 'Nyar', 'Senzu', 'Dalran', 'Dunn', 'Mizik', 'Irimon', 'Paine'];
+nexSys.saveModel('LustWhiteList', nexSys.whiteList);

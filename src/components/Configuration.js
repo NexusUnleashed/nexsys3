@@ -11,7 +11,7 @@ import Dndkit from "./Dndkit";
 import { CssBaseline } from "@mui/material";
 import SystemSettings from "./SystemSettings";
 
-const Configuration = ({ nexsys, theme }) => {
+const Configuration = ({ nexSys, theme }) => {
   const [value, setValue] = React.useState("1");
 
   const handleChange = (event, newValue) => {
@@ -67,14 +67,14 @@ const Configuration = ({ nexsys, theme }) => {
             </TabList>
           </Box>
           <TabPanel value="1">
-            <SystemSettings settings={nexsys.sys.settings} />
+            <SystemSettings settings={nexSys.sys.settings} />
           </TabPanel>
           <TabPanel value="2">
             Dndkit {/*<Dndkit />*/}
           </TabPanel>
           <TabPanel value="3"></TabPanel>
           <TabPanel value="4">
-            <Precache cache={nexsys.cacheTable}/>
+            <Precache cache={nexSys.cacheTable}/>
           </TabPanel>
         </TabContext>
       </Box>

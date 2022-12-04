@@ -5,7 +5,7 @@ import App from './components/App';
 import './styles/index.css';
 import reportWebVitals from './reportWebVitals';
 import 'nexevent'
-import './nexsys'
+import './nexSys'
 
 window.nexusclient = {
   variables() {

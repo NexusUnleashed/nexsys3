@@ -1,4 +1,4 @@
-/* global nexsys */
+/* global nexSys */
 
 const generate_chunk = (text, fg, bg) => {
   let result = document.createElement("span");
@@ -14,14 +14,14 @@ const colorPercentage = (perc) => {
 };
 
 const getCustomPrompt = () => {
-  let vars = nexsys.prompt.vars;
+  let vars = nexSys.prompt.vars;
   let promptLine = document.createElement("span");
 
   let add = (txt, fg, bg) => {
     if (txt.length === 0) {
       return;
     }
-    promptLine.appendChild(nexsys.prompt.generate_chunk(txt, fg, bg));
+    promptLine.appendChild(nexSys.prompt.generate_chunk(txt, fg, bg));
   };
 
   if (vars.blackout) {
@@ -32,18 +32,18 @@ const getCustomPrompt = () => {
   add(vars.paused.text, vars.paused.fg, vars.paused.bg);
   add(vars.aeon.text, vars.aeon.fg, vars.aeon.bg);
   add(vars.retard.text, vars.retard.fg, vars.retard.bg);
-  if (nexsys.defs.prismatic.have) {
+  if (nexSys.defs.prismatic.have) {
     add("[[", vars.prismatic.fg, vars.prismatic.bg);
   }
-  if (nexsys.defs.shield.have) {
+  if (nexSys.defs.shield.have) {
     add("((", vars.shield.fg, vars.shield.bg);
   }
   add(vars.h.text, vars.h.fg, vars.h.bg);
   add("(" + vars.ph.text + "), ", vars.h.fg, vars.h.bg);
   add(vars.m.text, vars.m.fg, vars.m.bg);
   add("(" + vars.pm.text + ") ", vars.m.fg, vars.m.bg);
-  if (nexsys.sys.isClass("Occultist")) {
-    add(`${nexsys.sys.char.karma}K `, vars.karma.fg, vars.karma.bg);
+  if (nexSys.sys.isClass("Occultist")) {
+    add(`${nexSys.sys.char.karma}K `, vars.karma.fg, vars.karma.bg);
   }
   if (vars.rage.text > 0) {
     add(`${vars.rage.text}R `, vars.rage.fg, vars.rage.bg);
@@ -54,10 +54,10 @@ const getCustomPrompt = () => {
     vars.c.fg,
     vars.c.bg
   );
-  if (nexsys.defs.shield.have) {
+  if (nexSys.defs.shield.have) {
     add("))", vars.shield.fg, vars.shield.bg);
   }
-  if (nexsys.defs.prismatic.have) {
+  if (nexSys.defs.prismatic.have) {
     add("]]", vars.prismatic.fg, vars.prismatic.bg);
   }
   add(" ", "", "");
