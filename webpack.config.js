@@ -6,7 +6,7 @@ module.exports = {
   entry: path.join(__dirname, 'src/bundle.js'),
   output: {
     path: path.join(__dirname, 'dist'),
-    filename: `bundle.min.js`,
+    filename: `nexsys.min.js`,
   },
   module: {
     rules: [

@@ -2,7 +2,7 @@
   "name": "nexsys",
   "version": "1.0.4",
   "description": "nexsys for nexus",
-  "main": "bundle.min.js",
+  "main": "nexsys.min.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
