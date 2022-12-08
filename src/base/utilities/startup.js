@@ -5,7 +5,7 @@ export const startup = () => {
 
   if (!document.getElementById("modal-root")) {
     document
-      .getElementById("root")
+      .getElementsByTagName('body')[0]
       .appendChild(
         Object.assign(document.createElement("div"), { id: "modal-root" })
       );

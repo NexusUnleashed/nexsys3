@@ -59,7 +59,7 @@ import {
   updateList,
   updateModel
 } from "./base/system/customsettings";
-import { curArea, curRoom, curRoomArea, curRoomName } from "./base/system/gmcp";
+import { curArea, curRoom, curRoomArea, curRoomName } from "./base/system/gmcpEvents";
 import { sys, sysLog, sysLogging, sysLoggingToggle } from "./base/system/sys";
 import {
   psend,
@@ -188,7 +188,6 @@ const generate_chunk = (text, fg, bg) => {
 
   return result;
 };
-
 nexSys.replace = (...args) => {
   let htmlLine = document.createElement("span");
 

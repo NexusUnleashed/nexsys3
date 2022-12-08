@@ -4,7 +4,7 @@ import "./base/balances/balanceEvents";
 import "./base/cache/cacheEvents";
 import "./base/defs/defEvents";
 import "./base/echo/echoEvents";
-import "./base/system/gmcp";
+import "./base/system/gmcpEvents";
 import "./base/utilities/lust";
 import "./base/serverside/serversideEvents";
 import "./base/system/sysEvents";

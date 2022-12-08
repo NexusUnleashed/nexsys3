@@ -67,7 +67,7 @@ const darkTheme = createTheme({
 });
 
 const NexDialog = ({ evt, nexSys }) => {
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = React.useState(true);
 
   evt.addEventListener("nexSys-config-dialog", ({ detail }) => {
     setOpen(detail);
@@ -111,3 +111,4 @@ const NexDialog = ({ evt, nexSys }) => {
 };
 
 export default NexDialog;
+//nexSys.evt.dispatchEvent(new CustomEvent('nexSys-config-dialog', {detail: true}))
