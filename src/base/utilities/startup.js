@@ -11,9 +11,16 @@ export const startup = () => {
       );
   }
 
+  document
+      .getElementById('modal-root')
+      .appendChild(
+        Object.assign(document.createElement("div"), { id: "nexsys-modal" })
+      );
+
+
   ReactDOM.render(
     React.createElement(nexSys.component, { evt: nexSys.evt, nexSys: nexSys }),
-    document.getElementById("modal-root")
+    document.getElementById("nexsys-modal")
   );
 
   //nexSys.evt.dispatchEvent(new CustomEvent('nexSys-config-dialog', {detail: true}))
