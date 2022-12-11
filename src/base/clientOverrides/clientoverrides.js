@@ -62,7 +62,7 @@ const add_block = function (block) {
     }
     if (!l.parsed_line && !l.html_line) continue;
     // no prompt if we gagged everything
-    if (l.is_prompt && gags) continue;
+    if (l.is_prompt && (gags >= block.length - 2)) continue;
     // empty line? include if it's not the first/last one
     if (l.parsed_line) {
       let text = l.parsed_line.text();
