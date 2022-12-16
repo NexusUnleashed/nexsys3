@@ -1,6 +1,6 @@
 /* global nexSys */
 
-const generate_chunk = (text, fg, bg) => {
+const generate_chunk = (text, fg = "", bg = "") => {
   let result = document.createElement("span");
   result.style.color = fg;
   result.style.backgroundColor = bg;
@@ -120,22 +120,22 @@ prompt.vars = {
 
 prompt.cureColors = {
   antimony: {fg: "", bg: ""},
-  argentum: {fg: "", bg: ""},
+  argentum: {fg: "LightSeaGreen", bg: ""},
   arsenic: {fg: "", bg: ""},
-  aurum: {fg: "", bg: ""},
+  aurum: {fg: "ForestGreen", bg: ""},
   azurite: {fg: "", bg: ""},
   calamine: {fg: "", bg: ""},
   calcite: {fg: "", bg: ""},
   cinnabar: {fg: "", bg: ""},
-  cuprum: {fg: "", bg: ""},
-  ferrum: {fg: "", bg: ""},
+  cuprum: {fg: "DeepSkyBlue", bg: ""},
+  ferrum: {fg: "Orange", bg: ""},
   gypsum: {fg: "", bg: ""},
-  magnesium: {fg: "", bg: ""},
-  plumbum: {fg: "", bg: ""},
+  magnesium: {fg: "Red", bg: ""},
+  plumbum: {fg: "Gold", bg: ""},
   quartz: {fg: "", bg: ""},
   quicksilver: {fg: "", bg: ""},
   realgar: {fg: "", bg: ""},
-  stannum: {fg: "", bg: ""},
+  stannum: {fg: "Tan", bg: ""},
   caloric: {fg: "", bg: ""},
   mending: {fg: "", bg: ""},
   epidermal: {fg: "", bg: ""},
@@ -215,12 +215,12 @@ prompt.affAbbrev = {
   masochism: { text: "maso", fg: "", bg: "" },
   meltingburn: { text: "5burn", fg: "", bg: "" },
   mildtrauma: { text: "tor1", fg: "", bg: "" },
-  nausea: { text: "nau", fg: "", bg: "" },
+  nausea: { text: "nau", fg: prompt.cureColors.ferrum.fg, bg: prompt.cureColors.ferrum.fg },
   slimeobscure: { text: "nkh", fg: "", bg: "" },
   numbedleftarm: { text: "nbla", fg: "", bg: "" },
   numbedrightarm: { text: "nbra", fg: "", bg: "" },
   pacified: { text: "pac", fg: "", bg: "" },
-  paralysis: { text: "par", fg: "", bg: "" },
+  paralysis: { text: "PAR", fg: prompt.cureColors.magnesium.fg, bg: prompt.cureColors.magnesium.fg },
   paranoia: { text: "prn", fg: "", bg: "" },
   peace: { text: "pea", fg: "", bg: "" },
   phlogistication: { text: "phlog", fg: "", bg: "" },

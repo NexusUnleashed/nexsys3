@@ -31,12 +31,14 @@ let setPromptVitals = function (vitals) {
     vars.pw.text = percw.toFixed(1) + "%";
 };
 /********** */
-let setPromptAffs = function (affs) {
+let setPromptAffs = function (promptAffs) {
     //let affs = nexSys.prompt.vars.affs;
 
     let affLine = document.createElement('span');
 
-    if (Object.keys(affs).length === 0) { return affLine; }
+    const affs = Object.keys(promptAffs);
+
+    if (affs.length === 0) { return affLine; }
 
     let affAbbrev = nexSys.prompt.affAbbrev;
 
@@ -45,21 +47,15 @@ let setPromptAffs = function (affs) {
     }
     
     add("[");
-    for (let aff in affs) {
-        if (affs[aff] === true) {
-            if (affAbbrev[aff]) {
-                add(affAbbrev[aff].text, affAbbrev[aff].fg, affAbbrev[aff].bg);
-            } else {
-                add(aff);
-            }
-        }
-        else {
-            if (affAbbrev[aff]) {
-                add(`${affAbbrev[aff].text}(${affs[aff]})`, affAbbrev[aff].fg, affAbbrev[aff].bg);
-            } else {
-                add(`${aff}(${affs[aff]})`);
-            }
-        }
+    for (let i = 0; i < affs.length; i++) {
+        const aff = affs[i];
+
+        const fg = affAbbrev[aff] ? affAbbrev[aff].fg : "";
+        const bg = affAbbrev[aff] ? affAbbrev[aff].bg : "";
+        const txt = affAbbrev[aff] ? affAbbrev[aff].text : aff;
+        const count = affs[aff] === true ? "" : `(${affs[aff]})`;
+        const pre = i > 0 ? ", " : "";
+        add(`${pre}${txt}${count}`, fg, bg);
     }
     add("]");
 

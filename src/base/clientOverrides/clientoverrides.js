@@ -52,17 +52,13 @@ const add_block = function (block) {
     nexSys.prepend_line = false;
   }
   let count = 0;
-  let gags = 0;
   for (let idx = 0; idx < block.length; ++idx) {
     var l = block[idx];
 
-    if (l.gag) {
-      gags++;
-      continue;
-    }
+    if (l.gag) continue;
     if (!l.parsed_line && !l.html_line) continue;
-    // no prompt if we gagged everything
-    if (l.is_prompt && (gags >= block.length - 2)) continue;
+    // no prompt if we gagged everything (so far)
+    if (l.is_prompt && !count) continue;
     // empty line? include if it's not the first/last one
     if (l.parsed_line) {
       let text = l.parsed_line.text();
@@ -73,6 +69,8 @@ const add_block = function (block) {
     count++;
     this.lineid++;
     l.id = this.lineid;
+
+    // Inject custom nexSys prompt
     if (l.is_prompt && nexSys.sys.settings.customPrompt) {
       let nexSysPromptString = nexSys.prompt.getCustomPrompt();
       l.parsed_line.formatted = () => {
