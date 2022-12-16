@@ -61,7 +61,7 @@ export const defTable = {
     belltattoo: {
         command: 'touch bell',
         bals_req: ['balance', 'equilibrium'],
-        bals_used: ['equilibrium'],
+        bals_used: ['free'],
         blocks: [
             'prone',
             'death',
@@ -94,7 +94,7 @@ export const defTable = {
     blocking: {
         command: 'block d',
         bals_req: ['balance', 'equilibrium'],
-        bals_used: ['balance'],
+        bals_used: ['free'],
         blocks: ['death', 'sleeping', 'prone'],
     },
     bodyblock: {
@@ -697,6 +697,7 @@ export const defTable = {
             'bound',
         ],
         preempt: true,
+        serverside: true,
     },
     nightsight: {
         command: 'nightsight',
