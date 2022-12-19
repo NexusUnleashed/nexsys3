@@ -4,7 +4,7 @@ const generate_chunk = (text, fg = "", bg = "") => {
   let result = document.createElement("span");
   result.style.color = fg;
   result.style.backgroundColor = bg;
-  result.innerHTML = text;
+  result.textContent = text;
 
   return result;
 };
@@ -150,7 +150,7 @@ prompt.affAbbrev = {
   amnesia: { text: "amn", fg: "", bg: "" },
   anorexia: { text: "ANO", fg: "", bg: "" },
   asleep: { text: "asl", fg: "", bg: "" },
-  asthma: { text: "AST", fg: prompt.cureColors.aurum.fg, bg: prompt.cureColors.aurum.fg },
+  asthma: { text: "AST", fg: prompt.cureColors.aurum.fg, bg: prompt.cureColors.aurum.bg },
   blackout: { text: "bo", fg: "", bg: "" },
   blindness: { text: "unb", fg: "", bg: "" },
   bound: { text: "bnd", fg: "", bg: "" },
@@ -198,7 +198,7 @@ prompt.affAbbrev = {
   hypothermia: { text: "hypoth", fg: "", bg: "" },
   icefist: { text: "ice", fg: "", bg: "" },
   impaled: { text: "impl", fg: "", bg: "" },
-  impatience: { text: "IMPAT", fg: prompt.cureColors.plumbum.fg, bg: prompt.cureColors.plumbum.fg },
+  impatience: { text: "IMPAT", fg: prompt.cureColors.plumbum.fg, bg: prompt.cureColors.plumbum.bg },
   itching: { text: "itch", fg: "", bg: "" },
   justice: { text: "just", fg: "", bg: "" },
   laceratedthroat: { text: "lac2", fg: "", bg: "" },
@@ -215,12 +215,12 @@ prompt.affAbbrev = {
   masochism: { text: "maso", fg: "", bg: "" },
   meltingburn: { text: "5burn", fg: "", bg: "" },
   mildtrauma: { text: "tor1", fg: "", bg: "" },
-  nausea: { text: "nau", fg: prompt.cureColors.ferrum.fg, bg: prompt.cureColors.ferrum.fg },
+  nausea: { text: "nau", fg: prompt.cureColors.ferrum.fg, bg: prompt.cureColors.ferrum.bg },
   slimeobscure: { text: "nkh", fg: "", bg: "" },
   numbedleftarm: { text: "nbla", fg: "", bg: "" },
   numbedrightarm: { text: "nbra", fg: "", bg: "" },
   pacified: { text: "pac", fg: "", bg: "" },
-  paralysis: { text: "PAR", fg: prompt.cureColors.magnesium.fg, bg: prompt.cureColors.magnesium.fg },
+  paralysis: { text: "PAR", fg: prompt.cureColors.magnesium.fg, bg: prompt.cureColors.magnesium.bg },
   paranoia: { text: "prn", fg: "", bg: "" },
   peace: { text: "pea", fg: "", bg: "" },
   phlogistication: { text: "phlog", fg: "", bg: "" },

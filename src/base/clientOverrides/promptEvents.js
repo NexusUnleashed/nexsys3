@@ -43,8 +43,8 @@ let setPromptAffs = function (promptAffs) {
     let affAbbrev = nexSys.prompt.affAbbrev;
 
     let add = (txt, fg, bg) => {
-        affLine.appendChild(nexSys.prompt.generate_chunk(txt, fg, bg))
-    }
+        affLine.appendChild(nexSys.prompt.generate_chunk(txt, fg, bg));
+    };
     
     add("[");
     for (let i = 0; i < affs.length; i++) {
@@ -53,7 +53,7 @@ let setPromptAffs = function (promptAffs) {
         const fg = affAbbrev[aff] ? affAbbrev[aff].fg : "";
         const bg = affAbbrev[aff] ? affAbbrev[aff].bg : "";
         const txt = affAbbrev[aff] ? affAbbrev[aff].text : aff;
-        const count = affs[aff] === true ? "" : `(${affs[aff]})`;
+        const count = promptAffs[aff] === true ? "" : `(${promptAffs[aff]})`;
         const pre = i > 0 ? ", " : "";
         add(`${pre}${txt}${count}`, fg, bg);
     }

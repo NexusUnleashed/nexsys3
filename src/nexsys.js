@@ -180,11 +180,11 @@ const nexSys = {
 };
 
 // TODO: We should probably move this somewhere else
-const generate_chunk = (text, fg, bg) => {
+const generateChunk = (text, fg, bg) => {
   let result = document.createElement("span");
   result.style.color = fg;
   result.style.backgroundColor = bg;
-  result.innerHTML = text;
+  result.textContent = text;
 
   return result;
 };
@@ -192,7 +192,7 @@ nexSys.replace = (...args) => {
   let htmlLine = document.createElement("span");
 
   for (let i = 0; i < args.length; i += 3) {
-    htmlLine.appendChild(generate_chunk(args[i], args[i + 1], args[i + 2]));
+    htmlLine.appendChild(generateChunk(args[i], args[i + 1], args[i + 2]));
   }
   globalThis.nexusclient.current_line.parsed_line.formatted = () => {
     return htmlLine.outerHTML;

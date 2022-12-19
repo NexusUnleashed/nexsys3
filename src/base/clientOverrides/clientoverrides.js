@@ -11,7 +11,7 @@ const generate_chunk = (text, fg, bg) => {
 
 // Override display_notice() for multi color options.
 //nexusclient.display_notice()
-const display_notice = function (...args) {
+const display_notice = function(...args) {
   let htmlLine = document.createElement("span");
 
   for (let i = 0; i < args.length; i += 3) {
@@ -22,7 +22,7 @@ const display_notice = function (...args) {
   return htmlLine.outerHTML;
 };
 
-const prepend_notice = function (...args) {
+const prepend_notice = function(...args) {
   let htmlLine = document.createElement("span");
 
   for (let i = 0; i < args.length; i += 3) {
@@ -46,7 +46,7 @@ const prepend_notice = function (...args) {
 
 // Override the add_block to substitute nexSys custom prompts in.
 //nexusclient.ui().buffer().add_block
-const add_block = function (block) {
+const add_block = function(block) {
   if (nexSys.prepend_line) {
     block.unshift(nexSys.prepend_line);
     nexSys.prepend_line = false;
@@ -85,6 +85,44 @@ const add_block = function (block) {
   if (count || pruned) this.on_lines_changed();
 };
 
+//Override the process_lines function to move logging after the
+//add_block function to allow custom prompt logging
+//nexusclient.process_lines();
+const process_lines = function(lines) {
+  if (this.gagged) return;
+  // Nothing to do if there are no lines. Happens when we receive a GMCP message.
+  if (!lines.length) return;
+
+  this.current_block = lines;
+  let reflexes = this.reflexes();
+
+  for (var idx = 0; idx < lines.length; ++idx) {
+      if (idx >= 1000) break;   // just in case we somehow hit an infinite loop (notifications mainly)
+
+      // this is for custom functions/scripts
+      this.current_line = lines[idx];
+
+      if (lines[idx].line && (lines[idx].line.indexOf(String.fromCharCode(7)) >= 0))  // line contains the beep char
+          this.platform().beep();
+      
+      if (!this.fullstop)
+          lines = reflexes.handle_triggers(lines, idx);
+  }
+
+  reflexes.run_function("onBlock", lines, 'ALL');
+
+  this.ui().buffer().add_block (lines);
+  // Logging - this is called after triggers so that we get the processed lines
+  // Nexsys: Moved logging after add_block for custom prompt capture
+  for (var idx = 0; idx < lines.length; ++idx)
+      this.log().append(lines[idx]);
+
+  this.current_line = undefined;
+  this.current_block = undefined;
+};
+
+
+nexusclient.process_lines = process_lines;
 nexusclient.display_notice = display_notice;
 nexusclient.ui().buffer().add_block = add_block;
 nexSys.prepend_notice = prepend_notice;

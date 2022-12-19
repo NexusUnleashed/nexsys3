@@ -1,13 +1,13 @@
 /*global eventStream, globalThis */
 
-import { sendCmd, sendInline } from '../system/sysService.js'
-import { sys } from '../system/sys.js'
+import { sendCmd, sendInline } from '../system/sysService.js';
+import { sys } from '../system/sys.js';
 
 export const createQueue = ({ name, type, pre = false, exclusions = false }) => {
     const queueFired = function (queue) {
-        queue.clear()
-    }
-    eventStream.registerEvent(name + 'QueueFired', queueFired)
+        queue.clear();
+    };
+    eventStream.registerEvent(name + 'QueueFired', queueFired);
 
     return ({
         name: name,
@@ -43,7 +43,7 @@ export const createQueue = ({ name, type, pre = false, exclusions = false }) => 
         send() {
             let cmds =  this.pre.concat(this.prependQueue, this.queue);
             let cmdString = `queue addclear ${this.type} ${cmds.join(sys.settings.sep)}`;
-            let clears = []
+            let clears = [];
             if (this.exclusions.length > 0) {
                 this.exclusions.forEach(element => {
                     let q = globalThis.nexSys[element];
@@ -55,7 +55,7 @@ export const createQueue = ({ name, type, pre = false, exclusions = false }) => 
             } 
 
             clears.push(cmdString);
-            console.log(clears.join("|"))
+            console.log(clears.join("|"));
             sendInline(clears);
         },
         clear() {
@@ -65,11 +65,11 @@ export const createQueue = ({ name, type, pre = false, exclusions = false }) => 
         clearQueue() {
             this.clear();
             console.log(`clearqueue ${type}`);
-            sendCmd(`clearqueue ${type}`)
-            eventStream.raiseEvent(this.name + 'QueueCleared', this)
+            sendCmd(`clearqueue ${type}`);
+            eventStream.raiseEvent(this.name + 'QueueCleared', this);
         }
-    })
-}
+    });
+};
 //globalThis.classQ = createQueue({ name: 'class', type: 'c!p!t!w', pre: 'touch soul|stand', exclusions: ['fullQ'] })
 //globalThis.freeQ = createQueue({ name: 'free', type: 'free', pre: 'touch soul|stand', exclusions: ['fullQ'] })
 //globalThis.fullQ = createQueue({ name: 'full', type: 'full', pre: 'touch soul|stand', exclusions: ['freeQ', 'classQ']})
