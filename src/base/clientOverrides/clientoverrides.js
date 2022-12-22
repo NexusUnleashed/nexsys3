@@ -47,22 +47,24 @@ const prepend_notice = function(...args) {
 // Override the add_block to substitute nexSys custom prompts in.
 //nexusclient.ui().buffer().add_block
 const add_block = function(block) {
+  // Inject html line at the begining of a block.
   if (nexSys.prepend_line) {
     block.unshift(nexSys.prepend_line);
     nexSys.prepend_line = false;
   }
+
   let count = 0;
   for (let idx = 0; idx < block.length; ++idx) {
     var l = block[idx];
 
     if (l.gag) continue;
-    if (!l.parsed_line && !l.html_line) continue;
+    if ((!l.parsed_line) && (!l.html_line)) continue;
     // no prompt if we gagged everything (so far)
-    if (l.is_prompt && !count) continue;
+    if (l.is_prompt && (!count)) continue;
     // empty line? include if it's not the first/last one
     if (l.parsed_line) {
       let text = l.parsed_line.text();
-      if (!text && (count === 0 || idx === block.length - 1)) continue;
+      if ((!text) && ((count === 0) || (idx === block.length - 1))) continue;
     }
 
     this._fill_tab_completion(l);
