@@ -1,18 +1,18 @@
-import { affs } from "../affs/affs"
-import { cures as Cures } from "./cures"
+import { affs } from "../affs/affs";
+import { cures as Cures } from "./cures";
 
 export function getCureOutputs(affList, balList) {
-  let cureOutputs = []
-  let affCurable = true
+  let cureOutputs = [];
+  let affCurable = true;
 
   while (affCurable) {
-      affCurable = false
+      affCurable = false;
       for (let i = 0; i < affList.length && !affCurable; i++) {
-          const aff = affs[affList[i]]
-          const cures = aff.cures
+          const aff = affs[affList[i]];
+          const cures = aff.cures;
           for (let j = 0; j < cures.length; j++) {
-              let canPerform = true
-              const cure = Cures[cures[j]]
+              let canPerform = true;
+              const cure = Cures[cures[j]];
               if (
                   !cure.isIgnored &&
                   !Array.arraysIntersect(cure.blocks, affList)
@@ -25,7 +25,7 @@ export function getCureOutputs(affList, balList) {
                       k++
                   ) {
                       if (balList.indexOf(cure.balsReq[k]) === -1) {
-                          canPerform = false
+                          canPerform = false;
                       }
                   }
 
@@ -40,15 +40,15 @@ export function getCureOutputs(affList, balList) {
                               cure.order[k] !== aff.name &&
                               affList.indexOf(cure.order[k]) >= 0
                           ) {
-                              canPerform = false
+                              canPerform = false;
                           }
                       }
 
                       if (canPerform) {
                           // We found a for sure cure, so restart loop with updated affList and balList
-                          cureOutputs = cureOutputs.concat(cure.command)
-                          affCurable = true
-                          affList.splice(affList.indexOf(aff.name), 1)
+                          cureOutputs = cureOutputs.concat(cure.command);
+                          affCurable = true;
+                          affList.splice(affList.indexOf(aff.name), 1);
                           if (
                               cure.balsUsed.length !== 0 &&
                               cure.balsUsed[0] !== 'free'
@@ -57,7 +57,7 @@ export function getCureOutputs(affList, balList) {
                                   balList.splice(
                                       balList.indexOf(cure.balsUsed[k]),
                                       1
-                                  )
+                                  );
                               }
                           }
                       }
@@ -68,15 +68,15 @@ export function getCureOutputs(affList, balList) {
   } // end while loop, no more for-sure cures were found
 
   // Now loop and finds cures that are possible but not guaranteed
-  affCurable = true
+  affCurable = true;
   while (affCurable) {
-      affCurable = false
+      affCurable = false;
       for (let i = 0; i < affList.length && !affCurable; i++) {
-          const aff = affs[affList[i]]
-          const cures = aff.cures
+          const aff = affs[affList[i]];
+          const cures = aff.cures;
           for (let j = 0; j < cures.length; j++) {
-              let canPerform = true
-              const cure = Cures[cures[j]]
+              let canPerform = true;
+              const cure = Cures[cures[j]];
               if (
                   !cure.isIgnored &&
                   !Array.arraysIntersect(cure.blocks, affList)
@@ -89,22 +89,22 @@ export function getCureOutputs(affList, balList) {
                       k++
                   ) {
                       if (balList.indexOf(cure.balsReq[k]) === -1) {
-                          canPerform = false
+                          canPerform = false;
                       }
                   }
 
                   // can Perform it, no need to make sure it might cure something else
                   if (canPerform) {
                       // We found a possible cure, so restart loop with updated affList and balList
-                      cureOutputs = cureOutputs.concat(cure.command)
-                      affCurable = true
-                      affList.splice(affList.indexOf(aff.name), 1)
+                      cureOutputs = cureOutputs.concat(cure.command);
+                      affCurable = true;
+                      affList.splice(affList.indexOf(aff.name), 1);
                       if (cure.balsUsed[0] !== 'free') {
                           for (let k = 0; k < cure.balsUsed.length; k++) {
                               balList.splice(
                                   balList.indexOf(cure.balsUsed[k]),
                                   1
-                              )
+                              );
                           }
                       }
                   }
@@ -113,5 +113,5 @@ export function getCureOutputs(affList, balList) {
       }
   } // end while loop, no more possible cures were found
 
-  return cureOutputs
+  return cureOutputs;
 }

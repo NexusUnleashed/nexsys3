@@ -82,7 +82,7 @@ const treeList = [
     "rebbies",
     "mycalium",
     "sandfever"
-]
+];
 
 const cures = {
     //#region Minerals
@@ -856,7 +856,7 @@ const cures = {
         order: treeList,
         prio: 0,
     },
-}
+};
 //#endregion
 
-export { cures as cureTable }
+export { cures as cureTable };

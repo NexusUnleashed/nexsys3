@@ -1,6 +1,6 @@
 /*global eventStream, nexSys */
-import { affs } from './affs'
-import { getCurrentAffs } from './affService'
+import { affs } from './affs';
+import { getCurrentAffs } from './affService';
 
 let eventGmcpAffList = function(list) {
   let prev_list = getCurrentAffs();

@@ -1,14 +1,14 @@
 /*global */
 
-import { cacheTable } from './cacheTable'
-import { Cache } from './Cache'
+import { cacheTable } from './cacheTable';
+import { Cache } from './Cache';
 
-export const caches = {}
+export const caches = {};
 
-const cache = cacheTable
+const cache = cacheTable;
 for (const herb in cache) {
-    const amount = cache[herb]
-    const obj = {}
+    const amount = cache[herb];
+    const obj = {};
     obj.blocks = [
         'death',
         'sleeping',
@@ -27,7 +27,7 @@ for (const herb in cache) {
         'webbed',
         'bound',
         'blackout',
-    ]
+    ];
 
-    caches[herb] = new Cache(herb, amount, obj)
+    caches[herb] = new Cache(herb, amount, obj);
 }

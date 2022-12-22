@@ -1,26 +1,26 @@
 /*global eventStream */
 
-import { sendCmd, sendInline } from '../system/sysService.js'
-import { sys } from '../system/sys.js'
+import { sendCmd, sendInline } from '../system/sysService.js';
+import { sys } from '../system/sys.js';
 
 export class Queue {
   constructor(obj) {
-    this._name = obj.name
-    this._prefix = obj.prefix || ''
-    this._pre = obj.pre || ''
-    this._clear = obj.clear || ''
-    this._queue = []
-    this._prepend = []
-    this._gagged = false
+    this._name = obj.name;
+    this._prefix = obj.prefix || '';
+    this._pre = obj.pre || '';
+    this._clear = obj.clear || '';
+    this._queue = [];
+    this._prepend = [];
+    this._gagged = false;
 
     const queueFired = function (queue) {
-      queue.clear()
-    }
-    eventStream.registerEvent(this._name + 'QueueFired', queueFired)
+      queue.clear();
+    };
+    eventStream.registerEvent(this._name + 'QueueFired', queueFired);
   }
 
   get queue() {
-    return this._queue
+    return this._queue;
   }
 
   /*get prepend() {
@@ -28,61 +28,61 @@ export class Queue {
   }*/
 
   isQueued(cmd) {
-    if (this._queue.indexOf(cmd) !== -1) return true
-    if (this._prepend.indexOf(cmd) !== -1) return true
+    if (this._queue.indexOf(cmd) !== -1) return true;
+    if (this._prepend.indexOf(cmd) !== -1) return true;
 
-    return false
+    return false;
   }
 
   add(cmd) {
-    const tempQ = Array.isArray(cmd) ? cmd : cmd.split(sys.settings.sep)
+    const tempQ = Array.isArray(cmd) ? cmd : cmd.split(sys.settings.sep);
 
     if (Array.equals(tempQ, this._queue)) {
-      return
+      return;
     }
 
-    this._queue = tempQ
+    this._queue = tempQ;
 
-    this.send()
+    this.send();
   }
 
   prepend(cmd) {
-    const tempQ = Array.isArray(cmd) ? cmd : cmd.split(sys.settings.sep)
+    const tempQ = Array.isArray(cmd) ? cmd : cmd.split(sys.settings.sep);
 
     if (Array.equals(tempQ, this._prepend)) {
-      return
+      return;
     }
 
-    this._prepend = this._prepend.concat(tempQ)
+    this._prepend = this._prepend.concat(tempQ);
 
-    this.send()
+    this.send();
   }
 
   send() {
-    const tempQueue = this._prepend.concat(this._queue)
+    const tempQueue = this._prepend.concat(this._queue);
 
     if (tempQueue.length < 1) {
-      return
+      return;
     }
 
     if (this._pre) {
-      tempQueue.unshift(this._pre)
+      tempQueue.unshift(this._pre);
     }
 
-    tempQueue[0] = this._prefix + tempQueue[0]
+    tempQueue[0] = this._prefix + tempQueue[0];
 
-    sendInline(tempQueue)
+    sendInline(tempQueue);
   }
 
   clearQueue() {
-    this._queue = []
-    this._prepend = []
-    sendCmd(this._clear)
-    eventStream.raiseEvent(this._name + 'QueueCleared', this)
+    this._queue = [];
+    this._prepend = [];
+    sendCmd(this._clear);
+    eventStream.raiseEvent(this._name + 'QueueCleared', this);
   }
 
   clear() {
-    this._queue = []
-    this._prepend = []
+    this._queue = [];
+    this._prepend = [];
   }
 }

@@ -1,57 +1,57 @@
 /* global eventStream */
 
-export let curRoom = 0
-export let curRoomName = ''
-export let curArea = ''
-export let curRoomArea = ''
+export let curRoom = 0;
+export let curRoomName = '';
+export let curArea = '';
+export let curRoomArea = '';
 
 const roomChangeCheck = function (args) {
     if (curRoom !== args.num) {
-        curRoom = args.num
-        curRoomName = args.name
-        curArea = args.area
-        curRoomArea = args.name + ' (' + args.area + ')'
-        eventStream.raiseEvent('RoomChangedEvent', args)
+        curRoom = args.num;
+        curRoomName = args.name;
+        curArea = args.area;
+        curRoomArea = args.name + ' (' + args.area + ')';
+        eventStream.raiseEvent('RoomChangedEvent', args);
     }
-}
-eventStream.registerEvent('Room.Info', roomChangeCheck)
+};
+eventStream.registerEvent('Room.Info', roomChangeCheck);
 
 const addedItem = function (args) {
     if (args.location === 'room') {
-        eventStream.raiseEvent('ItemAddedToRoom', args.item)
+        eventStream.raiseEvent('ItemAddedToRoom', args.item);
     } else if (args.location === 'inv') {
-        eventStream.raiseEvent('ItemAddedToInv', args.item)
+        eventStream.raiseEvent('ItemAddedToInv', args.item);
     }
-}
+};
 
-eventStream.registerEvent('Char.Items.Add', addedItem)
+eventStream.registerEvent('Char.Items.Add', addedItem);
 
 const removedItem = function (args) {
     if (args.location === 'room') {
-        eventStream.raiseEvent('ItemRemovedFromRoom', args.item)
+        eventStream.raiseEvent('ItemRemovedFromRoom', args.item);
     } else if (args.location === 'inv') {
-        eventStream.raiseEvent('ItemRemovedFromInv', args.item)
+        eventStream.raiseEvent('ItemRemovedFromInv', args.item);
     }
-}
+};
 
-eventStream.registerEvent('Char.Items.Remove', removedItem)
+eventStream.registerEvent('Char.Items.Remove', removedItem);
 
 const updatedItem = function (args) {
     if (args.location === 'room') {
-        eventStream.raiseEvent('ItemUpdatedRoom', args.item)
+        eventStream.raiseEvent('ItemUpdatedRoom', args.item);
     } else if (args.location === 'inv') {
-        eventStream.raiseEvent('ItemUpdatedInv', args.item)
+        eventStream.raiseEvent('ItemUpdatedInv', args.item);
     }
-}
+};
 
-eventStream.registerEvent('Char.Items.Update', updatedItem)
+eventStream.registerEvent('Char.Items.Update', updatedItem);
 
 const listItems = function (args) {
     if (args.location === 'room') {
-        eventStream.raiseEvent('ItemListForRoom', args.items)
+        eventStream.raiseEvent('ItemListForRoom', args.items);
     } else if (args.location === 'inv') {
-        eventStream.raiseEvent('ItemListForInv', args.items)
+        eventStream.raiseEvent('ItemListForInv', args.items);
     }
-}
+};
 
-eventStream.registerEvent('Char.Items.List', listItems)
+eventStream.registerEvent('Char.Items.List', listItems);

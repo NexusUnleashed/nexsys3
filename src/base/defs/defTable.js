@@ -1232,7 +1232,7 @@ export const defTable = {
         skills: ['Serpent'],
         serverside: true,
     },
-}
+};
 
 export const defPrios = {
 
@@ -1428,4 +1428,4 @@ static: {
     weaving: 0,
     shroud: 0,
 }
-}
+};

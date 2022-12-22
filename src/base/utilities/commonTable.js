@@ -21,7 +21,7 @@ export const limbs = {
         left: 'l',
         right: 'r',
     },
-}
+};
 
 export const dirs = [
     'e',
@@ -36,7 +36,7 @@ export const dirs = [
     'out',
     'd',
     'u',
-]
+];
 
 export const dirMap = {
     e: 'east',
@@ -53,7 +53,7 @@ export const dirMap = {
     d: 'down',
     u: 'up',
     up: 'up',
-}
+};
 
 export const oppDirs = {
     e: 'west',
@@ -70,7 +70,7 @@ export const oppDirs = {
     d: 'up',
     u: 'down',
     up: 'down',
-}
+};
 
 export const shortDirs = {
     east: 'e',
@@ -85,4 +85,4 @@ export const shortDirs = {
     out: 'out',
     down: 'd',
     up: 'up',
-}
+};

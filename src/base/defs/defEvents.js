@@ -1,9 +1,9 @@
 /* global eventStream, nexSys */
 
-import {getCurrentDefs, parry} from './defService'
-import { defs } from './defs'
-import { sys } from '../system/sys'
-import {limbs} from '../utilities/commonTable'
+import {getCurrentDefs, parry} from './defService';
+import { defs } from './defs';
+import { sys } from '../system/sys';
+import {limbs} from '../utilities/commonTable';
 import { defPrios } from "./defTable";
 import { serversideSettings } from "../serverside/serverside";
 
@@ -57,40 +57,40 @@ eventStream.registerEvent('Char.Defences.Remove', eventGmcpDefRemove);
 export function repop(args) {
   if (serversideSettings.loaded) {
 
-      const keepupPrios = defPrios.keepup
+      const keepupPrios = defPrios.keepup;
 
       for (const def in defs) {
-          const cur_def = defs[def]
+          const cur_def = defs[def];
           if (
               sys.isClass(cur_def.skills) ||
               cur_def.skills === undefined ||
               cur_def.skills.length === 0
           ) {
               if (keepupPrios[def]) {
-                console.log('1 + ' + def)
-                  cur_def.set_default_prio(keepupPrios[def])
+                console.log('1 + ' + def);
+                  cur_def.set_default_prio(keepupPrios[def]);
               } else {
-                  cur_def.set_default_prio(0)
+                  cur_def.set_default_prio(0);
               }
           } else {
-              cur_def.set_default_prio(0)
+              cur_def.set_default_prio(0);
           }
       }
 
       for (const limb in limbs.long) {
           if (!defs['parrying ' + limb].isIgnored) {
-              parry(limb)
+              parry(limb);
           }
           if (defs['guarding ' + limb]) {
               if (!defs['guarding ' + limb].isIgnored) {
-                  parry(limb)
+                  parry(limb);
               }
           }
       }
 
-      eventStream.raiseEvent('ForcePopulateEvent')
+      eventStream.raiseEvent('ForcePopulateEvent');
   }
 }
 
-eventStream.registerEvent('ClassChanged', repop)
-eventStream.registerEvent('ServersideSettingsCaptured', repop)
+eventStream.registerEvent('ClassChanged', repop);
+eventStream.registerEvent('ServersideSettingsCaptured', repop);

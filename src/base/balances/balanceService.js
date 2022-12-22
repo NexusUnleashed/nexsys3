@@ -1,56 +1,56 @@
-import { bals } from "./balances"
+import { bals } from "./balances";
 
 export function getCurrentBals() {
-  const currentBals = []
+  const currentBals = [];
   for (const bal in bals) {
       if (bals[bal].have) {
-          currentBals.push(bals[bal].name)
+          currentBals.push(bals[bal].name);
       }
   }
 
-  return currentBals
+  return currentBals;
 }
 
 export function haveBal(bal) {
-  const curBal = bals[bal]
+  const curBal = bals[bal];
   if (bal === undefined || curBal === undefined) {
       // nexSys.sysLog('Called nexSys.haveBal with a balance that does not exist: ' + bal);
-      return false
+      return false;
   } else {
-      return curBal.have
+      return curBal.have;
   }
 }
 
 export function haveBals(bals) {
   if (bals === undefined) {
-      return false
+      return false;
   }
 
   if (Array.isArray(bals)) {
       for (let i = 0; i < bals.length; i++) {
           if (!haveBal(bals[i])) {
-              return false
+              return false;
           }
       }
-      return true
+      return true;
   } else {
-      return haveBal(bals)
+      return haveBal(bals);
   }
 }
 
 export function haveABal(bals) {
   if (bals === undefined) {
-      return false
+      return false;
   }
 
   if (Array.isArray(bals)) {
       for (let i = 0; i < bals.length; i++) {
           if (haveBal(bals[i])) {
-              return true
+              return true;
           }
       }
-      return false
+      return false;
   } else {
-      return haveBal(bals)
+      return haveBal(bals);
   }
 }

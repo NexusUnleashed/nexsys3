@@ -2,59 +2,59 @@
 
 class Priority {
     constructor(name, prio = 0) {
-        this._name = name
-        this._default = prio
-        this._current = prio
-        this._prev = prio
+        this._name = name;
+        this._default = prio;
+        this._current = prio;
+        this._prev = prio;
     }
 
     get name() {
-        return this._name
+        return this._name;
     }
     get prio() {
-        return this._current
+        return this._current;
     }
     get defaultPrio() {
-        return this._default
+        return this._default;
     }
 
     raiseEventPrioSet() {
-        eventStream.raiseEvent('PrioritySetEvent', this)
+        eventStream.raiseEvent('PrioritySetEvent', this);
     }
     raiseEventPrioReset() {
-        eventStream.raiseEvent('PriorityResetEvent', this)
+        eventStream.raiseEvent('PriorityResetEvent', this);
     }
     raiseEventPrioSetDefault() {
-        eventStream.raiseEvent('PrioritySetDefaultEvent', this)
+        eventStream.raiseEvent('PrioritySetDefaultEvent', this);
     }
 
     setPrio(prio) {
-        this._prev = this.prio
-        this._current = prio
+        this._prev = this.prio;
+        this._current = prio;
         if (this._current !== this._prev) {
-            console.log(`${this._name} ${this._current} ${this._prev}`)
-            this.raiseEventPrioSet()
+            console.log(`${this._name} ${this._current} ${this._prev}`);
+            this.raiseEventPrioSet();
         }
     }
 
     reset() {
-        this.setPrio(this.defaultPrio)
+        this.setPrio(this.defaultPrio);
         if (this._current !== this._prev) {
-            this.raiseEventPrioReset()
+            this.raiseEventPrioReset();
         }
     }
 
     setDefault(prio) {
-        this._default = prio
-        this.setPrio(prio)
-        this.raiseEventPrioSetDefault()
+        this._default = prio;
+        this.setPrio(prio);
+        this.raiseEventPrioSetDefault();
     }
 
     initialize(prio) {
-        this._default = prio
-        this._current = prio
-        this._prev = prio
+        this._default = prio;
+        this._current = prio;
+        this._prev = prio;
     }
 }
 
-export default Priority
+export default Priority;

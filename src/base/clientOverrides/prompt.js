@@ -141,7 +141,7 @@ prompt.cureColors = {
   epidermal: {fg: "", bg: ""},
   restoration: {fg: "", bg: ""},
   health: {fg: "", bg: ""},
-}
+};
 
 prompt.affAbbrev = {
   addiction: { text: "add", fg: "", bg: "" },

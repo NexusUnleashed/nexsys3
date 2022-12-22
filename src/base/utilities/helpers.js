@@ -72,9 +72,9 @@ Array.arraysIntersectK = function (arr1, arr2) {
 };
 
 Array.equals = function (arr1, arr2) {
-  if (arr1.length !== arr2.length) { return false };
+  if (arr1.length !== arr2.length) { return false; };
 
-  if (!arr1.every((v, i) => v === arr2[i])) { return false };
+  if (!arr1.every((v, i) => v === arr2[i])) { return false; };
 
   return true;
-}
+};

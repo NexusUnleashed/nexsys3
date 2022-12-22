@@ -1,5 +1,5 @@
 /* global globalThis */
-import Configuration from "./Configuration"
+import Configuration from "./Configuration";
 import { createTheme } from "@mui/material/styles";
 import NexDialog from "./NexDialog";
 
@@ -9,9 +9,9 @@ window.nexusclient = {
       get() {
         return false;
       }
-    }
+    };
   }
-}
+};
 
 const darkTheme = createTheme({
   palette: {

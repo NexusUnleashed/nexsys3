@@ -67,7 +67,7 @@ const darkTheme = createTheme({
 });
 
 const NexDialog = ({ evt, nexSys }) => {
-  const [open, setOpen] = React.useState(true);
+  const [open, setOpen] = React.useState(false);
 
   evt.addEventListener("nexSys-config-dialog", ({ detail }) => {
     setOpen(detail);
@@ -84,7 +84,7 @@ const NexDialog = ({ evt, nexSys }) => {
   const handleClickSave = () => {
     nexSys.saveModel("cacheSettings", nexSys.cacheTable);
     nexSys.saveModel("systemSettings", nexSys.sys.settings);
-    handleClickClose()
+    handleClickClose();
   };
 
   return (
