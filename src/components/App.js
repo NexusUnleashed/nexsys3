@@ -1,4 +1,4 @@
-/* global globalThis */
+/* global */
 import Configuration from "./Configuration";
 import { createTheme } from "@mui/material/styles";
 import NexDialog from "./NexDialog";

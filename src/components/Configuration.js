@@ -44,7 +44,7 @@ const Configuration = ({ nexSys, theme }) => {
             Dndkit {/*<Dndkit />*/}
           </TabPanel>
           <TabPanel value="3">
-            <DefencePriorities defences={nexSys.defs} classList={nexSys.classList} />
+            <DefencePriorities defences={nexSys.defs} prios={nexSys.defPrios} classList={nexSys.classList} />
           </TabPanel>
           <TabPanel value="4">
             <Precache cache={nexSys.cacheTable}/>

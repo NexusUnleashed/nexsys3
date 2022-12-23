@@ -87,4 +87,4 @@ export const shortDirs = {
     up: 'up',
 };
 
-export const classList = ["Alchemist", "Apostate", "Bard", "Blademaster", "Depthswalker", "Druid", "Infernal", "Jester", "Magi", "Monk", "Occultist", "Paladin", "Pariah", "Priest", "Psion", "Runewarden", "Sentinel", "Serpent", "Shaman", "Sylvan", "Unnamable"];
+export const classList = ["Alchemist", "Apostate", "Bard", "Blademaster", "Depthswalker", "Dragon", "Druid", "Infernal", "Jester", "Magi", "Monk", "Occultist", "Paladin", "Pariah", "Priest", "Psion", "Runewarden", "Sentinel", "Serpent", "Shaman", "Sylvan", "Unnamable", "Air Elemental Lord", "Earth Elemental Lord", "Fire Elemental Lord", "Water Elemental Lord"];

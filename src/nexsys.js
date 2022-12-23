@@ -23,7 +23,7 @@ import {
   getCurrentAffs,
   haveAff,
   haveAffs,
-  haveAnAff
+  haveAnAff,
 } from "./base/affs/affService";
 import { affTable } from "./base/affs/affTable";
 import { bals } from "./base/balances/balances";
@@ -43,30 +43,35 @@ import {
   getDefOutputs,
   getMissingDefs,
   haveDef,
-  parry
+  parry,
 } from "./base/defs/defService";
 import { defPrios } from "./base/defs/defTable";
 import { echo, echoInfoLine, echoLine } from "./base/echo/echos";
 import { createQueue } from "./base/queues/Queue";
 import {
   serversideDefencePriorityListStart,
-  serversideSettings
+  serversideSettings,
 } from "./base/serverside/serverside";
 import {
   loadCustomSettings,
   saveModel,
   updateAndSaveModel,
   updateList,
-  updateModel
+  updateModel,
 } from "./base/system/customsettings";
-import { curArea, curRoom, curRoomArea, curRoomName } from "./base/system/gmcpEvents";
+import {
+  curArea,
+  curRoom,
+  curRoomArea,
+  curRoomName,
+} from "./base/system/gmcpEvents";
 import { sys, sysLog, sysLogging, sysLoggingToggle } from "./base/system/sys";
 import {
   psend,
   rsend,
   sendCmd,
   sendInline,
-  timeDiffNow
+  timeDiffNow,
 } from "./base/system/sysService";
 import {
   dirMap,
@@ -76,6 +81,7 @@ import {
   shortDirs,
   classList,
 } from "./base/utilities/commonTable";
+import { replace, say } from "./base/utilities/general";
 import { getLustCommands, rejectList, whiteList } from "./base/utilities/lust";
 import { startup } from "./base/utilities/startup";
 import NexDialog from "./components/NexDialog";
@@ -83,7 +89,7 @@ import NexDialog from "./components/NexDialog";
 const nexSys = {
   evt: new EventTarget(),
   component: NexDialog,
-  
+
   sys: sys,
   sysLogging: sysLogging,
   sysLog: sysLog,
@@ -148,6 +154,9 @@ const nexSys = {
   rsend: rsend,
   timeDiffNow: timeDiffNow,
 
+  replace: replace,
+  say: say,
+
   serversideSettings: serversideSettings,
   serversideDefencePriorityListStart: serversideDefencePriorityListStart,
 
@@ -179,28 +188,6 @@ const nexSys = {
   stunQueue: createQueue({ name: "stun", type: "!t", pre: "touch soul" }),
 
   prompt: prompt,
-};
-
-// TODO: We should probably move this somewhere else
-const generateChunk = (text, fg, bg) => {
-  let result = document.createElement("span");
-  result.style.color = fg;
-  result.style.backgroundColor = bg;
-  result.textContent = text;
-
-  return result;
-};
-nexSys.replace = (...args) => {
-  let htmlLine = document.createElement("span");
-
-  for (let i = 0; i < args.length; i += 3) {
-    htmlLine.appendChild(generateChunk(args[i], args[i + 1], args[i + 2]));
-  }
-  globalThis.nexusclient.current_line.parsed_line.formatted = () => {
-    return htmlLine.outerHTML;
-  };
-
-  return true;
 };
 
 globalThis.nexSys = nexSys;

@@ -8,6 +8,7 @@
     "@dnd-kit/sortable": "^7.0.1",
     "@emotion/react": "^11.10.4",
     "@emotion/styled": "^11.10.4",
+    "@mui/icons-material": "^5.11.0",
     "@mui/lab": "^5.0.0-alpha.103",
     "@mui/material": "^5.10.9",
     "@mui/x-data-grid": "^5.17.16",

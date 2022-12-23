@@ -5,9 +5,9 @@ import {
 
 const ConfigSwitch = ({ label, settings, option, setStateSettings }) => {
 
-  const handleChange = () => {
+  const handleChange = (e) => {
     setStateSettings((settings) => {
-      settings[option] = !settings[option];
+      settings[option] = e.target.checked;
       return { ...settings };
     });
   };
