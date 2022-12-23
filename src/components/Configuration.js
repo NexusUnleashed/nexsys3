@@ -10,6 +10,7 @@ import Precache from "./Precache";
 import Dndkit from "./Dndkit";
 import { CssBaseline } from "@mui/material";
 import SystemSettings from "./SystemSettings";
+import DefencePriorities from "./DefencePriorities";
 
 const Configuration = ({ nexSys, theme }) => {
   const [value, setValue] = React.useState("1");
@@ -18,42 +19,12 @@ const Configuration = ({ nexSys, theme }) => {
     setValue(newValue);
   };
 
-  const affs = Array.from(Array(26)).fill([], 0);
-  affs[0] = [
-    "bound",
-    "brokenleftarm",
-    "brokenrightarm",
-    "brokenleftleg",
-    "brokenrightleg",
-    "bruisedribs",
-    "burning",
-    "cadmuscurse",
-    "calcifiedskull",
-    "calcifiedtorso",
-    "claustrophobia",
-  ];
-  affs[1] = [
-    "addiction",
-    "aeon",
-    "agoraphobia",
-    "airfisted",
-    "amnesia",
-    "anorexia",
-    "asphyxiating" /**/,
-    "asthma",
-    "blackout",
-    "bleeding",
-    "blindness",
-    "blistered" /**/,
-    "bloodfire" /**/,
-  ];
-
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <Box sx={{ width: "500px", height: '600px' }}>
         <TabContext value={value}>
-          <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
+          <Box sx={{ borderBottom: 1, borderColor: "divider"}}>
             <TabList
               onChange={handleChange}
               variant="scrollable"
@@ -72,7 +43,9 @@ const Configuration = ({ nexSys, theme }) => {
           <TabPanel value="2">
             Dndkit {/*<Dndkit />*/}
           </TabPanel>
-          <TabPanel value="3"></TabPanel>
+          <TabPanel value="3">
+            <DefencePriorities defences={nexSys.defs} classList={nexSys.classList} />
+          </TabPanel>
           <TabPanel value="4">
             <Precache cache={nexSys.cacheTable}/>
           </TabPanel>

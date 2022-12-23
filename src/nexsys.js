@@ -73,7 +73,8 @@ import {
   dirs,
   limbs,
   oppDirs,
-  shortDirs
+  shortDirs,
+  classList,
 } from "./base/utilities/commonTable";
 import { getLustCommands, rejectList, whiteList } from "./base/utilities/lust";
 import { startup } from "./base/utilities/startup";
@@ -135,6 +136,7 @@ const nexSys = {
   dirMap: dirMap,
   oppdirs: oppDirs,
   shortDirs: shortDirs,
+  classList: classList,
 
   whiteList: whiteList,
   rejectList: rejectList,

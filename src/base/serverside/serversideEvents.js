@@ -178,7 +178,7 @@ const systemStartupServerside = function () {
   serversideSettings.loaded = false;
   serversideSettings.status = {};
   serversideSettings.affs = {};
-  serversideSettings.defs ={};
+  serversideSettings.defs = {};
 
   const separator = sys.settings.sep;
   sys.pause();
@@ -188,6 +188,7 @@ const systemStartupServerside = function () {
     echo(
       "Enter commandSeparator to get started (e.g. 'config commandseparator |')"
     );
+    nexSys.evt.dispatchEvent(new CustomEvent('nexSys-config-dialog', { detail: true }));
   }
 };
 

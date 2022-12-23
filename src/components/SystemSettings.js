@@ -5,17 +5,28 @@ import {
   FormLabel,
   Typography,
   TextField,
-  FormControlLabel,
+  Alert,
+  AlertTitle,
+  Collapse,
 } from "@mui/material";
 import ConfigSwitch from "./ConfigSwitch";
 
 const SystemSettings = ({ settings }) => {
-  const [stateSettings, setStateSettings] = React.useState(settings);
-  console.log("render");
-  
+  const [stateSettings, setStateSettings] = React.useState({ ...settings });
+  console.log(settings.sep);
+  const [open, setOpen] = React.useState(settings.sep);
+
   React.useEffect(() => {
     console.log("useEffect");
     globalThis.nexSys.sys.settings = { ...stateSettings };
+  }, [stateSettings]);
+
+  React.useEffect(() => {
+    if (stateSettings.sep) {
+      setOpen(false);
+    } else {
+      setOpen(true);
+    }
   }, [stateSettings]);
 
   const handleText = (e) => {
@@ -27,6 +38,12 @@ const SystemSettings = ({ settings }) => {
 
   return (
     <Typography component={"div"}>
+      {!stateSettings.sep && <Collapse in={open}>
+        <Alert severity="error" sx={{ fontSize: "16px" }}>
+          <AlertTitle sx={{ fontSize: "16px" }}>nexSys Error</AlertTitle>
+          Enter <strong>Command Separator</strong> to get started.
+        </Alert>
+      </Collapse>}
       <FormLabel component="legend">Nexsys Config</FormLabel>
       <FormGroup>
         <ConfigSwitch
