@@ -22,18 +22,14 @@ const DefenceRow = ({ def, defs, setKeepup, setStaticDefs }) => {
   const [prio, setPrio] = React.useState(defs[def].prio);
 
   const handleChange = (e) => {
-    console.log("handleChange");
     setChecked(e.target.checked);
   };
 
   const handleText = (e) => {
-    console.log("handleText");
     setPrio(parseInt(e.target.value));
   };
 
   React.useEffect(() => {
-    console.log('defencerow useeffect');
-    console.log(`${def} ${prio}`);
     setStaticDefs((prevState) => {
       return { ...prevState, ...{ [def]: checked ? prio : 0 } };
     });
@@ -81,7 +77,6 @@ const DefencePriorities = ({ defences, prios, classList }) => {
   };
 
   React.useEffect(() => {
-    console.log("useEffect");
     globalThis.nexSys.defPrios.keepup = { ...keepup };
     globalThis.nexSys.defPrios.static = { ...staticDefs };
   }, [keepup, staticDefs]);

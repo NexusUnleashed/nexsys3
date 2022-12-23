@@ -99,13 +99,13 @@ const populateOutput = function () {
 
 let addDefPrioEventOutput = function(command) {
 	defPrioOutput.push(command);
-    forcePopulateOutput();
+    //forcePopulateOutput();
 };
 eventStream.registerEvent('PriorityDefOutputAdd', addDefPrioEventOutput);
 
 let addAffPrioEventOutput = function(command) {
 	affPrioOutput.push(command);
-    forcePopulateOutput();
+    //forcePopulateOutput();
 };
 eventStream.registerEvent('PriorityAffOutputAdd', addAffPrioEventOutput);
 

@@ -5,17 +5,30 @@ if (typeof nexusclient === "undefined") {
   window.nexusclient = {
     variables() {
       return {
-        get() {
-          return false;
+        vars: {
+          nexSysSettings: {}
         },
+        get(txt) {
+          if (window.nexusclient.variables().vars[txt]) {
+            return window.nexusclient.variables().vars[txt];
+          } else {
+            return false;
+          }
+        },
+        set(txt, data) {
+          window.nexusclient.variables().vars[txt] = data;
+        }
       };
     },
   };
+
+  
 }
 
 export const sys = {
   settings: {
-    sep: nexusclient.variables().get('nexSysSettings')?.commandSeparator ?? false,
+    sep:
+      nexusclient.variables().get("nexSysSettings")?.commandSeparator ?? false,
     customPrompt: false,
     echoAffGot: false,
     echoAffLost: false,
@@ -30,7 +43,8 @@ export const sys = {
   state: {
     paused: false,
     slowMode: false,
-    sep: nexusclient.variables().get('nexSysSettings')?.commandSeparator ?? false,
+    sep:
+      nexusclient.variables().get("nexSysSettings")?.commandSeparator ?? false,
     curingMethod: "Transmutation",
     sipPriority: "Health",
     sipHealthAt: 80,

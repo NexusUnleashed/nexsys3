@@ -41,7 +41,7 @@ const serversideDefencePrio = function (def) {
         serversideSettings.defs[def.name] = def.prio;
         eventStream.raiseEvent(
           "PriorityDefOutputAdd",
-          def.name + " " + def.prio
+          `${def.name} ${def.prio}`
         );
       }
     }
@@ -58,14 +58,14 @@ const serversideDefencePrio = function (def) {
           serversideSettings.defs[def.name] = def.prio;
           eventStream.raiseEvent(
             "PriorityDefOutputAdd",
-            def.name + " " + def.prio + " preempt"
+            `${def.name} ${def.prio} preempt`
           );
         } else {
           serversideSettings.defs[def.name] = def.prio;
           console.log("DEBUGGGG");
           eventStream.raiseEvent(
             "PriorityDefOutputAdd",
-            def.name + " " + def.prio
+            `${def.name} ${def.prio}`
           );
         }
       }
@@ -150,7 +150,8 @@ const initiateStartup = function (args) {
     separatorSet = true;
     if (args) {
       sys.settings.sep = args;
-      nexusclient.variables().set("commandSeparator", args);
+      //nexusclient.variables().set("commandSeparator", args);
+      Object.assign(nexusclient.variables().vars.nexSysSettings, {sep: args});
     }
     sys.pause();
     const startupCommands = [

@@ -84,7 +84,8 @@ const NexDialog = ({ evt, nexSys }) => {
   const handleClickSave = () => {
     nexSys.saveModel("cacheSettings", nexSys.cacheTable);
     nexSys.saveModel("systemSettings", nexSys.sys.settings);
-    nexSys.eventStream.raiseEvent('CommandSeparatorSetOnStartup', nexSys.sys.settings.sep);
+    nexSys.saveModel("defSettings", nexSys.defPrios);
+    eventStream.raiseEvent('CommandSeparatorSetOnStartup', nexSys.sys.settings.sep);
     handleClickClose();
   };
 

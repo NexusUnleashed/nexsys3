@@ -3,16 +3,6 @@ import Configuration from "./Configuration";
 import { createTheme } from "@mui/material/styles";
 import NexDialog from "./NexDialog";
 
-window.nexusclient = {
-  variables() {
-    return {
-      get() {
-        return false;
-      }
-    };
-  }
-};
-
 const darkTheme = createTheme({
   palette: {
     mode: "dark",

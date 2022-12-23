@@ -22,6 +22,6 @@ export const startup = () => {
     React.createElement(nexSys.component, { evt: nexSys.evt, nexSys: nexSys }),
     document.getElementById("nexsys-modal")
   );
-
+  
   //nexSys.evt.dispatchEvent(new CustomEvent('nexSys-config-dialog', {detail: true}))
 };

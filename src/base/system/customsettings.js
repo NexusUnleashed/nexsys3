@@ -22,7 +22,15 @@ export const updateList = function (list, newList) {
   }
 };
 
+export const updateModel = function (name, newModel) {
+  if (newModel) {
+    let settings = nexusclient.variables().vars.nexSysSettings;
+    settings[name] = { ...newModel };
+  }
+};
+/* TODO I don't like this method
 export const updateModel = function (model, newModel) {
+
   if (newModel) {
     for (const key in newModel) {
       model[key] = newModel[key];
@@ -30,21 +38,21 @@ export const updateModel = function (model, newModel) {
   } else {
     console.log(model + " model was null in updateModel");
   }
-};
+  
+};*/
 
 export const saveModel = function (name, model) {
   if (model) {
-    let settings = nexusclient.variables().get("nexSysSettings");
-    settings[name] = model;
-    nexusclient.variables().set("nexSysSettings", settings);
+    let settings = nexusclient.variables().vars.nexSysSettings;
+    settings[name] = {...model};
     eventStream.raiseEvent(name + "ModelSavedEvent", model);
   } else {
     console.log(name + " model was null in saveModel");
   }
 };
 
-export const updateAndSaveModel = function (name, model, newModel) {
-  updateModel(model, newModel);
+export const updateAndSaveModel = function (name, newModel) {
+  updateModel(name, newModel);
   saveModel(name, model);
 };
 
