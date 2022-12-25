@@ -13,7 +13,7 @@ import DefencePriorities from "./DefencePriorities";
 import AffPriorities from "./AffPriorities";
 
 const Configuration = ({ nexSys, theme }) => {
-  const [value, setValue] = React.useState("1");
+  const [value, setValue] = React.useState("2");
 
   const handleChange = (event, newValue) => {
     setValue(newValue);

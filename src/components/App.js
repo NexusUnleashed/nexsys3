@@ -2,6 +2,7 @@
 import Configuration from "./Configuration";
 import { createTheme } from "@mui/material/styles";
 import NexDialog from "./NexDialog";
+import "../base/utilities/helpers";
 
 const darkTheme = createTheme({
   palette: {

@@ -6,7 +6,7 @@ const createColumn = ({ id, affs }) => {
   return {
     id: `prio-${id}`,
     prio: id,
-    title: `prio-${id}`,
+    title: `Prio ${id}`,
     affs: Object.keys(affs).filter((aff) => affs[aff].prio === id),
   };
 };
@@ -29,22 +29,29 @@ const createColumnOrder = () => {
 };
 
 const Container = styled.div`
-  flex-grow: 0,
-  flex-shrink: 0,
-  margin: 8px;
+  min-width: 50px;
+  flex-grow: 0;
+  flex-shrink: 0;
+  margin: 0px;
   border: 1px solid lightgrey;
   border-radius: 2px;
 `;
 const ListItem = styled.div`
-width: 125px;
-padding: 5px;
+width: auto;
+padding: 2px 10px 2px 10px;
+font-size: 13px;
+margin: 0px;
 border: 1px solid lightgrey;
 border-radius: 2px;
+background: #121212;
 ${props => `color:${props.fg}`};
 ${props => `background:${props.bg}`};
 `;
 const Title = styled.h3`
+  text-align: center;
   padding: 5px;
+  width: auto;
+  
 `;
 const AffList = styled.div`
   padding: 8px;
@@ -61,7 +68,7 @@ const AffItem = ({ aff, index, color }) => {
           {...provided.draggableProps}
           {...provided.dragHandleProps}
         >
-          {aff.name}
+          {aff.name.capitalize()}
         </ListItem>
       )}
     </Draggable>
@@ -71,7 +78,7 @@ const AffItem = ({ aff, index, color }) => {
 const Column = ({ column, affs, colors }) => {
   return (
     <Container>
-      <Title>{column.id}</Title>
+      <Title>{column.title}</Title>
       <Droppable droppableId={column.id}>
         {(provided) => (
           <AffList ref={provided.innerRef} {...provided.droppableProps}>
@@ -94,7 +101,6 @@ const AffPriorities = ({ colors, affs, affPrios }) => {
   ]);
 
   const onDragEnd = (result) => {
-    console.log(result);
     const { destination, source, draggableId } = result;
     
     //If there is no destination, the user dropped the item outside of the context
