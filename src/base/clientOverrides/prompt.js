@@ -121,11 +121,11 @@ prompt.vars = {
 prompt.cureColors = {
   antimony: { fg: "olive", bg: "" },
   argentum: { fg: "royalblue", bg: "" },
-  arsenic: { fg: "lightcoral", bg: "" },
+  arsenic: { fg: "", bg: "" },
   aurum: { fg: "ForestGreen", bg: "" },
   azurite: { fg: "", bg: "" },
   calamine: { fg: "", bg: "" },
-  calcite: { fg: "firebrick", bg: "" },
+  calcite: { fg: "slategray", bg: "" },
   cinnabar: { fg: "greenyellow", bg: "" }, // smoke
   cuprum: { fg: "DeepSkyBlue", bg: "" },
   ferrum: { fg: "DarkOrange", bg: "" },
@@ -134,13 +134,14 @@ prompt.cureColors = {
   plumbum: { fg: "Gold", bg: "" },
   quartz: { fg: "", bg: "" },
   quicksilver: { fg: "", bg: "" },
-  realgar: { fg: "slategray", bg: "" }, // smoke
+  realgar: { fg: "firebrick", bg: "" }, // smoke
   stannum: { fg: "Tan", bg: "" },
-  caloric: { fg: "hotpink", bg: "" }, // apply
+  caloric: { fg: "darkseagreen", bg: "" }, // apply
   mending: { fg: "orchid", bg: "" }, // apply
   epidermal: { fg: "sienna", bg: "" }, // apply
-  restoration: { fg: "purple", bg: "" }, // apply
-  health: { fg: "darkseagreen", bg: "" }, // sip
+  restoration: { fg: "darkviolet", bg: "" }, // apply
+  health: { fg: "lightpink", bg: "" }, // sip
+  writhe: { fg: "paleyellow", bg:  "darkslategray" }
 };
 
 prompt.affAbbrev = {
@@ -152,8 +153,8 @@ prompt.affAbbrev = {
   asthma: { text: "AST", ...prompt.cureColors.aurum },
   bedevil: { text: "bed", fg: "", bg: "" },
   blackout: { text: "bo", fg: "", bg: "" },
-  blindness: { text: "unb", fg: "", bg: "" },
-  bound: { text: "bnd", fg: "", bg: "" },
+  blindness: { text: "unb", ...prompt.cureColors.arsenic },
+  bound: { text: "bnd", ...prompt.cureColors.writhe },
   brokenleftarm: { text: "la1", ...prompt.cureColors.mending },
   brokenleftleg: { text: "ll1", ...prompt.cureColors.mending },
   brokenrightarm: { text: "ra1", ...prompt.cureColors.mending },
@@ -169,7 +170,7 @@ prompt.affAbbrev = {
   corruption: { text: "corr", fg: "", bg: "" },
   crackedribs: { text: "cr", ...prompt.cureColors.health },
   crushedthroat: { text: "cru", ...prompt.cureColors.mending },
-  daeggerimpale: { text: "daeg", fg: "", bg: "" },
+  daeggerimpale: { text: "daeg", ...prompt.cureColors.writhe },
   damagedleftarm: { text: "la2", ...prompt.cureColors.restoration },
   damagedleftleg: { text: "ll2", ...prompt.cureColors.restoration },
   damagedrightarm: { text: "ra2", ...prompt.cureColors.restoration },
@@ -180,14 +181,14 @@ prompt.affAbbrev = {
   dazed: { text: "dzd", ...prompt.cureColors.cinnabar },
   dazzled: { text: "dzl", ...prompt.cureColors.mending },
   deadening: { text: "dea", ...prompt.cureColors.cinnabar },
-  deafness: { text: "und", fg: "", bg: "" },
+  deafness: { text: "und", ...prompt.cureColors.calamine },
   dehydrated: { text: "deh", fg: "", bg: "" },
   dementia: { text: "dem", ...prompt.cureColors.stannum },
   disloyalty: { text: "disl", ...prompt.cureColors.realgar },
   disrupted: { text: "disr", fg: "", bg: "" },
   dissonance: { text: "disso", ...prompt.cureColors.plumbum },
   dizziness: { text: "diz", ...prompt.cureColors.plumbum },
-  entangled: { text: "entgl", fg: "", bg: "" },
+  entangled: { text: "entgl", ...prompt.cureColors.writhe },
   epilepsy: { text: "epi", ...prompt.cureColors.plumbum },
   fear: { text: "fear", fg: "", bg: "" },
   frozen: { text: "frz", ...prompt.cureColors.caloric },
@@ -206,7 +207,7 @@ prompt.affAbbrev = {
   hypochondria: { text: "hypoch", ...prompt.cureColors.aurum },
   hypothermia: { text: "hypoth", ...prompt.cureColors.restoration },
   icefisted: { text: "ice", fg: "", bg: "" },
-  impaled: { text: "impl", fg: "", bg: "" },
+  impaled: { text: "impl", ...prompt.cureColors.writhe },
   impatience: { text: "IMPAT", ...prompt.cureColors.plumbum },
   indifference: { text: "ind", ...prompt.cureColors.cuprum },
   itching: { text: "itch", ...prompt.cureColors.epidermal },
@@ -273,7 +274,7 @@ prompt.affAbbrev = {
   timeloop: { text: "tmlp", ...prompt.cureColors.cuprum },
   tonguetied: { text: "tngt", ...prompt.cureColors.restoration },
   torntendons: { text: "tt", ...prompt.cureColors.health },
-  transfixation: { text: "trfx", fg: "", bg: "" },
+  transfixation: { text: "trfx", ...prompt.cureColors.writhe },
   unweavingbody: { text: "unwM", ...prompt.cureColors.ferrum },
   unweavingspirit: { text: "unwS", ...prompt.cureColors.cinnabar },
   unweavingmind: { text: "unwM", ...prompt.cureColors.plumbum },
@@ -282,7 +283,7 @@ prompt.affAbbrev = {
   voidfisted: { text: "void", fg: "", bg: "" },
   voyria: { text: "voy", fg: "", bg: "" },
   weariness: { text: "wea", ...prompt.cureColors.aurum },
-  webbed: { text: "web", fg: "", bg: "" },
+  webbed: { text: "web", ...prompt.cureColors.writhe },
   whisperingmadness: { text: "mad", ...prompt.cureColors.argentum },
   wristfractures: { text: "wf", ...prompt.cureColors.health },
 };

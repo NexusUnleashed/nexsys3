@@ -29,7 +29,7 @@ const createColumnOrder = () => {
 };
 
 const Container = styled.div`
-  min-width: 50px;
+  min-width: 100px;
   flex-grow: 0;
   flex-shrink: 0;
   margin: 0px;
@@ -38,7 +38,7 @@ const Container = styled.div`
 `;
 const ListItem = styled.div`
 width: auto;
-padding: 2px 10px 2px 10px;
+padding: 3px 10px 3px 10px;
 font-size: 13px;
 margin: 0px;
 border: 1px solid lightgrey;
@@ -160,7 +160,6 @@ const AffPriorities = ({ colors, affs, affPrios }) => {
   return (
     <DragDropContext onDragEnd={onDragEnd}>
       <div style={{display: 'flex', flexDirection: 'row'}}>
-      {}
       {columnOrder.map((col) => (
         <Column key={col} column={columns[col]} affs={affs} colors={colors} />
       ))}

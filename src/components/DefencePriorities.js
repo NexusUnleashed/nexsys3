@@ -84,12 +84,12 @@ const DefencePriorities = ({ defences, prios, classList }) => {
   }, [keepup, staticDefs]);
 
   return (
-    <div style={{ height: 400, width: "100%" }}>
+    <div style={{ width: "100%" }}>
       <FormControl fullWidth>
-        <InputLabel id="demo-simple-select-label">Class</InputLabel>
+        <InputLabel id="select-label">Class</InputLabel>
         <Select
-          labelId="demo-simple-select-label"
-          id="demo-simple-select"
+          labelId="select-label"
+          id="simple-select"
           value={skill}
           label="This is a test"
           onChange={handleChange}
