@@ -13,11 +13,9 @@ import ConfigSwitch from "./ConfigSwitch";
 
 const SystemSettings = ({ settings }) => {
   const [stateSettings, setStateSettings] = React.useState({ ...settings });
-  console.log(settings.sep);
   const [open, setOpen] = React.useState(settings.sep);
 
   React.useEffect(() => {
-    console.log("useEffect");
     globalThis.nexSys.sys.settings = { ...stateSettings };
   }, [stateSettings]);
 

@@ -7,10 +7,10 @@ import TabPanel from "@mui/lab/TabPanel";
 import { ThemeProvider } from "@mui/material/styles";
 
 import Precache from "./Precache";
-import Dndkit from "./Dndkit";
 import { CssBaseline } from "@mui/material";
 import SystemSettings from "./SystemSettings";
 import DefencePriorities from "./DefencePriorities";
+import AffPriorities from "./AffPriorities";
 
 const Configuration = ({ nexSys, theme }) => {
   const [value, setValue] = React.useState("1");
@@ -22,9 +22,9 @@ const Configuration = ({ nexSys, theme }) => {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <Box sx={{ width: "500px", height: '600px' }}>
+      <Box sx={{ width: "500px", height: "600px" }}>
         <TabContext value={value}>
-          <Box sx={{ borderBottom: 1, borderColor: "divider"}}>
+          <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
             <TabList
               onChange={handleChange}
               variant="scrollable"
@@ -41,13 +41,22 @@ const Configuration = ({ nexSys, theme }) => {
             <SystemSettings settings={nexSys.sys.settings} />
           </TabPanel>
           <TabPanel value="2">
-            Dndkit {/*<Dndkit />*/}
+            {/*<Dndkit />*/}
+            <AffPriorities
+              affs={nexSys.affs}
+              colors={nexSys.prompt.affAbbrev}
+              affPrios={nexSys.affTable.prios}
+            />
           </TabPanel>
           <TabPanel value="3">
-            <DefencePriorities defences={nexSys.defs} prios={nexSys.defPrios} classList={nexSys.classList} />
+            <DefencePriorities
+              defences={nexSys.defs}
+              prios={nexSys.defPrios}
+              classList={nexSys.classList}
+            />
           </TabPanel>
           <TabPanel value="4">
-            <Precache cache={nexSys.cacheTable}/>
+            <Precache cache={nexSys.cacheTable} />
           </TabPanel>
         </TabContext>
       </Box>

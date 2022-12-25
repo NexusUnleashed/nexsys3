@@ -85,6 +85,7 @@ const NexDialog = ({ evt, nexSys }) => {
     nexSys.saveModel("cacheSettings", nexSys.cacheTable);
     nexSys.saveModel("systemSettings", nexSys.sys.settings);
     nexSys.saveModel("defSettings", nexSys.defPrios);
+    nexSys.updatePriorities();
     eventStream.raiseEvent('CommandSeparatorSetOnStartup', nexSys.sys.settings.sep);
     handleClickClose();
   };
@@ -99,7 +100,7 @@ const NexDialog = ({ evt, nexSys }) => {
           maxWidth="md"
         >
           <DialogTitle>Nexsys Configuration Options</DialogTitle>
-          <DialogContent>
+          <DialogContent sx={{background:"#121212"}}>
             <Configuration theme={darkTheme} nexSys={nexSys} />
           </DialogContent>
           <DialogActions>

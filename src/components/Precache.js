@@ -5,6 +5,8 @@ import Button from "@mui/material/Button";
 import ButtonGroup from "@mui/material/ButtonGroup";
 import { Typography } from "@mui/material";
 
+const herbList = ['ash', 'bayberry', 'bellwort', 'bloodroot', 'cohosh', 'elm', 'ginger', 'ginseng', 'goldenseal', 'hawthorn', 'kelp', 'kola', 'lobelia', 'moss', 'sileris', 'skullcap', 'valerian'];
+const mineralList = ['stannum', 'arsenic', 'cuprum', 'magnesium', 'gypsum', 'cinnabar', 'antimony', 'ferrum', 'plumbum', 'calamine', 'potash', 'aurum', 'quartz', 'argentum', 'quicksilver', 'malachite', 'realgar'];
 const GroupedButtons = ({ curative, precache }) => {
   const [cache, setCache] = React.useState(precache[curative] || 0);
 
@@ -34,6 +36,8 @@ const GroupedButtons = ({ curative, precache }) => {
   );
 };
 
+// TODO: Why are these defined individually? Source an array of the
+// herbs/minerals and map the buttons. Same with the labels.
 const Precache = ({ cache }) => {
   return (
     <div style={{ display: "flex" }}>

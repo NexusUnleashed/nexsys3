@@ -58,6 +58,7 @@ import {
   updateAndSaveModel,
   updateList,
   updateModel,
+  updatePriorities,
 } from "./base/system/customsettings";
 import {
   curArea,
@@ -165,6 +166,7 @@ const nexSys = {
   saveModel: saveModel,
   updateAndSaveModel: updateAndSaveModel,
   loadCustomSettings: loadCustomSettings,
+  updatePriorities: updatePriorities,
   //saveCustomSettings: saveCustomSettings,
 
   classQueue: createQueue({

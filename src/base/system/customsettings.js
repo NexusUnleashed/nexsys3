@@ -44,7 +44,7 @@ export const updateModel = function (model, newModel) {
 export const saveModel = function (name, model) {
   if (model) {
     let settings = nexusclient.variables().vars.nexSysSettings;
-    settings[name] = {...model};
+    settings[name] = { ...model };
     eventStream.raiseEvent(name + "ModelSavedEvent", model);
   } else {
     console.log(name + " model was null in saveModel");
@@ -112,6 +112,16 @@ const loadCacheSettings = function () {
 const loadLustList = function () {
   whiteList = nexusclient.variables().get("LustWhiteList") || whiteList;
   //saveModel("LustWhiteList", whiteList);
+};
+
+export const updatePriorities = () => {
+  for (let def in defPrios.keepup) {
+    defs[def].set_default_prio(defPrios.keepup[def]);
+  }
+
+  for (let aff in affTable.prios) {
+    affs[aff]?.set_default_prio(affTable.prios[aff]);
+  }
 };
 
 export function loadCustomSettings() {

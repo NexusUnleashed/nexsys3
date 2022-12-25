@@ -69,7 +69,9 @@ const DefencePriorities = ({ defences, prios, classList }) => {
   const [defs, setDefs] = React.useState({ ...defences });
   const [keepup, setKeepup] = React.useState({ ...prios.keepup });
   const [staticDefs, setStaticDefs] = React.useState({ ...prios.static });
-  const [skill, setSkill] = React.useState(typeof GMCP === 'undefined' ? "" : GMCP.Char.Status.class);
+  const [skill, setSkill] = React.useState(
+    typeof GMCP === "undefined" ? "" : GMCP.Char.Status.class
+  );
   const defList = Object.keys(defs);
 
   const handleChange = (e) => {
@@ -120,7 +122,6 @@ const DefencePriorities = ({ defences, prios, classList }) => {
                   <HelpOutline fontSize="small" />
                 </Tooltip>
               </TableCell>
-
               <TableCell
                 sx={{ fontWeight: "bold", fontSize: "12px" }}
                 align="left"
