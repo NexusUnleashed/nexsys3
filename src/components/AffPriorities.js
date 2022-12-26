@@ -7,14 +7,15 @@ const createColumn = ({ id, affs }) => {
     id: `prio-${id}`,
     prio: id,
     title: `Prio ${id}`,
-    affs: Object.keys(affs).filter((aff) => affs[aff].prio === id),
+    //affs: Object.keys(affs).filter((aff) => affs[aff].prio === id),
+    affs: affs || [],
   };
 };
 
 const createColumns = (affs) => {
   const columns = {};
   for (let i = 1; i < 27; i++) {
-    columns[`prio-${i}`] = createColumn({ id: i, affs: affs });
+    columns[`prio-${i}`] = createColumn({ id: i, affs: affs[i] });
   }
 
   return columns;
@@ -34,7 +35,7 @@ const Container = styled.div`
   flex-shrink: 0;
   margin: 0px;
   border: 1px solid lightgrey;
-  border-radius: 2px;
+  border-radius: 0px;
 `;
 const ListItem = styled.div`
 width: auto;
@@ -51,7 +52,7 @@ const Title = styled.h3`
   text-align: center;
   padding: 5px;
   width: auto;
-  
+  margin: 4px;
 `;
 const AffList = styled.div`
   padding: 8px;
@@ -59,7 +60,7 @@ const AffList = styled.div`
 
 const AffItem = ({ aff, index, color }) => {
   return (
-    <Draggable draggableId={aff.name} index={index}>
+    <Draggable draggableId={aff} index={index}>
       {(provided) => (
         <ListItem
           fg = {color?.fg}
@@ -68,14 +69,14 @@ const AffItem = ({ aff, index, color }) => {
           {...provided.draggableProps}
           {...provided.dragHandleProps}
         >
-          {aff.name.capitalize()}
+          {aff.capitalize()}
         </ListItem>
       )}
     </Draggable>
   );
 };
 
-const Column = ({ column, affs, colors }) => {
+const Column = ({ column, colors }) => {
   return (
     <Container>
       <Title>{column.title}</Title>
@@ -83,7 +84,7 @@ const Column = ({ column, affs, colors }) => {
         {(provided) => (
           <AffList ref={provided.innerRef} {...provided.droppableProps}>
             {column.affs.map((aff, i) => (
-              <AffItem key={aff} aff={affs[aff]} index={i} color={colors[aff]} />
+              <AffItem key={aff} aff={aff} index={i} color={colors[aff]} />
             ))}
             {provided.placeholder}
           </AffList>
@@ -93,9 +94,9 @@ const Column = ({ column, affs, colors }) => {
   );
 };
 
-const AffPriorities = ({ colors, affs, affPrios }) => {
-  const [columns, setColumns] = React.useState({ ...createColumns(affs) });
-  const [prios, setPrios] = React.useState({...affPrios});
+const AffPriorities = ({ colors, affPrios }) => {
+  const [columns, setColumns] = React.useState({ ...createColumns(affPrios.prioArrays) });
+  const [prios, setPrios] = React.useState({...affPrios.prios});
   const [columnOrder, setColumnOrder] = React.useState([
     ...createColumnOrder(),
   ]);
@@ -130,6 +131,7 @@ const AffPriorities = ({ colors, affs, affPrios }) => {
         ...columns,
         [newSourceColumn.id]: newSourceColumn,
       });
+
     } else {
       const sourceColumn = columns[source.droppableId];
       const targetColumn = columns[destination.droppableId];
@@ -155,13 +157,16 @@ const AffPriorities = ({ colors, affs, affPrios }) => {
 
   React.useEffect(()=>{
     globalThis.nexSys.affTable.prios = {...prios};
+    columnOrder.forEach(col => {
+      globalThis.nexSys.affTable.setPrioArrays(columns[col].prio, columns[col].affs);
+    });
   }, [prios]);
 
   return (
     <DragDropContext onDragEnd={onDragEnd}>
       <div style={{display: 'flex', flexDirection: 'row'}}>
       {columnOrder.map((col) => (
-        <Column key={col} column={columns[col]} affs={affs} colors={colors} />
+        <Column key={col} column={columns[col]} colors={colors} />
       ))}
       </div>
     </DragDropContext>

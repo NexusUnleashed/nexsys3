@@ -306,7 +306,7 @@ const affs = {
     peace: 5,
     scytherus: 5,
     pressure: 5,
-    unweavingbody: 5, 
+    unweavingbody: 5,
     unweavingmind: 5,
     unweavingspirit: 5,
 
@@ -611,6 +611,18 @@ const affs = {
       weakenedmind: true,
     },
   },
+};
+
+// EXPERIMENTAL: Code snippet added to maintain prio arrays for the purpose
+// of potentially sorting affs within the same priority.
+affs.prioArrays = {};
+[...new Set(Object.values(affs.prios))].forEach((prio) => {
+  affs.prioArrays[prio] = Object.keys(affs.prios).filter(
+    (aff) => affs.prios[aff] === prio
+  );
+});
+affs.setPrioArrays = (id, arr) => {
+ affs.prioArrays[id] = [...arr];
 };
 
 export { affs as affTable };

@@ -43,9 +43,8 @@ const Configuration = ({ nexSys, theme }) => {
           <TabPanel value="2">
             {/*<Dndkit />*/}
             <AffPriorities
-              affs={nexSys.affs}
               colors={nexSys.prompt.affAbbrev}
-              affPrios={nexSys.affTable.prios}
+              affPrios={nexSys.affTable}
             />
           </TabPanel>
           <TabPanel value="3">
