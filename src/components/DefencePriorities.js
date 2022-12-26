@@ -46,7 +46,14 @@ const DefenceRow = ({ def, defs, setKeepup, setStaticDefs }) => {
       <TableCell>
         <Checkbox onChange={handleChange} checked={checked} />
       </TableCell>
-      <TableCell sx={{ fontSize: "12px" }} align="left">
+      <TableCell
+        sx={{
+          fontSize: "12px",
+          color:
+            defs[def].balsUsed.indexOf("free") === -1 ? "tomato" : "dodgerblue",
+        }}
+        align="left"
+      >
         {defs[def].name}
       </TableCell>
       <TableCell align="left">
@@ -72,7 +79,7 @@ const DefencePriorities = ({ defences, prios, classList }) => {
   const [skill, setSkill] = React.useState(
     typeof GMCP === "undefined" ? "" : GMCP.Char.Status.class
   );
-  const defList = Object.keys(defs);
+  const [defList, setDefList] = React.useState(Object.keys(defs));
 
   const handleChange = (e) => {
     setSkill(e.target.value);
@@ -91,7 +98,7 @@ const DefencePriorities = ({ defences, prios, classList }) => {
           labelId="select-label"
           id="simple-select"
           value={skill}
-          label="This is a test"
+          label="Class"
           onChange={handleChange}
         >
           <MenuItem value={"all"}>{"All"}</MenuItem>
@@ -127,6 +134,22 @@ const DefencePriorities = ({ defences, prios, classList }) => {
                 align="left"
               >
                 Name
+                <Tooltip
+                  arrow
+                  placement="bottom-end"
+                  title={
+                    <div>
+                      <div style={{ fontSize: "14px" }}>
+                        Red: Skills that require a balance
+                      </div>
+                      <div style={{ fontSize: "14px" }}>
+                        Blue: Skills that are free to use
+                      </div>
+                    </div>
+                  }
+                >
+                  <HelpOutline fontSize="small" />
+                </Tooltip>
               </TableCell>
               <TableCell
                 sx={{ fontWeight: "bold", fontSize: "12px" }}
@@ -140,7 +163,8 @@ const DefencePriorities = ({ defences, prios, classList }) => {
             {defList
               .filter(
                 (def) =>
-                  skill === "All" ||
+                  skill === "all" ||
+                  typeof defs[def].skills === "undefined" ||
                   defs[def].skills.length === 0 ||
                   defs[def].skills.indexOf(skill) > -1
               )
