@@ -1,16 +1,15 @@
 {
   "files": {
-    "main.css": "/nexsys2/static/css/main.073c9b0a.css",
-    "main.js": "/nexsys2/static/js/main.26678a04.js",
-    "static/js/787.5558011e.chunk.js": "/nexsys2/static/js/787.5558011e.chunk.js",
-    "static/media/piedpiper.svg": "/nexsys2/static/media/piedpiper.243d65282e39764d21b9c5000c1a1be7.svg",
-    "index.html": "/nexsys2/index.html",
-    "main.073c9b0a.css.map": "/nexsys2/static/css/main.073c9b0a.css.map",
-    "main.26678a04.js.map": "/nexsys2/static/js/main.26678a04.js.map",
-    "787.5558011e.chunk.js.map": "/nexsys2/static/js/787.5558011e.chunk.js.map"
+    "main.css": "/nexsys3/static/css/main.e6c13ad2.css",
+    "main.js": "/nexsys3/static/js/main.c89521bf.js",
+    "static/js/787.f2cacdcb.chunk.js": "/nexsys3/static/js/787.f2cacdcb.chunk.js",
+    "index.html": "/nexsys3/index.html",
+    "main.e6c13ad2.css.map": "/nexsys3/static/css/main.e6c13ad2.css.map",
+    "main.c89521bf.js.map": "/nexsys3/static/js/main.c89521bf.js.map",
+    "787.f2cacdcb.chunk.js.map": "/nexsys3/static/js/787.f2cacdcb.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.073c9b0a.css",
-    "static/js/main.26678a04.js"
+    "static/css/main.e6c13ad2.css",
+    "static/js/main.c89521bf.js"
   ]
 }
