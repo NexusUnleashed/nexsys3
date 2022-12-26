@@ -66,6 +66,7 @@
     "@babel/core": "^7.18.5",
     "@babel/preset-env": "^7.18.2",
     "eslint-plugin-react": "^7.31.11",
+    "gh-pages": "^4.0.0",
     "nexevent": "^1.0.5",
     "webpack-cli": "^4.10.0"
   }
