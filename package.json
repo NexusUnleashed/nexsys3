@@ -4,8 +4,6 @@
   "private": true,
   "homepage": "https://Log-Wall.github.io/nexsys3",
   "dependencies": {
-    "@dnd-kit/core": "^6.0.5",
-    "@dnd-kit/sortable": "^7.0.1",
     "@emotion/react": "^11.10.4",
     "@emotion/styled": "^11.10.4",
     "@mui/icons-material": "^5.11.0",
@@ -67,6 +65,7 @@
     "@babel/preset-env": "^7.18.2",
     "eslint-plugin-react": "^7.31.11",
     "gh-pages": "^4.0.0",
+    "jest": "^27.5.1",
     "nexevent": "^1.0.5",
     "webpack-cli": "^4.10.0"
   }
