@@ -77,7 +77,7 @@ const setPromptAffs = function (promptAffs) {
     const bg = affAbbrev[aff] ? affAbbrev[aff].bg : "";
     let txt = affAbbrev[aff] ? affAbbrev[aff].text : aff;
     if (affs.length > 1 && i < affs.length - 1) {
-      txt += ", ";
+      txt += " ";
     }
     const count = promptAffs[aff] === true ? "" : `(${promptAffs[aff]})`;
     add(`${txt}${count}`, fg, bg);
