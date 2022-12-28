@@ -158,7 +158,7 @@ const AffPriorities = ({ colors, affPrios }) => {
   React.useEffect(()=>{
     globalThis.nexSys.affTable.prios = {...prios};
     columnOrder.forEach(col => {
-      globalThis.nexSys.affTable.setPrioArrays(columns[col].prio, columns[col].affs);
+      globalThis.nexSys.setPrioArrays(columns[col].prio, columns[col].affs);
     });
   }, [prios]);
 

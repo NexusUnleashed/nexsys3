@@ -24,6 +24,7 @@ import {
   haveAff,
   haveAffs,
   haveAnAff,
+  setPrioArrays,
 } from "./base/affs/affService";
 import { affTable } from "./base/affs/affTable";
 import { bals } from "./base/balances/balances";
@@ -105,6 +106,7 @@ const nexSys = {
   haveAffs: haveAffs,
   haveAnAff: haveAnAff,
   affPrioSwap: affPrioSwap,
+  setPrioArrays: setPrioArrays,
 
   snapTrack: new Trackable("Snapped"),
 

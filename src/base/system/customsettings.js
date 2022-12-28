@@ -7,7 +7,6 @@ import { whiteList } from "../utilities/lust";
 import { sys } from "./sys";
 import { defs } from "../defs/defs";
 import { affs } from "../affs/affs";
-import { caches } from "../cache/caches";
 
 // Khaseem: Removed the CustomCureTable, CustomBalanceTable, and CustomDefTable
 // these should be static entries. I do not see the need to store these variables.
@@ -61,25 +60,15 @@ const loadSystemSettings = function () {
     nexusclient.variables().set("nexSysSettings", {});
   }
   const model = nexusclient.variables().get("nexSysSettings").systemSettings; //nexusclient.variables().get('CustomSystemSettings')
+  sys.settings = { ...model };
   //updateAndSaveModel("systemSettings", sys.settings, model);
-  updateModel(sys.settings, model);
+  //updateModel(sys.settings, model);
 };
 
 const loadAffSettings = function () {
   const model = nexusclient.variables().get("nexSysSettings").affSettings; //nexusclient.variables().get('CustomAffSettings')
   if (model) {
-    updateList(affTable.list, model.list);
-    updateModel(affTable.prios, model.prios);
-    for (let aff in affTable.prios) {
-      affs[aff]?._prio.initialize(affTable.prios[aff]);
-    }
-    if (model.types) {
-      updateModel(affTable.types.defs, model.types.defs);
-      updateModel(affTable.types.countable, model.types.countable);
-      updateModel(affTable.types.timed, model.types.timed);
-      updateModel(affTable.types.unknown, model.types.unknown);
-      updateModel(affTable.types.uncurable, model.types.uncurable);
-    }
+    nexSys.affTable = { ...model };
   }
 
   //saveModel("affSettings", affTable);
@@ -88,29 +77,25 @@ const loadAffSettings = function () {
 const loadDefSettings = function () {
   const model = nexusclient.variables().get("nexSysSettings").defSettings; //nexusclient.variables().get('CustomDefSettings')
   if (model) {
-    updateModel(defPrios.keepup, model.keepup);
-    updateModel(defPrios.static, model.static);
-    for (let def in defPrios.keepup) {
-      defs[def]._prio.initialize(defPrios.keepup[def]);
-    }
+    nexSys.defPrios = { ...model };
+    //saveModel("defSettings", defPrios);
   }
-
-  //saveModel("defSettings", defPrios);
 };
 
 const loadCacheSettings = function () {
   const model = nexusclient.variables().get("nexSysSettings").cacheSettings; //nexusclient.variables().get('CustomCacheSettings')
   if (model) {
-    updateModel(cacheTable, model);
-    for (const curative in cacheTable) {
-      caches[curative]._amount = cacheTable[curative];
-    }
+    nexSys.cacheTable = { ...model };
   }
   //saveModel("cacheSettings", cacheTable);
 };
 
 const loadLustList = function () {
-  whiteList = nexusclient.variables().get("LustWhiteList") || whiteList;
+  const model = nexusclient.variables().get("LustWhiteList");
+
+  if (model) {
+    nexSys.whiteList = [...model];
+  }
   //saveModel("LustWhiteList", whiteList);
 };
 
@@ -122,6 +107,8 @@ export const updatePriorities = () => {
   for (let aff in affTable.prios) {
     affs[aff]?.set_default_prio(affTable.prios[aff]);
   }
+
+  eventStream.raiseEvent("ForcePopulateEvent");
 };
 
 export function loadCustomSettings() {

@@ -17,6 +17,17 @@ import {
 } from "@mui/material";
 import { HelpOutline } from "@mui/icons-material";
 
+const getColor = (def) => {
+  let res;
+  if (def.balsUsed.indexOf("balance") > -1 || def.balsUsed.indexOf("equilibrium") > -1) {
+    res = "tomato";
+  } else {
+    res = "dodgerblue";
+  }
+
+  return res;
+};
+
 const DefenceRow = ({ def, defs, setKeepup, setStaticDefs }) => {
   const [checked, setChecked] = React.useState(false);
   const [prio, setPrio] = React.useState(defs[def].prio);
@@ -49,8 +60,7 @@ const DefenceRow = ({ def, defs, setKeepup, setStaticDefs }) => {
       <TableCell
         sx={{
           fontSize: "12px",
-          color:
-            defs[def].balsUsed.indexOf("free") === -1 ? "tomato" : "dodgerblue",
+          color: getColor(defs[def])
         }}
         align="left"
       >
@@ -77,9 +87,11 @@ const DefencePriorities = ({ defences, prios, classList }) => {
   const [keepup, setKeepup] = React.useState({ ...prios.keepup });
   const [staticDefs, setStaticDefs] = React.useState({ ...prios.static });
   const [skill, setSkill] = React.useState(
-    typeof GMCP === "undefined" ? "" : GMCP.Char.Status.class
+    (typeof GMCP !== 'undefined' && GMCP?.Char?.Status?.class) ?
+    GMCP.Char.Status.class :
+    ""
   );
-  const [defList, setDefList] = React.useState(Object.keys(defs));
+  const [defList, setDefList] = React.useState(Object.keys(defs).filter(d => ["blindness", "deafness", "insomnia"].indexOf(d) === -1));
 
   const handleChange = (e) => {
     setSkill(e.target.value);

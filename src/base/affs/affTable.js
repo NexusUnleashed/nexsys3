@@ -621,9 +621,6 @@ affs.prioArrays = {};
     (aff) => affs.prios[aff] === prio
   );
 });
-affs.setPrioArrays = (id, arr) => {
- affs.prioArrays[id] = [...arr];
-};
 
 export { affs as affTable };
 
