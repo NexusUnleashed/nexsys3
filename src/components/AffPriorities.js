@@ -94,9 +94,9 @@ const Column = ({ column, colors }) => {
   );
 };
 
-const AffPriorities = ({ colors, affPrios }) => {
-  const [columns, setColumns] = React.useState({ ...createColumns(affPrios.prioArrays) });
-  const [prios, setPrios] = React.useState({...affPrios.prios});
+const AffPriorities = ({ colors, affTable, setPrioArrays }) => {
+  const [columns, setColumns] = React.useState({ ...createColumns(affTable.prioArrays) });
+  const [prios, setPrios] = React.useState({...affTable.prios});
   const [columnOrder, setColumnOrder] = React.useState([
     ...createColumnOrder(),
   ]);
@@ -156,9 +156,9 @@ const AffPriorities = ({ colors, affPrios }) => {
   };
 
   React.useEffect(()=>{
-    globalThis.nexSys.affTable.prios = {...prios};
+    affTable.prios = {...prios};
     columnOrder.forEach(col => {
-      globalThis.nexSys.setPrioArrays(columns[col].prio, columns[col].affs);
+      setPrioArrays(columns[col].prio, columns[col].affs);
     });
   }, [prios]);
 

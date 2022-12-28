@@ -38,13 +38,14 @@ const Configuration = ({ nexSys, theme }) => {
             </TabList>
           </Box>
           <TabPanel value="1">
-            <SystemSettings settings={nexSys.sys.settings} />
+            <SystemSettings sys={nexSys.sys} />
           </TabPanel>
           <TabPanel value="2">
             {/*<Dndkit />*/}
             <AffPriorities
               colors={nexSys.prompt.affAbbrev}
-              affPrios={nexSys.affTable}
+              affTable={nexSys.affTable}
+              setPrioArrays={nexSys.setPrioArrays}
             />
           </TabPanel>
           <TabPanel value="3">

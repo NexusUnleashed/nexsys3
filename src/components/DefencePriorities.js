@@ -98,8 +98,8 @@ const DefencePriorities = ({ defences, prios, classList }) => {
   };
 
   React.useEffect(() => {
-    globalThis.nexSys.defPrios.keepup = { ...keepup };
-    globalThis.nexSys.defPrios.static = { ...staticDefs };
+    prios.keepup = { ...keepup };
+    prios.static = { ...staticDefs };
   }, [keepup, staticDefs]);
 
   return (

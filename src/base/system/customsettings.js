@@ -68,7 +68,8 @@ const loadSystemSettings = function () {
 const loadAffSettings = function () {
   const model = nexusclient.variables().get("nexSysSettings").affSettings; //nexusclient.variables().get('CustomAffSettings')
   if (model) {
-    nexSys.affTable = { ...model };
+    affTable.prios = { ...model.prios };
+    affTable.prioArrays = { ...model.prioArrays };
   }
 
   //saveModel("affSettings", affTable);
@@ -77,7 +78,8 @@ const loadAffSettings = function () {
 const loadDefSettings = function () {
   const model = nexusclient.variables().get("nexSysSettings").defSettings; //nexusclient.variables().get('CustomDefSettings')
   if (model) {
-    nexSys.defPrios = { ...model };
+    defPrios.keepup = { ...model.keepup };
+    defPrios.static = { ...model.static };
     //saveModel("defSettings", defPrios);
   }
 };
@@ -85,7 +87,9 @@ const loadDefSettings = function () {
 const loadCacheSettings = function () {
   const model = nexusclient.variables().get("nexSysSettings").cacheSettings; //nexusclient.variables().get('CustomCacheSettings')
   if (model) {
-    nexSys.cacheTable = { ...model };
+    for (const cure in cacheTable) {
+      cacheTable[cure] = model[cure];
+    }
   }
   //saveModel("cacheSettings", cacheTable);
 };
@@ -94,7 +98,10 @@ const loadLustList = function () {
   const model = nexusclient.variables().get("LustWhiteList");
 
   if (model) {
-    nexSys.whiteList = [...model];
+    whiteList.length = 0;
+    model.forEach(element => {
+      whiteList.push(element);
+    });
   }
   //saveModel("LustWhiteList", whiteList);
 };

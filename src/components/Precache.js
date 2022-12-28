@@ -22,7 +22,7 @@ const GroupedButtons = ({ curative, precache }) => {
   };
 
   React.useEffect(() => {
-    nexSys.cacheTable[curative] = parseInt(cache);
+    precache[curative] = parseInt(cache);
   }, [cache, curative]);
 
   return (
