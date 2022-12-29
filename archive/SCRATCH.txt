@@ -1,4 +1,9 @@
 
+d3.geo
+react-leaflet
+topojson-client
+react-map-gl
+
 if (nexSys.Bals.balance.duration > 0.25 && nexSys.haveBal('balance') == false) {
     nexSys.eventStream.raiseEvent('balanceGotBalEvent');
     nexSys.eventStream.raiseEvent('balanceLostBalEvent');
