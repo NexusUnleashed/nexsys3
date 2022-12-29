@@ -12,12 +12,20 @@ import SystemSettings from "./SystemSettings";
 import DefencePriorities from "./DefencePriorities";
 import AffPriorities from "./AffPriorities";
 
-const Configuration = ({ nexSys, theme }) => {
+const Configuration = ({ nexSys, theme, setNexSys }) => {
   const [value, setValue] = React.useState("1");
+  const [settings, setSettings] = React.useState(nexSys.sys.settings);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
+
+  React.useEffect(() => {
+    const temp = {...nexSys};
+    temp.sys.settings = {...settings};
+    console.log(globalThis.nexSys.sys.settings);
+    //setNexSys({...temp});
+  }, [settings]);
 
   return (
     <ThemeProvider theme={theme}>
@@ -38,10 +46,9 @@ const Configuration = ({ nexSys, theme }) => {
             </TabList>
           </Box>
           <TabPanel value="1">
-            <SystemSettings sys={nexSys.sys} />
+            <SystemSettings settings={settings} setSettings={setSettings} />
           </TabPanel>
           <TabPanel value="2">
-            {/*<Dndkit />*/}
             <AffPriorities
               colors={nexSys.prompt.affAbbrev}
               affTable={nexSys.affTable}

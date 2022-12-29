@@ -1,8 +1,11 @@
 /* global globalThis */
-import { DialogContent, DialogTitle } from "@mui/material";
-import Button from "@mui/material/Button";
-import Dialog from "@mui/material/Dialog";
-import DialogActions from "@mui/material/DialogActions";
+import {
+  DialogContent,
+  DialogTitle,
+  DialogActions,
+  Button,
+  Dialog,
+} from "@mui/material";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import * as React from "react";
 import Configuration from "./Configuration";
@@ -67,12 +70,17 @@ const darkTheme = createTheme({
 });
 
 const NexDialog = ({ evt, nexSys }) => {
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = React.useState(true);
+  const [_nexSys, setNexSys] = React.useState(nexSys);
 
   evt.addEventListener("nexSys-config-dialog", ({ detail }) => {
     setOpen(detail);
   });
 
+  React.useEffect(() => {
+    console.log(globalThis.nexSys.sys.settings);
+  }, [_nexSys]);
+  
   const handleClickClose = () => {
     setOpen(false);
     setTimeout(() => {
@@ -82,12 +90,16 @@ const NexDialog = ({ evt, nexSys }) => {
   };
 
   const handleClickSave = () => {
-    nexSys.saveModel("cacheSettings", nexSys.cacheTable);
-    nexSys.saveModel("systemSettings", nexSys.sys.settings);
-    nexSys.saveModel("defSettings", nexSys.defPrios);
-    nexSys.saveModel("affSettings", nexSys.affTable);
+    nexSys.updateAndSaveModel("cacheSettings", _nexSys.cacheTable);
+    nexSys.updateAndSaveModel("systemSettings", _nexSys.sys.settings);
+    nexSys.updateAndSaveModel("defSettings", _nexSys.defPrios);
+    nexSys.updateAndSaveModel("affSettings", _nexSys.affTable);
     nexSys.updatePriorities();
-    eventStream.raiseEvent('CommandSeparatorSetOnStartup', nexSys.sys.settings.sep);
+    eventStream.raiseEvent(
+      "CommandSeparatorSetOnStartup",
+      _nexSys.sys.settings.sep
+    );
+
     handleClickClose();
   };
 
@@ -101,11 +113,17 @@ const NexDialog = ({ evt, nexSys }) => {
           maxWidth="md"
         >
           <DialogTitle>Nexsys Configuration Options</DialogTitle>
-          <DialogContent sx={{background:"#121212"}}>
-            <Configuration theme={darkTheme} nexSys={nexSys} />
+          <DialogContent sx={{ background: "#121212" }}>
+            <Configuration
+              theme={darkTheme}
+              nexSys={_nexSys}
+              setNexSys={setNexSys}
+            />
           </DialogContent>
           <DialogActions>
-            <Button autoFocus onClick={handleClickClose}>Cancel</Button>
+            <Button autoFocus onClick={handleClickClose}>
+              Cancel
+            </Button>
             <Button onClick={handleClickSave}>Save</Button>
           </DialogActions>
         </Dialog>

@@ -11,12 +11,12 @@ import {
 } from "@mui/material";
 import ConfigSwitch from "./ConfigSwitch";
 
-const SystemSettings = ({ sys }) => {
-  const [stateSettings, setStateSettings] = React.useState({ ...sys.settings });
-  const [open, setOpen] = React.useState(sys.settings.sep);
+const SystemSettings = ({ settings, setSettings }) => {
+  const [stateSettings, setStateSettings] = React.useState(settings);
+  const [open, setOpen] = React.useState(settings.sep);
 
   React.useEffect(() => {
-    sys.settings = { ...stateSettings };
+    setSettings({...stateSettings});
   }, [stateSettings]);
 
   React.useEffect(() => {

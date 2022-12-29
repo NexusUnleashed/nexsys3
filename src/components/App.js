@@ -66,8 +66,8 @@ const darkTheme = createTheme({
 function App() {
   return (
     <div>
-      <NexDialog evt={globalThis.nexSys.evt} nexSys={globalThis.nexSys}/>
-    <Configuration theme={darkTheme} nexSys={globalThis.nexSys}/>
+      <NexDialog evt={globalThis.nexSys.evt} nexSys={globalThis.nexSys} />
+      {/*<Configuration theme={darkTheme} nexSys={globalThis.nexSys} />*/}
     </div>
   );
 }
