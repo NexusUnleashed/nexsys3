@@ -16,10 +16,9 @@ const SystemSettings = ({ settings, setSettings }) => {
   const [open, setOpen] = React.useState(settings.sep);
 
   React.useEffect(() => {
-    setSettings({...stateSettings});
-  }, [stateSettings]);
-
-  React.useEffect(() => {
+    console.log('render');
+    setSettings({ ...stateSettings });
+    //console.log(globalThis.nexSys.sys.settings);
     if (stateSettings.sep) {
       setOpen(false);
     } else {
@@ -32,6 +31,21 @@ const SystemSettings = ({ settings, setSettings }) => {
       ...stateSettings,
       [e.target.id]: e.target.value,
     });
+  };
+
+  const handleCheck = (e) => {
+    /*
+    setStateSettings((prev) => {
+      prev[e.target.id] = e.target.checked;
+      return { ...prev };
+    });
+    */
+    /*
+    const temp = { ...stateSettings };
+    temp[e.target.id] = e.target.checked;
+    setStateSettings({ ...temp });
+    */
+    setStateSettings((prev) => ({ ...prev, [e.target.id]: e.target.checked }));
   };
 
   return (
@@ -47,62 +61,62 @@ const SystemSettings = ({ settings, setSettings }) => {
         <ConfigSwitch
           label="Custom Prompt"
           option={"customPrompt"}
-          settings={stateSettings}
-          setStateSettings={setStateSettings}
+          handleCheck={handleCheck}
+          checked={stateSettings["customPrompt"]}
         />
         <ConfigSwitch
           label="Echo Priority Set"
           option={"echoPrioritySet"}
-          settings={stateSettings}
-          setStateSettings={setStateSettings}
+          handleCheck={handleCheck}
+          checked={stateSettings["echoPrioritySet"]}
         />
         <ConfigSwitch
           label="Echo Aff Got"
           option={"echoAffGot"}
-          settings={stateSettings}
-          setStateSettings={setStateSettings}
+          handleCheck={handleCheck}
+          checked={stateSettings["echoAffGot"]}
         />
         <ConfigSwitch
           label="Echo Aff Lost"
           option={"echoAffLost"}
-          settings={stateSettings}
-          setStateSettings={setStateSettings}
+          handleCheck={handleCheck}
+          checked={stateSettings["echoAffLost"]}
         />
         <ConfigSwitch
           label="Echo Balance Got"
           option={"echoBalanceGot"}
-          settings={stateSettings}
-          setStateSettings={setStateSettings}
+          handleCheck={handleCheck}
+          checked={stateSettings["echoBalanceGot"]}
         />
         <ConfigSwitch
           label="Echo Balance Lost"
           option={"echoBalanceLost"}
-          settings={stateSettings}
-          setStateSettings={setStateSettings}
+          handleCheck={handleCheck}
+          checked={stateSettings["echoBalanceLost"]}
         />
         <ConfigSwitch
           label="Echo Def Got"
           option={"echoDefGot"}
-          settings={stateSettings}
-          setStateSettings={setStateSettings}
+          handleCheck={handleCheck}
+          checked={stateSettings["echoDefGot"]}
         />
         <ConfigSwitch
           label="Echo Def Lost"
           option={"echoDefLost"}
-          settings={stateSettings}
-          setStateSettings={setStateSettings}
+          handleCheck={handleCheck}
+          checked={stateSettings["echoDefLost"]}
         />
         <ConfigSwitch
           label="Echo Trackable Got"
           option={"echoTrackableGot"}
-          settings={stateSettings}
-          setStateSettings={setStateSettings}
+          handleCheck={handleCheck}
+          checked={stateSettings["echoTrackableGot"]}
         />
         <ConfigSwitch
           label="Echo Trackable Lost"
           option={"echoTrackableLost"}
-          settings={stateSettings}
-          setStateSettings={setStateSettings}
+          handleCheck={handleCheck}
+          checked={stateSettings["echoTrackableLost"]}
         />
         <TextField
           id="sep"

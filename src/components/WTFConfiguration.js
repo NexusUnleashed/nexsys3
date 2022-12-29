@@ -12,20 +12,29 @@ import SystemSettings from "./SystemSettings";
 import DefencePriorities from "./DefencePriorities";
 import AffPriorities from "./AffPriorities";
 
-const Configuration = ({ nexSys, theme, setNexSys }) => {
+const WTFConfiguration = ({ nexSys, theme, defPrios, setDefPrios, affTable, setAffTable, sys, setSys }) => {
   const [value, setValue] = React.useState("1");
-  const [settings, setSettings] = React.useState(nexSys.sys.settings);
+  const [_nexSys, setNexSys] = React.useState({ ...nexSys });
+  const [settings, setSettings] = React.useState({ ...sys.settings });
+  const [cacheTable, setCacheTable] = React.useState({ ...nexSys.cacheTable });
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
 
   React.useEffect(() => {
-    const temp = {...nexSys, 'sys.settings': {...settings}};
-    //temp.sys.settings = {...settings};
+    console.log('-----');
+    console.log(settings);
     console.log(globalThis.nexSys.sys.settings);
-    //setNexSys({...temp});
+    setSys({ ...settings });
   }, [settings]);
+
+  React.useEffect(() => {
+    console.log('//////');
+    console.log(cacheTable);
+    console.log(globalThis.nexSys.cacheTable);
+    //setSys({ ...cacheTable });
+  }, [cacheTable]);
 
   return (
     <ThemeProvider theme={theme}>
@@ -40,30 +49,14 @@ const Configuration = ({ nexSys, theme, setNexSys }) => {
               aria-label="scrollable tabs"
             >
               <Tab label="System Settings" value="1" />
-              <Tab label="Curing Priorities" value="2" />
-              <Tab label="Defence Priorities" value="3" />
               <Tab label="Precache" value="4" />
             </TabList>
           </Box>
           <TabPanel value="1">
             <SystemSettings settings={settings} setSettings={setSettings} />
           </TabPanel>
-          <TabPanel value="2">
-            <AffPriorities
-              colors={nexSys.prompt.affAbbrev}
-              affTable={nexSys.affTable}
-              setPrioArrays={nexSys.setPrioArrays}
-            />
-          </TabPanel>
-          <TabPanel value="3">
-            <DefencePriorities
-              defences={nexSys.defs}
-              prios={nexSys.defPrios}
-              classList={nexSys.classList}
-            />
-          </TabPanel>
           <TabPanel value="4">
-            <Precache cache={nexSys.cacheTable} />
+            <Precache cacheTable={cacheTable} setCacheTable={setCacheTable} />
           </TabPanel>
         </TabContext>
       </Box>
@@ -71,4 +64,4 @@ const Configuration = ({ nexSys, theme, setNexSys }) => {
   );
 };
 
-export default Configuration;
+export default WTFConfiguration;

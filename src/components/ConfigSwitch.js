@@ -3,25 +3,23 @@ import {
   Switch,
 } from "@mui/material";
 
-const ConfigSwitch = ({ label, settings, option, setStateSettings }) => {
+const ConfigSwitch = ({ label, option, handleCheck, checked }) => {
 
   const handleChange = (e) => {
-    setStateSettings((settings) => {
-      settings[option] = e.target.checked;
-      return { ...settings };
-    });
+    handleCheck(e);
   };
 
   return (
-      <FormControlLabel
-          label={label}
-          control={
-            <Switch
-              checked={settings[option]}
-              onChange={handleChange}
-            />
-          }
+    <FormControlLabel
+      label={label}
+      control={
+        <Switch
+          id={option}
+          checked={checked}
+          onChange={handleChange}
         />
+      }
+    />
   );
 };
 

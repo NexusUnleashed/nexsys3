@@ -8,7 +8,7 @@ import {
 } from "@mui/material";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import * as React from "react";
-import Configuration from "./Configuration";
+import WTFConfiguration from "./WTFConfiguration";
 
 const darkTheme = createTheme({
   palette: {
@@ -69,19 +69,26 @@ const darkTheme = createTheme({
   },
 });
 
-const NexDialog = ({ evt, nexSys }) => {
-  const [open, setOpen] = React.useState(false);
+const WTFNexDialog = ({ evt, nexSys }) => {
+  const [open, setOpen] = React.useState(true);
   const [_nexSys, setNexSys] = React.useState(nexSys);
+  const [sys, setSys] = React.useState(nexSys.sys);
+  const [cacheTable, setCacheTable] = React.useState(nexSys.cacheTable);
+  const [affTable, setAffTable] = React.useState(nexSys.affTable);
+  const [defPrios, setDefPrios] = React.useState(nexSys.defPrios);
 
   evt.addEventListener("nexSys-config-dialog", ({ detail }) => {
     setOpen(detail);
   });
 
   React.useEffect(() => {
+    console.log("*******");
+    console.log(sys);
     console.log(globalThis.nexSys.sys.settings);
-  }, [_nexSys]);
-  
+  }, [sys]);
+
   const handleClickClose = () => {
+    console.log('handleClickClose');
     setOpen(false);
     setTimeout(() => {
       globalThis.nexusclient.platform().inputRef.current.focus();
@@ -90,6 +97,7 @@ const NexDialog = ({ evt, nexSys }) => {
   };
 
   const handleClickSave = () => {
+    console.log('handleClickSave');
     nexSys.updateAndSaveModel("cacheSettings", _nexSys.cacheTable);
     nexSys.updateAndSaveModel("systemSettings", _nexSys.sys.settings);
     nexSys.updateAndSaveModel("defSettings", _nexSys.defPrios);
@@ -114,10 +122,18 @@ const NexDialog = ({ evt, nexSys }) => {
         >
           <DialogTitle>Nexsys Configuration Options</DialogTitle>
           <DialogContent sx={{ background: "#121212" }}>
-            <Configuration
+            <WTFConfiguration
               theme={darkTheme}
               nexSys={_nexSys}
               setNexSys={setNexSys}
+              sys={sys}
+              setSys={setSys}
+              cacheTable={cacheTable}
+              setCacheTable={setCacheTable}
+              affTable={affTable}
+              setAffTable={setAffTable}
+              defPrios={defPrios}
+              setDefPrios={setDefPrios}
             />
           </DialogContent>
           <DialogActions>
@@ -132,5 +148,7 @@ const NexDialog = ({ evt, nexSys }) => {
   );
 };
 
-export default NexDialog;
+export default WTFNexDialog;
 //nexSys.evt.dispatchEvent(new CustomEvent('nexSys-config-dialog', {detail: true}))
+
+//https://beta.reactjs.org/learn/passing-props-to-a-component

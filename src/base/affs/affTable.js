@@ -204,6 +204,7 @@ const affs = {
     "swiftcurse",
   ],
   prios: {
+    // TODO: How should we handle prios for countable affs? horror4 etc?
     // affs that don't have serverside prio because can't be 'cured', set as 0
     airfisted: 0,
     asphyxiating: 0,
