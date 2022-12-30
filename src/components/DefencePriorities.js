@@ -93,11 +93,7 @@ const DefencePriorities = ({ defs, defPrios, setDefPrios, classList }) => {
       ? GMCP.Char.Status.class
       : ""
   );
-  const [defList, setDefList] = React.useState(
-    Object.keys(defs).filter(
-      (d) => ["blindness", "deafness", "insomnia"].indexOf(d) === -1
-    )
-  );
+  const [defList, setDefList] = React.useState(Object.keys(defs));
 
   const handleChange = (e) => {
     setSkill(e.target.value);

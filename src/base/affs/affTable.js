@@ -417,10 +417,10 @@ const affs = {
     blackout: 30,
 
     // def affs
-    insomnia: 10,
+    insomnia: 0,
     // insulation: 20,  // CUSTOM not an aff
-    deafness: 21,
-    blindness: 22,
+    deafness: 0,
+    blindness: 0,
 
     // unknowns, 100=ignore
     harmonic: 100,

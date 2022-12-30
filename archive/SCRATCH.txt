@@ -4,6 +4,18 @@ react-leaflet
 topojson-client
 react-map-gl
 
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+[GMCP]: Char.Afflictions.Remove [ "deafness" ]
+[GMCP]: Char.Defences.Remove [ "deafness" ]
+
+[GMCP]: Char.Afflictions.Add { "name": "burning (1)", "cure": "APPLY MENDING TO TORSO", "desc": "When your body is completely wrapped in flames, you will unsuprisingly find it quite painful." }
+
+[GMCP]: Char.Afflictions.Add { "name": "deafness", "cure": "APPLY EPIDERMAL TO HEAD", "desc": "Deafness stops you from hearing anything." }
+[GMCP]: Char.Defences.Add { "name": "deafness", "desc": "Deafness can prevent some harmful effects, at the expense of your hearing." }
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 if (nexSys.Bals.balance.duration > 0.25 && nexSys.haveBal('balance') == false) {
     nexSys.eventStream.raiseEvent('balanceGotBalEvent');
     nexSys.eventStream.raiseEvent('balanceLostBalEvent');
