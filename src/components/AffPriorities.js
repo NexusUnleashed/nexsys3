@@ -38,15 +38,15 @@ const Container = styled.div`
   border-radius: 0px;
 `;
 const ListItem = styled.div`
-width: auto;
-padding: 3px 10px 3px 10px;
-font-size: 13px;
-margin: 0px;
-border: 1px solid lightgrey;
-border-radius: 2px;
-background: #121212;
-${props => `color:${props.fg}`};
-${props => `background:${props.bg}`};
+  width: auto;
+  padding: 3px 10px 3px 10px;
+  font-size: 13px;
+  margin: 0px;
+  border: 1px solid lightgrey;
+  border-radius: 2px;
+  background: #121212;
+  ${(props) => `color:${props.fg}`};
+  ${(props) => `background:${props.bg}`};
 `;
 const Title = styled.h3`
   text-align: center;
@@ -63,9 +63,9 @@ const AffItem = ({ aff, index, color }) => {
     <Draggable draggableId={aff} index={index}>
       {(provided) => (
         <ListItem
-          fg = {color?.fg}
-          bg = {color?.bg}
-          ref = {provided.innerRef}
+          fg={color?.fg}
+          bg={color?.bg}
+          ref={provided.innerRef}
           {...provided.draggableProps}
           {...provided.dragHandleProps}
         >
@@ -94,21 +94,23 @@ const Column = ({ column, colors }) => {
   );
 };
 
-const AffPriorities = ({ colors, affTable, setPrioArrays }) => {
-  const [columns, setColumns] = React.useState({ ...createColumns(affTable.prioArrays) });
-  const [prios, setPrios] = React.useState({...affTable.prios});
+const AffPriorities = ({ colors, affTable, setAffTable, setPrioArrays }) => {
+  const [columns, setColumns] = React.useState({
+    ...createColumns(affTable.prioArrays),
+  });
+  const [prios, setPrios] = React.useState({ ...affTable.prios });
   const [columnOrder, setColumnOrder] = React.useState([
     ...createColumnOrder(),
   ]);
 
   const onDragEnd = (result) => {
     const { destination, source, draggableId } = result;
-    
+
     //If there is no destination, the user dropped the item outside of the context
     if (!destination) {
       return;
     }
-    
+
     //Was the item moved to the same location?
     if (
       destination.droppableId === source.droppableId &&
@@ -131,7 +133,6 @@ const AffPriorities = ({ colors, affTable, setPrioArrays }) => {
         ...columns,
         [newSourceColumn.id]: newSourceColumn,
       });
-
     } else {
       const sourceColumn = columns[source.droppableId];
       const targetColumn = columns[destination.droppableId];
@@ -150,24 +151,34 @@ const AffPriorities = ({ colors, affTable, setPrioArrays }) => {
     }
 
     //update prios based on the location of the moved affliction.
-    const newPrios = {...prios};
+    const newPrios = { ...prios };
     newPrios[draggableId] = columns[destination.droppableId].prio;
-    setPrios({...newPrios});
+    setPrios({ ...newPrios });
   };
 
-  React.useEffect(()=>{
-    affTable.prios = {...prios};
-    columnOrder.forEach(col => {
+  React.useEffect(() => {
+    setAffTable((prev) => ({
+      ...prev,
+      prios: { ...prios },
+    }));
+    columnOrder.forEach((col) => {
       setPrioArrays(columns[col].prio, columns[col].affs);
     });
   }, [prios]);
 
   return (
     <DragDropContext onDragEnd={onDragEnd}>
-      <div style={{display: 'flex', flexDirection: 'row'}}>
-      {columnOrder.map((col) => (
-        <Column key={col} column={columns[col]} colors={colors} />
-      ))}
+      <div
+        style={{
+          height: "auto",
+          width: "auto",
+          display: "flex",
+          flexDirection: "row",
+        }}
+      >
+        {columnOrder.map((col) => (
+          <Column key={col} column={columns[col]} colors={colors} />
+        ))}
       </div>
     </DragDropContext>
   );

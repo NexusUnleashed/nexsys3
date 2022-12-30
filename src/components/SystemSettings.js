@@ -16,7 +16,7 @@ const SystemSettings = ({ settings, setSettings }) => {
   const [open, setOpen] = React.useState(settings.sep);
 
   React.useEffect(() => {
-    console.log('render');
+    console.log("render");
     setSettings({ ...stateSettings });
     //console.log(globalThis.nexSys.sys.settings);
     if (stateSettings.sep) {
@@ -49,13 +49,15 @@ const SystemSettings = ({ settings, setSettings }) => {
   };
 
   return (
-    <Typography component={"div"}>
-      {!stateSettings.sep && <Collapse in={open}>
-        <Alert severity="error" sx={{ fontSize: "16px" }}>
-          <AlertTitle sx={{ fontSize: "16px" }}>nexSys Error</AlertTitle>
-          Enter <strong>Command Separator</strong> to get started.
-        </Alert>
-      </Collapse>}
+    <div>
+      {!stateSettings.sep && (
+        <Collapse in={open}>
+          <Alert severity="error" sx={{ fontSize: "16px" }}>
+            <AlertTitle sx={{ fontSize: "16px" }}>nexSys Error</AlertTitle>
+            Enter <strong>Command Separator</strong> to get started.
+          </Alert>
+        </Collapse>
+      )}
       <FormLabel component="legend">Nexsys Config</FormLabel>
       <FormGroup>
         <ConfigSwitch
@@ -127,7 +129,7 @@ const SystemSettings = ({ settings, setSettings }) => {
           style={{ width: "10em", margin: "10px 0 0 0" }}
         />
       </FormGroup>
-    </Typography>
+    </div>
   );
 };
 

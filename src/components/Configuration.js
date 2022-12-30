@@ -12,25 +12,38 @@ import SystemSettings from "./SystemSettings";
 import DefencePriorities from "./DefencePriorities";
 import AffPriorities from "./AffPriorities";
 
-const Configuration = ({ nexSys, theme, setNexSys }) => {
+const Configuration = ({
+  nexSys,
+  setNexSys,
+  theme,
+  defPrios,
+  setDefPrios,
+  affTable,
+  setAffTable,
+  sys,
+  setSys,
+}) => {
   const [value, setValue] = React.useState("1");
-  const [settings, setSettings] = React.useState(nexSys.sys.settings);
+  //const [_nexSys, setNexSys] = React.useState({ ...nexSys });
+  const [settings, setSettings] = React.useState({ ...sys.settings });
+  const [cacheTable, setCacheTable] = React.useState({ ...nexSys.cacheTable });
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
 
   React.useEffect(() => {
-    const temp = {...nexSys, 'sys.settings': {...settings}};
-    //temp.sys.settings = {...settings};
-    console.log(globalThis.nexSys.sys.settings);
-    //setNexSys({...temp});
+    setSys((prev) => ({ ...prev, settings: { ...settings } }));
   }, [settings]);
+
+  React.useEffect(() => {
+    setNexSys((prev) => ({ ...prev, cacheTable: cacheTable }));
+  }, [cacheTable]);
 
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <Box sx={{ width: "500px", height: "600px" }}>
+      <Box sx={{ width: "800px", height: "600px" }}>
         <TabContext value={value}>
           <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
             <TabList
@@ -51,19 +64,21 @@ const Configuration = ({ nexSys, theme, setNexSys }) => {
           <TabPanel value="2">
             <AffPriorities
               colors={nexSys.prompt.affAbbrev}
-              affTable={nexSys.affTable}
+              affTable={affTable}
+              setAffTable={setAffTable}
               setPrioArrays={nexSys.setPrioArrays}
             />
           </TabPanel>
           <TabPanel value="3">
             <DefencePriorities
-              defences={nexSys.defs}
-              prios={nexSys.defPrios}
+              defs={nexSys.defs}
+              defPrios={defPrios}
+              setDefPrios={setDefPrios}
               classList={nexSys.classList}
             />
           </TabPanel>
           <TabPanel value="4">
-            <Precache cache={nexSys.cacheTable} />
+            <Precache cacheTable={cacheTable} setCacheTable={setCacheTable} />
           </TabPanel>
         </TabContext>
       </Box>

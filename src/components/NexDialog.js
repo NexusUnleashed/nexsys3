@@ -70,17 +70,38 @@ const darkTheme = createTheme({
 });
 
 const NexDialog = ({ evt, nexSys }) => {
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = React.useState(true);
   const [_nexSys, setNexSys] = React.useState(nexSys);
+  const [sys, setSys] = React.useState(nexSys.sys);
+  const [cacheTable, setCacheTable] = React.useState(nexSys.cacheTable);
+  const [affTable, setAffTable] = React.useState(nexSys.affTable);
+  const [defPrios, setDefPrios] = React.useState(nexSys.defPrios);
 
   evt.addEventListener("nexSys-config-dialog", ({ detail }) => {
     setOpen(detail);
   });
 
   React.useEffect(() => {
-    console.log(globalThis.nexSys.sys.settings);
+    console.log("NexDialog useEffect");
+    console.log(_nexSys.sys.settings);
+    console.log(_nexSys.cacheTable);
+    console.log(_nexSys.defPrios.keepup);
+    console.log(_nexSys.affTable.prios.aeon);
+    console.log(_nexSys.affTable.prioArrays);
   }, [_nexSys]);
-  
+
+  React.useEffect(() => {
+    setNexSys((prev) => ({ ...prev, defPrios: { ...defPrios } }));
+  }, [defPrios]);
+
+  React.useEffect(() => {
+    setNexSys((prev) => ({ ...prev, sys: { ...sys } }));
+  }, [sys]);
+
+  React.useEffect(() => {
+    setNexSys((prev) => ({ ...prev, affTable: { ...affTable } }));
+  }, [affTable]);
+
   const handleClickClose = () => {
     setOpen(false);
     setTimeout(() => {
@@ -110,7 +131,7 @@ const NexDialog = ({ evt, nexSys }) => {
           open={open}
           onClose={handleClickClose}
           hideBackdrop={true}
-          maxWidth="md"
+          maxWidth="lg"
         >
           <DialogTitle>Nexsys Configuration Options</DialogTitle>
           <DialogContent sx={{ background: "#121212" }}>
@@ -118,6 +139,14 @@ const NexDialog = ({ evt, nexSys }) => {
               theme={darkTheme}
               nexSys={_nexSys}
               setNexSys={setNexSys}
+              sys={sys}
+              setSys={setSys}
+              cacheTable={cacheTable}
+              setCacheTable={setCacheTable}
+              affTable={affTable}
+              setAffTable={setAffTable}
+              defPrios={defPrios}
+              setDefPrios={setDefPrios}
             />
           </DialogContent>
           <DialogActions>

@@ -1,9 +1,7 @@
 /* global */
 import Configuration from "./Configuration";
-import WTFConfiguration from "./WTFConfiguration";
 import { createTheme } from "@mui/material/styles";
 import NexDialog from "./NexDialog";
-import WTFNexDialog from "./WTFNexDialog";
 import "../base/utilities/helpers";
 
 const darkTheme = createTheme({
@@ -68,8 +66,7 @@ const darkTheme = createTheme({
 function App() {
   return (
     <div>
-      {/*<NexDialog evt={globalThis.nexSys.evt} nexSys={globalThis.nexSys} />*/}
-      <WTFNexDialog evt={globalThis.nexSys.evt} nexSys={globalThis.nexSys} />
+      <NexDialog evt={globalThis.nexSys.evt} nexSys={globalThis.nexSys} />
     </div>
   );
 }

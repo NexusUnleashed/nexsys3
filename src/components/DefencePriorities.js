@@ -19,7 +19,10 @@ import { HelpOutline } from "@mui/icons-material";
 
 const getColor = (def) => {
   let res;
-  if (def.balsUsed.indexOf("balance") > -1 || def.balsUsed.indexOf("equilibrium") > -1) {
+  if (
+    def.balsUsed.indexOf("balance") > -1 ||
+    def.balsUsed.indexOf("equilibrium") > -1
+  ) {
     res = "tomato";
   } else {
     res = "dodgerblue";
@@ -60,7 +63,7 @@ const DefenceRow = ({ def, defs, setKeepup, setStaticDefs }) => {
       <TableCell
         sx={{
           fontSize: "12px",
-          color: getColor(defs[def])
+          color: getColor(defs[def]),
         }}
         align="left"
       >
@@ -82,24 +85,30 @@ const DefenceRow = ({ def, defs, setKeepup, setStaticDefs }) => {
   );
 };
 
-const DefencePriorities = ({ defences, prios, classList }) => {
-  const [defs, setDefs] = React.useState({ ...defences });
-  const [keepup, setKeepup] = React.useState({ ...prios.keepup });
-  const [staticDefs, setStaticDefs] = React.useState({ ...prios.static });
+const DefencePriorities = ({ defs, defPrios, setDefPrios, classList }) => {
+  const [keepup, setKeepup] = React.useState({ ...defPrios.keepup });
+  const [staticDefs, setStaticDefs] = React.useState({ ...defPrios.static });
   const [skill, setSkill] = React.useState(
-    (typeof GMCP !== 'undefined' && GMCP?.Char?.Status?.class) ?
-    GMCP.Char.Status.class :
-    ""
+    typeof GMCP !== "undefined" && GMCP?.Char?.Status?.class
+      ? GMCP.Char.Status.class
+      : ""
   );
-  const [defList, setDefList] = React.useState(Object.keys(defs).filter(d => ["blindness", "deafness", "insomnia"].indexOf(d) === -1));
+  const [defList, setDefList] = React.useState(
+    Object.keys(defs).filter(
+      (d) => ["blindness", "deafness", "insomnia"].indexOf(d) === -1
+    )
+  );
 
   const handleChange = (e) => {
     setSkill(e.target.value);
   };
 
   React.useEffect(() => {
-    prios.keepup = { ...keepup };
-    prios.static = { ...staticDefs };
+    setDefPrios((prev) => ({
+      ...prev,
+      keepup: { ...keepup },
+      static: { ...staticDefs },
+    }));
   }, [keepup, staticDefs]);
 
   return (

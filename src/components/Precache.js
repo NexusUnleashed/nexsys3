@@ -5,8 +5,44 @@ import Button from "@mui/material/Button";
 import ButtonGroup from "@mui/material/ButtonGroup";
 import { Typography } from "@mui/material";
 
-const herbList = ['ash', 'bayberry', 'bellwort', 'bloodroot', 'cohosh', 'elm', 'ginger', 'ginseng', 'goldenseal', 'hawthorn', 'kelp', 'kola', 'lobelia', 'moss', 'sileris', 'skullcap', 'valerian'];
-const mineralList = ['stannum', 'arsenic', 'cuprum', 'magnesium', 'gypsum', 'cinnabar', 'antimony', 'ferrum', 'plumbum', 'calamine', 'potash', 'aurum', 'quartz', 'argentum', 'quicksilver', 'malachite', 'realgar'];
+const herbList = [
+  "ash",
+  "bayberry",
+  "bellwort",
+  "bloodroot",
+  "cohosh",
+  "elm",
+  "ginger",
+  "ginseng",
+  "goldenseal",
+  "hawthorn",
+  "kelp",
+  "kola",
+  "lobelia",
+  "moss",
+  "sileris",
+  "skullcap",
+  "valerian",
+];
+const mineralList = [
+  "stannum",
+  "arsenic",
+  "cuprum",
+  "magnesium",
+  "gypsum",
+  "cinnabar",
+  "antimony",
+  "ferrum",
+  "plumbum",
+  "calamine",
+  "potash",
+  "aurum",
+  "quartz",
+  "argentum",
+  "quicksilver",
+  "malachite",
+  "realgar",
+];
 
 const GroupedButtons = ({ curative, precache, setCacheTable }) => {
   const [count, setCount] = React.useState(precache[curative] || 0);
@@ -23,7 +59,7 @@ const GroupedButtons = ({ curative, precache, setCacheTable }) => {
   };
 
   React.useEffect(() => {
-    setCacheTable(prev => ({ ...prev, [curative]: count }));
+    setCacheTable((prev) => ({ ...prev, [curative]: count }));
   }, [count]);
 
   return (
@@ -40,17 +76,28 @@ const GroupedButtons = ({ curative, precache, setCacheTable }) => {
   );
 };
 
-// TODO: Why are these defined individually? Source an array of the
-// herbs/minerals and map the buttons. Same with the labels.
 const Precache = ({ cacheTable, setCacheTable }) => {
-
   return (
     <div style={{ display: "flex" }}>
       <Typography component={"div"} sx={{ margin: "10px" }}>
-        {herbList.map(herb => <GroupedButtons key={herb} curative={herb} precache={cacheTable} setCacheTable={setCacheTable} />)}
+        {herbList.map((herb) => (
+          <GroupedButtons
+            key={herb}
+            curative={herb}
+            precache={cacheTable}
+            setCacheTable={setCacheTable}
+          />
+        ))}
       </Typography>
       <Typography component={"div"} sx={{ margin: "10px" }}>
-        {mineralList.map(mineral => <GroupedButtons key={mineral} curative={mineral} precache={cacheTable} setCacheTable={setCacheTable} />)}
+        {mineralList.map((mineral) => (
+          <GroupedButtons
+            key={mineral}
+            curative={mineral}
+            precache={cacheTable}
+            setCacheTable={setCacheTable}
+          />
+        ))}
       </Typography>
     </div>
   );
