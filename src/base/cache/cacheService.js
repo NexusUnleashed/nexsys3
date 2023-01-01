@@ -1,34 +1,41 @@
 import { caches } from "./caches";
+import { cacheTable } from "./cacheTable";
 import { affs } from "../affs/affs";
 import { defs } from "../defs/defs";
 
 function getMissingCache() {
   const current_cache = [];
   for (const cache in caches) {
-      if (caches[cache].needToOutr) {
-          current_cache.push(caches[cache]);
-      }
+    if (caches[cache].needToOutr) {
+      current_cache.push(caches[cache]);
+    }
   }
 
   return current_cache;
 }
 
 export function getCacheOutputs(affList) {
-  if (affs.blindness.have || defs.mindseye.have) {
-      const missingCache = getMissingCache(); // return this as sorted by prio
-      let cacheOutputs = [];
+  if (!affs.blindness.have || defs.mindseye.have) {
+    const missingCache = getMissingCache(); // return this as sorted by prio
+    let cacheOutputs = [];
 
-      for (let i = 0; i < missingCache.length; i++) {
-          const cache = missingCache[i];
-          
-          //if (!affList.some(aff => cache.blocks.flat().indexOf(aff) > -1)) {
-          if (!Array.arraysIntersect(cache.blocks, affList)) {
-              cacheOutputs = cacheOutputs.concat(cache.command);
-          }
+    for (let i = 0; i < missingCache.length; i++) {
+      const cache = missingCache[i];
+
+      //if (!affList.some(aff => cache.blocks.flat().indexOf(aff) > -1)) {
+      if (!Array.arraysIntersect(cache.blocks, affList)) {
+        cacheOutputs = cacheOutputs.concat(cache.command);
       }
+    }
 
-      return cacheOutputs;
+    return cacheOutputs;
   } else {
-      return [];
+    return [];
   }
 }
+
+export const updatePrecache = () => {
+  for (const herb in cacheTable) {
+    caches[herb].amount = cacheTable[herb];
+  }
+};

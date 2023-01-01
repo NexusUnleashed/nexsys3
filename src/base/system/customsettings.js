@@ -7,6 +7,7 @@ import { whiteList } from "../utilities/lust";
 import { sys } from "./sys";
 import { defs } from "../defs/defs";
 import { affs } from "../affs/affs";
+import { updatePrecache } from "../cache/cacheService";
 
 // Khaseem: Removed the CustomCureTable, CustomBalanceTable, and CustomDefTable
 // these should be static entries. I do not see the need to store these variables.
@@ -23,8 +24,24 @@ export const updateList = function (list, newList) {
 
 export const updateModel = function (name, newModel) {
   if (newModel) {
-    let settings = nexusclient.variables().vars.nexSysSettings;
-    settings[name] = { ...newModel };
+    switch (name) {
+      case "cacheSettings":
+        cacheTable = { ...newModel };
+        updatePrecache();
+        break;
+      case "systemSettings":
+        sys.settings = { ...newModel };
+        break;
+      case "defSettings":
+        defPrios.keepup = { ...newModel.keepup };
+        defPrios.static = { ...newModel.static };
+        break;
+      case "affSettings":
+        affTable.prios = { ...newModel.prios };
+        break;
+      default:
+        break;
+    }
   }
 };
 /* TODO I don't like this method
@@ -52,7 +69,7 @@ export const saveModel = function (name, model) {
 
 export const updateAndSaveModel = function (name, newModel) {
   updateModel(name, newModel);
-  saveModel(name, model);
+  saveModel(name, newModel);
 };
 
 const loadSystemSettings = function () {
@@ -99,7 +116,7 @@ const loadLustList = function () {
 
   if (model) {
     whiteList.length = 0;
-    model.forEach(element => {
+    model.forEach((element) => {
       whiteList.push(element);
     });
   }
