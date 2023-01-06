@@ -82,15 +82,6 @@ const NexDialog = ({ evt, nexSys }) => {
   });
 
   React.useEffect(() => {
-    console.log("NexDialog useEffect");
-    console.log(_nexSys.sys.settings);
-    console.log(_nexSys.cacheTable);
-    console.log(_nexSys.defPrios.keepup);
-    console.log(_nexSys.affTable.prios.aeon);
-    console.log(_nexSys.affTable.prioArrays);
-  }, [_nexSys]);
-
-  React.useEffect(() => {
     setNexSys((prev) => ({ ...prev, defPrios: { ...defPrios } }));
   }, [defPrios]);
 

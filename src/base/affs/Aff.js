@@ -32,6 +32,10 @@ class Aff extends Trackable {
         return this._uncurable;
     }
 
+    get isIgnored() {
+        return this._prio.prio === 0;
+    }
+
     get isServerSide() {
         return this._serverside;
     }
@@ -198,7 +202,8 @@ class AffDef extends Aff {
 
     raiseEventSet() {
         if (!this.isUncurable) {
-            eventStream.raiseEvent('DefPrioritySetEvent', this);
+            console.log(`AffDef ${this.name} eventStream.raiseEvent(DefPrioritySetEvent) ${this.prio}`);
+            //eventStream.raiseEvent('DefPrioritySetEvent', this);
         }
     }
 }
