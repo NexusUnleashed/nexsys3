@@ -21,7 +21,11 @@ export const replace = (...args) => {
 };
 
 const speech = new SpeechSynthesisUtterance();
-speech.voice = window.speechSynthesis.getVoices()[5];
+speech.voice =
+  window.speechSynthesis
+    .getVoices()
+    .find((e) => e.voiceURI === "Google UK English Female") ||
+  globalThis.speechSynthesis.getVoices()[5];
 speech.rate = 1;
 speech.pitch = 1.1;
 export const say = (txt) => {

@@ -31,9 +31,11 @@ const getColor = (def) => {
   return res;
 };
 
-const DefenceRow = ({ def, defs, setKeepup, setStaticDefs }) => {
-  const [checked, setChecked] = React.useState(false);
-  const [prio, setPrio] = React.useState(defs[def].prio);
+const DefenceRow = ({ def, defs, defPrios, setKeepup, setStaticDefs }) => {
+  const [checked, setChecked] = React.useState(defPrios.static[def] > 0);
+  const [prio, setPrio] = React.useState(
+    defPrios.keepup[def] || defPrios.static[def] || 0
+  );
 
   const handleChange = (e) => {
     setChecked(e.target.checked);
@@ -51,7 +53,8 @@ const DefenceRow = ({ def, defs, setKeepup, setStaticDefs }) => {
       return { ...prevState, ...{ [def]: checked ? 0 : prio } };
     });
   }, [prio, checked]);
-
+  //console.log(`Def: ${def} Prio: ${prio}`);
+  //console.log(defPrios);
   return (
     <TableRow
       key={def}
@@ -77,7 +80,7 @@ const DefenceRow = ({ def, defs, setKeepup, setStaticDefs }) => {
           size="small"
           sx={{ width: "8ch" }}
           variant="outlined"
-          defaultValue={prio}
+          defaultValue={checked ? defPrios.static[def] : defPrios.keepup[def]}
           onChange={handleText}
         />
       </TableCell>
@@ -190,6 +193,7 @@ const DefencePriorities = ({ defs, defPrios, setDefPrios, classList }) => {
                   key={i}
                   def={def}
                   defs={defs}
+                  defPrios={defPrios}
                   setKeepup={setKeepup}
                   setStaticDefs={setStaticDefs}
                 />

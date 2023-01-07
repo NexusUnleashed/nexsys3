@@ -70,7 +70,7 @@ const darkTheme = createTheme({
 });
 
 const NexDialog = ({ evt, nexSys }) => {
-  const [open, setOpen] = React.useState(true);
+  const [open, setOpen] = React.useState(false);
   const [_nexSys, setNexSys] = React.useState(nexSys);
   const [sys, setSys] = React.useState(nexSys.sys);
   const [cacheTable, setCacheTable] = React.useState(nexSys.cacheTable);
@@ -122,7 +122,7 @@ const NexDialog = ({ evt, nexSys }) => {
           open={open}
           onClose={handleClickClose}
           hideBackdrop={true}
-          maxWidth="lg"
+          maxWidth="md"
         >
           <DialogTitle>Nexsys Configuration Options</DialogTitle>
           <DialogContent sx={{ background: "#121212" }}>

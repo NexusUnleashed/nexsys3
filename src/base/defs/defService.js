@@ -57,6 +57,7 @@ export function getMissingDefs() {
     });
 }
 
+//TODO This seems overly complex. Deeper analysis on this function.
 export function getDefOutputs(affList, balList) {
   let defOutputs = [];
   const missingDefs = getMissingDefs(); // return this as sorted by prio

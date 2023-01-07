@@ -29,10 +29,18 @@ const serversideSlowModeOff = function (args) {
   ]);
 };
 
+// TODO This is overly complex. Why is there so much more logic here than the affs
+// deeper analysis of this function required.
 const serversideDefencePrio = function (def) {
-  if (!serversideSettings.loaded) { return; }
+  if (!serversideSettings.loaded) {
+    return;
+  }
 
   if (def instanceof AffDef) {
+    console.log(
+      `serversideEvents.js / serversideDefencePrio / def instanceof Affdef`
+    );
+    console.log(def);
     if (def.isServerSide && def.prio !== serversideSettings.defs[def.name]) {
       if (def.isIgnored) {
         serversideSettings.defs[def.name] = undefined;
@@ -74,7 +82,9 @@ const serversideDefencePrio = function (def) {
 };
 
 const serversideAffPrio = function (aff) {
-  if (!serversideSettings.loaded) { return; }
+  if (!serversideSettings.loaded) {
+    return;
+  }
 
   if (aff.isServerSide && aff.prio !== serversideSettings.affs[aff.name]) {
     const prio = aff.prio;
@@ -151,7 +161,7 @@ const initiateStartup = function (args) {
     if (args) {
       sys.settings.sep = args;
       //nexusclient.variables().set("commandSeparator", args);
-      Object.assign(nexusclient.variables().vars.nexSysSettings, {sep: args});
+      Object.assign(nexusclient.variables().vars.nexSysSettings, { sep: args });
     }
     sys.pause();
     const startupCommands = [
@@ -189,7 +199,9 @@ const systemStartupServerside = function () {
     echo(
       "Enter commandSeparator to get started (e.g. 'config commandseparator |')"
     );
-    nexSys.evt.dispatchEvent(new CustomEvent('nexSys-config-dialog', { detail: true }));
+    nexSys.evt.dispatchEvent(
+      new CustomEvent("nexSys-config-dialog", { detail: true })
+    );
   }
 };
 
