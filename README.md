@@ -2,6 +2,11 @@
 
 In development.
 
+## Original repo
+
+Credit to Jhui for the original version of Nexsys
+https://github.com/jhuiAchaea/Nexsys
+
 ## API
 
 Maybe

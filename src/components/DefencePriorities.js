@@ -88,14 +88,23 @@ const DefenceRow = ({ def, defs, defPrios, setKeepup, setStaticDefs }) => {
   );
 };
 
+const getClass = () => {
+  let res = "";
+  if (typeof GMCP !== "undefined" && GMCP.Char?.Status?.class) {
+    if (GMCP.Char.Status.class.indexOf("Dragon") > -1) {
+      res = "Dragon";
+    } else {
+      res = GMCP.Char.Status.class;
+    }
+  }
+
+  return res;
+};
+
 const DefencePriorities = ({ defs, defPrios, setDefPrios, classList }) => {
   const [keepup, setKeepup] = React.useState({ ...defPrios.keepup });
   const [staticDefs, setStaticDefs] = React.useState({ ...defPrios.static });
-  const [skill, setSkill] = React.useState(
-    typeof GMCP !== "undefined" && GMCP?.Char?.Status?.class
-      ? GMCP.Char.Status.class
-      : ""
-  );
+  const [skill, setSkill] = React.useState(getClass());
   const [defList, setDefList] = React.useState(Object.keys(defs));
 
   const handleChange = (e) => {

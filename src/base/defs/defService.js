@@ -133,6 +133,7 @@ export function defPrioSwap(def, prio) {
     sysLog("Called nexSys.defPrioSwap with an def that does not exist: " + def);
   } else {
     curDef.set_prio(prio);
+    eventStream.raiseEvent("ForcePopulateEvent");
   }
 }
 

@@ -58,11 +58,12 @@ export function haveAnAff(affs) {
 export function affPrioSwap(aff, prio) {
   const curAff = affs[aff];
   if (aff === undefined || curAff === undefined) {
-    /* nexSys.sysLog(
-          'Called nexSys.affPrioSwap with an aff that does not exist: ' + aff
-      )*/
+    nexSys.sysLog(
+      "Called nexSys.affPrioSwap with an aff that does not exist: " + aff
+    );
   } else {
     curAff.set_prio(prio);
+    eventStream.raiseEvent("ForcePopulateEvent");
   }
 }
 
