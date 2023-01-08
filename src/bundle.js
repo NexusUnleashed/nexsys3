@@ -10,11 +10,11 @@ import "./base/serverside/serversideEvents";
 import "./base/system/sysEvents";
 import "./base/system/systemOutput";
 import "./base/clientOverrides/prompt";
-import './base/clientOverrides/clientoverrides';
-import './base/clientOverrides/promptEvents';
+import "./base/clientOverrides/clientoverrides";
+import "./base/clientOverrides/promptEvents";
 import "./base/utilities/helpers";
 // Two stage importing for nexSys because we decoupled the eventStream
 // package from nexSys to be stand alone. Nexsys needs to be loaded in
 // THEN events loaded.
 
-//window.nexSys = nexSys;
+//globalThis.nexSys = nexSys;

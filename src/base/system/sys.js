@@ -2,27 +2,25 @@
 
 /* This function is strictly for localhost simulations */
 if (typeof nexusclient === "undefined") {
-  window.nexusclient = {
+  globalThis.nexusclient = {
     variables() {
       return {
         vars: {
-          nexSysSettings: {}
+          nexSysSettings: {},
         },
         get(txt) {
-          if (window.nexusclient.variables().vars[txt]) {
-            return window.nexusclient.variables().vars[txt];
+          if (globalThis.nexusclient.variables().vars[txt]) {
+            return globalThis.nexusclient.variables().vars[txt];
           } else {
             return false;
           }
         },
         set(txt, data) {
-          window.nexusclient.variables().vars[txt] = data;
-        }
+          globalThis.nexusclient.variables().vars[txt] = data;
+        },
       };
     },
   };
-
-  
 }
 
 export const sys = {
