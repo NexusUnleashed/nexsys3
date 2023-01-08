@@ -15,27 +15,28 @@ TODO topics
 
 - Curing priorities
 - Defense priorities
+- Automatic Priority swapping
 - Balances
 - Queueing manager (freeQueue, classQueue, fullQueue)
 - Precache manager
 - Custom prompt strings
 
-getCurrentAffs()
-haveAff()
-haveAffs()
-haveAnAff()
-affPrioSwap()
-haveABal()
-haveBal()
-haveBals()
-haveDef()
-defPrioSwap()
-defup()
-defoff()
-parry()
-sendCmd()
-sendInline()
-psend()
-rsend()
-replace()
-say()
+-- getCurrentAffs()
+-- haveAff()
+-- haveAffs()
+-- haveAnAff()
+-- affPrioSwap()
+-- haveABal()
+-- haveBal()
+-- haveBals()
+-- haveDef()
+-- defPrioSwap()
+-- defup()
+-- defoff()
+-- parry()
+-- sendCmd()
+-- sendInline()
+-- psend()
+-- rsend()
+-- replace()
+-- say()
