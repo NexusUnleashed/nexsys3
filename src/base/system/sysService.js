@@ -5,8 +5,8 @@ import { sys } from "./sys";
 export function sendCmd(cmd) {
   if (cmd) {
     // TODO Is this working to use the stunQueue instead of send?
-    //globalThis.nexusclient.send_commands(cmd);
-    nexSys.stunQueue.add(cmd);
+    globalThis.nexusclient.send_commands(cmd);
+    //nexSys.stunQueue.add(cmd);
   }
   eventStream.raiseEvent("SendCommandEvent", cmd);
 }
