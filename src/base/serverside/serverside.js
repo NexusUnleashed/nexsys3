@@ -4,5 +4,3 @@ export const serversideSettings = {
   affs: {},
   defs: {},
 };
-
-export const serversideDefencePriorityListStart = false;

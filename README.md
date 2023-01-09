@@ -20,7 +20,7 @@ TODO topics
 - Defense priorities
 - Automatic Priority swapping
 - Balances
-- Queueing manager (freeQueue, classQueue, fullQueue)
+- Queueing manager (freeQueue, classQueue, fullQueue, stunQueue)
 - Precache manager
 - Custom prompt strings
 
@@ -45,3 +45,23 @@ TODO API functions
 - rsend()
 - replace()
 - say()
+
+TODO in game aliases
+
+- pp (pause)
+- tt (target)
+- hh (hp/mana toggle)
+- defup
+- defoff
+- ma
+- br
+- ss
+- cl
+- p\* (parry)
+- ub
+- inra
+- event
+- logging
+- qcp (class queue prepend)
+- qp (free queue prepend)
+- qa (free queue add)

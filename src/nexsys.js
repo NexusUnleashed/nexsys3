@@ -161,7 +161,6 @@ const nexSys = {
   say: say,
 
   serversideSettings: serversideSettings,
-  serversideDefencePriorityListStart: serversideDefencePriorityListStart,
 
   updateModel: updateModel,
   updateList: updateList,

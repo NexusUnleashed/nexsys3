@@ -160,8 +160,7 @@ const initiateStartup = function (args) {
     separatorSet = true;
     if (args) {
       sys.settings.sep = args;
-      //nexusclient.variables().set("commandSeparator", args);
-      Object.assign(nexusclient.variables().vars.nexSysSettings, { sep: args });
+      nexusclient.variables().vars.nexSysSettings.systemSettings.sep = args;
     }
     sys.pause();
     const startupCommands = [
@@ -298,16 +297,3 @@ const setCuringStatusVars = function () {
   }
 };
 eventStream.registerEvent("ServersideSettingsCaptured", setCuringStatusVars);
-
-/*
-serversideDefencePriorityListStart = false;
-
-let disableTriggersOnPrompt = function() {
-  if(serversideDefencePriorityListStart) {
-      client.reflex_disable(client.reflex_find_by_name("trigger", "Curing Defence Priority List Line", true, true, "System"));
-  }
-  serversideDefencePriorityListStart = false;
-};
-
-eventStream.registerEvent('PromptEvent', disableTriggersOnPrompt);
-*/
