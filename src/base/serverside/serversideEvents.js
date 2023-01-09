@@ -70,7 +70,7 @@ const serversideDefencePrio = function (def) {
           );
         } else {
           serversideSettings.defs[def.name] = def.prio;
-          console.log("DEBUGGGG");
+          console.log("TODO Debug serversideDefencePrio");
           eventStream.raiseEvent(
             "PriorityDefOutputAdd",
             `${def.name} ${def.prio}`

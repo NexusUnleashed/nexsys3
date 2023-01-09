@@ -41,8 +41,6 @@ export const sys = {
   state: {
     paused: false,
     slowMode: false,
-    sep:
-      nexusclient.variables().get("nexSysSettings")?.commandSeparator ?? false,
     curingMethod: "Transmutation",
     sipPriority: "Health",
     sipHealthAt: 80,
