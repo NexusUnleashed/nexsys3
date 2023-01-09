@@ -16,7 +16,6 @@ const SystemSettings = ({ settings, setSettings }) => {
   const [open, setOpen] = React.useState(settings.sep);
 
   React.useEffect(() => {
-    console.log("render");
     setSettings({ ...stateSettings });
     //console.log(globalThis.nexSys.sys.settings);
     if (stateSettings.sep) {
@@ -27,6 +26,8 @@ const SystemSettings = ({ settings, setSettings }) => {
   }, [stateSettings]);
 
   const handleText = (e) => {
+    console.log(e.target.value);
+    globalThis.tester = e.target.value;
     setStateSettings({
       ...stateSettings,
       [e.target.id]: e.target.value,

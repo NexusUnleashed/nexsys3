@@ -9,7 +9,10 @@ https://github.com/jhuiAchaea/Nexsys
 
 ## API
 
-Maybe
+TODO issues
+
+- Don't use "\" for a command separator
+- Refresh or new tab on relog / login
 
 TODO topics
 
