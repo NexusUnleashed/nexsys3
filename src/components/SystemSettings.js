@@ -3,11 +3,14 @@ import * as React from "react";
 import {
   FormGroup,
   FormLabel,
+  ToggleButton,
+  ToggleButtonGroup,
   Typography,
   TextField,
   Alert,
   AlertTitle,
   Collapse,
+  Slider,
 } from "@mui/material";
 import ConfigSwitch from "./ConfigSwitch";
 
@@ -32,6 +35,27 @@ const SystemSettings = ({ settings, setSettings }) => {
       ...stateSettings,
       [e.target.id]: e.target.value,
     });
+  };
+  const handleCuringMethod = (e) => {
+    console.log(e.target.value);
+    setStateSettings((prev) => ({
+      ...prev,
+      curingMethod: e.target.value,
+    }));
+  };
+  const handleSipType = (e) => {
+    console.log(e.target.value);
+    setStateSettings((prev) => ({
+      ...prev,
+      sipPriority: e.target.value,
+    }));
+  };
+
+  const handleSlider = (e) => {
+    setStateSettings((prev) => ({
+      ...prev,
+      [e.target.name]: e.target.value,
+    }));
   };
 
   const handleCheck = (e) => {
@@ -59,77 +83,252 @@ const SystemSettings = ({ settings, setSettings }) => {
           </Alert>
         </Collapse>
       )}
-      <FormLabel component="legend">Nexsys Config</FormLabel>
-      <FormGroup>
-        <ConfigSwitch
-          label="Custom Prompt"
-          option={"customPrompt"}
-          handleCheck={handleCheck}
-          checked={stateSettings["customPrompt"]}
-        />
-        <ConfigSwitch
-          label="Echo Priority Set"
-          option={"echoPrioritySet"}
-          handleCheck={handleCheck}
-          checked={stateSettings["echoPrioritySet"]}
-        />
-        <ConfigSwitch
-          label="Echo Aff Got"
-          option={"echoAffGot"}
-          handleCheck={handleCheck}
-          checked={stateSettings["echoAffGot"]}
-        />
-        <ConfigSwitch
-          label="Echo Aff Lost"
-          option={"echoAffLost"}
-          handleCheck={handleCheck}
-          checked={stateSettings["echoAffLost"]}
-        />
-        <ConfigSwitch
-          label="Echo Balance Got"
-          option={"echoBalanceGot"}
-          handleCheck={handleCheck}
-          checked={stateSettings["echoBalanceGot"]}
-        />
-        <ConfigSwitch
-          label="Echo Balance Lost"
-          option={"echoBalanceLost"}
-          handleCheck={handleCheck}
-          checked={stateSettings["echoBalanceLost"]}
-        />
-        <ConfigSwitch
-          label="Echo Def Got"
-          option={"echoDefGot"}
-          handleCheck={handleCheck}
-          checked={stateSettings["echoDefGot"]}
-        />
-        <ConfigSwitch
-          label="Echo Def Lost"
-          option={"echoDefLost"}
-          handleCheck={handleCheck}
-          checked={stateSettings["echoDefLost"]}
-        />
-        <ConfigSwitch
-          label="Echo Trackable Got"
-          option={"echoTrackableGot"}
-          handleCheck={handleCheck}
-          checked={stateSettings["echoTrackableGot"]}
-        />
-        <ConfigSwitch
-          label="Echo Trackable Lost"
-          option={"echoTrackableLost"}
-          handleCheck={handleCheck}
-          checked={stateSettings["echoTrackableLost"]}
-        />
-        <TextField
-          id="sep"
-          onChange={handleText}
-          value={stateSettings.sep}
-          size="small"
-          label="Command Separator"
-          style={{ width: "10em", margin: "10px 0 0 0" }}
-        />
-      </FormGroup>
+      <div style={{ display: "flex", gap: "50px" }}>
+        <div>
+          <FormLabel component="legend" sx={{ margin: 1 }}>
+            Nexsys Config
+          </FormLabel>
+          <FormGroup>
+            <ConfigSwitch
+              label="Custom Prompt"
+              option={"customPrompt"}
+              handleCheck={handleCheck}
+              checked={stateSettings["customPrompt"]}
+            />
+            <ConfigSwitch
+              label="Echo Priority Set"
+              option={"echoPrioritySet"}
+              handleCheck={handleCheck}
+              checked={stateSettings["echoPrioritySet"]}
+            />
+            <ConfigSwitch
+              label="Echo Aff Got"
+              option={"echoAffGot"}
+              handleCheck={handleCheck}
+              checked={stateSettings["echoAffGot"]}
+            />
+            <ConfigSwitch
+              label="Echo Aff Lost"
+              option={"echoAffLost"}
+              handleCheck={handleCheck}
+              checked={stateSettings["echoAffLost"]}
+            />
+            <ConfigSwitch
+              label="Echo Balance Got"
+              option={"echoBalanceGot"}
+              handleCheck={handleCheck}
+              checked={stateSettings["echoBalanceGot"]}
+            />
+            <ConfigSwitch
+              label="Echo Balance Lost"
+              option={"echoBalanceLost"}
+              handleCheck={handleCheck}
+              checked={stateSettings["echoBalanceLost"]}
+            />
+            <ConfigSwitch
+              label="Echo Def Got"
+              option={"echoDefGot"}
+              handleCheck={handleCheck}
+              checked={stateSettings["echoDefGot"]}
+            />
+            <ConfigSwitch
+              label="Echo Def Lost"
+              option={"echoDefLost"}
+              handleCheck={handleCheck}
+              checked={stateSettings["echoDefLost"]}
+            />
+            <ConfigSwitch
+              label="Echo Trackable Got"
+              option={"echoTrackableGot"}
+              handleCheck={handleCheck}
+              checked={stateSettings["echoTrackableGot"]}
+            />
+            <ConfigSwitch
+              label="Echo Trackable Lost"
+              option={"echoTrackableLost"}
+              handleCheck={handleCheck}
+              checked={stateSettings["echoTrackableLost"]}
+            />
+            <TextField
+              id="sep"
+              onChange={handleText}
+              value={stateSettings.sep}
+              size="small"
+              label="Command Separator"
+              style={{ width: "10em", margin: "10px 0 0 0" }}
+            />
+          </FormGroup>
+        </div>
+        <div>
+          <FormLabel component="legend" sx={{ margin: 1 }}>
+            Curing Config
+          </FormLabel>
+          <FormGroup>
+            <ToggleButtonGroup
+              color="primary"
+              value={stateSettings["curingMethod"]}
+              exclusive
+              size="small"
+              onChange={handleCuringMethod}
+              aria-label="Curing Type"
+            >
+              <ToggleButton
+                value="Transmutation"
+                sx={{ width: 95, height: 25 }}
+              >
+                Transmutation
+              </ToggleButton>
+              <ToggleButton value="Concoctions" sx={{ width: 95, height: 25 }}>
+                Concoctions
+              </ToggleButton>
+            </ToggleButtonGroup>
+            <ToggleButtonGroup
+              color="primary"
+              value={stateSettings["sipPriority"]}
+              exclusive
+              size="small"
+              onChange={handleSipType}
+              aria-label="Sip Type"
+            >
+              <ToggleButton value="Health" sx={{ width: 95, height: 25 }}>
+                Health
+              </ToggleButton>
+              <ToggleButton value="Mana" sx={{ width: 95, height: 25 }}>
+                Mana
+              </ToggleButton>
+            </ToggleButtonGroup>
+            <ConfigSwitch
+              label="Batching"
+              option={"batch"}
+              handleCheck={handleCheck}
+              checked={stateSettings["batch"]}
+            />
+            <ConfigSwitch
+              label="Tree Tatoo"
+              option={"tree"}
+              handleCheck={handleCheck}
+              checked={stateSettings["tree"]}
+            />
+            <ConfigSwitch
+              label="Focus"
+              option={"focus"}
+              handleCheck={handleCheck}
+              checked={stateSettings["focus"]}
+            />
+            <ConfigSwitch
+              label="Focus over Herbs"
+              option={"focusOverHerbs"}
+              handleCheck={handleCheck}
+              checked={stateSettings["focusOverHerbs"]}
+            />
+            <div style={{ display: "flex" }}>
+              <ConfigSwitch
+                label="Clotting at"
+                option={"clot"}
+                handleCheck={handleCheck}
+                checked={stateSettings["clot"]}
+              />
+              <TextField
+                id="clotAt"
+                onChange={handleText}
+                value={stateSettings.clotAt}
+                size="small"
+                style={{ width: "5em" }}
+              />
+            </div>
+            <ConfigSwitch
+              label="Insomnia"
+              option={"insomnia"}
+              handleCheck={handleCheck}
+              checked={stateSettings["insomnia"]}
+            />
+          </FormGroup>
+        </div>
+        <div style={{ width: 150 }}>
+          <FormLabel component="legend" sx={{ margin: 1 }}>
+            Curing Config Cont.
+          </FormLabel>
+          <FormGroup>
+            <FormLabel component="legend">Sip health at</FormLabel>
+            <Slider
+              aria-label="Always visible"
+              name="sipHealthAt"
+              value={stateSettings["sipHealthAt"]}
+              onChange={handleSlider}
+              step={5}
+              size="small"
+              marks={false}
+              valueLabelDisplay="auto"
+            />
+            <FormLabel component="legend">Sip mana at</FormLabel>
+            <Slider
+              aria-label="Always visible"
+              name="sipManaAt"
+              size="small"
+              value={stateSettings["sipManaAt"]}
+              onChange={handleSlider}
+              step={5}
+              marks={false}
+              valueLabelDisplay="auto"
+            />
+            <FormLabel component="legend">Moss health at</FormLabel>
+            <Slider
+              aria-label="Always visible"
+              name="mossHealthAt"
+              size="small"
+              value={stateSettings["mossHealthAt"]}
+              onChange={handleSlider}
+              step={5}
+              marks={false}
+              valueLabelDisplay="auto"
+            />
+            <FormLabel component="legend">Moss mana at</FormLabel>
+            <Slider
+              aria-label="Always visible"
+              name="mossManaAt"
+              size="small"
+              value={stateSettings["mossManaAt"]}
+              onChange={handleSlider}
+              step={5}
+              marks={false}
+              valueLabelDisplay="auto"
+            />
+            <FormLabel component="legend">Fractures above</FormLabel>
+            <Slider
+              aria-label="Always visible"
+              name="fracturesAbove"
+              size="small"
+              value={stateSettings["fracturesAbove"]}
+              onChange={handleSlider}
+              step={5}
+              marks={false}
+              valueLabelDisplay="auto"
+            />
+            <FormLabel component="legend">Clot above</FormLabel>
+            <Slider
+              aria-label="Always visible"
+              name="clotAbove"
+              size="small"
+              value={stateSettings["clotAbove"]}
+              onChange={handleSlider}
+              step={5}
+              marks={false}
+              valueLabelDisplay="auto"
+            />
+            <FormLabel component="legend">Mana abilities above</FormLabel>
+            <Slider
+              aria-label="Always visible"
+              name="manaAbilitiesAbove"
+              size="small"
+              value={stateSettings["manaAbilitiesAbove"]}
+              onChange={handleSlider}
+              step={5}
+              marks={false}
+              valueLabelDisplay="auto"
+            />
+          </FormGroup>
+        </div>
+      </div>
     </div>
   );
 };

@@ -28,7 +28,6 @@ export const updateModel = function (name, newModel) {
     switch (name) {
       case "cacheSettings":
         cacheTable = { ...newModel };
-        updatePrecache();
         break;
       case "systemSettings":
         sys.settings = { ...newModel };
@@ -130,6 +129,7 @@ export const updatePriorities = () => {
     defs[def].set_default_prio(defPrios.keepup[def]);
   }
   */
+  updatePrecache();
 
   for (let aff in affTable.prios) {
     affs[aff]?.set_default_prio(affTable.prios[aff]);
@@ -145,6 +145,7 @@ export function loadCustomSettings() {
   loadDefSettings();
   loadCacheSettings();
   loadLustList();
+  updatePriorities();
 }
 
 function saveCustomSettings() {

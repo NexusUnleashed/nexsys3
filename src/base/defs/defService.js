@@ -5,6 +5,7 @@ import { sysLog } from "../system/sys";
 import { limbs } from "../utilities/commonTable";
 import { sys } from "../system/sys";
 import { defPrios } from "./defTable.js";
+import { serversideSettings } from "../serverside/serverside";
 
 export function getCurrentDefs() {
   const current_defs = [];

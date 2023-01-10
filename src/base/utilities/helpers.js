@@ -57,8 +57,6 @@ Array.arraysIntersect = function (arr1, arr2) {
 };
 
 Array.arraysIntersectK = function (arr1, arr2) {
-  console.log(arr1);
-  console.log(arr2);
   arr1 = !Array.isArray(arr1) ? Object.keys(arr1) : arr1;
   arr2 = !Array.isArray(arr2) ? Object.keys(arr2) : arr2;
   let res = arr1.find((e) => arr2.indexOf(e) !== -1);
@@ -72,9 +70,13 @@ Array.arraysIntersectK = function (arr1, arr2) {
 };
 
 Array.equals = function (arr1, arr2) {
-  if (arr1.length !== arr2.length) { return false; };
+  if (arr1.length !== arr2.length) {
+    return false;
+  }
 
-  if (!arr1.every((v, i) => v === arr2[i])) { return false; };
+  if (!arr1.every((v, i) => v === arr2[i])) {
+    return false;
+  }
 
   return true;
 };

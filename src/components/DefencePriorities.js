@@ -53,8 +53,7 @@ const DefenceRow = ({ def, defs, defPrios, setKeepup, setStaticDefs }) => {
       return { ...prevState, ...{ [def]: checked ? 0 : prio } };
     });
   }, [prio, checked]);
-  //console.log(`Def: ${def} Prio: ${prio}`);
-  //console.log(defPrios);
+
   return (
     <TableRow
       key={def}
@@ -80,7 +79,7 @@ const DefenceRow = ({ def, defs, defPrios, setKeepup, setStaticDefs }) => {
           size="small"
           sx={{ width: "8ch" }}
           variant="outlined"
-          defaultValue={checked ? defPrios.static[def] : defPrios.keepup[def]}
+          value={prio}
           onChange={handleText}
         />
       </TableCell>
@@ -199,7 +198,7 @@ const DefencePriorities = ({ defs, defPrios, setDefPrios, classList }) => {
               )
               .map((def, i) => (
                 <DefenceRow
-                  key={i}
+                  key={def}
                   def={def}
                   defs={defs}
                   defPrios={defPrios}

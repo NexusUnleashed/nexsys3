@@ -22,7 +22,9 @@ const getCustomPrompt = () => {
       return;
     }
     if (vars.hasOwnProperty(txt)) {
-      promptLine.appendChild(nexSys.prompt.generate_chunk(vars[txt].text, vars[txt].fg, vars[txt].bg));
+      promptLine.appendChild(
+        nexSys.prompt.generate_chunk(vars[txt].text, vars[txt].fg, vars[txt].bg)
+      );
     } else {
       promptLine.appendChild(nexSys.prompt.generate_chunk(txt, fg, bg));
     }
@@ -125,29 +127,29 @@ prompt.vars = {
 };
 
 prompt.cureColors = {
-  antimony: { fg: "olive", bg: "" },
-  argentum: { fg: "royalblue", bg: "" },
-  arsenic: { fg: "", bg: "" },
-  aurum: { fg: "ForestGreen", bg: "" },
-  azurite: { fg: "", bg: "" },
-  calamine: { fg: "", bg: "" },
-  calcite: { fg: "slategray", bg: "" },
+  antimony: { fg: "olive", bg: "" }, // eat
+  argentum: { fg: "royalblue", bg: "" }, // eat
+  arsenic: { fg: "", bg: "" }, // eat
+  aurum: { fg: "ForestGreen", bg: "" }, // eat
+  azurite: { fg: "", bg: "" }, // eat
+  calamine: { fg: "", bg: "" }, // eat
+  calcite: { fg: "slategray", bg: "" }, // eat
   cinnabar: { fg: "greenyellow", bg: "" }, // smoke
-  cuprum: { fg: "DeepSkyBlue", bg: "" },
-  ferrum: { fg: "DarkOrange", bg: "" },
+  cuprum: { fg: "DeepSkyBlue", bg: "" }, // eat
+  ferrum: { fg: "DarkOrange", bg: "" }, // eat
   gypsum: { fg: "", bg: "" },
-  magnesium: { fg: "Red", bg: "" },
-  plumbum: { fg: "Gold", bg: "" },
+  magnesium: { fg: "Red", bg: "" }, // eat
+  plumbum: { fg: "Gold", bg: "" }, // eat
   quartz: { fg: "", bg: "" },
   quicksilver: { fg: "", bg: "" },
   realgar: { fg: "firebrick", bg: "" }, // smoke
-  stannum: { fg: "Tan", bg: "" },
+  stannum: { fg: "Tan", bg: "" }, // eat
   caloric: { fg: "darkseagreen", bg: "" }, // apply
   mending: { fg: "orchid", bg: "" }, // apply
   epidermal: { fg: "sienna", bg: "" }, // apply
   restoration: { fg: "darkviolet", bg: "" }, // apply
   health: { fg: "lightpink", bg: "" }, // sip
-  writhe: { fg: "paleyellow", bg: "darkslategray" }
+  writhe: { fg: "paleyellow", bg: "darkslategray" }, // eat
 };
 
 prompt.affAbbrev = {
