@@ -43,7 +43,7 @@ const Configuration = ({
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <Box sx={{ width: "800px", height: "600px" }}>
+      <Box sx={{ width: "800px" }}>
         <TabContext value={value}>
           <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
             <TabList
