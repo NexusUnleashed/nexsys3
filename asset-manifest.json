@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/nexsys3/static/css/main.e6c13ad2.css",
-    "main.js": "/nexsys3/static/js/main.a0cad80e.js",
+    "main.js": "/nexsys3/static/js/main.adb735ee.js",
     "static/js/787.f2cacdcb.chunk.js": "/nexsys3/static/js/787.f2cacdcb.chunk.js",
     "index.html": "/nexsys3/index.html",
     "main.e6c13ad2.css.map": "/nexsys3/static/css/main.e6c13ad2.css.map",
-    "main.a0cad80e.js.map": "/nexsys3/static/js/main.a0cad80e.js.map",
+    "main.adb735ee.js.map": "/nexsys3/static/js/main.adb735ee.js.map",
     "787.f2cacdcb.chunk.js.map": "/nexsys3/static/js/787.f2cacdcb.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.e6c13ad2.css",
-    "static/js/main.a0cad80e.js"
+    "static/js/main.adb735ee.js"
   ]
 }
