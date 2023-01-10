@@ -83,7 +83,7 @@ import {
   shortDirs,
   classList,
 } from "./base/utilities/commonTable";
-import { replace, say } from "./base/utilities/general";
+import { replace, replaceHTML, say } from "./base/utilities/general";
 import { getLustCommands, rejectList, whiteList } from "./base/utilities/lust";
 import { startup } from "./base/utilities/startup";
 import NexDialog from "./components/NexDialog";
@@ -158,6 +158,7 @@ const nexSys = {
   timeDiffNow: timeDiffNow,
 
   replace: replace,
+  replaceHTML: replaceHTML,
   say: say,
 
   serversideSettings: serversideSettings,

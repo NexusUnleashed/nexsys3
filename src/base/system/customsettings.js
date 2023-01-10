@@ -8,6 +8,7 @@ import { sys } from "./sys";
 import { defs } from "../defs/defs";
 import { affs } from "../affs/affs";
 import { updatePrecache } from "../cache/cacheService";
+import { repop } from "../defs/defService";
 
 // Khaseem: Removed the CustomCureTable, CustomBalanceTable, and CustomDefTable
 // these should be static entries. I do not see the need to store these variables.
@@ -124,15 +125,18 @@ const loadLustList = function () {
 };
 
 export const updatePriorities = () => {
+  /*
   for (let def in defPrios.keepup) {
     defs[def].set_default_prio(defPrios.keepup[def]);
   }
+  */
 
   for (let aff in affTable.prios) {
     affs[aff]?.set_default_prio(affTable.prios[aff]);
   }
 
-  eventStream.raiseEvent("ForcePopulateEvent");
+  repop();
+  //ventStream.raiseEvent("ForcePopulateEvent");
 };
 
 export function loadCustomSettings() {

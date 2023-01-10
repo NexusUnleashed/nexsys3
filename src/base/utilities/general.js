@@ -19,7 +19,18 @@ export const replace = (...args) => {
 
   return true;
 };
+export const replaceHTML = (...args) => {
+  let htmlLine = document.createElement("span");
 
+  for (let i = 0; i < args.length; i += 3) {
+    htmlLine.appendChild(generateChunk(args[i], args[i + 1], args[i + 2]));
+  }
+  globalThis.nexusclient.current_line.parsed_line.formatted = () => {
+    return htmlLine.outerHTML;
+  };
+
+  return true;
+};
 const speech = new SpeechSynthesisUtterance();
 speech.voice =
   globalThis.speechSynthesis

@@ -77,7 +77,7 @@ const balances = {
     length: 6.0,
   },
   homunculus: {
-    length: 12.0, // CUSTOM
+    length: 12.0, // CUSTOM Alchemist
   },
   fitness: {
     length: 10.0,
@@ -110,7 +110,10 @@ const balances = {
     length: 4.0,
   },
   entity: {
-    length: 4.0, // CUSTOM
+    length: 4.0, // CUSTOM Occultist
+  },
+  word: {
+    length: 5.0, // CUSTOM Depthswalker
   },
 };
 

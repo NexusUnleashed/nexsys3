@@ -21,7 +21,11 @@ const getCustomPrompt = () => {
     if (txt.length === 0) {
       return;
     }
-    promptLine.appendChild(nexSys.prompt.generate_chunk(txt, fg, bg));
+    if (vars.hasOwnProperty(txt)) {
+      promptLine.appendChild(nexSys.prompt.generate_chunk(vars[txt].text, vars[txt].fg, vars[txt].bg));
+    } else {
+      promptLine.appendChild(nexSys.prompt.generate_chunk(txt, fg, bg));
+    }
   };
 
   if (vars.blackout) {
@@ -29,18 +33,18 @@ const getCustomPrompt = () => {
     return promptLine.outerHTML;
   }
 
-  add(vars.paused.text, vars.paused.fg, vars.paused.bg);
-  add(vars.aeon.text, vars.aeon.fg, vars.aeon.bg);
-  add(vars.retard.text, vars.retard.fg, vars.retard.bg);
+  add("paused");
+  add("aeon");
+  add("retard");
   if (nexSys.defs.prismatic.have) {
     add("[[", vars.prismatic.fg, vars.prismatic.bg);
   }
   if (nexSys.defs.shield.have) {
     add("((", vars.shield.fg, vars.shield.bg);
   }
-  add(vars.h.text, vars.h.fg, vars.h.bg);
+  add("h");
   add("(" + vars.ph.text + "), ", vars.h.fg, vars.h.bg);
-  add(vars.m.text, vars.m.fg, vars.m.bg);
+  add("m");
   add("(" + vars.pm.text + ") ", vars.m.fg, vars.m.bg);
   if (nexSys.sys.isClass("Occultist")) {
     add(`${nexSys.sys.char.karma}K `, vars.karma.fg, vars.karma.bg);
@@ -48,12 +52,13 @@ const getCustomPrompt = () => {
   if (vars.rage.text > 0) {
     add(`${vars.rage.text}R `, vars.rage.fg, vars.rage.bg);
   }
-  add(vars.eq.text + vars.bal.text + "|", vars.eq.fg, vars.eq.bg);
-  add(
-    `${vars.c.text}${vars.k.text}${vars.d.text}${vars.b.text}`,
-    vars.c.fg,
-    vars.c.bg
-  );
+  add("eq");
+  add("bal");
+  add("|");
+  add("c");
+  add("k");
+  add("d");
+  add("b");
   if (nexSys.defs.shield.have) {
     add("))", vars.shield.fg, vars.shield.bg);
   }
@@ -62,8 +67,8 @@ const getCustomPrompt = () => {
   }
   add(" ", "", "");
   promptLine.appendChild(vars.affString);
-  add(vars.diffh.text, vars.diffh.fg, vars.diffh.bg);
-  add(vars.diffm.text, vars.diffm.fg, vars.diffm.bg);
+  add("diffh");
+  add("diffm");
 
   vars.diffh.text = "";
   vars.diffm.text = "";
@@ -106,6 +111,7 @@ prompt.vars = {
   affs: {},
   affString: document.createElement("span"),
   paused: { text: "", fg: "red", bg: "" },
+  rage: { text: "", fg: "red", bg: "" },
   retard: { text: "", fg: "blue", bg: "" },
   aeon: { text: "", fg: "red", bg: "" },
   kai: { text: "", fg: "", bg: "" },
@@ -141,7 +147,7 @@ prompt.cureColors = {
   epidermal: { fg: "sienna", bg: "" }, // apply
   restoration: { fg: "darkviolet", bg: "" }, // apply
   health: { fg: "lightpink", bg: "" }, // sip
-  writhe: { fg: "paleyellow", bg:  "darkslategray" }
+  writhe: { fg: "paleyellow", bg: "darkslategray" }
 };
 
 prompt.affAbbrev = {
@@ -217,7 +223,7 @@ prompt.affAbbrev = {
   laceratedthroat: { text: "lac2", ...prompt.cureColors.restoration },
   latched: { text: "latch", ...prompt.cureColors.health },
   lethargy: { text: "let", ...prompt.cureColors.ferrum },
-  lightbind: { text: "light", fg: "", bg: ""},
+  lightbind: { text: "light", fg: "", bg: "" },
   loneliness: { text: "lon", ...prompt.cureColors.argentum },
   lovers: { text: "love", ...prompt.cureColors.cuprum },
   manaleech: { text: "man", ...prompt.cureColors.realgar },

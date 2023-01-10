@@ -6,6 +6,7 @@ import { sys } from "../system/sys";
 import { limbs } from "../utilities/commonTable";
 import { defPrios } from "./defTable";
 import { serversideSettings } from "../serverside/serverside";
+import { repop } from "./defService";
 
 let eventGmcpDefList = function (list) {
   let prev_list = getCurrentDefs();
@@ -54,6 +55,7 @@ let eventGmcpDefRemove = function (def) {
 eventStream.registerEvent("Char.Defences.Remove", eventGmcpDefRemove);
 
 //TODO reevaluate how this function handles defence up.
+/*
 function repop(args) {
   if (serversideSettings.loaded) {
     const keepupPrios = defPrios.keepup;
@@ -90,6 +92,9 @@ function repop(args) {
     eventStream.raiseEvent("ForcePopulateEvent");
   }
 }
+*/
+
+
 
 eventStream.registerEvent("ClassChanged", repop);
 eventStream.registerEvent("ServersideSettingsCaptured", repop);

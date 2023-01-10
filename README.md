@@ -13,6 +13,7 @@ TODO issues
 
 - Don't use "\" for a command separator
 - Refresh or new tab on relog / login
+- Lacking full support for "newer" classes: Depthswalker, Psion, Pariah, Unnamable, Elemental Lords
 
 TODO topics
 

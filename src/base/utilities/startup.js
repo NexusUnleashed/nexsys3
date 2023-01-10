@@ -13,6 +13,7 @@ export const startup = () => {
       );
   }
 
+  document.getElementById('nexsys-modal')?.remove();
   document
     .getElementById("modal-root")
     .appendChild(

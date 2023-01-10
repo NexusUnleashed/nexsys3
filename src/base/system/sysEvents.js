@@ -3,7 +3,8 @@
 import { sys } from "./sys";
 import { bals } from "../balances/balances";
 
-const rageRegex = /(\d+)/g;
+const valueRegex = /(\d+)/;
+const classSpecific = /(\w+): (\w+)/;
 const setCharVitals = function (vitals) {
   const sysChar = sys.char;
   const oh = sysChar.h;
@@ -24,7 +25,7 @@ const setCharVitals = function (vitals) {
   const maxm = vitals.maxmp || omaxm;
   const maxe = vitals.maxep || omaxe;
   const maxw = vitals.maxwp || omaxw;
-  const rage = parseInt(vitals.charstats[1].match(rageRegex)[0]);
+  const rage = parseInt(vitals.charstats[1].match(valueRegex)[0]);
 
   sysChar.h = h;
   sysChar.m = m;
@@ -35,6 +36,38 @@ const setCharVitals = function (vitals) {
   sysChar.maxe = maxe;
   sysChar.maxw = maxw;
   sysChar.rage = rage;
+
+  if (vitals.charstats.length > 2) {
+    const class1 = vitals.charstats[2].match(classSpecific);
+    const id = class1[1].toLowerCase();
+    let val = "";
+    if (['Yes', 'No'].indexOf(class1[2]) > -1) {
+      if (class1[2] === 'Yes' && !bals[id].have) {
+        eventStream.raiseEvent(`${id}GotBalEvent`);
+      } else if (class1[2] === 'No' && bals[id].have) {
+        eventStream.raiseEvent(`${id}LostBalEvent`);
+      }
+    } else {
+      val = parseInt(class1[2]);
+      sysChar[id] = val;
+    }
+  }
+
+  if (vitals.charstats.length > 3) {
+    const class1 = vitals.charstats[2].match(classSpecific);
+    const id = class1[1].toLowerCase();
+    let val = "";
+    if (['Yes', 'No'].indexOf(class1[2]) > -1) {
+      if (class1[2] === 'Yes' && !bals[id].have) {
+        eventStream.raiseEvent(`${id}GotBalEvent`);
+      } else if (class1[2] === 'No' && bals[id].have) {
+        eventStream.raiseEvent(`${id}LostBalEvent`);
+      }
+    } else {
+      val = parseInt(class1[2]);
+      sysChar[id] = val;
+    }
+  }
 
   if (h !== oh) {
     eventStream.raiseEvent("HealthUpdated", {
@@ -145,7 +178,7 @@ const lifevisionCheck = function () {
 };
 eventStream.registerEvent("PromptEvent", lifevisionCheck);
 
-const karmaRegex = /(\d+)/g;
+/*
 const occultistStatsGmcpBalance = function (vitals) {
   if (!sys.isClass("Occultist")) {
     return;
@@ -155,7 +188,7 @@ const occultistStatsGmcpBalance = function (vitals) {
     vitals.charstats.length > 2 &&
     vitals.charstats[2].indexOf("Karma") > -1
   ) {
-    sys.char.karma = parseInt(vitals.charstats[2].match(karmaRegex)[0]);
+    sys.char.karma = parseInt(vitals.charstats[2].match(valueRegex)[0]);
   }
   if (vitals.charstats.includes("Entity: Yes") && !bals["entity"].have) {
     eventStream.raiseEvent("entityGotBalEvent");
@@ -164,3 +197,4 @@ const occultistStatsGmcpBalance = function (vitals) {
   }
 };
 eventStream.registerEvent("Char.Vitals", occultistStatsGmcpBalance);
+*/
