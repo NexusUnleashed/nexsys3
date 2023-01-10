@@ -5,10 +5,10 @@ import { defPrios } from "../defs/defTable";
 import { cacheTable } from "../cache/cacheTable";
 import { whiteList } from "../utilities/lust";
 import { sys } from "./sys";
-import { defs } from "../defs/defs";
 import { affs } from "../affs/affs";
 import { updatePrecache } from "../cache/cacheService";
 import { repop } from "../defs/defService";
+import { serversideSettings } from "../serverside/serverside";
 
 // Khaseem: Removed the CustomCureTable, CustomBalanceTable, and CustomDefTable
 // these should be static entries. I do not see the need to store these variables.
@@ -129,6 +129,15 @@ export const updatePriorities = () => {
     defs[def].set_default_prio(defPrios.keepup[def]);
   }
   */
+  sys.state = { ...sys.settings };
+  for (const status in serversideSettings.status) {
+    const curStatus = serversideSettings.status[status];
+    const systemStatus = sys.state[status];
+    if (curStatus !== systemStatus) {
+      sys.setSystemStatus(status, systemStatus);
+    }
+  }
+
   updatePrecache();
 
   for (let aff in affTable.prios) {

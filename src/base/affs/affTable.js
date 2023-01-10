@@ -438,7 +438,7 @@ const affs = {
       blindness: true,
       deafness: true,
       insomnia: true,
-      // insulation: true  // CUSTOM not an aff
+      // insulation: true  // TODO not an aff?
     },
     countable: {
       // TODO: Is pressure a countable aff?

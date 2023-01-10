@@ -3,7 +3,7 @@ import { AffDef } from "../affs/Aff";
 import { defs } from "../defs/defs";
 import { sys } from "../system/sys";
 import { sendCmd, sendInline } from "../system/sysService";
-import { serversideSettings } from "./serverside";
+import { serversideSettings, setCuringStatusVars } from "./serverside";
 import { echo } from "../echo/echos";
 
 const serversideSlowModeOn = function (args) {
@@ -287,7 +287,7 @@ const curingStartupComplete = function (args) {
 };
 eventStream.registerEvent("CuringStartupCompleteEvent", curingStartupComplete);
 
-const setCuringStatusVars = function () {
+/*const setCuringStatusVars = function () {
   for (const status in serversideSettings.status) {
     const curStatus = serversideSettings.status[status];
     const systemStatus = sys.state[status];
@@ -296,4 +296,6 @@ const setCuringStatusVars = function () {
     }
   }
 };
+*/
+
 eventStream.registerEvent("ServersideSettingsCaptured", setCuringStatusVars);

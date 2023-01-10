@@ -5,7 +5,6 @@ import {
   FormLabel,
   ToggleButton,
   ToggleButtonGroup,
-  Typography,
   TextField,
   Alert,
   AlertTitle,
@@ -20,7 +19,7 @@ const SystemSettings = ({ settings, setSettings }) => {
 
   React.useEffect(() => {
     setSettings({ ...stateSettings });
-    //console.log(globalThis.nexSys.sys.settings);
+    console.log(stateSettings);
     if (stateSettings.sep) {
       setOpen(false);
     } else {
@@ -29,47 +28,23 @@ const SystemSettings = ({ settings, setSettings }) => {
   }, [stateSettings]);
 
   const handleText = (e) => {
-    console.log(e.target.value);
-    globalThis.tester = e.target.value;
     setStateSettings({
       ...stateSettings,
       [e.target.id]: e.target.value,
     });
   };
-  const handleCuringMethod = (e) => {
-    console.log(e.target.value);
-    setStateSettings((prev) => ({
-      ...prev,
-      curingMethod: e.target.value,
-    }));
-  };
-  const handleSipType = (e) => {
-    console.log(e.target.value);
-    setStateSettings((prev) => ({
-      ...prev,
-      sipPriority: e.target.value,
-    }));
+  const handleTextNumbers = (e) => {
+    setStateSettings({
+      ...stateSettings,
+      [e.target.id]: parseInt(e.target.value) || e.target.value,
+    });
   };
 
-  const handleSlider = (e) => {
-    setStateSettings((prev) => ({
-      ...prev,
-      [e.target.name]: e.target.value,
-    }));
+  const handleSelection = (e) => {
+    setStateSettings((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
   const handleCheck = (e) => {
-    /*
-    setStateSettings((prev) => {
-      prev[e.target.id] = e.target.checked;
-      return { ...prev };
-    });
-    */
-    /*
-    const temp = { ...stateSettings };
-    temp[e.target.id] = e.target.checked;
-    setStateSettings({ ...temp });
-    */
     setStateSettings((prev) => ({ ...prev, [e.target.id]: e.target.checked }));
   };
 
@@ -166,19 +141,20 @@ const SystemSettings = ({ settings, setSettings }) => {
           <FormGroup>
             <ToggleButtonGroup
               color="primary"
-              value={stateSettings["curingMethod"]}
+              value={stateSettings.curingMethod}
               exclusive
               size="small"
-              onChange={handleCuringMethod}
+              onChange={handleSelection}
               aria-label="Curing Type"
             >
               <ToggleButton
                 value="Transmutation"
+                name="curingMethod"
                 sx={{ width: 95, height: 25 }}
               >
                 Transmutation
               </ToggleButton>
-              <ToggleButton value="Concoctions" sx={{ width: 95, height: 25 }}>
+              <ToggleButton value="Concoctions" name="curingMethod" sx={{ width: 95, height: 25 }}>
                 Concoctions
               </ToggleButton>
             </ToggleButtonGroup>
@@ -187,13 +163,13 @@ const SystemSettings = ({ settings, setSettings }) => {
               value={stateSettings["sipPriority"]}
               exclusive
               size="small"
-              onChange={handleSipType}
+              onChange={handleSelection}
               aria-label="Sip Type"
             >
-              <ToggleButton value="Health" sx={{ width: 95, height: 25 }}>
+              <ToggleButton value="Health" name="sipPriority" sx={{ width: 95, height: 25 }}>
                 Health
               </ToggleButton>
-              <ToggleButton value="Mana" sx={{ width: 95, height: 25 }}>
+              <ToggleButton value="Mana" name="sipPriority" sx={{ width: 95, height: 25 }}>
                 Mana
               </ToggleButton>
             </ToggleButtonGroup>
@@ -230,7 +206,9 @@ const SystemSettings = ({ settings, setSettings }) => {
               />
               <TextField
                 id="clotAt"
-                onChange={handleText}
+                error={stateSettings.clotAt < 0 || !Number.isInteger(parseInt(stateSettings.clotAt)) ? true : false}
+                label={stateSettings.clotAt < 0 || !Number.isInteger(parseInt(stateSettings.clotAt)) ? "error" : ""}
+                onChange={handleTextNumbers}
                 value={stateSettings.clotAt}
                 size="small"
                 style={{ width: "5em" }}
@@ -254,7 +232,7 @@ const SystemSettings = ({ settings, setSettings }) => {
               aria-label="Always visible"
               name="sipHealthAt"
               value={stateSettings["sipHealthAt"]}
-              onChange={handleSlider}
+              onChange={handleSelection}
               step={5}
               size="small"
               marks={false}
@@ -266,7 +244,7 @@ const SystemSettings = ({ settings, setSettings }) => {
               name="sipManaAt"
               size="small"
               value={stateSettings["sipManaAt"]}
-              onChange={handleSlider}
+              onChange={handleSelection}
               step={5}
               marks={false}
               valueLabelDisplay="auto"
@@ -277,7 +255,7 @@ const SystemSettings = ({ settings, setSettings }) => {
               name="mossHealthAt"
               size="small"
               value={stateSettings["mossHealthAt"]}
-              onChange={handleSlider}
+              onChange={handleSelection}
               step={5}
               marks={false}
               valueLabelDisplay="auto"
@@ -288,7 +266,7 @@ const SystemSettings = ({ settings, setSettings }) => {
               name="mossManaAt"
               size="small"
               value={stateSettings["mossManaAt"]}
-              onChange={handleSlider}
+              onChange={handleSelection}
               step={5}
               marks={false}
               valueLabelDisplay="auto"
@@ -299,7 +277,7 @@ const SystemSettings = ({ settings, setSettings }) => {
               name="fracturesAbove"
               size="small"
               value={stateSettings["fracturesAbove"]}
-              onChange={handleSlider}
+              onChange={handleSelection}
               step={5}
               marks={false}
               valueLabelDisplay="auto"
@@ -310,7 +288,7 @@ const SystemSettings = ({ settings, setSettings }) => {
               name="clotAbove"
               size="small"
               value={stateSettings["clotAbove"]}
-              onChange={handleSlider}
+              onChange={handleSelection}
               step={5}
               marks={false}
               valueLabelDisplay="auto"
@@ -321,7 +299,7 @@ const SystemSettings = ({ settings, setSettings }) => {
               name="manaAbilitiesAbove"
               size="small"
               value={stateSettings["manaAbilitiesAbove"]}
-              onChange={handleSlider}
+              onChange={handleSelection}
               step={5}
               marks={false}
               valueLabelDisplay="auto"
