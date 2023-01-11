@@ -3,7 +3,7 @@ import { AffDef } from "../affs/Aff";
 import { defs } from "../defs/defs";
 import { sys } from "../system/sys";
 import { sendCmd, sendInline } from "../system/sysService";
-import { serversideSettings, setCuringStatusVars } from "./serverside";
+import { serversideSettings } from "./serverside";
 import { echo } from "../echo/echos";
 
 const serversideSlowModeOn = function (args) {
@@ -248,12 +248,13 @@ const curingPriorityDefs = function (args) {
 const serversideCuringStatusSet = function (args) {
   let arg = args.arg;
   if (arg === "activated") {
-    arg = true;
-  } else if (arg === "disabled") {
     arg = false;
+  } else if (arg === "disabled") {
+    arg = true;
   }
-
-  serversideSettings.status[args.status] = args.arg;
+  serversideSettings.status[args.status] = arg;
+  console.log(`serversideCuringStatusSet: ${args.status}`);
+  console.log(`${serversideSettings.status[args.status]}`);
 };
 
 const serversideAffPrioSet = function (args) {
@@ -287,7 +288,7 @@ const curingStartupComplete = function (args) {
 };
 eventStream.registerEvent("CuringStartupCompleteEvent", curingStartupComplete);
 
-/*const setCuringStatusVars = function () {
+const setCuringStatusVars = function () {
   for (const status in serversideSettings.status) {
     const curStatus = serversideSettings.status[status];
     const systemStatus = sys.state[status];
@@ -296,6 +297,5 @@ eventStream.registerEvent("CuringStartupCompleteEvent", curingStartupComplete);
     }
   }
 };
-*/
 
 eventStream.registerEvent("ServersideSettingsCaptured", setCuringStatusVars);

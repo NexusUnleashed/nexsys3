@@ -154,7 +154,11 @@ const SystemSettings = ({ settings, setSettings }) => {
               >
                 Transmutation
               </ToggleButton>
-              <ToggleButton value="Concoctions" name="curingMethod" sx={{ width: 95, height: 25 }}>
+              <ToggleButton
+                value="Concoctions"
+                name="curingMethod"
+                sx={{ width: 95, height: 25 }}
+              >
                 Concoctions
               </ToggleButton>
             </ToggleButtonGroup>
@@ -166,10 +170,18 @@ const SystemSettings = ({ settings, setSettings }) => {
               onChange={handleSelection}
               aria-label="Sip Type"
             >
-              <ToggleButton value="Health" name="sipPriority" sx={{ width: 95, height: 25 }}>
+              <ToggleButton
+                value="Health"
+                name="sipPriority"
+                sx={{ width: 95, height: 25 }}
+              >
                 Health
               </ToggleButton>
-              <ToggleButton value="Mana" name="sipPriority" sx={{ width: 95, height: 25 }}>
+              <ToggleButton
+                value="Mana"
+                name="sipPriority"
+                sx={{ width: 95, height: 25 }}
+              >
                 Mana
               </ToggleButton>
             </ToggleButtonGroup>
@@ -206,8 +218,18 @@ const SystemSettings = ({ settings, setSettings }) => {
               />
               <TextField
                 id="clotAt"
-                error={stateSettings.clotAt < 0 || !Number.isInteger(parseInt(stateSettings.clotAt)) ? true : false}
-                label={stateSettings.clotAt < 0 || !Number.isInteger(parseInt(stateSettings.clotAt)) ? "error" : ""}
+                error={
+                  stateSettings.clotAt < 0 ||
+                  !Number.isInteger(parseInt(stateSettings.clotAt))
+                    ? true
+                    : false
+                }
+                label={
+                  stateSettings.clotAt < 0 ||
+                  !Number.isInteger(parseInt(stateSettings.clotAt))
+                    ? "error"
+                    : ""
+                }
                 onChange={handleTextNumbers}
                 value={stateSettings.clotAt}
                 size="small"

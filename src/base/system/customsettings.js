@@ -129,7 +129,7 @@ export const updatePriorities = () => {
     defs[def].set_default_prio(defPrios.keepup[def]);
   }
   */
-  sys.state = { ...sys.settings };
+  Object.assign(sys.state, { ...sys.settings });
   for (const status in serversideSettings.status) {
     const curStatus = serversideSettings.status[status];
     const systemStatus = sys.state[status];
@@ -138,6 +138,16 @@ export const updatePriorities = () => {
     }
   }
 
+  /* DEBUG
+for (const status in nexSys.serversideSettings.status) {
+    const curStatus = nexSys.serversideSettings.status[status];
+    const systemStatus = nexSys.sys.state[status];
+    if (curStatus !== systemStatus) {
+      console.log(curStatus);
+      console.log(`${status} ${systemStatus}`);
+    }
+  }
+  */
   updatePrecache();
 
   for (let aff in affTable.prios) {
