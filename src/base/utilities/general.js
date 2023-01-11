@@ -38,3 +38,36 @@ export const say = (txt) => {
   speech.text = txt;
   globalThis.speechSynthesis.speak(speech);
 };
+
+export const tabCompletion = {
+  txt: null,
+  qry: null,
+  vals: null,
+  index: 0,
+  re: null,
+  reset() {
+    this.txt = null;
+    this.qry = null;
+    this.re = null;
+    this.vals = null;
+    this.index = 0;
+  },
+  tc() {
+    this.txt ??= document.getElementsByTagName("textarea")[0].value.split(" ");
+    this.qry ??= document.getElementsByTagName("textarea")[0].value.split(" ").at(-1);
+    this.re ??= new RegExp(`\\b${window._.capitalize(this.qry)}\\w*\\b`);
+    //this.vals ??= GMCP.WhoList.filter(e => e.name.match(this.re)).map(n => n.name);
+    this.vals ??= [... new Set([...(nexGui?.colors?.enemies || []), ...GMCP.WhoList.filter(e => e.name.match(this.re)).map(n => n.name)])];
+    if (this.vals.length === 0) { return; }
+    if (this.index > this.vals.length - 1) {
+      this.txt[this.txt.length - 1] = this.qry;
+      this.index = 0;
+    } else {
+      this.txt[this.txt.length - 1] = this.vals[this.index];
+      this.index++;
+    }
+    document.getElementsByTagName("textarea")[0].value = this.txt.join(" ");
+    //console.log(this.txt.join(" "));
+
+  }
+};

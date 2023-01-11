@@ -57,6 +57,7 @@ export const sys = {
   state: {
     paused: false,
     slowMode: false,
+    overrideTab: false,
     curingMethod: "Transmutation",
     sipPriority: "Health",
     sipHealthAt: 80,

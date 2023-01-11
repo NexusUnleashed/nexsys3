@@ -1,6 +1,7 @@
 # nexSys for Nexus 3.0
 
 In development.
+Dependency requirement: eventStream
 
 ## Original repo
 
