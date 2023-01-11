@@ -1,6 +1,6 @@
-import styled from "@emotion/styled";
-import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
+import { DragDropContext } from "react-beautiful-dnd";
 import * as React from "react";
+import AffColumn from "./AffColumn";
 
 const createColumn = ({ id, affs }) => {
   return {
@@ -27,71 +27,6 @@ const createColumnOrder = () => {
     columnOrder.push(`prio-${i}`);
   }
   return columnOrder;
-};
-
-const Container = styled.div`
-  min-width: 100px;
-  flex-grow: 0;
-  flex-shrink: 0;
-  margin: 0px;
-  border: 1px solid lightgrey;
-  border-radius: 0px;
-`;
-const ListItem = styled.div`
-  width: auto;
-  padding: 3px 10px 3px 10px;
-  font-size: 13px;
-  margin: 0px;
-  border: 1px solid lightgrey;
-  border-radius: 2px;
-  background: #121212;
-  ${(props) => `color:${props.fg}`};
-  ${(props) => `background:${props.bg}`};
-`;
-const Title = styled.h3`
-  text-align: center;
-  padding: 5px;
-  width: auto;
-  margin: 4px;
-`;
-const AffList = styled.div`
-  padding: 8px;
-`;
-
-const AffItem = ({ aff, index, color }) => {
-  return (
-    <Draggable draggableId={aff} index={index}>
-      {(provided) => (
-        <ListItem
-          fg={color?.fg}
-          bg={color?.bg}
-          ref={provided.innerRef}
-          {...provided.draggableProps}
-          {...provided.dragHandleProps}
-        >
-          {aff.capitalize()}
-        </ListItem>
-      )}
-    </Draggable>
-  );
-};
-
-const Column = ({ column, colors }) => {
-  return (
-    <Container>
-      <Title>{column.title}</Title>
-      <Droppable droppableId={column.id}>
-        {(provided) => (
-          <AffList ref={provided.innerRef} {...provided.droppableProps}>
-            {column.affs.map((aff, i) => (
-              <AffItem key={aff} aff={aff} index={i} color={colors[aff]} />
-            ))}
-            {provided.placeholder}
-          </AffList>
-        )}
-      </Droppable>
-    </Container>
-  );
 };
 
 const AffPriorities = ({ colors, affTable, setAffTable, setPrioArrays }) => {
@@ -177,7 +112,7 @@ const AffPriorities = ({ colors, affTable, setAffTable, setPrioArrays }) => {
         }}
       >
         {columnOrder.map((col) => (
-          <Column key={col} column={columns[col]} colors={colors} />
+          <AffColumn key={col} column={columns[col]} colors={colors} />
         ))}
       </div>
     </DragDropContext>

@@ -24,7 +24,7 @@ import {
   haveAff,
   haveAffs,
   haveAnAff,
-  setPrioArrays,
+  setPrioArrays
 } from "./base/affs/affService";
 import { affTable } from "./base/affs/affTable";
 import { bals } from "./base/balances/balances";
@@ -44,14 +44,13 @@ import {
   getDefOutputs,
   getMissingDefs,
   haveDef,
-  parry,
+  parry
 } from "./base/defs/defService";
 import { defPrios } from "./base/defs/defTable";
 import { echo, echoInfoLine, echoLine } from "./base/echo/echos";
 import { createQueue } from "./base/queues/Queue";
 import {
-  serversideDefencePriorityListStart,
-  serversideSettings,
+  serversideSettings
 } from "./base/serverside/serverside";
 import {
   loadCustomSettings,
@@ -59,13 +58,13 @@ import {
   updateAndSaveModel,
   updateList,
   updateModel,
-  updatePriorities,
+  updatePriorities
 } from "./base/system/customsettings";
 import {
   curArea,
   curRoom,
   curRoomArea,
-  curRoomName,
+  curRoomName
 } from "./base/system/gmcpEvents";
 import { sys, sysLog, sysLogging, sysLoggingToggle } from "./base/system/sys";
 import {
@@ -73,15 +72,14 @@ import {
   rsend,
   sendCmd,
   sendInline,
-  timeDiffNow,
+  timeDiffNow
 } from "./base/system/sysService";
 import {
-  dirMap,
+  classList, dirMap,
   dirs,
   limbs,
   oppDirs,
-  shortDirs,
-  classList,
+  shortDirs
 } from "./base/utilities/commonTable";
 import { replace, replaceHTML, say, tabCompletion } from "./base/utilities/general";
 import { getLustCommands, rejectList, whiteList } from "./base/utilities/lust";
@@ -89,7 +87,7 @@ import { startup } from "./base/utilities/startup";
 import NexDialog from "./components/NexDialog";
 
 const nexSys = {
-  version: "1.2.0",
+  version: "1.2.1",
   evt: new EventTarget(),
   component: NexDialog,
 
