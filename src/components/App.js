@@ -3,7 +3,7 @@ import Configuration from "./Configuration";
 import { createTheme } from "@mui/material/styles";
 import NexDialog from "./NexDialog";
 import "../base/utilities/helpers";
-
+import * as React from "react";
 const darkTheme = createTheme({
   palette: {
     mode: "dark",
@@ -63,9 +63,28 @@ const darkTheme = createTheme({
   },
 });
 
-function App() {
+function App({ nexSys }) {
+  const [_nexSys, setNexSys] = React.useState(nexSys);
+  const [sys, setSys] = React.useState(nexSys.sys);
+  const [cacheTable, setCacheTable] = React.useState(nexSys.cacheTable);
+  const [affTable, setAffTable] = React.useState(nexSys.affTable);
+  const [defPrios, setDefPrios] = React.useState(nexSys.defPrios);
+
   return (
     <div>
+      <Configuration
+        theme={darkTheme}
+        nexSys={_nexSys}
+        setNexSys={setNexSys}
+        sys={sys}
+        setSys={setSys}
+        cacheTable={cacheTable}
+        setCacheTable={setCacheTable}
+        affTable={affTable}
+        setAffTable={setAffTable}
+        defPrios={defPrios}
+        setDefPrios={setDefPrios}
+      />
       <NexDialog evt={globalThis.nexSys.evt} nexSys={globalThis.nexSys} />
     </div>
   );

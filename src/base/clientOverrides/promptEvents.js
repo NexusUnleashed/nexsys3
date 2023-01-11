@@ -13,7 +13,9 @@ const setPromptVitals = function (vitals) {
   vars.maxe.text = vitals.maxe;
   vars.maxw.text = vitals.maxw;
   vars.bleed.text = vitals.bleed;
-  vars.rage.text = vitals.rage;
+
+  vars.karma.text = vitals.karma || "";
+  vars.age.text = vitals.age || "";
 
   let perch = (vitals.h * 100) / vitals.maxh;
   let percm = (vitals.m * 100) / vitals.maxm;
@@ -43,13 +45,13 @@ const setPromptAffs = function (promptAffs) {
   const affs = Object.keys(promptAffs).sort((a, b) => {
     let res;
     if (nexSys.affTable.prios[a] > nexSys.affTable.prios[b]) {
-        res = 1;
-     } else if (nexSys.affTable.prios[a] < nexSys.affTable.prios[b]) {
-        res = -1;
-     } else {
-        const prioArray = nexSys.affTable.prioArrays[nexSys.affTable.prios[a]];
-        res = prioArray.indexOf(a) >= prioArray.indexOf(b) ? 1 : -1;
-     }
+      res = 1;
+    } else if (nexSys.affTable.prios[a] < nexSys.affTable.prios[b]) {
+      res = -1;
+    } else {
+      const prioArray = nexSys.affTable.prioArrays[nexSys.affTable.prios[a]];
+      res = prioArray.indexOf(a) >= prioArray.indexOf(b) ? 1 : -1;
+    }
     return res;
   });
 
@@ -154,4 +156,8 @@ eventStream.registerEvent("SystemSlowModeOn", function (args) {
 });
 eventStream.registerEvent("SystemSlowModeOff", function (args) {
   nexSys.prompt.vars.retard.text = "";
+});
+eventStream.registerEvent("TargetSetEvent", function (args) {
+  nexSys.prompt.vars.target.text = GMCP.Target.Text;
+  nexSys.prompt.vars.targetHP.text = GMCP.Target.hpperc || "";
 });

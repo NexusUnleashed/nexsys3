@@ -85,6 +85,10 @@ export const prompt = {
 
 prompt.vars = {
   blackout: false,
+  paused: { text: "", fg: "red", bg: "" },
+  retard: { text: "", fg: "blue", bg: "" },
+  aeon: { text: "", fg: "red", bg: "" },
+
   h: { text: "0", fg: "green", bg: "" },
   m: { text: "0", fg: "green", bg: "" },
   e: { text: "0", fg: "green", bg: "" },
@@ -95,7 +99,6 @@ prompt.vars = {
   maxm: { text: "", fg: "", bg: "" },
   maxe: { text: "", fg: "", bg: "" },
   maxw: { text: "", fg: "", bg: "" },
-  bleed: { text: "", fg: "", bg: "" },
   ph: { text: "100%", fg: "", bg: "" },
   pm: { text: "100%", fg: "", bg: "" },
   pe: { text: "100%", fg: "", bg: "" },
@@ -104,24 +107,28 @@ prompt.vars = {
   diffm: { text: "", fg: "green", bg: "" },
   diffxp: { text: "", fg: "", bg: "" },
   target: { text: "", fg: "red", bg: "" },
+  targetHP: { text: "", fg: "green", bg: "" },
+
   eq: { text: "", fg: "", bg: "" },
   bal: { text: "", fg: "", bg: "" },
   c: { text: "", fg: "", bg: "" },
   k: { text: "", fg: "", bg: "" },
   d: { text: "", fg: "", bg: "" },
   b: { text: "", fg: "", bg: "" },
+
   affs: {},
   affString: document.createElement("span"),
-  paused: { text: "", fg: "red", bg: "" },
+
+  bleed: { text: "", fg: "", bg: "" },
   rage: { text: "", fg: "red", bg: "" },
-  retard: { text: "", fg: "blue", bg: "" },
-  aeon: { text: "", fg: "red", bg: "" },
+  age: { text: "", fg: "red", bg: "" },
   kai: { text: "", fg: "", bg: "" },
   karma: { text: "", fg: "green", bg: "" },
   vitality: { text: "", fg: "purple", bg: "" },
   kaitrance: { text: "", fg: "blue", bg: "" },
   shintrance: { text: "", fg: "", bg: "" },
   stance: { text: "", fg: "white", bg: "" },
+
   shield: { text: "", fg: "cyan", bg: "" },
   prismatic: { text: "", fg: "yellow", bg: "" },
 };

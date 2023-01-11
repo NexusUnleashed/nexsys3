@@ -25,6 +25,7 @@ const setCharVitals = function (vitals) {
   const maxm = vitals.maxmp || omaxm;
   const maxe = vitals.maxep || omaxe;
   const maxw = vitals.maxwp || omaxw;
+  const bleed = parseInt(vitals.charstats[0].match(valueRegex)[0]);
   const rage = parseInt(vitals.charstats[1].match(valueRegex)[0]);
 
   sysChar.h = h;
@@ -36,15 +37,16 @@ const setCharVitals = function (vitals) {
   sysChar.maxe = maxe;
   sysChar.maxw = maxw;
   sysChar.rage = rage;
+  sysChar.bleed = bleed;
 
   if (vitals.charstats.length > 2) {
     const class1 = vitals.charstats[2].match(classSpecific);
     const id = class1[1].toLowerCase();
     let val = "";
-    if (['Yes', 'No'].indexOf(class1[2]) > -1) {
-      if (class1[2] === 'Yes' && !bals[id].have) {
+    if (["Yes", "No"].indexOf(class1[2]) > -1) {
+      if (class1[2] === "Yes" && !bals[id].have) {
         eventStream.raiseEvent(`${id}GotBalEvent`);
-      } else if (class1[2] === 'No' && bals[id].have) {
+      } else if (class1[2] === "No" && bals[id].have) {
         eventStream.raiseEvent(`${id}LostBalEvent`);
       }
     } else {
@@ -57,10 +59,10 @@ const setCharVitals = function (vitals) {
     const class1 = vitals.charstats[2].match(classSpecific);
     const id = class1[1].toLowerCase();
     let val = "";
-    if (['Yes', 'No'].indexOf(class1[2]) > -1) {
-      if (class1[2] === 'Yes' && !bals[id].have) {
+    if (["Yes", "No"].indexOf(class1[2]) > -1) {
+      if (class1[2] === "Yes" && !bals[id].have) {
         eventStream.raiseEvent(`${id}GotBalEvent`);
-      } else if (class1[2] === 'No' && bals[id].have) {
+      } else if (class1[2] === "No" && bals[id].have) {
         eventStream.raiseEvent(`${id}LostBalEvent`);
       }
     } else {
