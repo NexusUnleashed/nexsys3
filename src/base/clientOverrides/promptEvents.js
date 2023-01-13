@@ -7,15 +7,15 @@ const setPromptVitals = function (vitals) {
   vars.e.text = vitals.e;
   vars.w.text = vitals.w;
   vars.xp.text = vitals.xp;
-  vars.rage.text = vitals.rage > 0 ? vitals.rage : "";
+  vars.rage.text = vitals.rage;
   vars.maxh.text = vitals.maxh;
   vars.maxm.text = vitals.maxm;
   vars.maxe.text = vitals.maxe;
   vars.maxw.text = vitals.maxw;
   vars.bleed.text = vitals.bleed;
 
-  vars.karma.text = vitals.karma || "";
-  vars.age.text = vitals.age || "";
+  vars.karma.text = vitals?.karma || "";
+  vars.age.text = vitals?.age || "";
 
   let perch = (vitals.h * 100) / vitals.maxh;
   let percm = (vitals.m * 100) / vitals.maxm;
