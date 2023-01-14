@@ -22,10 +22,10 @@ const setPromptVitals = function (vitals) {
   let perce = (vitals.e * 100) / vitals.maxe;
   let percw = (vitals.w * 100) / vitals.maxw;
 
-  vars.h.fg = nexSys.prompt.colorPercentage(perch);
-  vars.m.fg = nexSys.prompt.colorPercentage(percm);
-  vars.e.fg = nexSys.prompt.colorPercentage(perce);
-  vars.w.fg = nexSys.prompt.colorPercentage(percw);
+  vars.h.fg = `hsl(${perch * 1.2}, 100%, 50%)`;//nexSys.prompt.colorPercentage(perch);
+  vars.m.fg = `hsl(${percm * 1.2}, 100%, 50%)`;//nexSys.prompt.colorPercentage(percm);
+  vars.e.fg = `hsl(${perce * 1.2}, 100%, 50%)`;//nexSys.prompt.colorPercentage(perce);
+  vars.w.fg = `hsl(${percw * 1.2}, 100%, 50%)`;//nexSys.prompt.colorPercentage(percw);
 
   vars.ph.text = perch.toFixed(1) + "%";
   vars.pm.text = percm.toFixed(1) + "%";
@@ -156,8 +156,4 @@ eventStream.registerEvent("SystemSlowModeOn", function (args) {
 });
 eventStream.registerEvent("SystemSlowModeOff", function (args) {
   nexSys.prompt.vars.retard.text = "";
-});
-eventStream.registerEvent("TargetSetEvent", function (args) {
-  nexSys.prompt.vars.target.text = GMCP.Target.Text;
-  nexSys.prompt.vars.targetHP.text = GMCP.Target.hpperc || "";
 });

@@ -9,6 +9,19 @@ const generate_chunk = (text, fg = "", bg = "") => {
   return result;
 };
 
+const add = (txt, fg, bg) => {
+  if (txt.length === 0) {
+    return;
+  }
+  if (nexSys.prompt.vars.hasOwnProperty(txt)) {
+    promptLine.appendChild(
+      nexSys.prompt.generate_chunk(vars[txt].text, vars[txt].fg, vars[txt].bg)
+    );
+  } else {
+    promptLine.appendChild(nexSys.prompt.generate_chunk(txt, fg, bg));
+  }
+};
+
 const colorPercentage = (perc) => {
   return perc > 75 ? "green" : perc >= 33 ? "yellow" : "red";
 };
@@ -16,19 +29,10 @@ const colorPercentage = (perc) => {
 const getCustomPrompt = () => {
   let vars = nexSys.prompt.vars;
   let promptLine = document.createElement("span");
-
-  let add = (txt, fg, bg) => {
-    if (txt.length === 0) {
-      return;
-    }
-    if (vars.hasOwnProperty(txt)) {
-      promptLine.appendChild(
-        nexSys.prompt.generate_chunk(vars[txt].text, vars[txt].fg, vars[txt].bg)
-      );
-    } else {
-      promptLine.appendChild(nexSys.prompt.generate_chunk(txt, fg, bg));
-    }
+  const add = (txt, fg, bg) => {
+    promptLine.appendChild(nexSys.prompt.add(txt, fg, bg));
   };
+
 
   if (vars.blackout) {
     add("-", "reset", "");
@@ -79,6 +83,7 @@ const getCustomPrompt = () => {
 
 export const prompt = {
   generate_chunk: generate_chunk,
+  add: add,
   colorPercentage: colorPercentage,
   getCustomPrompt: getCustomPrompt,
 };

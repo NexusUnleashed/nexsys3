@@ -26,6 +26,16 @@ export const replaceHTML = (html) => {
 
   return true;
 };
+
+export const replaceWord = (word, fg, bg) => {
+  let line = globalThis.nexusclient.current_line.parsed_line.text().replaceAll(word, `<span style="color:${fg};background:${bg}">${word}</span>`);
+  globalThis.nexusclient.current_line.parsed_line.formatted = () => {
+    return line;
+  };
+
+  return true;
+};
+
 const speech = new SpeechSynthesisUtterance();
 speech.voice =
   globalThis.speechSynthesis
