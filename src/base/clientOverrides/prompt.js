@@ -126,6 +126,7 @@ prompt.vars = {
 
   bleed: { text: "", fg: "", bg: "" },
   rage: { text: "", fg: "red", bg: "" },
+
   age: { text: "", fg: "red", bg: "" },
   kai: { text: "", fg: "", bg: "" },
   karma: { text: "", fg: "green", bg: "" },

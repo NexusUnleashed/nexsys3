@@ -179,6 +179,7 @@ const initiateStartup = function (args) {
       sendCmd(startupCommands[i]);
     }
     nexusclient.datahandler().send_GMCP("IRE.Rift.Request", "");
+    nexusclient.datahandler().send_GMCP("IRE.Time.Request");
   }
 };
 
