@@ -78,7 +78,9 @@ const DefencePriorities = ({ defs, defPrios, setDefPrios, classList }) => {
                   placement="bottom-end"
                   title={
                     <div style={{ fontSize: "14px" }}>
-                      Checked defences will not be kept up by serverside curing. Checked defences will be managed by nexSys using the "defup" alias.
+                      Checked defences will not be kept up by serverside curing.
+                      Checked defences will be managed by nexSys using the
+                      "defup" alias.
                     </div>
                   }
                 >
@@ -119,10 +121,11 @@ const DefencePriorities = ({ defs, defPrios, setDefPrios, classList }) => {
             {defList
               .filter(
                 (def) =>
-                  skill === "all" ||
-                  typeof defs[def].skills === "undefined" ||
-                  defs[def].skills.length === 0 ||
-                  defs[def].skills.indexOf(skill) > -1
+                  (skill === "all" ||
+                    typeof defs[def].skills === "undefined" ||
+                    defs[def].skills.length === 0 ||
+                    defs[def].skills.indexOf(skill) > -1) &&
+                  defs[def].isServerSide
               )
               .map((def, i) => (
                 <DefenceRow

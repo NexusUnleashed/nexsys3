@@ -4,9 +4,7 @@ import { sys } from "./sys";
 
 export function sendCmd(cmd) {
   if (cmd) {
-    // TODO Is this working to use the stunQueue instead of send?
     globalThis.nexusclient.send_commands(cmd);
-    //nexSys.stunQueue.add(cmd);
   }
   eventStream.raiseEvent("SendCommandEvent", cmd);
 }
@@ -29,6 +27,7 @@ export function timeDiffNow(prev) {
 }
 
 export function sendInline(cmd) {
+  console.log(`nexSys sendInline: ${cmd}`);
   if (Array.isArray(cmd)) sendCmd(cmd.join(sys.settings.sep));
   eventStream.raiseEvent("SendCommandEvent", cmd);
 }

@@ -22,10 +22,10 @@ const setPromptVitals = function (vitals) {
   let perce = (vitals.e * 100) / vitals.maxe;
   let percw = (vitals.w * 100) / vitals.maxw;
 
-  vars.h.fg = `hsl(${perch * 1.2}, 100%, 50%)`;//nexSys.prompt.colorPercentage(perch);
-  vars.m.fg = `hsl(${percm * 1.2}, 100%, 50%)`;//nexSys.prompt.colorPercentage(percm);
-  vars.e.fg = `hsl(${perce * 1.2}, 100%, 50%)`;//nexSys.prompt.colorPercentage(perce);
-  vars.w.fg = `hsl(${percw * 1.2}, 100%, 50%)`;//nexSys.prompt.colorPercentage(percw);
+  vars.h.fg = `hsl(${perch * 1.2}, 100%, 50%)`; //nexSys.prompt.colorPercentage(perch);
+  vars.m.fg = `hsl(${percm * 1.2}, 100%, 50%)`; //nexSys.prompt.colorPercentage(percm);
+  vars.e.fg = `hsl(${perce * 1.2}, 100%, 50%)`; //nexSys.prompt.colorPercentage(perce);
+  vars.w.fg = `hsl(${percw * 1.2}, 100%, 50%)`; //nexSys.prompt.colorPercentage(percw);
 
   vars.ph.text = perch.toFixed(1) + "%";
   vars.pm.text = percm.toFixed(1) + "%";
@@ -78,11 +78,13 @@ const setPromptAffs = function (promptAffs) {
     const fg = affAbbrev[aff] ? affAbbrev[aff].fg : "";
     const bg = affAbbrev[aff] ? affAbbrev[aff].bg : "";
     let txt = affAbbrev[aff] ? affAbbrev[aff].text : aff;
-    if (affs.length > 1 && i < affs.length - 1) {
-      txt += " ";
-    }
+
     const count = promptAffs[aff] === true ? "" : `(${promptAffs[aff]})`;
-    add(`${txt}${count}`, fg, bg);
+    add(
+      `${txt}${count}${affs.length > 1 && i < affs.length - 1 ? " " : ""}`,
+      fg,
+      bg
+    );
   }
   add("]", "brown");
 

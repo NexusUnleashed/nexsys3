@@ -188,6 +188,7 @@ export function parry(arg) {
       defs["parrying " + limb].set_command("parry " + limb);
     }
   }
+  eventStream.raiseEvent("ForcePopulateEvent");
 }
 
 export function repop() {

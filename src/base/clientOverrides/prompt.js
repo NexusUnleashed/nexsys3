@@ -13,13 +13,27 @@ const add = (txt, fg, bg) => {
   if (txt.length === 0) {
     return;
   }
-  if (nexSys.prompt.vars.hasOwnProperty(txt)) {
-    promptLine.appendChild(
-      nexSys.prompt.generate_chunk(vars[txt].text, vars[txt].fg, vars[txt].bg)
+
+  let vars = nexSys.prompt.vars;
+
+  if (txt === "affString") {
+    nexSys.prompt.promptLine.appendChild(vars.affString);
+    return;
+  }
+
+  if (vars.hasOwnProperty(txt)) {
+    nexSys.prompt.promptLine.appendChild(
+      generate_chunk(vars[txt].text, vars[txt].fg, vars[txt].bg)
     );
   } else {
-    promptLine.appendChild(nexSys.prompt.generate_chunk(txt, fg, bg));
+    nexSys.prompt.promptLine.appendChild(generate_chunk(txt, fg, bg));
   }
+};
+
+const addHTML = (html) => {
+  const res = document.createElement("span");
+  res.innerHTML = html;
+  nexSys.prompt.promptLine.appendChild(res);
 };
 
 const colorPercentage = (perc) => {
@@ -28,11 +42,8 @@ const colorPercentage = (perc) => {
 
 const getCustomPrompt = () => {
   let vars = nexSys.prompt.vars;
-  let promptLine = document.createElement("span");
-  const add = (txt, fg, bg) => {
-    promptLine.appendChild(nexSys.prompt.add(txt, fg, bg));
-  };
-
+  const add = nexSys.prompt.add;
+  nexSys.prompt.promptLine = document.createElement("span");
 
   if (vars.blackout) {
     add("-", "reset", "");
@@ -71,19 +82,21 @@ const getCustomPrompt = () => {
   if (nexSys.defs.prismatic.have) {
     add("]]", vars.prismatic.fg, vars.prismatic.bg);
   }
-  add(" ", "", "");
-  promptLine.appendChild(vars.affString);
+  add(" ");
+  add("affString");
   add("diffh");
   add("diffm");
 
   vars.diffh.text = "";
   vars.diffm.text = "";
-  return promptLine.outerHTML;
+  return nexSys.prompt.promptLine.outerHTML;
 };
 
 export const prompt = {
+  promptLine: {},
   generate_chunk: generate_chunk,
   add: add,
+  addHTML: addHTML,
   colorPercentage: colorPercentage,
   getCustomPrompt: getCustomPrompt,
 };
@@ -94,18 +107,33 @@ prompt.vars = {
   retard: { text: "", fg: "blue", bg: "" },
   aeon: { text: "", fg: "red", bg: "" },
 
-  h: { text: "0", fg: "green", bg: "" },
-  m: { text: "0", fg: "green", bg: "" },
+  h: {
+    text: "0",
+    fg: "green",
+    bg: "",
+  },
+  m: {
+    text: "0",
+    fg: "green",
+    bg: "",
+  },
   e: { text: "0", fg: "green", bg: "" },
   w: { text: "0", fg: "green", bg: "" },
   xp: { text: "", fg: "", bg: "" },
-  rage: { text: "", fg: "green", bg: "" },
   maxh: { text: "", fg: "", bg: "" },
   maxm: { text: "", fg: "", bg: "" },
   maxe: { text: "", fg: "", bg: "" },
   maxw: { text: "", fg: "", bg: "" },
-  ph: { text: "100%", fg: "", bg: "" },
-  pm: { text: "100%", fg: "", bg: "" },
+  ph: {
+    text: "100%",
+    fg: "green",
+    bg: "",
+  },
+  pm: {
+    text: "100%",
+    fg: "green",
+    bg: "",
+  },
   pe: { text: "100%", fg: "", bg: "" },
   pw: { text: "100%", fg: "", bg: "" },
   diffh: { text: "", fg: "green", bg: "" },
