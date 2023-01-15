@@ -119,6 +119,7 @@ const setCharVitals = function (vitals) {
   } else {
     if (oh === 0 && h > 0) {
       sys.unpause();
+      eventStream.raiseEvent("SystemOutputGotBalEvent");
       eventStream.raiseEvent("AliveEvent");
     }
   }

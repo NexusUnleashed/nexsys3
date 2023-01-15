@@ -40,6 +40,12 @@ const colorPercentage = (perc) => {
   return perc > 75 ? "green" : perc >= 33 ? "yellow" : "red";
 };
 
+const colorGradation = (perc) => {
+  return `hsl(${perc * 1.2}, 100%, ${
+    perc < 50 ? 50 : Math.abs(perc - 100) / 2 + 25
+  }%)`;
+};
+
 const getCustomPrompt = () => {
   let vars = nexSys.prompt.vars;
   const add = nexSys.prompt.add;
@@ -98,6 +104,7 @@ export const prompt = {
   add: add,
   addHTML: addHTML,
   colorPercentage: colorPercentage,
+  colorGradation: colorGradation,
   getCustomPrompt: getCustomPrompt,
 };
 
@@ -107,16 +114,8 @@ prompt.vars = {
   retard: { text: "", fg: "blue", bg: "" },
   aeon: { text: "", fg: "red", bg: "" },
 
-  h: {
-    text: "0",
-    fg: "green",
-    bg: "",
-  },
-  m: {
-    text: "0",
-    fg: "green",
-    bg: "",
-  },
+  h: { text: "0", fg: "green", bg: "" },
+  m: { text: "0", fg: "green", bg: "" },
   e: { text: "0", fg: "green", bg: "" },
   w: { text: "0", fg: "green", bg: "" },
   xp: { text: "", fg: "", bg: "" },
@@ -124,20 +123,14 @@ prompt.vars = {
   maxm: { text: "", fg: "", bg: "" },
   maxe: { text: "", fg: "", bg: "" },
   maxw: { text: "", fg: "", bg: "" },
-  ph: {
-    text: "100%",
-    fg: "green",
-    bg: "",
-  },
-  pm: {
-    text: "100%",
-    fg: "green",
-    bg: "",
-  },
+  ph: { text: "100%", fg: "green", bg: "" },
+  pm: { text: "100%", fg: "green", bg: "" },
   pe: { text: "100%", fg: "", bg: "" },
   pw: { text: "100%", fg: "", bg: "" },
   diffh: { text: "", fg: "green", bg: "" },
   diffm: { text: "", fg: "green", bg: "" },
+  diffhp: { text: "", fg: "green", bg: "" },
+  diffmp: { text: "", fg: "green", bg: "" },
   diffxp: { text: "", fg: "", bg: "" },
   target: { text: "", fg: "red", bg: "" },
   targetHP: { text: "", fg: "green", bg: "" },
@@ -339,5 +332,6 @@ prompt.affAbbrev = {
   whisperingmadness: { text: "mad", ...prompt.cureColors.argentum },
   wristfractures: { text: "wf", ...prompt.cureColors.health },
 };
+
 // Affs missing from prompt list:
 // nexSys.affTable.list.filter(aff => Object.keys(nexSys.prompt.affAbbrev).indexOf(aff) === -1).sort()

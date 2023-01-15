@@ -28,7 +28,12 @@ export const replaceHTML = (html) => {
 };
 
 export const replaceWord = (word, fg, bg) => {
-  let line = globalThis.nexusclient.current_line.parsed_line.text().replaceAll(word, `<span style="color:${fg};background:${bg}">${word}</span>`);
+  let line = globalThis.nexusclient.current_line.parsed_line
+    .text()
+    .replaceAll(
+      word,
+      `<span style="color:${fg};background:${bg}">${word}</span>`
+    );
   globalThis.nexusclient.current_line.parsed_line.formatted = () => {
     return line;
   };
@@ -42,7 +47,7 @@ speech.voice =
     .getVoices()
     .find((e) => e.voiceURI === "Google UK English Female") ||
   globalThis.speechSynthesis.getVoices()[5];
-speech.rate = 1;
+speech.rate = 1.1;
 speech.pitch = 1.1;
 export const say = (txt) => {
   speech.text = txt;
@@ -64,11 +69,21 @@ export const tabCompletion = {
   },
   tc() {
     this.txt ??= document.getElementsByTagName("textarea")[0].value.split(" ");
-    this.qry ??= document.getElementsByTagName("textarea")[0].value.split(" ").at(-1);
+    this.qry ??= document
+      .getElementsByTagName("textarea")[0]
+      .value.split(" ")
+      .at(-1);
     this.re ??= new RegExp(`\\b${window._.capitalize(this.qry)}\\w*\\b`);
     //this.vals ??= GMCP.WhoList.filter(e => e.name.match(this.re)).map(n => n.name);
-    this.vals ??= [... new Set([...(nexGui?.colors?.enemies || []), ...GMCP.WhoList.filter(e => e.name.match(this.re)).map(n => n.name)])];
-    if (this.vals.length === 0) { return; }
+    this.vals ??= [
+      ...new Set([
+        ...(nexGui?.colors?.enemies || []),
+        ...GMCP.WhoList.filter((e) => e.name.match(this.re)).map((n) => n.name),
+      ]),
+    ];
+    if (this.vals.length === 0) {
+      return;
+    }
     if (this.index > this.vals.length - 1) {
       this.txt[this.txt.length - 1] = this.qry;
       this.index = 0;
@@ -78,6 +93,5 @@ export const tabCompletion = {
     }
     document.getElementsByTagName("textarea")[0].value = this.txt.join(" ");
     //console.log(this.txt.join(" "));
-
-  }
+  },
 };

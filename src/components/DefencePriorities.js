@@ -1,20 +1,6 @@
 import * as React from "react";
-import {
-  Select,
-  MenuItem,
-  InputLabel,
-  FormControl,
-  Table,
-  TableContainer,
-  TableRow,
-  TableHead,
-  TableCell,
-  TableBody,
-  Paper,
-  Tooltip,
-} from "@mui/material";
-import { HelpOutline } from "@mui/icons-material";
-import DefenceRow from "./DefenceRow";
+import { Select, MenuItem, InputLabel, FormControl } from "@mui/material";
+import DefenceTable from "./DefenceTable";
 
 const getClass = () => {
   let res = "";
@@ -37,6 +23,16 @@ const DefencePriorities = ({ defs, defPrios, setDefPrios, classList }) => {
 
   const handleChange = (e) => {
     setSkill(e.target.value);
+    setDefList(
+      Object.keys(defs).filter(
+        (def) =>
+          (skill === "all" ||
+            typeof defs[def].skills === "undefined" ||
+            defs[def].skills.length === 0 ||
+            defs[def].skills.indexOf(e.target.value) > -1) &&
+          defs[def].isServerSide
+      )
+    );
   };
 
   React.useEffect(() => {
@@ -66,80 +62,22 @@ const DefencePriorities = ({ defs, defPrios, setDefPrios, classList }) => {
           ))}
         </Select>
       </FormControl>
-
-      <TableContainer component={Paper} sx={{ width: "100%" }}>
-        <Table stickyHeader size="small" aria-label="simple table">
-          <TableHead>
-            <TableRow>
-              <TableCell sx={{ fontWeight: "bold", fontSize: "12px" }}>
-                Defup
-                <Tooltip
-                  arrow
-                  placement="bottom-end"
-                  title={
-                    <div style={{ fontSize: "14px" }}>
-                      Checked defences will not be kept up by serverside curing.
-                      Checked defences will be managed by nexSys using the
-                      "defup" alias.
-                    </div>
-                  }
-                >
-                  <HelpOutline fontSize="small" />
-                </Tooltip>
-              </TableCell>
-              <TableCell
-                sx={{ fontWeight: "bold", fontSize: "12px" }}
-                align="left"
-              >
-                Name
-                <Tooltip
-                  arrow
-                  placement="bottom-end"
-                  title={
-                    <div>
-                      <div style={{ fontSize: "14px" }}>
-                        Red: Skills that require a balance
-                      </div>
-                      <div style={{ fontSize: "14px" }}>
-                        Blue: Skills that are free to use
-                      </div>
-                    </div>
-                  }
-                >
-                  <HelpOutline fontSize="small" />
-                </Tooltip>
-              </TableCell>
-              <TableCell
-                sx={{ fontWeight: "bold", fontSize: "12px" }}
-                align="left"
-              >
-                Priority
-              </TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {defList
-              .filter(
-                (def) =>
-                  (skill === "all" ||
-                    typeof defs[def].skills === "undefined" ||
-                    defs[def].skills.length === 0 ||
-                    defs[def].skills.indexOf(skill) > -1) &&
-                  defs[def].isServerSide
-              )
-              .map((def, i) => (
-                <DefenceRow
-                  key={def}
-                  def={def}
-                  defs={defs}
-                  defPrios={defPrios}
-                  setKeepup={setKeepup}
-                  setStaticDefs={setStaticDefs}
-                />
-              ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
+      <div style={{ display: "flex" }}>
+        <DefenceTable
+          defList={defList.slice(0, parseInt(defList.length / 2))}
+          defs={defs}
+          defPrios={defPrios}
+          setKeepup={setKeepup}
+          setStaticDefs={setStaticDefs}
+        />
+        <DefenceTable
+          defList={defList.slice(parseInt(defList.length / 2))}
+          defs={defs}
+          defPrios={defPrios}
+          setKeepup={setKeepup}
+          setStaticDefs={setStaticDefs}
+        />
+      </div>
     </div>
   );
 };

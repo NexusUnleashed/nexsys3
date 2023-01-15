@@ -172,6 +172,7 @@ const initiateStartup = function (args) {
       "curing priority list",
       "curing priority defence list",
       "def",
+      "date",
       "echo SystemEvent CuringStartupCompleteEvent",
     ];
 

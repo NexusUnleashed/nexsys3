@@ -7,30 +7,36 @@ const setPromptVitals = function (vitals) {
   vars.e.text = vitals.e;
   vars.w.text = vitals.w;
   vars.xp.text = vitals.xp;
-  vars.rage.text = vitals.rage;
   vars.maxh.text = vitals.maxh;
   vars.maxm.text = vitals.maxm;
   vars.maxe.text = vitals.maxe;
   vars.maxw.text = vitals.maxw;
-  vars.bleed.text = vitals.bleed;
 
-  vars.karma.text = vitals?.karma || "";
-  vars.age.text = vitals?.age || "";
+  vars.bleed.text = vitals.bleed;
+  vars.rage.text = vitals.rage;
+
+  vars.karma.text = vitals?.karma || "0";
+  vars.age.text = vitals?.age || "0";
 
   let perch = (vitals.h * 100) / vitals.maxh;
   let percm = (vitals.m * 100) / vitals.maxm;
   let perce = (vitals.e * 100) / vitals.maxe;
   let percw = (vitals.w * 100) / vitals.maxw;
-
+  /*
   vars.h.fg = `hsl(${perch * 1.2}, 100%, 50%)`; //nexSys.prompt.colorPercentage(perch);
   vars.m.fg = `hsl(${percm * 1.2}, 100%, 50%)`; //nexSys.prompt.colorPercentage(percm);
   vars.e.fg = `hsl(${perce * 1.2}, 100%, 50%)`; //nexSys.prompt.colorPercentage(perce);
   vars.w.fg = `hsl(${percw * 1.2}, 100%, 50%)`; //nexSys.prompt.colorPercentage(percw);
-
+*/
   vars.ph.text = perch.toFixed(1) + "%";
   vars.pm.text = percm.toFixed(1) + "%";
   vars.pe.text = perce.toFixed(1) + "%";
   vars.pw.text = percw.toFixed(1) + "%";
+
+  vars.ph.value = perch.toFixed(2);
+  vars.pm.value = percm.toFixed(2);
+  vars.pe.value = perce.toFixed(2);
+  vars.pw.value = percw.toFixed(2);
 };
 /********** */
 const setPromptAffs = function (promptAffs) {
@@ -119,15 +125,21 @@ const setPromptBals = function (args) {
 };
 
 const setHealthDiffPrompt = function (args) {
-  nexSys.prompt.vars.diffh.text =
-    args.diff < 0 ? "(" + args.diff + ")h" : "(+" + args.diff + ")h";
+  nexSys.prompt.vars.diffmp.text = `${((args.diff / args.max) * 100).toFixed(
+    1
+  )}%`;
+  nexSys.prompt.vars.diffh.text = `(${args.diff > 0 ? "+" : ""}${args.diff})h`;
   nexSys.prompt.vars.diffh.fg = args.diff < 0 ? "red" : "green";
+  nexSys.prompt.vars.diffhp.fg = nexSys.prompt.vars.diffh.fg;
 };
 
 const setManaDiffPrompt = function (args) {
-  nexSys.prompt.vars.diffm.text =
-    args.diff < 0 ? "(" + args.diff + ")m" : "(+" + args.diff + ")m";
+  nexSys.prompt.vars.diffmp.text = `${((args.diff / args.max) * 100).toFixed(
+    1
+  )}%`;
+  nexSys.prompt.vars.diffm.text = `(${args.diff > 0 ? "+" : ""}${args.diff})m`;
   nexSys.prompt.vars.diffm.fg = args.diff < 0 ? "red" : "green";
+  nexSys.prompt.vars.diffmp.fg = nexSys.prompt.vars.diffm.fg;
 };
 
 eventStream.registerEvent("AffGot", gotPromptAff);

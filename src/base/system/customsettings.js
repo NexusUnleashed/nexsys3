@@ -155,7 +155,17 @@ for (const status in nexSys.serversideSettings.status) {
   }
 
   repop();
-  //ventStream.raiseEvent("ForcePopulateEvent");
+  //eventStream.raiseEvent("ForcePopulateEvent");
+
+  globalThis.localStorage.setItem(
+    "nexSysSettings",
+    JSON.stringify({
+      defSettings: { ...nexSys.defPrios },
+      affSettings: { ...nexSys.affTable },
+      cacheSettings: { ...nexSys.cacheTable },
+      systemSettings: { ...nexSys.sys.settings },
+    })
+  );
 };
 
 export function loadCustomSettings() {

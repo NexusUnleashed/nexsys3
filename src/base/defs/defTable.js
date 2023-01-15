@@ -9,10 +9,11 @@ export const defTable = {
   },
   airpocket: {
     command: ["outr calcite", "eat calcite"],
-    bals_req: [],
-    bals_used: [],
+    bals_req: ["free"],
+    bals_used: ["free"],
     blocks: ["death", "sleeping", "anorexia"],
     serverside: true,
+    preempt: true,
   },
   alertness: {
     command: "alertness on",
@@ -33,6 +34,8 @@ export const defTable = {
     bals_used: ["free"],
     blocks: ["death", "sleeping"],
     skills: ["Occultist"],
+    serverside: false,
+    preempt: true,
   },
   arrowcatching: {
     command: "arrowcatch on",
@@ -83,6 +86,7 @@ export const defTable = {
       "icefisted",
     ],
     serverside: true,
+    preempt: true,
   },
   blindness: {
     command: ["outr arsenic", "eat arsenic"],
@@ -96,6 +100,8 @@ export const defTable = {
     bals_req: ["balance", "equilibrium"],
     bals_used: ["free"],
     blocks: ["death", "sleeping", "prone"],
+    serverside: false,
+    preempt: true,
   },
   bodyblock: {
     command: "bdb",
@@ -112,6 +118,7 @@ export const defTable = {
     blocks: ["death", "sleeping"],
     skills: ["Monk"],
     serverside: true,
+    preempt: true,
   },
   cloak: {
     command: "touch cloak",
@@ -158,6 +165,7 @@ export const defTable = {
     bals_req: ["free"],
     bals_used: ["free"],
     skills: ["Alchemist"],
+    serverside: false,
   },
   consciousness: {
     command: "consciousness on",
@@ -166,6 +174,7 @@ export const defTable = {
     blocks: ["death", "sleeping"],
     skills: ["Monk", "Blademaster"],
     serverside: true,
+    preempt: true,
   },
   constitution: {
     command: "constitution",
@@ -192,6 +201,7 @@ export const defTable = {
     bals_req: ["balance", "equilibrium"],
     bals_used: ["free"],
     serverside: true,
+    preempt: true,
   },
   density: {
     command: "wear shackle",
@@ -261,6 +271,8 @@ export const defTable = {
     bals_used: ["free"],
     blocks: ["death", "sleeping"],
     skills: ["Alchemist"],
+    serverside: false,
+    preempt: true,
   },
   evadeblock: {
     command: "evb",
@@ -328,6 +340,7 @@ export const defTable = {
     bals_req: ["free"],
     bals_used: ["free"],
     serverside: true,
+    preempt: true,
   },
   "guarding right leg": {
     command: "guard right leg",
@@ -510,6 +523,7 @@ export const defTable = {
     bals_used: ["free"],
     blocks: ["death", "hypersomnia", "sleeping"],
     serverside: true,
+    preempt: true,
   },
   insulation: {
     command: "apply caloric",
@@ -529,6 +543,7 @@ export const defTable = {
     blocks: ["death", "sleeping"],
     skills: ["Alchemist"],
     preempt: true,
+    serverside: false,
   },
   ironform: {
     command: [
@@ -541,6 +556,7 @@ export const defTable = {
     blocks: ["death", "sleeping"],
     skills: ["Alchemist"],
     preempt: true,
+    serverside: false,
   },
   kaiboost: {
     command: "kai boost",
@@ -558,6 +574,7 @@ export const defTable = {
     blocks: ["death", "sleeping"],
     skills: ["Monk"],
     serverside: true,
+    preempt: true,
   },
   kola: {
     command: ["outr quartz", "eat quartz"],
@@ -565,6 +582,7 @@ export const defTable = {
     bals_used: ["free"],
     blocks: ["death", "sleeping", "anorexia"],
     serverside: true,
+    preempt: true,
   },
   lay: {
     command: "sing lay",
@@ -580,6 +598,7 @@ export const defTable = {
     bals_used: ["free"],
     blocks: ["death", "anorexia", "sleeping"],
     serverside: true,
+    preempt: true,
   },
   lifevision: {
     command: "astralvision",
@@ -636,6 +655,7 @@ export const defTable = {
     bals_used: ["free"],
     blocks: ["death", "sleeping", "lullaby"],
     serverside: true,
+    preempt: true,
   },
   mindcloak: {
     command: "mind cloak on",
@@ -653,6 +673,7 @@ export const defTable = {
     blocks: ["death", "sleeping"],
     skills: ["Monk", "Blademaster"],
     serverside: true,
+    preempt: true,
   },
   mindseye: {
     command: "touch mindseye",
@@ -697,13 +718,14 @@ export const defTable = {
       "bound",
     ],
     preempt: true,
-    serverside: true,
+    serverside: false,
   },
   nightsight: {
     command: "nightsight",
     bals_req: ["free"],
     bals_used: ["free"],
     serverside: true,
+    preempt: true,
   },
   numbness: {
     command: "numb",
@@ -935,6 +957,7 @@ export const defTable = {
     bals_used: ["free"],
     blocks: ["death", "anorexia", "sleeping"],
     serverside: true,
+    preempt: true,
   },
   prismatic: {
     command: "strum lyre",
@@ -954,6 +977,8 @@ export const defTable = {
     bals_req: ["balance", "equilibrium"],
     bals_used: ["free"],
     blocks: ["death", "sleeping"],
+    preempt: true,
+    serverside: false,
   },
   regeneration: {
     command: "regeneration on",
@@ -962,6 +987,7 @@ export const defTable = {
     skills: ["Monk"],
     blocks: ["death", "sleeping"],
     serverside: true,
+    preempt: true,
   },
   resistance: {
     command: "resistance",
@@ -970,6 +996,7 @@ export const defTable = {
     skills: ["Runewarden", "Monk"],
     blocks: ["death", "sleeping"],
     serverside: true,
+    preempt: true,
   },
   scales: {
     command: "scales",
@@ -1024,6 +1051,7 @@ export const defTable = {
     skills: ["Blademaster"],
     blocks: ["death", "sleeping"],
     serverside: true,
+    preempt: true,
   },
   shinclarity: {
     command: "clarity",
@@ -1054,6 +1082,7 @@ export const defTable = {
     bals_used: ["free"],
     blocks: ["death", "sleeping"],
     serverside: true,
+    preempt: true,
   },
   songbird: {
     command: "whistle for songbird",
@@ -1093,6 +1122,7 @@ export const defTable = {
     bals_req: ["free"],
     bals_used: ["free"],
     serverside: true,
+    preempt: true,
   },
   stonefist: {
     command: "cast stonefist",
@@ -1127,6 +1157,7 @@ export const defTable = {
     bals_req: ["free"],
     bals_used: ["free"],
     serverside: true,
+    preempt: true,
   },
   temperance: {
     command: "sip frost",
@@ -1134,6 +1165,7 @@ export const defTable = {
     bals_used: ["free"],
     blocks: ["death", "anorexia", "sleeping"],
     serverside: true,
+    preempt: true,
   },
   tempest: {
     command: "manifest tempest",
@@ -1159,6 +1191,7 @@ export const defTable = {
     bals_req: ["free"],
     bals_used: ["free"],
     serverside: true,
+    preempt: true,
   },
   tin: {
     command: "educe tin",
@@ -1182,12 +1215,14 @@ export const defTable = {
     bals_used: ["free"],
     skills: ["Monk", "Blademaster"],
     serverside: true,
+    preempt: true,
   },
   treewatch: {
     command: "treewatch on",
     bals_req: ["free"],
     bals_used: ["free"],
     serverside: true,
+    preempt: true,
   },
   tune: {
     command: "sing tune",
@@ -1209,6 +1244,7 @@ export const defTable = {
     bals_req: ["free"],
     bals_used: ["free"],
     serverside: true,
+    preempt: true,
   },
   vitality: {
     command: "vitality on",
@@ -1224,6 +1260,7 @@ export const defTable = {
     skills: ["Runewarden", "Monk", "Blademaster"],
     blocks: ["death", "sleeping"],
     serverside: true,
+    preempt: true,
   },
   weaving: {
     command: "weaving on",
