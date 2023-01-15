@@ -19,7 +19,16 @@ const DefencePriorities = ({ defs, defPrios, setDefPrios, classList }) => {
   const [keepup, setKeepup] = React.useState({ ...defPrios.keepup });
   const [staticDefs, setStaticDefs] = React.useState({ ...defPrios.static });
   const [skill, setSkill] = React.useState(getClass());
-  const [defList, setDefList] = React.useState(Object.keys(defs));
+  const [defList, setDefList] = React.useState(
+    Object.keys(defs).filter(
+      (def) =>
+        (skill === "all" ||
+          typeof defs[def].skills === "undefined" ||
+          defs[def].skills.length === 0 ||
+          defs[def].skills.indexOf(skill) > -1) &&
+        defs[def].isServerSide
+    )
+  );
 
   const handleChange = (e) => {
     setSkill(e.target.value);

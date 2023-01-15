@@ -125,7 +125,7 @@ const setPromptBals = function (args) {
 };
 
 const setHealthDiffPrompt = function (args) {
-  nexSys.prompt.vars.diffmp.text = `${((args.diff / args.max) * 100).toFixed(
+  nexSys.prompt.vars.diffhp.text = `${((args.diff / args.max) * 100).toFixed(
     1
   )}%`;
   nexSys.prompt.vars.diffh.text = `(${args.diff > 0 ? "+" : ""}${args.diff})h`;
