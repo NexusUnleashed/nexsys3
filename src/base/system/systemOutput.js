@@ -100,6 +100,16 @@ const populateOutput = function () {
   }
 };
 
+export const systemOutputDebug = () => {
+  console.log(outputInProgress);
+  console.log(outputPending);
+  console.log(output);
+  console.log(eventOutput);
+  console.log(affPrioOutput);
+  console.log(defPrioOutput);
+  console.log(populateOutputFlag);
+};
+
 let addDefPrioEventOutput = function (command) {
   defPrioOutput.push(command);
   //forcePopulateOutput();

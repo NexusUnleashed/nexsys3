@@ -128,7 +128,8 @@ const setHealthDiffPrompt = function (args) {
   nexSys.prompt.vars.diffhp.text = `${((args.diff / args.max) * 100).toFixed(
     1
   )}%`;
-  nexSys.prompt.vars.diffh.text = `(${args.diff > 0 ? "+" : ""}${args.diff})h`;
+  //nexSys.prompt.vars.diffh.text = `(${args.diff > 0 ? "+" : ""}${args.diff})h`;
+  nexSys.prompt.vars.diffh.text = `${args.diff > 0 ? "+" : ""}${args.diff}`;
   nexSys.prompt.vars.diffh.fg = args.diff < 0 ? "red" : "green";
   nexSys.prompt.vars.diffhp.fg = nexSys.prompt.vars.diffh.fg;
 };
@@ -137,7 +138,7 @@ const setManaDiffPrompt = function (args) {
   nexSys.prompt.vars.diffmp.text = `${((args.diff / args.max) * 100).toFixed(
     1
   )}%`;
-  nexSys.prompt.vars.diffm.text = `(${args.diff > 0 ? "+" : ""}${args.diff})m`;
+  nexSys.prompt.vars.diffm.text = `${args.diff > 0 ? "+" : ""}${args.diff}`;
   nexSys.prompt.vars.diffm.fg = args.diff < 0 ? "red" : "green";
   nexSys.prompt.vars.diffmp.fg = nexSys.prompt.vars.diffm.fg;
 };

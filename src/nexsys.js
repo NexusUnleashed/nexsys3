@@ -72,6 +72,7 @@ import {
   sendInline,
   timeDiffNow,
 } from "./base/system/sysService";
+import { systemOutputDebug } from "./base/system/systemOutput";
 import {
   classList,
   dirMap,
@@ -91,7 +92,7 @@ import { startup } from "./base/utilities/startup";
 import NexDialog from "./components/NexDialog";
 
 const nexSys = {
-  version: "1.2.3",
+  version: "1.2.4",
   evt: new EventTarget(),
   component: NexDialog,
 
@@ -196,6 +197,9 @@ const nexSys = {
   stunQueue: createQueue({ name: "stun", type: "!t", pre: "touch soul" }),
 
   prompt: prompt,
+
+  // DEBUG Functions
+  systemOutputDebug: systemOutputDebug,
 };
 
 globalThis.nexSys = nexSys;

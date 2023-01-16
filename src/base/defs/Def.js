@@ -107,6 +107,7 @@ export class Def extends Trackable {
     } else {
       this.set_default_prio(prio);
     }
+    eventStream.raiseEvent("ForcePopulateEvent");
   }
 
   reset_prio() {
