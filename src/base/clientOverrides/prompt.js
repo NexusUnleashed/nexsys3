@@ -149,6 +149,7 @@ prompt.vars = {
   rage: { text: "", fg: "red", bg: "" },
 
   age: { text: "", fg: "red", bg: "" },
+  essence: { text: "", fg: "", bg: "" },
   kai: { text: "", fg: "", bg: "" },
   karma: { text: "", fg: "green", bg: "" },
   vitality: { text: "", fg: "purple", bg: "" },

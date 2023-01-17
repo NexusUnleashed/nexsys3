@@ -27,7 +27,6 @@ export function timeDiffNow(prev) {
 }
 
 export function sendInline(cmd) {
-  console.log(`nexSys sendInline: ${cmd}`);
   if (Array.isArray(cmd)) sendCmd(cmd.join(sys.settings.sep));
   eventStream.raiseEvent("SendCommandEvent", cmd);
 }

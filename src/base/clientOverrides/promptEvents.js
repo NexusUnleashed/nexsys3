@@ -15,8 +15,9 @@ const setPromptVitals = function (vitals) {
   vars.bleed.text = vitals.bleed;
   vars.rage.text = vitals.rage;
 
-  vars.karma.text = vitals?.karma || "0";
-  vars.age.text = vitals?.age || "0";
+  vars.karma.text = vitals.karma || "";
+  vars.age.text = vitals.age || "";
+  vars.essence.text = vitals.essence || "";
 
   let perch = (vitals.h * 100) / vitals.maxh;
   let percm = (vitals.m * 100) / vitals.maxm;
