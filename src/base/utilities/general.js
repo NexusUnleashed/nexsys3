@@ -47,7 +47,7 @@ speech.voice =
     .getVoices()
     .find((e) => e.voiceURI === "Google UK English Female") ||
   globalThis.speechSynthesis.getVoices().find((e) => e.lang === "en-US");
-speech.rate = 1.1;
+speech.rate = 1.05;
 speech.pitch = 1.1;
 export const say = (txt) => {
   speech.text = txt;

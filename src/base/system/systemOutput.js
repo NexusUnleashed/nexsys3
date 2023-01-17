@@ -107,6 +107,10 @@ export const systemOutputDebug = () => {
   console.log(eventOutput);
   console.log(affPrioOutput);
   console.log(defPrioOutput);
+  console.log(getCureOutputs(getCurrentAffs(), getCurrentBals()));
+  console.log(getLustCommands());
+  console.log(getDefOutputs(getCurrentAffs(), getCurrentBals()));
+  console.log(getCacheOutputs(getCurrentAffs()));
   console.log(populateOutputFlag);
 };
 
