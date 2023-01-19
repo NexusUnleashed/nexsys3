@@ -28,6 +28,8 @@ export const sys = {
     sep:
       nexusclient.variables().get("nexSysSettings")?.commandSeparator ?? false,
     customPrompt: false,
+    overrideTab: false,
+    loadOnLogin: false,
     echoAffGot: false,
     echoAffLost: false,
     echoDefGot: false,
@@ -58,6 +60,7 @@ export const sys = {
     paused: false,
     slowMode: false,
     overrideTab: false,
+    loadOnLogin: false,
     curingMethod: "Transmutation",
     sipPriority: "Health",
     sipHealthAt: 80,

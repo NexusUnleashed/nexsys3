@@ -64,6 +64,12 @@ const SystemSettings = ({ settings, setSettings }) => {
           </FormLabel>
           <FormGroup>
             <ConfigSwitch
+              label="Load on login"
+              option={"loadOnLogin"}
+              handleCheck={handleCheck}
+              checked={stateSettings.loadOnLogin}
+            />
+            <ConfigSwitch
               label="Override Tab target"
               option={"overrideTab"}
               handleCheck={handleCheck}
@@ -225,13 +231,13 @@ const SystemSettings = ({ settings, setSettings }) => {
                 id="clotAt"
                 error={
                   stateSettings.clotAt < 0 ||
-                    !Number.isInteger(parseInt(stateSettings.clotAt))
+                  !Number.isInteger(parseInt(stateSettings.clotAt))
                     ? true
                     : false
                 }
                 label={
                   stateSettings.clotAt < 0 ||
-                    !Number.isInteger(parseInt(stateSettings.clotAt))
+                  !Number.isInteger(parseInt(stateSettings.clotAt))
                     ? "error"
                     : ""
                 }
@@ -254,7 +260,9 @@ const SystemSettings = ({ settings, setSettings }) => {
             Curing Config Cont.
           </FormLabel>
           <FormGroup>
-            <FormLabel component="legend">Sip health at ({stateSettings["sipHealthAt"]}%)</FormLabel>
+            <FormLabel component="legend">
+              Sip health at ({stateSettings["sipHealthAt"]}%)
+            </FormLabel>
             <Slider
               aria-label="Always visible"
               name="sipHealthAt"
@@ -265,7 +273,9 @@ const SystemSettings = ({ settings, setSettings }) => {
               marks={false}
               valueLabelDisplay="auto"
             />
-            <FormLabel component="legend">Sip mana at ({stateSettings["sipManaAt"]}%)</FormLabel>
+            <FormLabel component="legend">
+              Sip mana at ({stateSettings["sipManaAt"]}%)
+            </FormLabel>
             <Slider
               aria-label="Always visible"
               name="sipManaAt"
@@ -276,7 +286,9 @@ const SystemSettings = ({ settings, setSettings }) => {
               marks={false}
               valueLabelDisplay="auto"
             />
-            <FormLabel component="legend">Moss health at ({stateSettings["mossHealthAt"]}%)</FormLabel>
+            <FormLabel component="legend">
+              Moss health at ({stateSettings["mossHealthAt"]}%)
+            </FormLabel>
             <Slider
               aria-label="Always visible"
               name="mossHealthAt"
@@ -287,7 +299,9 @@ const SystemSettings = ({ settings, setSettings }) => {
               marks={false}
               valueLabelDisplay="auto"
             />
-            <FormLabel component="legend">Moss mana at ({stateSettings["mossManaAt"]}%)</FormLabel>
+            <FormLabel component="legend">
+              Moss mana at ({stateSettings["mossManaAt"]}%)
+            </FormLabel>
             <Slider
               aria-label="Always visible"
               name="mossManaAt"
@@ -298,7 +312,9 @@ const SystemSettings = ({ settings, setSettings }) => {
               marks={false}
               valueLabelDisplay="auto"
             />
-            <FormLabel component="legend">Fractures above ({stateSettings["fracturesAbove"]}%)</FormLabel>
+            <FormLabel component="legend">
+              Fractures above ({stateSettings["fracturesAbove"]}%)
+            </FormLabel>
             <Slider
               aria-label="Always visible"
               name="fracturesAbove"
@@ -309,7 +325,9 @@ const SystemSettings = ({ settings, setSettings }) => {
               marks={false}
               valueLabelDisplay="auto"
             />
-            <FormLabel component="legend">Clot above ({stateSettings["clotAbove"]}%) Health</FormLabel>
+            <FormLabel component="legend">
+              Clot above ({stateSettings["clotAbove"]}%) Health
+            </FormLabel>
             <Slider
               aria-label="Always visible"
               name="clotAbove"
@@ -320,7 +338,9 @@ const SystemSettings = ({ settings, setSettings }) => {
               marks={false}
               valueLabelDisplay="auto"
             />
-            <FormLabel component="legend">Mana abilities above ({stateSettings["manaAbilitiesAbove"]}%)</FormLabel>
+            <FormLabel component="legend">
+              Mana abilities above ({stateSettings["manaAbilitiesAbove"]}%)
+            </FormLabel>
             <Slider
               aria-label="Always visible"
               name="manaAbilitiesAbove"
