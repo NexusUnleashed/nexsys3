@@ -41,9 +41,8 @@ const colorPercentage = (perc) => {
 };
 
 const colorGradation = (perc) => {
-  return `hsl(${perc * 1.2}, 100%, ${
-    perc < 50 ? 50 : Math.abs(perc - 100) / 2 + 25
-  }%)`;
+  return `hsl(${perc * 1.2}, 100%, ${perc < 50 ? 50 : Math.abs(perc - 100) / 2 + 25
+    }%)`;
 };
 
 const getCustomPrompt = () => {
@@ -98,6 +97,65 @@ const getCustomPrompt = () => {
   return nexSys.prompt.promptLine.outerHTML;
 };
 
+const addAffArray = function (affs) {
+  let affLine = document.createElement("span");
+  affLine.className = "mono";
+
+  if (!Array.isArray(affs) || affs.length === 0) {
+    nexSys.prompt.promptLine.appendChild(affLine);
+    return affLine;
+  }
+
+  // TODO: This sorts affs based on priority order for prompt display.
+  // How to make this also sort based on order within priority?
+  // Do we care?
+  affs.sort((a, b) => {
+    let res;
+    if (nexSys.affTable.prios[a] > nexSys.affTable.prios[b]) {
+      res = 1;
+    } else if (nexSys.affTable.prios[a] < nexSys.affTable.prios[b]) {
+      res = -1;
+    } else {
+      const prioArray = nexSys.affTable.prioArrays[nexSys.affTable.prios[a]];
+      res = prioArray.indexOf(a) >= prioArray.indexOf(b) ? 1 : -1;
+    }
+    return res;
+  });
+
+  /*
+  // Simple sort
+  Object.keys(tester).sort((a, b) =>
+  nexSys.affTable.prios[a] >= nexSys.affTable.prios[b] ? 1 : -1
+  );
+  */
+
+
+  let affAbbrev = nexSys.prompt.affAbbrev;
+
+  let add = (txt, fg, bg) => {
+    affLine.appendChild(generate_chunk(txt, fg, bg));
+  };
+
+  add("[", "brown");
+  for (let i = 0; i < affs.length; i++) {
+    const aff = affs[i];
+    const fg = affAbbrev[aff] ? affAbbrev[aff].fg : "";
+    const bg = affAbbrev[aff] ? affAbbrev[aff].bg : "";
+    let txt = affAbbrev[aff] ? affAbbrev[aff].text : aff;
+
+    //const count = promptAffs[aff] === true ? "" : `(${promptAffs[aff]})`;
+    add(
+      `${txt}${affs.length > 1 && i < affs.length - 1 ? " " : ""}`,
+      fg,
+      bg
+    );
+  }
+  add("]", "brown");
+
+  nexSys.prompt.promptLine.appendChild(affLine);
+  return affLine;
+};
+
 export const prompt = {
   promptLine: {},
   generate_chunk: generate_chunk,
@@ -106,6 +164,7 @@ export const prompt = {
   colorPercentage: colorPercentage,
   colorGradation: colorGradation,
   getCustomPrompt: getCustomPrompt,
+  addAffArray: addAffArray
 };
 
 prompt.vars = {

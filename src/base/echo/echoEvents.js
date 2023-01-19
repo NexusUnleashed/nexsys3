@@ -125,7 +125,9 @@ eventStream.registerEvent("PrioritySetEvent", prioritySet);
 const SystemOutputDisplay = new Echo("red");
 
 const systemOutputSentDisplay = function (output) {
-  SystemOutputDisplay.echo("(" + output.join("|") + ")");
+  if (sys.settings.echoOutput) {
+    SystemOutputDisplay.echo("(" + output.join("|") + ")");
+  }
 };
 
 eventStream.registerEvent("OutputSentEvent", systemOutputSentDisplay);

@@ -30,6 +30,7 @@ export const sys = {
     customPrompt: false,
     overrideTab: false,
     loadOnLogin: false,
+    echoOutput: true,
     echoAffGot: false,
     echoAffLost: false,
     echoDefGot: false,
