@@ -78,7 +78,7 @@ const NexDialog = ({ evt, nexSys }) => {
   const [defPrios, setDefPrios] = React.useState(nexSys.defPrios);
 
   evt.addEventListener("nexSys-config-dialog", ({ detail }) => {
-    setOpen(detail);
+    if (nexSys.system_loaded) { setOpen(detail); }
   });
 
   React.useEffect(() => {
