@@ -203,6 +203,16 @@ export const defTable = {
     serverside: true,
     preempt: true,
   },
+  deflect: {
+    command: "deflect",
+    bals_req: ["balance", "equilibrium"],
+    bals_used: ["free"],
+    blocks: ["death", "prone", "sleeping"],
+    // This is a 2h-spec specific defence, so all the knight/warrior classes get it
+    skills: ["Runewarden", "Paladin", "Infernal", "Unnameable"],
+    serverside: true,
+    preempt: true,
+  },
   density: {
     command: "wear shackle",
     bals_req: ["salve"],
@@ -334,6 +344,15 @@ export const defTable = {
     bals_used: ["equilibrium"],
     skills: ["Serpent"],
     serverside: true,
+  },
+  gripping: {
+    command: "grip",
+    bals_req: ["balance", "equilibrium"],
+    bals_used: ["free"],
+    // Only Shikudo has gripping, Tekura doesn't. Not sure nexSys distinguishes between the two somehow
+    skills: ["Runewarden", "Paladin", "Infernal", "Unnameable", "Monk", "Bard", "Blademaster", "Jester", "Shaman"],
+    serverside: true,
+    preempt: true,
   },
   groundwatch: {
     command: "groundwatch on",
