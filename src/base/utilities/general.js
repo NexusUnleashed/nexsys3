@@ -41,6 +41,22 @@ export const replaceWord = (word, fg, bg) => {
   return true;
 };
 
+export const updateNxs = () => {
+  fetch(
+    `https://unpkg.com/nexsys@${nexSys.currentVersion}/nexSys3encode.json`,
+    { cache: "no-store" }
+  )
+    .then((response) => response.json())
+    .then((data) => {
+      const newPackage = JSON.parse(data);
+      nexusclient
+        .reflexes()
+        .packages()
+        .get("nexSys3")
+        .apply(newPackage, nexusclient.reflexes());
+    });
+};
+
 const speech = new SpeechSynthesisUtterance();
 speech.voice =
   globalThis.speechSynthesis

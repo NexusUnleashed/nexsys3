@@ -5,6 +5,10 @@ export const startup = () => {
     return;
   }
 
+  fetch("https://registry.npmjs.org/nexsys/", { cache: "no-store" })
+    .then((response) => response.json())
+    .then((data) => (nexSys.latestVersion = data["dist-tags"].latest));
+
   if (!document.getElementById("modal-root")) {
     document
       .getElementsByTagName("body")[0]
@@ -13,7 +17,7 @@ export const startup = () => {
       );
   }
 
-  document.getElementById('nexsys-modal')?.remove();
+  document.getElementById("nexsys-modal")?.remove();
   document
     .getElementById("modal-root")
     .appendChild(

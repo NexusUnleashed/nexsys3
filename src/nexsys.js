@@ -86,13 +86,14 @@ import {
   replaceHTML,
   say,
   tabCompletion,
+  updateNxs,
 } from "./base/utilities/general";
 import { getLustCommands, rejectList, whiteList } from "./base/utilities/lust";
 import { startup } from "./base/utilities/startup";
 import NexDialog from "./components/NexDialog";
 
 const nexSys = {
-  version: "1.2.6",
+  version: "1.2.8",
   evt: new EventTarget(),
   component: NexDialog,
 
@@ -170,6 +171,7 @@ const nexSys = {
 
   updateModel: updateModel,
   updateList: updateList,
+  updateNxs: updateNxs,
   saveModel: saveModel,
   updateAndSaveModel: updateAndSaveModel,
   loadCustomSettings: loadCustomSettings,

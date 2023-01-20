@@ -5,6 +5,9 @@ import {
   DialogActions,
   Button,
   Dialog,
+  Alert,
+  AlertTitle,
+  Collapse,
 } from "@mui/material";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import * as React from "react";
@@ -70,15 +73,18 @@ const darkTheme = createTheme({
 });
 
 const NexDialog = ({ evt, nexSys }) => {
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = React.useState(true);
   const [_nexSys, setNexSys] = React.useState(nexSys);
   const [sys, setSys] = React.useState(nexSys.sys);
   const [cacheTable, setCacheTable] = React.useState(nexSys.cacheTable);
   const [affTable, setAffTable] = React.useState(nexSys.affTable);
   const [defPrios, setDefPrios] = React.useState(nexSys.defPrios);
+  const [updated, setUpdated] = React.useState(false);
 
   evt.addEventListener("nexSys-config-dialog", ({ detail }) => {
-    if (nexSys.system_loaded) { setOpen(detail); }
+    if (nexSys.system_loaded) {
+      setOpen(detail);
+    }
   });
 
   React.useEffect(() => {
@@ -93,6 +99,10 @@ const NexDialog = ({ evt, nexSys }) => {
     setNexSys((prev) => ({ ...prev, affTable: { ...affTable } }));
   }, [affTable]);
 
+  const handleUpdateClick = () => {
+    nexSys.updateNxs();
+    setUpdated(true);
+  };
   const handleClickClose = () => {
     setOpen(false);
     setTimeout(() => {
@@ -114,7 +124,7 @@ const NexDialog = ({ evt, nexSys }) => {
 
     handleClickClose();
   };
-
+  console.log(updated);
   return (
     <div>
       <ThemeProvider theme={darkTheme}>
@@ -126,6 +136,29 @@ const NexDialog = ({ evt, nexSys }) => {
         >
           <DialogTitle>Nexsys Configuration Options</DialogTitle>
           <DialogContent sx={{ background: "#121212" }}>
+            <Collapse in={nexSys.version !== nexSys.currentVersion && !updated}>
+              <Alert
+                severity="info"
+                sx={{ fontSize: "12px" }}
+                action={
+                  <Button
+                    variant="outlined"
+                    color="inherit"
+                    size="small"
+                    onClick={handleUpdateClick}
+                  >
+                    UPDATE
+                  </Button>
+                }
+              >
+                <AlertTitle sx={{ fontSize: "14px" }}>
+                  nexSys Update Available
+                </AlertTitle>
+                You are using version <strong>{nexSys.version}</strong> version{" "}
+                <strong>{nexSys.currentVersion || "update"}</strong> is
+                available now.
+              </Alert>
+            </Collapse>
             <Configuration
               theme={darkTheme}
               nexSys={_nexSys}

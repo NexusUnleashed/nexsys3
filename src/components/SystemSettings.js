@@ -51,8 +51,8 @@ const SystemSettings = ({ settings, setSettings }) => {
     <div>
       {!stateSettings.sep && (
         <Collapse in={open}>
-          <Alert severity="error" sx={{ fontSize: "16px" }}>
-            <AlertTitle sx={{ fontSize: "16px" }}>nexSys Error</AlertTitle>
+          <Alert severity="error" sx={{ fontSize: "12px" }}>
+            <AlertTitle sx={{ fontSize: "14px" }}>nexSys Error</AlertTitle>
             Enter <strong>Command Separator</strong> to get started.
           </Alert>
         </Collapse>

@@ -32,7 +32,7 @@ const sendOutput = function () {
   if (output.length > 0) {
     eventStream.raiseEvent("OutputSentEvent", output);
     addToOutput(outputFeedbackCommand);
-    const chunks = parseInt((output.length - 1) / outputChunkSize + 1); //CUSTOM
+    const chunks = parseInt((output.length - 1) / outputChunkSize) + 1; //CUSTOM
 
     for (let i = 0; i < chunks; i++) {
       const chunk = output.slice(
