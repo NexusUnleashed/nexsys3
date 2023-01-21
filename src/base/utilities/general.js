@@ -27,12 +27,16 @@ export const replaceHTML = (html) => {
   return true;
 };
 
-export const replaceWord = (word, fg, bg) => {
+export const replaceWord = (word, replaceWord, fg, bg) => {
+  let replacement = replaceWord.indexOf("/>") > -1 ?
+    replaceWord :
+    `<span style="color:${fg};background:${bg}">${replaceWord}</span>`;
+
   let line = globalThis.nexusclient.current_line.parsed_line
-    .text()
+    .formatted()
     .replaceAll(
       word,
-      `<span style="color:${fg};background:${bg}">${word}</span>`
+      replacement
     );
   globalThis.nexusclient.current_line.parsed_line.formatted = () => {
     return line;

@@ -138,6 +138,9 @@ export function defPrioSwap(def, prio) {
   }
 }
 
+//TODO "cur_def.skills?.length > 0 &&"
+// We added that snip because we shifted from static object containing only static defs
+// to containing all defs, defined by 0 or prio.
 export function defup() {
   const staticPrios = defPrios.static;
   for (const def in defs) {
@@ -153,7 +156,7 @@ export function defup() {
         } else {
           cur_def.set_default_prio(0);
         }
-      } else if (!sys.isClass(cur_def.skills)) {
+      } else if (cur_def.skills?.length > 0 && !sys.isClass(cur_def.skills)) {
         cur_def.set_default_prio(0);
       }
     }
