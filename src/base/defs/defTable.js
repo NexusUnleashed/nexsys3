@@ -350,7 +350,17 @@ export const defTable = {
     bals_req: ["balance", "equilibrium"],
     bals_used: ["free"],
     // Only Shikudo has gripping, Tekura doesn't. Not sure nexSys distinguishes between the two somehow
-    skills: ["Runewarden", "Paladin", "Infernal", "Unnameable", "Monk", "Bard", "Blademaster", "Jester", "Shaman"],
+    skills: [
+      "Runewarden",
+      "Paladin",
+      "Infernal",
+      "Unnameable",
+      "Monk",
+      "Bard",
+      "Blademaster",
+      "Jester",
+      "Shaman",
+    ],
     serverside: true,
     preempt: true,
   },
@@ -623,7 +633,7 @@ export const defTable = {
     command: "astralvision",
     bals_req: ["equilibrium"],
     bals_used: ["equilibrium"],
-    skills: ["Occultist"],
+    //skills: ["Occultist"],
     serverside: true,
   },
   lipreading: {
