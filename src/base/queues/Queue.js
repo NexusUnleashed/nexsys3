@@ -17,7 +17,7 @@ export const createQueue = ({
   return {
     name: name,
     type: type,
-    pre: pre.split(sys.settings.sep),
+    pre: pre || [],
     exclusions: exclusions,
     queue: [],
     prependQueue: [],
@@ -78,6 +78,7 @@ export const createQueue = ({
       }
 
       clears.push(cmdString);
+      console.log(clears);
       sendInline(clears);
     },
     clear() {

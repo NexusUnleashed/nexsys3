@@ -23,7 +23,7 @@ const darkTheme = createTheme({
   },
   typography: {
     fontSize: 12 * (14 / 16), // conversion for px
-    fontFamily: ["Arial"],
+    fontFamily: "Montserrat,Roboto,Helvetica,Arial,sans-serif",
   },
   components: {
     MuiList: {

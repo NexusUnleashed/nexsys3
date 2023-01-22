@@ -93,7 +93,7 @@ import { startup } from "./base/utilities/startup";
 import NexDialog from "./components/NexDialog";
 
 const nexSys = {
-  version: "1.3.1",
+  version: "1.3.3",
   evt: new EventTarget(),
   component: NexDialog,
 
@@ -187,19 +187,19 @@ const nexSys = {
   freeQueue: createQueue({
     name: "free",
     type: "free",
-    pre: "touch soul|stand",
+    pre: ["touch soul", "stand"],
     exclusions: ["fullQueue", "shieldQueue"],
   }),
   fullQueue: createQueue({
     name: "full",
     type: "ebc!w!p!t",
-    pre: "touch soul|stand",
+    pre: ["touch soul", "stand"],
     exclusions: ["freeQueue", "shieldQueue", "classQueue"],
   }),
   shieldQueue: createQueue({
     name: "full",
     type: "ebc!w!t",
-    pre: "touch soul|stand",
+    pre: ["touch soul", "stand"],
     exclusions: ["freeQueue", "fullQueue"],
   }),
   stunQueue: createQueue({ name: "stun", type: "!t", pre: "touch soul" }),
