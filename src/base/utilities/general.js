@@ -28,21 +28,25 @@ export const replaceHTML = (html) => {
 };
 
 export const replaceWord = (word, replaceWord, fg, bg) => {
-  let replacement = replaceWord.indexOf("/>") > -1 ?
-    replaceWord :
-    `<span style="color:${fg};background:${bg}">${replaceWord}</span>`;
+  let replacement =
+    replaceWord.indexOf("/>") > -1
+      ? replaceWord
+      : `<span style="color:${fg};background:${bg}">${replaceWord}</span>`;
 
   let line = globalThis.nexusclient.current_line.parsed_line
     .formatted()
-    .replaceAll(
-      word,
-      replacement
-    );
+    .replaceAll(word, replacement);
   globalThis.nexusclient.current_line.parsed_line.formatted = () => {
     return line;
   };
 
   return true;
+};
+
+export const checkForUpdate = () => {
+  fetch("https://registry.npmjs.org/nexsys/", { cache: "no-store" })
+    .then((response) => response.json())
+    .then((data) => (nexSys.currentVersion = data["dist-tags"].latest));
 };
 
 export const updateNxs = () => {

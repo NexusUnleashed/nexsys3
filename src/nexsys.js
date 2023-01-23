@@ -82,6 +82,7 @@ import {
   shortDirs,
 } from "./base/utilities/commonTable";
 import {
+  checkForUpdate,
   replace,
   replaceHTML,
   say,
@@ -93,7 +94,7 @@ import { startup } from "./base/utilities/startup";
 import NexDialog from "./components/NexDialog";
 
 const nexSys = {
-  version: "1.3.3",
+  version: "1.3.4",
   evt: new EventTarget(),
   component: NexDialog,
 
@@ -172,6 +173,7 @@ const nexSys = {
   updateModel: updateModel,
   updateList: updateList,
   updateNxs: updateNxs,
+  checkForUpdate: checkForUpdate,
   saveModel: saveModel,
   updateAndSaveModel: updateAndSaveModel,
   loadCustomSettings: loadCustomSettings,
@@ -181,7 +183,7 @@ const nexSys = {
   classQueue: createQueue({
     name: "class",
     type: "c!p!t!w",
-    pre: "touch soul|stand",
+    pre: ["touch soul", "stand"],
     exclusions: ["fullQueue"],
   }),
   freeQueue: createQueue({
@@ -202,7 +204,7 @@ const nexSys = {
     pre: ["touch soul", "stand"],
     exclusions: ["freeQueue", "fullQueue"],
   }),
-  stunQueue: createQueue({ name: "stun", type: "!t", pre: "touch soul" }),
+  stunQueue: createQueue({ name: "stun", type: "!t", pre: ["touch soul"] }),
 
   prompt: prompt,
 

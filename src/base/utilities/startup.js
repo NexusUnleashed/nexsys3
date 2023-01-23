@@ -5,9 +5,7 @@ export const startup = () => {
     return;
   }
 
-  fetch("https://registry.npmjs.org/nexsys/", { cache: "no-store" })
-    .then((response) => response.json())
-    .then((data) => (nexSys.currentVersion = data["dist-tags"].latest));
+  nexSys.checkForUpdate();
 
   if (!document.getElementById("modal-root")) {
     document

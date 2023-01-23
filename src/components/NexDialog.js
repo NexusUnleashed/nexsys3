@@ -23,7 +23,7 @@ const darkTheme = createTheme({
   },
   typography: {
     fontSize: 12 * (14 / 16), // conversion for px
-    fontFamily: "Montserrat,Roboto,Helvetica,Arial,sans-serif",
+    fontFamily: "Montserrat,Roboto,Helvetica,Arial,monospace,sans-serif",
   },
   components: {
     MuiList: {
@@ -80,6 +80,7 @@ const NexDialog = ({ evt, nexSys }) => {
   const [affTable, setAffTable] = React.useState(nexSys.affTable);
   const [defPrios, setDefPrios] = React.useState(nexSys.defPrios);
   const [updated, setUpdated] = React.useState(false);
+  const [checkUpdate, setCheckUpdate] = React.useState(0);
 
   evt.addEventListener("nexSys-config-dialog", ({ detail }) => {
     if (nexSys.system_loaded) {
@@ -103,6 +104,10 @@ const NexDialog = ({ evt, nexSys }) => {
     nexSys.updateNxs();
     setUpdated(true);
   };
+  const handleCheckUpdateClick = () => {
+    nexSys.checkForUpdate();
+    setCheckUpdate((prev) => prev++);
+  };
   const handleClickClose = () => {
     setOpen(false);
     setTimeout(() => {
@@ -124,6 +129,7 @@ const NexDialog = ({ evt, nexSys }) => {
 
     handleClickClose();
   };
+  console.log(nexSys.currentVersion);
   console.log(updated);
   return (
     <div>
@@ -134,7 +140,22 @@ const NexDialog = ({ evt, nexSys }) => {
           hideBackdrop={true}
           maxWidth="md"
         >
-          <DialogTitle>Nexsys Configuration Options</DialogTitle>
+          <DialogTitle>
+            <div style={{ display: "flex", justifyContent: "space-between" }}>
+              <span>nexSys Configuration Options</span>
+              <span>
+                version: {nexSys.version}{" "}
+                <Button
+                  variant="outlined"
+                  color="inherit"
+                  size="small"
+                  onClick={handleCheckUpdateClick}
+                >
+                  Check for Update
+                </Button>
+              </span>
+            </div>
+          </DialogTitle>
           <DialogContent sx={{ background: "#121212" }}>
             <Collapse in={nexSys.version !== nexSys.currentVersion && !updated}>
               <Alert
@@ -155,8 +176,8 @@ const NexDialog = ({ evt, nexSys }) => {
                   nexSys Update Available
                 </AlertTitle>
                 You are using version <strong>{nexSys.version}</strong> version{" "}
-                <strong>{nexSys.currentVersion || "update"}</strong> is
-                available now.
+                <strong>{nexSys.currentVersion || "ERROR"}</strong> is available
+                now.
               </Alert>
             </Collapse>
             <Configuration
