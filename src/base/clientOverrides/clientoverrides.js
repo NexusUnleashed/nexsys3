@@ -60,7 +60,10 @@ const add_block = function (block) {
     if (l.gag) continue;
     if ((!l.parsed_line) && (!l.html_line)) continue;
     // no prompt if we gagged everything (so far)
-    if (l.is_prompt && (!count)) continue;
+    if (l.is_prompt && (!count)) {
+      l.gag = true; // nexSys: This prevents prompt lines from logging when all text is gagged
+      continue;
+    }
     // empty line? include if it's not the first/last one
     if (l.parsed_line) {
       let text = l.parsed_line.text();

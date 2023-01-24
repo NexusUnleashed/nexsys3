@@ -67,3 +67,6 @@ TODO in game aliases
 - qcp (class queue prepend)
 - qp (free queue prepend)
 - qa (free queue add)
+
+TODO addons
+prepend_notice()
