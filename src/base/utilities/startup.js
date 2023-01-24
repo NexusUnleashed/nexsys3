@@ -31,4 +31,16 @@ export const startup = () => {
     nexusclient.variables().vars.nexSysSettings = {};
   }
   //nexSys.evt.dispatchEvent(new CustomEvent('nexSys-config-dialog', {detail: true}))
+
+  // Roboto font
+  const robotoFont = document.createElement("link");
+  robotoFont.rel = "stylesheet";
+  robotoFont.href =
+    "https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap";
+  document.getElementsByTagName("head")[0].appendChild(robotoFont);
+  const robotoMonoFont = document.createElement("link");
+  robotoMonoFont.rel = "stylesheet";
+  robotoMonoFont.href =
+    "https://fonts.googleapis.com/css?family=Roboto%20Mono:300,400,500,700&display=swap";
+  document.getElementsByTagName("head")[0].appendChild(robotoMonoFont);
 };

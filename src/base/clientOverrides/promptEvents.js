@@ -89,11 +89,10 @@ const setPromptAffs = function (promptAffs) {
     let txt = affAbbrev[aff] ? affAbbrev[aff].text : aff;
 
     const count = promptAffs[aff] === true ? "" : `(${promptAffs[aff]})`;
-    add(
-      `${txt}${count}${affs.length > 1 && i < affs.length - 1 ? " " : ""}`,
-      fg,
-      bg
-    );
+    add(`${txt}${count}`, fg, bg);
+    if (affs.length > 1 && i < affs.length - 1) {
+      add(" ");
+    }
   }
   add("]", "brown");
 

@@ -41,8 +41,9 @@ const colorPercentage = (perc) => {
 };
 
 const colorGradation = (perc) => {
-  return `hsl(${perc * 1.2}, 100%, ${perc < 50 ? 50 : Math.abs(perc - 100) / 2 + 25
-    }%)`;
+  return `hsl(${perc * 1.2}, 100%, ${
+    perc < 50 ? 50 : Math.abs(perc - 100) / 2 + 25
+  }%)`;
 };
 
 const getCustomPrompt = () => {
@@ -129,7 +130,6 @@ const addAffArray = function (affs) {
   );
   */
 
-
   let affAbbrev = nexSys.prompt.affAbbrev;
 
   let add = (txt, fg, bg) => {
@@ -144,11 +144,7 @@ const addAffArray = function (affs) {
     let txt = affAbbrev[aff] ? affAbbrev[aff].text : aff;
 
     //const count = promptAffs[aff] === true ? "" : `(${promptAffs[aff]})`;
-    add(
-      `${txt}${affs.length > 1 && i < affs.length - 1 ? " " : ""}`,
-      fg,
-      bg
-    );
+    add(`${txt}${affs.length > 1 && i < affs.length - 1 ? " " : ""}`, fg, bg);
   }
   add("]", "brown");
 
@@ -164,7 +160,7 @@ export const prompt = {
   colorPercentage: colorPercentage,
   colorGradation: colorGradation,
   getCustomPrompt: getCustomPrompt,
-  addAffArray: addAffArray
+  addAffArray: addAffArray,
 };
 
 prompt.vars = {
@@ -215,9 +211,6 @@ prompt.vars = {
   kaitrance: { text: "", fg: "blue", bg: "" },
   shintrance: { text: "", fg: "", bg: "" },
   stance: { text: "", fg: "white", bg: "" },
-
-  shield: { text: "", fg: "cyan", bg: "" },
-  prismatic: { text: "", fg: "yellow", bg: "" },
 };
 
 prompt.cureColors = {
