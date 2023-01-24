@@ -23,21 +23,23 @@ const setPromptVitals = function (vitals) {
   let percm = (vitals.m * 100) / vitals.maxm;
   let perce = (vitals.e * 100) / vitals.maxe;
   let percw = (vitals.w * 100) / vitals.maxw;
-  /*
-  vars.h.fg = `hsl(${perch * 1.2}, 100%, 50%)`; //nexSys.prompt.colorPercentage(perch);
-  vars.m.fg = `hsl(${percm * 1.2}, 100%, 50%)`; //nexSys.prompt.colorPercentage(percm);
-  vars.e.fg = `hsl(${perce * 1.2}, 100%, 50%)`; //nexSys.prompt.colorPercentage(perce);
-  vars.w.fg = `hsl(${percw * 1.2}, 100%, 50%)`; //nexSys.prompt.colorPercentage(percw);
-*/
+
+  vars.h.fg = nexSys.prompt.colorGradation(perch); //nexSys.prompt.colorPercentage(perch);
+  vars.m.fg = nexSys.prompt.colorGradation(percm); //nexSys.prompt.colorPercentage(percm);
+  vars.e.fg = nexSys.prompt.colorGradation(perce); //nexSys.prompt.colorPercentage(perce);
+  vars.w.fg = nexSys.prompt.colorGradation(percw); //nexSys.prompt.colorPercentage(percw);
+
   vars.ph.text = perch.toFixed(1) + "%";
   vars.pm.text = percm.toFixed(1) + "%";
   vars.pe.text = perce.toFixed(1) + "%";
   vars.pw.text = percw.toFixed(1) + "%";
 
+  /*
   vars.ph.value = perch.toFixed(2);
   vars.pm.value = percm.toFixed(2);
   vars.pe.value = perce.toFixed(2);
   vars.pw.value = percw.toFixed(2);
+  */
 };
 /********** */
 const setPromptAffs = function (promptAffs) {
