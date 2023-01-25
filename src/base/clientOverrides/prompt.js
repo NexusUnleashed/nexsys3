@@ -42,7 +42,7 @@ const colorPercentage = (perc) => {
 
 const colorGradation = (perc) => {
   return `hsl(${perc * 1.2}, 100%, ${
-    perc < 50 ? 50 : Math.abs(perc - 100) / 2 + 25
+    perc < 75 ? 50 : Math.abs(perc - 100) / 2 + 25
   }%)`;
 };
 
