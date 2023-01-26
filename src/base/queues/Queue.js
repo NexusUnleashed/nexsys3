@@ -78,7 +78,6 @@ export const createQueue = ({
       }
 
       clears.push(cmdString);
-      console.log(clears);
       sendInline(clears);
     },
     clear() {
