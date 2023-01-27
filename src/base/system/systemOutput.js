@@ -101,17 +101,17 @@ const populateOutput = function () {
 };
 
 export const systemOutputDebug = () => {
-  console.log(outputInProgress);
-  console.log(outputPending);
-  console.log(output);
-  console.log(eventOutput);
-  console.log(affPrioOutput);
-  console.log(defPrioOutput);
-  console.log(getCureOutputs(getCurrentAffs(), getCurrentBals()));
-  console.log(getLustCommands());
-  console.log(getDefOutputs(getCurrentAffs(), getCurrentBals()));
-  console.log(getCacheOutputs(getCurrentAffs()));
-  console.log(populateOutputFlag);
+  console.log(`outputInProgress: ${outputInProgress}`);
+  console.log(`outputPending: ${outputPending}`);
+  console.log(`output: ${output}`);
+  console.log(`eventOutput: ${eventOutput}`);
+  console.log(`affPrioOutput: ${affPrioOutput}`);
+  console.log(`defPrioOutput: ${defPrioOutput}`);
+  console.log(`getCureOutputs: ${getCureOutputs(getCurrentAffs(), getCurrentBals())}`);
+  console.log(`getLustCommands: ${getLustCommands()}`);
+  console.log(`getDefOutputs: ${getDefOutputs(getCurrentAffs(), getCurrentBals())}`);
+  console.log(`getCacheOutputs: ${getCacheOutputs(getCurrentAffs())}`);
+  console.log(`populateOutputFlag: ${populateOutputFlag}`);
 };
 
 let addDefPrioEventOutput = function (command) {
