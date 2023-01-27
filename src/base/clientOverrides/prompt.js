@@ -117,7 +117,8 @@ const addAffArray = function (affs) {
     } else if (nexSys.affTable.prios[a] < nexSys.affTable.prios[b]) {
       res = -1;
     } else {
-      const prioArray = nexSys.affTable.prioArrays[nexSys.affTable.prios[a]];
+      const prioArray =
+        nexSys.affTable.prioArrays[nexSys.affTable.prios[a]] || [];
       res = prioArray.indexOf(a) >= prioArray.indexOf(b) ? 1 : -1;
     }
     return res;
