@@ -98,6 +98,11 @@ const loadDefSettings = function () {
     defPrios.keepup = { ...model.keepup };
     defPrios.static = { ...model.static };
     //saveModel("defSettings", defPrios);
+    /*
+      for (let def in defPrios.keepup) {
+        defs[def]._prio._default = defPrios.keepup[def];
+      }
+    */
   }
 };
 
@@ -127,6 +132,7 @@ export const updatePriorities = () => {
   /*
   for (let def in defPrios.keepup) {
     defs[def].set_default_prio(defPrios.keepup[def]);
+    nexSys.defs.deathsight._prio._default
   }
   */
   Object.assign(sys.state, { ...sys.settings });
