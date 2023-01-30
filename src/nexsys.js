@@ -14,6 +14,7 @@
     gag_current_line() > nexusclient.current_line.gag = true
     reflex_disable() > nexusclient.reflexes().disable_reflex();
     reflex_find_by_name() > nexusclient.reflexes().find_by_name("group", "Aliases", false, false, "nexmap3")
+      nexusclient.reflexes().disable_reflex(nexusclient.reflexes().find_by_name("group", "Aliases", false, false, "nexmap3"));
     set_current_target() > nexusclient.datahandler().set_current_target()
 */
 /* global globalThis */
@@ -94,7 +95,7 @@ import { startup } from "./base/utilities/startup";
 import NexDialog from "./components/NexDialog";
 
 const nexSys = {
-  version: "1.3.6",
+  version: "1.3.8",
   evt: new EventTarget(),
   component: NexDialog,
 

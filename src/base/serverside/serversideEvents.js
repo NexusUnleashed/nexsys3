@@ -164,6 +164,7 @@ const initiateStartup = function (args) {
     }
     sys.pause();
     const startupCommands = [
+      "echo SystemEvent CuringStartupBeginEvent",
       "inr all",
       "score",
       "curing defences on",
@@ -175,6 +176,23 @@ const initiateStartup = function (args) {
       "date",
       "echo SystemEvent CuringStartupCompleteEvent",
     ];
+
+    const startUpGag = () => {
+      nexusclient.current_block.forEach((e) => (e.gag = true));
+    };
+    const mountStartUpGag = () => {
+      eventStream.registerEvent("PromptEvent", startUpGag);
+    };
+    eventStream.registerEvent("CuringStartupBeginEvent", mountStartUpGag, true);
+
+    eventStream.registerEvent(
+      "CuringStartupCompleteEvent",
+      () => {
+        eventStream.removeListener("PromptEvent", "startUpGag");
+        nexSys.echoInfoLine(`nexSys loaded using startup spam gag.`);
+      },
+      true
+    );
 
     for (let i = 0; i < startupCommands.length; i++) {
       sendCmd(startupCommands[i]);
