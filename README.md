@@ -69,4 +69,9 @@ TODO in game aliases
 - qa (free queue add)
 
 TODO addons
-prepend_notice()
+
+- prepend_notice()
+- say()
+- replace()
+- replaceWord()
+- replaceHTML()
