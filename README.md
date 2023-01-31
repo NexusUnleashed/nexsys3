@@ -25,6 +25,7 @@ TODO topics
 - Queueing manager (freeQueue, classQueue, fullQueue, stunQueue)
 - Precache manager
 - Custom prompt strings
+- Tab completion
 
 TODO API functions
 
