@@ -86,6 +86,7 @@ import {
   checkForUpdate,
   replace,
   replaceHTML,
+  replaceWord,
   say,
   tabCompletion,
   updateNxs,
@@ -166,6 +167,7 @@ const nexSys = {
 
   replace: replace,
   replaceHTML: replaceHTML,
+  replaceWord: replaceWord,
   say: say,
   tabCompletion: tabCompletion,
 
