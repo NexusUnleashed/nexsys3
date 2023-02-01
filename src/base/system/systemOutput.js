@@ -83,7 +83,9 @@ const populateOutput = function () {
 
       addToOutput(getCureOutputs(affList, balList));
 
-      addToOutput(getLustCommands());
+      // TODO: Lust feels like too specialized of a feature for nexSys general
+      //addToOutput(getLustCommands());
+      
       // loop defs
       addToOutput(getDefOutputs(affList, balList));
       // loop precache

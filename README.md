@@ -25,6 +25,7 @@ TODO topics
 - Queueing manager (freeQueue, classQueue, fullQueue, stunQueue)
 - Precache manager
 - Custom prompt strings
+- Tab completion
 
 TODO API functions
 
@@ -69,4 +70,9 @@ TODO in game aliases
 - qa (free queue add)
 
 TODO addons
-prepend_notice()
+
+- prepend_notice()
+- say()
+- replace()
+- replaceWord()
+- replaceHTML()
