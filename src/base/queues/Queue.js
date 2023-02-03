@@ -26,6 +26,7 @@ export const createQueue = ({
         ? cmd
         : cmd.split(sys.settings.sep);
       if (Array.equals(newCommands, this.queue)) {
+        console.log(`${this.name}: Duplicate commands, not added ${newCommands}`);
         return;
       }
 

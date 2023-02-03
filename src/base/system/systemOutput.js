@@ -14,7 +14,7 @@ let outputInProgress = false;
 let outputPending = false;
 let output = [];
 const outputFeedbackCommand = "echo SystemEvent SystemOutputCompleteEvent";
-const outputChunkSize = 20;
+const outputChunkSize = 19; // Needs to account for preQueue commands
 let eventOutput = [];
 let affPrioOutput = [];
 let defPrioOutput = [];
@@ -85,7 +85,7 @@ const populateOutput = function () {
 
       // TODO: Lust feels like too specialized of a feature for nexSys general
       //addToOutput(getLustCommands());
-      
+
       // loop defs
       addToOutput(getDefOutputs(affList, balList));
       // loop precache
