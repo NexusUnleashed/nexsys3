@@ -266,6 +266,7 @@ prompt.affAbbrev = {
   crackedribs: { text: "cr", ...prompt.cureColors.health },
   crushedthroat: { text: "cru", ...prompt.cureColors.mending },
   daeggerimpale: { text: "daeg", ...prompt.cureColors.writhe },
+  damage: { text: "dmg", fg: "tomato", bg: "" },
   damagedleftarm: { text: "la2", ...prompt.cureColors.restoration },
   damagedleftleg: { text: "ll2", ...prompt.cureColors.restoration },
   damagedrightarm: { text: "ra2", ...prompt.cureColors.restoration },
