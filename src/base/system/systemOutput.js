@@ -109,9 +109,13 @@ export const systemOutputDebug = () => {
   console.log(`eventOutput: ${eventOutput}`);
   console.log(`affPrioOutput: ${affPrioOutput}`);
   console.log(`defPrioOutput: ${defPrioOutput}`);
-  console.log(`getCureOutputs: ${getCureOutputs(getCurrentAffs(), getCurrentBals())}`);
+  console.log(
+    `getCureOutputs: ${getCureOutputs(getCurrentAffs(), getCurrentBals())}`
+  );
   console.log(`getLustCommands: ${getLustCommands()}`);
-  console.log(`getDefOutputs: ${getDefOutputs(getCurrentAffs(), getCurrentBals())}`);
+  console.log(
+    `getDefOutputs: ${getDefOutputs(getCurrentAffs(), getCurrentBals())}`
+  );
   console.log(`getCacheOutputs: ${getCacheOutputs(getCurrentAffs())}`);
   console.log(`populateOutputFlag: ${populateOutputFlag}`);
 };

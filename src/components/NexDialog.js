@@ -79,7 +79,7 @@ const NexDialog = ({ evt, nexSys }) => {
   const [cacheTable, setCacheTable] = React.useState(nexSys.cacheTable);
   const [affTable, setAffTable] = React.useState(nexSys.affTable);
   const [defPrios, setDefPrios] = React.useState(nexSys.defPrios);
-  const [updated, setUpdated] = React.useState(false);
+  const [updateCheck, setUpdateCheck] = React.useState(false);
   const [checkUpdate, setCheckUpdate] = React.useState(0);
 
   evt.addEventListener("nexSys-config-dialog", ({ detail }) => {
@@ -102,7 +102,7 @@ const NexDialog = ({ evt, nexSys }) => {
 
   const handleUpdateClick = () => {
     nexSys.updateNxs();
-    setUpdated(true);
+    setUpdateCheck(true);
   };
   const handleCheckUpdateClick = () => {
     nexSys.checkForUpdate();
@@ -129,8 +129,7 @@ const NexDialog = ({ evt, nexSys }) => {
 
     handleClickClose();
   };
-  console.log(nexSys.currentVersion);
-  console.log(updated);
+
   return (
     <div>
       <ThemeProvider theme={darkTheme}>
@@ -149,6 +148,7 @@ const NexDialog = ({ evt, nexSys }) => {
                   variant="outlined"
                   color="inherit"
                   size="small"
+                  disabled={updateCheck}
                   onClick={handleCheckUpdateClick}
                 >
                   Check for Update
@@ -157,7 +157,9 @@ const NexDialog = ({ evt, nexSys }) => {
             </div>
           </DialogTitle>
           <DialogContent sx={{ background: "#121212" }}>
-            <Collapse in={nexSys.version !== nexSys.currentVersion && !updated}>
+            <Collapse
+              in={nexSys.version !== nexSys.currentVersion && !updateCheck}
+            >
               <Alert
                 severity="info"
                 sx={{ fontSize: "12px" }}
