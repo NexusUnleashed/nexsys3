@@ -114,13 +114,14 @@ const setCharVitals = function (vitals) {
   if (h === 0) {
     if (oh > 0) {
       sys.pause();
-      eventStream.raiseEvent("DiedEvent");
+      eventStream.raiseEvent("deathGotAffEvent");
+      eventStream.raiseEvent("deathEvent");
     }
   } else {
     if (oh === 0 && h > 0) {
       sys.unpause();
-      eventStream.raiseEvent("SystemOutputGotBalEvent");
-      eventStream.raiseEvent("AliveEvent");
+      eventStream.raiseEvent("deathLostAffEvent");
+      eventStream.raiseEvent("aliveEvent");
     }
   }
 

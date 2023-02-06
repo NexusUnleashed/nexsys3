@@ -43,4 +43,37 @@ export const startup = () => {
   robotoMonoFont.href =
     "https://fonts.googleapis.com/css?family=Roboto%20Mono:300,400,500,700&display=swap";
   document.getElementsByTagName("head")[0].appendChild(robotoMonoFont);
+
+  nexusclient.settings().font_stacks = function () {
+    return [
+      { name: "Roboto", stack: "Roboto,Montserrat,Helvetica,Arial,sans-serif" },
+      {
+        name: "RobotoMono",
+        stack: "RobotoMono,Consolas,monospace",
+      },
+      { name: "Verdana", stack: "Verdana, Geneva, sans-serif" },
+      {
+        name: "Lucida",
+        stack:
+          "'Lucida Grande', 'Lucida Sans Unicode', 'Lucida Sans', Geneva, Verdana, sans-serif",
+      },
+      {
+        name: "Arial",
+        stack: "Arial, 'Helvetica Neue', Helvetica, sans-serif",
+      },
+      { name: "Futura", stack: "Futura, 'Trebuchet MS', Arial, sans-serif" },
+      {
+        name: "Book Antiqua",
+        stack:
+          "'Book Antiqua', Palatino, 'Palatino Linotype', 'Palatino LT STD', Georgia, serif",
+      },
+      {
+        name: "Garamond",
+        stack:
+          "Garamond, Baskerville, 'Baskerville Old Face', 'Hoefler Text', 'Times New Roman', serif",
+      },
+      //{name: 'Monospace (Traditional)', stack: 'monospace'}
+      { name: "Monospace (Traditional)", stack: "'LiberationMono', monospace" },
+    ];
+  };
 };
