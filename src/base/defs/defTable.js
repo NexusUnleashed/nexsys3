@@ -1286,7 +1286,7 @@ export const defTable = {
     command: "weathering on",
     bals_req: ["free"],
     bals_used: ["free"],
-    skills: ["Runewarden", "Monk", "Blademaster"],
+    skills: ["Runewarden", "Infernal", "Paladin", "Monk", "Blademaster"],
     blocks: ["death", "sleeping"],
     serverside: true,
     preempt: true,

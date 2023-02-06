@@ -51,6 +51,10 @@ export const startup = () => {
         name: "RobotoMono",
         stack: "RobotoMono,Consolas,monospace",
       },
+      {
+        name: "Consolas",
+        stack: "Consolas,RobotoMono,monospace",
+      },
       { name: "Verdana", stack: "Verdana, Geneva, sans-serif" },
       {
         name: "Lucida",
