@@ -44,12 +44,13 @@ export const startup = () => {
     "https://fonts.googleapis.com/css?family=Roboto%20Mono:300,400,500,700&display=swap";
   document.getElementsByTagName("head")[0].appendChild(robotoMonoFont);
 
+  // Add Roboto, Roboto Mono, and Consolas as selectable fonts
   nexusclient.settings().font_stacks = function () {
     return [
       { name: "Roboto", stack: "Roboto,Montserrat,Helvetica,Arial,sans-serif" },
       {
         name: "RobotoMono",
-        stack: "RobotoMono,Consolas,monospace",
+        stack: "Roboto Mono,Consolas,monospace",
       },
       {
         name: "Consolas",
@@ -80,4 +81,11 @@ export const startup = () => {
       { name: "Monospace (Traditional)", stack: "'LiberationMono', monospace" },
     ];
   };
+
+  // CSS override of Nexus timestamp font.
+  // TODO: Make this a function to match the selected font.
+  const sty = document.createElement("style");
+  sty.id = "nexSysCSS";
+  sty.textContent = `.mono {font-family: Roboto Mono}`;
+  document.getElementsByTagName("head")[0].appendChild(sty);
 };
