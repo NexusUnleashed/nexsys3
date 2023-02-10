@@ -186,19 +186,9 @@ const outputComplete = function (balance) {
     forcePopulateOutput();
   }
 };
-
 eventStream.registerEvent("SystemOutputGotBalEvent", outputComplete); // CUSTOM
 
 const systemOutputComplete = function () {
   eventStream.raiseEvent("SystemOutputGotBalEvent");
 };
-
 eventStream.registerEvent("SystemOutputCompleteEvent", systemOutputComplete);
-
-const stunOutput = () => {
-  if (outputInProgress) {
-    console.log(`nexSys stunOutput sendOutput`);
-    sendOutput();
-  }
-};
-eventStream.registerEvent("stunLostAffEvent", stunOutput);
