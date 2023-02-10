@@ -79,7 +79,7 @@ export const createQueue = ({
       }
 
       const chunks = parseInt((cmds.length - 1) / 18) + 1;
-      if (chunks = 1) {
+      if (chunks === 1) {
         clears.push(cmdString);
         sendInline(clears);
       } else {
