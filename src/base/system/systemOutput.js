@@ -104,6 +104,8 @@ const populateOutput = function () {
 
 export const systemOutputDebug = () => {
   console.log(`outputInProgress: ${outputInProgress}`);
+  console.log(`sys.isPaused(): ${sys.isPaused()}`);
+  console.log(`sys.isSlowMode(): ${sys.isSlowMode()}`);
   console.log(`outputPending: ${outputPending}`);
   console.log(`output: ${output}`);
   console.log(`eventOutput: ${eventOutput}`);

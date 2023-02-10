@@ -2,6 +2,7 @@
 
 import { sys } from "./sys";
 import { bals } from "../balances/balances";
+import { systemOutputDebug } from "./systemOutput";
 
 const valueRegex = /(\d+)/;
 const classSpecific = /(\w+): (\w+)/;
@@ -114,12 +115,16 @@ const setCharVitals = function (vitals) {
   if (h === 0) {
     if (oh > 0) {
       sys.pause();
+      console.log('deathGotAffEvent DEBUG');
+      systemOutputDebug();
       eventStream.raiseEvent("deathGotAffEvent");
       eventStream.raiseEvent("deathEvent");
     }
   } else {
     if (oh === 0 && h > 0) {
       sys.unpause();
+      console.log('deathLostAffEvent DEBUG');
+      systemOutputDebug();
       eventStream.raiseEvent("deathLostAffEvent");
       eventStream.raiseEvent("aliveEvent");
     }
