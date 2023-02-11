@@ -77,17 +77,17 @@ export const createQueue = ({
           }
         });
       }
-
-      const chunks = parseInt((cmds.length - 1) / 18) + 1;
+      const chunkSize = 20 - 1 - this.pre.length;
+      const chunks = parseInt((cmds.length - 1) / chunkSize) + 1;
       if (chunks === 1) {
         clears.push(cmdString);
         sendInline(clears);
       } else {
-        sendInline(`queue addclear ${this.type} ${cmds.slice(0, 18).join(
+        sendCmd(`queue addclear ${this.type} ${cmds.slice(0, 18).join(
           sys.settings.sep
         )}`);
         for (let i = 1; i < chunks; i++) {
-          sendInline(`queue add ${this.type} ${cmds.slice((i * 18), (i * 18 + 18)).join(
+          sendCmd(`queue add ${this.type} ${cmds.slice((i * 18), (i * 18 + 18)).join(
             sys.settings.sep
           )}`);
         }

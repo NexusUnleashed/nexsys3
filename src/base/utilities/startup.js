@@ -28,7 +28,9 @@ export const startup = () => {
   );
 
   if (typeof nexusclient.variables().vars.nexSysSettings === "undefined") {
-    nexusclient.variables().vars.nexSysSettings = {};
+    nexusclient.variables().vars.nexSysSettings = {
+      loadOnLogin: true
+    };
   }
   //nexSys.evt.dispatchEvent(new CustomEvent('nexSys-config-dialog', {detail: true}))
 
