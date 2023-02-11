@@ -26,7 +26,9 @@ export const createQueue = ({
         ? cmd
         : cmd.split(sys.settings.sep);
       if (Array.equals(newCommands, this.queue)) {
-        console.log(`${this.name}: Duplicate commands, not added ${newCommands}`);
+        console.log(
+          `${this.name}: Duplicate commands, not added ${newCommands}`
+        );
         return;
       }
 
@@ -64,33 +66,39 @@ export const createQueue = ({
     },
     send() {
       let cmds = this.pre.concat(this.prependQueue, this.queue);
-      let cmdString = `queue addclear ${this.type} ${cmds.join(
-        sys.settings.sep
-      )}`;
-      let clears = [];
+
+      let output = [];
       if (this.exclusions.length > 0) {
         this.exclusions.forEach((element) => {
           let q = globalThis.nexSys[element];
           if (q.queued()) {
             q.clear();
-            clears.push(`clearqueue ${q.type}`);
+            output.push(`clearqueue ${q.type}`);
           }
         });
       }
-      const chunkSize = 20 - 1 - this.pre.length;
+
+      const chunkSize = 20 - this.pre.length - clears.length;
       const chunks = parseInt((cmds.length - 1) / chunkSize) + 1;
-      if (chunks === 1) {
-        clears.push(cmdString);
-        sendInline(clears);
-      } else {
-        sendCmd(`queue addclear ${this.type} ${cmds.slice(0, 18).join(
-          sys.settings.sep
-        )}`);
-        for (let i = 1; i < chunks; i++) {
-          sendCmd(`queue add ${this.type} ${cmds.slice((i * 18), (i * 18 + 18)).join(
-            sys.settings.sep
-          )}`);
+
+      if (chunks > 1) {
+        for (let i = 0; i < chunks; i++) {
+          const chunk = cmds.slice(
+            i * outputChunkSize,
+            i * outputChunkSize + outputChunkSize
+          );
+          const cmdString = `queue ${i > 0 ? "add" : "addclear"} ${
+            this.type
+          } ${chunk.join(sys.settings.sep)}`;
+          output.push(cmdString);
         }
+        sendInline(output);
+      } else {
+        const cmdString = `queue addclear ${this.type} ${cmds.join(
+          sys.settings.sep
+        )}`;
+        output.push(cmdString);
+        sendInline(output);
       }
     },
     clear() {

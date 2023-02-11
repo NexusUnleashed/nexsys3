@@ -14,7 +14,7 @@ let outputInProgress = false;
 let outputPending = false;
 let output = [];
 const outputFeedbackCommand = "echo SystemEvent SystemOutputCompleteEvent";
-const outputChunkSize = 19; // Needs to account for preQueue commands
+const outputChunkSize = 20; // Needs to account for preQueue commands
 let eventOutput = [];
 let affPrioOutput = [];
 let defPrioOutput = [];
@@ -34,16 +34,19 @@ const sendOutput = function () {
     addToOutput(outputFeedbackCommand);
     const chunks = parseInt((output.length - 1) / outputChunkSize) + 1; //CUSTOM
 
+    /*
     for (let i = 0; i < chunks; i++) {
       const chunk = output.slice(
         i * outputChunkSize,
         i * outputChunkSize + outputChunkSize
       );
       const cmd = chunk.join(sys.settings.sep);
-      // TODO Is this working to use the stunQueue instead of send?
-      nexSys.stunQueue.add(cmd);
-      //sendCmd(cmd);
+      sendCmd(cmd);
     }
+    */
+    // TODO Is this working to use the stunQueue instead of send?
+    nexSys.stunQueue.add(output);
+
     outputInProgress = true;
     eventOutput = [];
     affPrioOutput = [];

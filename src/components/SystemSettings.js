@@ -238,7 +238,7 @@ const SystemSettings = ({ settings, setSettings }) => {
                 label={
                   stateSettings.clotAt < 0 ||
                   !Number.isInteger(parseInt(stateSettings.clotAt))
-                    ? "error"
+                    ? "###"
                     : ""
                 }
                 onChange={handleTextNumbers}

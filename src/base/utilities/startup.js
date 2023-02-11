@@ -1,5 +1,7 @@
 /* global ReactDOM, React, nexSys */
 
+import { saveCustomSettings } from "../system/customsettings";
+
 export const startup = () => {
   if (typeof ReactDOM === "undefined") {
     return;
@@ -28,9 +30,8 @@ export const startup = () => {
   );
 
   if (typeof nexusclient.variables().vars.nexSysSettings === "undefined") {
-    nexusclient.variables().vars.nexSysSettings = {
-      loadOnLogin: true
-    };
+    nexusclient.variables().vars.nexSysSettings = {};
+    saveCustomSettings();
   }
   //nexSys.evt.dispatchEvent(new CustomEvent('nexSys-config-dialog', {detail: true}))
 

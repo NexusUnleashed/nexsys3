@@ -183,10 +183,10 @@ export function loadCustomSettings() {
   updatePriorities();
 }
 
-function saveCustomSettings() {
-  saveModel("CustomSystemSettings", sys.settings);
-  saveModel("CustomAffSettings", affTable);
-  saveModel("CustomDefSettings", defPrios);
-  saveModel("CustomCacheSettings", cacheTable);
-  saveModel("LustWhiteList", whiteList);
+export function saveCustomSettings() {
+  saveModel("systemSettings", sys.settings);
+  saveModel("affSettings", affTable);
+  saveModel("defSettings", defPrios);
+  saveModel("cacheSettings", cacheTable);
+  //saveModel("LustWhiteList", whiteList);
 }
