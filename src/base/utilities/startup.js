@@ -8,7 +8,7 @@ export const startup = () => {
   }
 
   nexSys.checkForUpdate();
-
+  /*
   if (!document.getElementById("modal-root")) {
     document
       .getElementsByTagName("body")[0]
@@ -28,13 +28,17 @@ export const startup = () => {
     React.createElement(nexSys.component, { evt: nexSys.evt, nexSys: nexSys }),
     document.getElementById("nexsys-modal")
   );
+  ReactDOM.render(
+    React.createElement(nexSys.componentTest, { evt: nexSys.evt, nexSys: nexSys }),
+    document.getElementById("footer")
+  );
 
   if (typeof nexusclient.variables().vars.nexSysSettings === "undefined") {
     nexusclient.variables().vars.nexSysSettings = {};
     saveCustomSettings();
   }
   //nexSys.evt.dispatchEvent(new CustomEvent('nexSys-config-dialog', {detail: true}))
-
+*/
   // Roboto font
   const robotoFont = document.createElement("link");
   robotoFont.rel = "stylesheet";

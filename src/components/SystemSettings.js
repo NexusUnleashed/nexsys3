@@ -255,7 +255,7 @@ const SystemSettings = ({ settings, setSettings }) => {
             />
           </FormGroup>
         </div>
-        <div style={{ width: 150 }}>
+        <div style={{ width: 175 }}>
           <FormLabel component="legend" sx={{ margin: 1 }}>
             Curing Config Cont.
           </FormLabel>

@@ -67,7 +67,7 @@ export const createQueue = ({
     send() {
       let cmds = this.pre.concat(this.prependQueue, this.queue);
 
-      let output = [];
+      const output = [];
       if (this.exclusions.length > 0) {
         this.exclusions.forEach((element) => {
           let q = globalThis.nexSys[element];
@@ -78,21 +78,19 @@ export const createQueue = ({
         });
       }
 
-      const chunkSize = 20 - this.pre.length - clears.length;
+      const chunkSize = 20 - output.length;
       const chunks = parseInt((cmds.length - 1) / chunkSize) + 1;
 
       if (chunks > 1) {
         for (let i = 0; i < chunks; i++) {
-          const chunk = cmds.slice(
-            i * outputChunkSize,
-            i * outputChunkSize + outputChunkSize
-          );
+          const chunk = cmds.slice(i * chunkSize, i * chunkSize + chunkSize);
           const cmdString = `queue ${i > 0 ? "add" : "addclear"} ${
             this.type
           } ${chunk.join(sys.settings.sep)}`;
           output.push(cmdString);
+          sendInline(output);
+          output.length = 0;
         }
-        sendInline(output);
       } else {
         const cmdString = `queue addclear ${this.type} ${cmds.join(
           sys.settings.sep

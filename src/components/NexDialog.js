@@ -13,18 +13,21 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import * as React from "react";
 import Configuration from "./Configuration";
 
-const darkTheme = createTheme({
+let darkTheme = createTheme({
   palette: {
     mode: "dark",
-    text: {
+    /*text: {
       primary: "#FFF5D6",
       //secondary: 'green'
-    },
+    },*/
   },
   typography: {
     fontSize: 12 * (14 / 16), // conversion for px
-    fontFamily: "Montserrat,Roboto,Helvetica,Arial,monospace,sans-serif",
+    fontFamily: ["Robot Mono", "Consolas", "Montserrat", "monospace"].join(","),
   },
+});
+
+darkTheme = createTheme(darkTheme, {
   components: {
     MuiList: {
       defaultProps: {
@@ -131,12 +134,12 @@ const NexDialog = ({ evt, nexSys }) => {
   };
 
   return (
-    <div>
-      <ThemeProvider theme={darkTheme}>
+    <ThemeProvider theme={darkTheme}>
+      <div>
         <Dialog
           open={open}
           onClose={handleClickClose}
-          hideBackdrop={true}
+          //hideBackdrop={true}
           maxWidth="md"
         >
           <DialogTitle>
@@ -203,8 +206,8 @@ const NexDialog = ({ evt, nexSys }) => {
             <Button onClick={handleClickSave}>Save</Button>
           </DialogActions>
         </Dialog>
-      </ThemeProvider>
-    </div>
+      </div>
+    </ThemeProvider>
   );
 };
 
