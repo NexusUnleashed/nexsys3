@@ -157,6 +157,7 @@ export const herb_name_to_herb = {
 
 export const cacheTable = {
   azurite: 0,
+  bisemutum: 0,
   magnesium: 0,
   plumbum: 0,
   arsenic: 0,
