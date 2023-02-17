@@ -1,4 +1,6 @@
 export const mineral_names = [
+  "a bisemutum chip",
+  "an azurite mote",
   "a magnesium chip",
   "an aurum flake",
   "a plumbum flake",
@@ -19,6 +21,8 @@ export const mineral_names = [
 ];
 
 export const mineral_names_group = [
+  "bisemutum chips",
+  "azurite motes",
   "magnesium chips",
   "aurum flakes",
   "plumbum flakes",
@@ -79,6 +83,8 @@ export const herb_names_group = [
 ];
 
 export const herb_name_to_herb = {
+  "a bisemutum chip": "bisemutum",
+  "an azurite mote": "azurite",
   "a magnesium chip": "magnesium",
   "an aurum flake": "aurum",
   "a plumbum flake": "plumbum",
@@ -150,6 +156,7 @@ export const herb_name_to_herb = {
 };
 
 export const cacheTable = {
+  azurite: 0,
   magnesium: 0,
   plumbum: 0,
   arsenic: 0,
