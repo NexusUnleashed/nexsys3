@@ -1,4 +1,6 @@
 export const mineral_names = [
+  "a dolomite grain",
+  "a calcite mote",
   "a bisemutum chip",
   "an azurite mote",
   "a magnesium chip",
@@ -21,6 +23,8 @@ export const mineral_names = [
 ];
 
 export const mineral_names_group = [
+  "dolomite grains",
+  "calcite motes",
   "bisemutum chips",
   "azurite motes",
   "magnesium chips",
@@ -83,6 +87,8 @@ export const herb_names_group = [
 ];
 
 export const herb_name_to_herb = {
+  "a dolomite grain": "dolomite",
+  "a calcite mote": "calcite",
   "a bisemutum chip": "bisemutum",
   "an azurite mote": "azurite",
   "a magnesium chip": "magnesium",
@@ -119,6 +125,11 @@ export const herb_name_to_herb = {
   "sileris berry": "sileris",
   "some irid moss": "moss",
   "a black cohosh root": "cohosh",
+
+  "dolomite grains": "dolomite",
+  "calcite motes": "calcite",
+  "bisemutum chips": "bisemutum",
+  "azurite motes": "azurite",
   "magnesium chips": "magnesium",
   "aurum flakes": "aurum",
   "plumbum flakes": "plumbum",
@@ -175,6 +186,8 @@ export const cacheTable = {
   cuprum: 0,
   argentum: 0,
   gypsum: 0,
+  calcite: 0,
+  dolomite: 0,
 
   // herbs
   ginseng: 0,
