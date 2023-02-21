@@ -111,7 +111,7 @@ const setCharVitals = function (vitals) {
       diff: sysChar.rage - orage,
     });
   }
-  console.log(`oh:${oh} h:${h} vitals.hp:${vitals.hp} check1:${h === 0} check2:${oh > 0}`);
+
   if (sysChar.h === 0) {
     if (oh > 0) {
       sys.pause();
