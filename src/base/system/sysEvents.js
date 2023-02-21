@@ -29,14 +29,14 @@ const setCharVitals = function (vitals) {
   const bleed = parseInt(vitals.charstats[0].match(valueRegex)[0]);
   const rage = parseInt(vitals.charstats[1].match(valueRegex)[0]);
 
-  sysChar.h = h;
-  sysChar.m = m;
-  sysChar.e = e;
-  sysChar.w = w;
-  sysChar.maxh = maxh;
-  sysChar.maxm = maxm;
-  sysChar.maxe = maxe;
-  sysChar.maxw = maxw;
+  sysChar.h = parseInt(h);
+  sysChar.m = parseInt(m);
+  sysChar.e = parseInt(e);
+  sysChar.w = parseInt(w);
+  sysChar.maxh = parseInt(maxh);
+  sysChar.maxm = parseInt(maxm);
+  sysChar.maxe = parseInt(maxe);
+  sysChar.maxw = parseInt(maxw);
   sysChar.rage = rage;
   sysChar.bleed = bleed;
 
@@ -72,47 +72,47 @@ const setCharVitals = function (vitals) {
     }
   }
 
-  if (h !== oh) {
+  if (sysChar.h !== oh) {
     eventStream.raiseEvent("HealthUpdated", {
-      max: maxh,
-      current: h,
-      diff: h - oh,
+      max: sysChar.maxh,
+      current: sysChar.h,
+      diff: sysChar.h - oh,
     });
   }
 
-  if (m !== om) {
+  if (sysChar.m !== om) {
     eventStream.raiseEvent("ManaUpdated", {
-      max: maxm,
-      current: m,
-      diff: m - om,
+      max: sysChar.maxm,
+      current: sysChar.m,
+      diff: sysChar.m - om,
     });
   }
 
-  if (maxh !== omaxh) {
+  if (sysChar.maxh !== omaxh) {
     eventStream.raiseEvent("MaxHealthUpdated", {
-      max: maxh,
-      current: h,
-      diff: maxh - omaxh,
+      max: sysChar.maxh,
+      current: sysChar.h,
+      diff: sysChar.maxh - omaxh,
     });
   }
 
-  if (maxm !== omaxm) {
+  if (sysChar.maxm !== omaxm) {
     eventStream.raiseEvent("MaxManaUpdated", {
-      max: maxm,
-      current: m,
-      diff: maxm - omaxm,
+      max: sysChar.maxm,
+      current: sysChar.m,
+      diff: sysChar.maxm - omaxm,
     });
   }
 
-  if (rage !== orage) {
+  if (sysChar.rage !== orage) {
     eventStream.raiseEvent("RageUpdated", {
-      max: rage,
-      current: rage,
-      diff: rage - orage,
+      max: sysChar.rage,
+      current: sysChar.rage,
+      diff: sysChar.rage - orage,
     });
   }
-
-  if (h === 0) {
+  console.log(`oh:${oh} h:${h} vitals.hp:${vitals.hp} check1:${h === 0} check2:${oh > 0}`);
+  if (sysChar.h === 0) {
     if (oh > 0) {
       sys.pause();
       console.log('deathGotAffEvent DEBUG');
@@ -121,7 +121,7 @@ const setCharVitals = function (vitals) {
       eventStream.raiseEvent("deathEvent");
     }
   } else {
-    if (oh === 0 && h > 0) {
+    if (oh === 0 && sysChar.h > 0) {
       sys.unpause();
       console.log('deathLostAffEvent DEBUG');
       systemOutputDebug();

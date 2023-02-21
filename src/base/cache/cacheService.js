@@ -16,7 +16,7 @@ function getMissingCache() {
 
 export function getCacheOutputs(affList) {
   // TODO  Shouldn't this be !affs.blindness.have ?
-  if (affs.blindness.have || defs.mindseye.have) {
+  if (!affs.blindness.have || defs.mindseye.have) {
     const missingCache = getMissingCache(); // return this as sorted by prio
     let cacheOutputs = [];
 

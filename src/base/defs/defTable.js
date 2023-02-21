@@ -21,6 +21,14 @@ export const defTable = {
     bals_used: ["equilibrium"],
     serverside: true,
   },
+  antiforce: {
+    command: "intone gaiartha",
+    bals_req: ["balance", "equilibrium"],
+    bals_used: ["word"],
+    blocks: ["death", "sleeping", "prone"],
+    skills: ["Depthswalker"],
+    serverside: true,
+  },
   aria: {
     command: "sing aria at me",
     bals_req: ["voice"],
@@ -102,6 +110,14 @@ export const defTable = {
     blocks: ["death", "sleeping", "prone"],
     serverside: false,
     preempt: true,
+  },
+  bodyaugment: {
+    command: "intone mainaas",
+    bals_req: ["balance", "equilibrium"],
+    blocks: ["death", "sleeping", "prone"],
+    skills: ["depthswalker"],
+    bals_used: ["word"],
+    serverside: true,
   },
   bodyblock: {
     command: "bdb",
@@ -266,6 +282,14 @@ export const defTable = {
     bals_used: ["balance"],
     blocks: ["death", "sleeping"],
     skills: ["Bard"],
+    serverside: true,
+  },
+  durability: {
+    command: "intone tsuura",
+    bals_req: ["balance", "equilibrium"],
+    skills: ["Depthswalker"],
+    blocks: ["death", "sleeping", "prone"],
+    bals_used: ["word"],
     serverside: true,
   },
   electricresist: {
@@ -987,6 +1011,14 @@ export const defTable = {
     blocks: ["death", "anorexia", "sleeping"],
     serverside: true,
     preempt: true,
+  },
+  precision: {
+    command: "intone trusad",
+    bals_req: ["balance", "equilibrium"],
+    blocks: ["death", "sleeping", "prone"],
+    skills: ["Depthswalker"],
+    bals_used: ["word"],
+    serverside: true,
   },
   prismatic: {
     command: "strum lyre",
