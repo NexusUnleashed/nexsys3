@@ -114,6 +114,7 @@ export const defTable = {
   bodyaugment: {
     command: "intone mainaas",
     bals_req: ["balance", "equilibrium"],
+    bals_used: ["word"],
     blocks: ["death", "sleeping", "prone"],
     skills: ["Depthswalker"],
     bals_used: ["word"],
