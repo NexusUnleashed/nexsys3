@@ -115,7 +115,7 @@ export const defTable = {
     command: "intone mainaas",
     bals_req: ["balance", "equilibrium"],
     blocks: ["death", "sleeping", "prone"],
-    skills: ["depthswalker"],
+    skills: ["Depthswalker"],
     bals_used: ["word"],
     serverside: true,
   },

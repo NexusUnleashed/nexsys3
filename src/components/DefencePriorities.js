@@ -35,7 +35,7 @@ const DefencePriorities = ({ defs, defPrios, setDefPrios, classList }) => {
     setDefList(
       Object.keys(defs).filter(
         (def) =>
-          (skill === "all" ||
+          (e.target.value === "all" ||
             typeof defs[def].skills === "undefined" ||
             defs[def].skills.length === 0 ||
             defs[def].skills.indexOf(e.target.value) > -1) &&
