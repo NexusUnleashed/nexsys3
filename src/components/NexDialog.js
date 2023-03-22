@@ -76,7 +76,7 @@ darkTheme = createTheme(darkTheme, {
 });
 
 const NexDialog = ({ evt, nexSys }) => {
-  const [open, setOpen] = React.useState(true);
+  const [open, setOpen] = React.useState(false);
   const [_nexSys, setNexSys] = React.useState(nexSys);
   const [sys, setSys] = React.useState(nexSys.sys);
   const [cacheTable, setCacheTable] = React.useState(nexSys.cacheTable);

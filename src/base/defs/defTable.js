@@ -1131,6 +1131,13 @@ export const defTable = {
     blocks: ["death", "sleeping"],
     serverside: true,
   },
+  shipwarning: {
+    command: "shipwarning on",
+    bals_req: ["free"],
+    bals_used: ["free"],
+    blocks: ["death", "sleeping"],
+    serverside: true,
+  },
   shroud: {
     command: "shroud",
     bals_req: ["balance", "equilibrium"],
