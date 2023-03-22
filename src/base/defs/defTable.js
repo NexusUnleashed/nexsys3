@@ -706,7 +706,7 @@ export const defTable = {
   metawake: {
     command: "metawake on",
     bals_req: ["balance", "equilibrium"],
-    bals_used: ["free"],
+    bals_used: ["equilibrium"],
     blocks: ["death", "sleeping", "lullaby"],
     serverside: true,
     preempt: true,
