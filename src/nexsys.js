@@ -202,10 +202,16 @@ const nexSys = {
     exclusions: ["freeQueue", "shieldQueue", "classQueue"],
   }),
   shieldQueue: createQueue({
-    name: "full",
+    name: "shield",
     type: "ebc!w!t",
     pre: ["touch soul", "stand"],
     exclusions: ["freeQueue", "fullQueue"],
+  }),
+  shipQueue: createQueue({
+    name: "ship",
+    type: "s!w!t",
+    pre: ["touch soul", "stand"],
+    exclusions: [],
   }),
   stunQueue: createQueue({ name: "stun", type: "!t", pre: ["touch soul"] }),
 

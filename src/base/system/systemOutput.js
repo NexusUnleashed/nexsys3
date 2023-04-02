@@ -83,8 +83,8 @@ const populateOutput = function () {
 
       // loop affs repeatedly until no for-sure cures happen, remove those affs, bals
       // loop affs repeatedly until no maybe cures happen, remove those affs, bals
-
-      addToOutput(getCureOutputs(affList, balList));
+      // TODO: This appears to be a relic from old curing logic. Not for serverside
+      //addToOutput(getCureOutputs(affList, balList));
 
       // TODO: Lust feels like too specialized of a feature for nexSys general
       //addToOutput(getLustCommands());
@@ -197,3 +197,6 @@ const systemOutputComplete = function () {
   eventStream.raiseEvent("SystemOutputGotBalEvent");
 };
 eventStream.registerEvent("SystemOutputCompleteEvent", systemOutputComplete);
+
+// TODO Hack because nexSys was getting "stuck" in output pending after dying.
+eventStream.registerEvent("aliveEvent", sendOutput);
