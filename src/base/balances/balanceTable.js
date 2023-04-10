@@ -10,7 +10,10 @@ const balances = {
   },
   focus: {
     length: 2.5,
-    aff_modifiers: { weakenedmind: { multiplier: 2.0, offset: 0.5 } },
+    aff_modifiers: {
+      weakenedmind: { multiplier: 2.0, offset: 0.5 },
+      whisperingmadness: { multiplier: 1.6, offset: 0.0 },
+    },
   },
   sip: {
     length: 4.5,

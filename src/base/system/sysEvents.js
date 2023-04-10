@@ -57,7 +57,7 @@ const setCharVitals = function (vitals) {
   }
 
   if (vitals.charstats.length > 3) {
-    const class1 = vitals.charstats[2].match(classSpecific);
+    const class1 = vitals.charstats[3].match(classSpecific);
     const id = class1[1].toLowerCase();
     let val = "";
     if (["Yes", "No"].indexOf(class1[2]) > -1) {
@@ -115,7 +115,7 @@ const setCharVitals = function (vitals) {
   if (sysChar.h === 0) {
     if (oh > 0) {
       sys.pause();
-      console.log('deathGotAffEvent DEBUG');
+      console.log("deathGotAffEvent DEBUG");
       systemOutputDebug();
       eventStream.raiseEvent("deathGotAffEvent");
       eventStream.raiseEvent("deathEvent");
@@ -123,7 +123,7 @@ const setCharVitals = function (vitals) {
   } else {
     if (oh === 0 && sysChar.h > 0) {
       sys.unpause();
-      console.log('deathLostAffEvent DEBUG');
+      console.log("deathLostAffEvent DEBUG");
       systemOutputDebug();
       eventStream.raiseEvent("deathLostAffEvent");
       eventStream.raiseEvent("aliveEvent");
