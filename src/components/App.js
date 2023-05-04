@@ -71,7 +71,7 @@ function App({ nexSys }) {
   const [defPrios, setDefPrios] = React.useState(nexSys.defPrios);
 
   return (
-    <div>
+    <div style={{ background: 'black' }}>
       <Configuration
         theme={darkTheme}
         nexSys={_nexSys}

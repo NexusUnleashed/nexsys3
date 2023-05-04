@@ -11,6 +11,7 @@ const Title = styled.h3`
   padding: 5px;
   width: auto;
   margin: 4px;
+  color: white;
 `;
 const Container = styled.div`
   min-width: 100px;
