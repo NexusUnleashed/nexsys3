@@ -15,24 +15,26 @@ function getMissingCache() {
 }
 
 export function getCacheOutputs(affList) {
-  // TODO  Shouldn't this be !affs.blindness.have ?
-  if (/*!defs.blindness.have || */defs.mindseye.have) {
-    const missingCache = getMissingCache(); // return this as sorted by prio
-    let cacheOutputs = [];
-
-    for (let i = 0; i < missingCache.length; i++) {
-      const cache = missingCache[i];
-
-      //if (!affList.some(aff => cache.blocks.flat().indexOf(aff) > -1)) {
-      if (!Array.arraysIntersect(cache.blocks, affList)) {
-        cacheOutputs = cacheOutputs.concat(cache.command);
-      }
-    }
-
-    return cacheOutputs;
-  } else {
+  if (affs.trueblind.have) {
     return [];
   }
+  if (defs.blindness.have && !defs.mindseye.have) {
+    return [];
+  }
+
+  const missingCache = getMissingCache(); // return this as sorted by prio
+  let cacheOutputs = [];
+
+  for (let i = 0; i < missingCache.length; i++) {
+    const cache = missingCache[i];
+
+    //if (!affList.some(aff => cache.blocks.flat().indexOf(aff) > -1)) {
+    if (!Array.arraysIntersect(cache.blocks, affList)) {
+      cacheOutputs = cacheOutputs.concat(cache.command);
+    }
+  }
+
+  return cacheOutputs;
 }
 
 export const updatePrecache = () => {

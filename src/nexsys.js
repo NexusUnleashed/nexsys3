@@ -96,7 +96,7 @@ import { startup } from "./base/utilities/startup";
 import NexDialog from "./components/NexDialog";
 
 const nexSys = {
-  version: "1.6.7",
+  version: "1.6.8",
   evt: new EventTarget(),
   component: NexDialog,
 
