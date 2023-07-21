@@ -118,6 +118,9 @@ const balances = {
   word: {
     length: 5.0, // CUSTOM Depthswalker
   },
+  karma: {
+    length: 5.0, // CUSTOM Unnamable
+  },
 };
 
 export { balances as balanceTable };
