@@ -118,7 +118,7 @@ const balances = {
   word: {
     length: 5.0, // CUSTOM Depthswalker
   },
-  karma: {
+  anathema: {
     length: 5.0, // CUSTOM Unnamable
   },
 };
