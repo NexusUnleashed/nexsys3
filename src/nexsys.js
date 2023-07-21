@@ -33,6 +33,10 @@ import { haveABal, haveBal, haveBals } from "./base/balances/balanceService";
 import { caches } from "./base/cache/caches";
 import { getCacheOutputs } from "./base/cache/cacheService";
 import { cacheTable } from "./base/cache/cacheTable";
+import Countable from "./base/classes/Countable";
+import Priority from "./base/classes/Priority";
+import Priorityqueue from "./base/classes/Priorityqueue";
+import Timer from "./base/classes/Timer";
 import Trackable from "./base/classes/Trackable";
 import { prompt } from "./base/clientOverrides/prompt";
 import { cures } from "./base/cures/cures";
@@ -104,6 +108,14 @@ const nexSys = {
   sysLogging: sysLogging,
   sysLog: sysLog,
   sysLoggingToggle: sysLoggingToggle,
+
+  classes: {
+    Countable: Countable,
+    Priority: Priority,
+    Priorityqueue: Priorityqueue,
+    Timer: Timer,
+    Trackable: Trackable,
+  },
 
   cures: cures,
 
