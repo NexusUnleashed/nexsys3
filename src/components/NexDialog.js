@@ -161,7 +161,7 @@ const NexDialog = ({ evt, nexSys }) => {
           </DialogTitle>
           <DialogContent sx={{ background: "#121212" }}>
             <Collapse
-              in={nexSys.version !== nexSys.currentVersion && !updateCheck}
+              in={typeof nexSys.currentVersion !== "undefined" && nexSys.version !== nexSys.currentVersion && !updateCheck}
             >
               <Alert
                 severity="info"

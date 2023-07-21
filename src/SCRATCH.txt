@@ -1,4 +1,6 @@
 /*
+JSON.stringify(nexusclient.reflexes().packages().get('nexSys3').encode())
+
 POST
 Your insulating unguent dissolves as it ameliorates the extreme cold.
 Your insomnia has cleared up.
