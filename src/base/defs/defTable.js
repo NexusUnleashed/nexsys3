@@ -1167,6 +1167,13 @@ export const defTable = {
     blocks: ["death", "anorexia", "sleeping"],
     serverside: true,
   },
+  splitmind: {
+    command: "split mind",
+    bals_req: ["balance", "equilibrium"],
+    bals_used: ["equilibrium"],
+    skills: ["Monk"],
+    serverside: true,
+  },
   skysight: {
     command: "manifest skysight",
     bals_req: ["balance", "equilibrium"],
