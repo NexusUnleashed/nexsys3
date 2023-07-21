@@ -19,6 +19,7 @@
 */
 /* global globalThis */
 import { affs } from "./base/affs/affs";
+import { Aff, AffCountable, AffTimed, AffDef } from "./base/affs/Aff";
 import {
   affPrioSwap,
   getCurrentAffs,
@@ -28,14 +29,21 @@ import {
   setPrioArrays,
 } from "./base/affs/affService";
 import { affTable } from "./base/affs/affTable";
+import { Balance, BalExtended } from "./base/balances/Balance";
 import { bals } from "./base/balances/balances";
 import { haveABal, haveBal, haveBals } from "./base/balances/balanceService";
+import { Cache } from "./base/cache/Cache";
 import { caches } from "./base/cache/caches";
 import { getCacheOutputs } from "./base/cache/cacheService";
 import { cacheTable } from "./base/cache/cacheTable";
+import Countable from "./base/classes/Countable";
+import Priority from "./base/classes/Priority";
+import Priorityqueue from "./base/classes/Priorityqueue";
+import Timer from "./base/classes/Timer";
 import Trackable from "./base/classes/Trackable";
 import { prompt } from "./base/clientOverrides/prompt";
 import { cures } from "./base/cures/cures";
+import { Def, DefServerside } from "./base/defs/Def";
 import { defs } from "./base/defs/defs";
 import {
   defoff,
@@ -104,6 +112,23 @@ const nexSys = {
   sysLogging: sysLogging,
   sysLog: sysLog,
   sysLoggingToggle: sysLoggingToggle,
+
+  classes: {
+    Countable,
+    Priority,
+    Priorityqueue,
+    Timer,
+    Trackable,
+    Aff,
+    AffCountable,
+    AffTimed,
+    AffDef,
+    Balance,
+    BalExtended,
+    Cache,
+    Def,
+    DefServerside,
+  },
 
   cures: cures,
 
