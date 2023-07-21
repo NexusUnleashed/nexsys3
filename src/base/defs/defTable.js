@@ -137,6 +137,14 @@ export const defTable = {
     serverside: true,
     preempt: true,
   },
+  bulk: {
+    command: "mutate bulk",
+    bals_req: ["karma"],
+    bals_used: ["karma"],
+    blocks: ["death", "sleeping", "prone"],
+    skills: ["Unnamable"],
+    serverside: true,
+  },
   cloak: {
     command: "touch cloak",
     bals_req: ["balance", "equilibrium"],
@@ -315,6 +323,14 @@ export const defTable = {
     bals_used: ["balance"],
     blocks: ["death", "sleeping"],
     skills: ["Monk"],
+    serverside: true,
+  },
+  eyes: {
+    command: "mutate eyes",
+    bals_req: ["karma"],
+    bals_used: ["karma"],
+    blocks: ["death", "sleeping", "prone"],
+    skills: ["Unnamable"],
     serverside: true,
   },
   fireresist: {
@@ -612,6 +628,14 @@ export const defTable = {
     preempt: true,
     serverside: false,
   },
+  joints: {
+    command: "mutate joints",
+    bals_req: ["karma"],
+    bals_used: ["karma"],
+    blocks: ["death", "sleeping", "prone"],
+    skills: ["Unnamable"],
+    serverside: true,
+  },
   kaiboost: {
     command: "kai boost",
     bals_req: ["balance", "equilibrium"],
@@ -773,6 +797,14 @@ export const defTable = {
     ],
     preempt: true,
     serverside: false,
+  },
+  mouths: {
+    command: "mutate mouths",
+    bals_req: ["karma"],
+    bals_used: ["karma"],
+    blocks: ["death", "sleeping", "prone"],
+    skills: ["Unnamable"],
+    serverside: true,
   },
   nightsight: {
     command: "nightsight",
@@ -1253,6 +1285,14 @@ export const defTable = {
       "bound",
     ],
     skills: ["Air Elemental Lord"],
+    serverside: true,
+  },
+  tentacles: {
+    command: "mutate tentacles",
+    bals_req: ["karma"],
+    bals_used: ["karma"],
+    blocks: ["death", "sleeping", "prone"],
+    skills: ["Unnamable"],
     serverside: true,
   },
   thirdeye: {

@@ -45,7 +45,9 @@ const setCharVitals = function (vitals) {
     const id = class1[1].toLowerCase();
     let val = "";
     if (["Yes", "No"].indexOf(class1[2]) > -1) {
-      if (class1[2] === "Yes" && !bals[id].have) {
+      if (!bals[id]) {
+        console.log(`${id} class balance is not in balances table but is provided in GMCP`);      
+      } else if (class1[2] === "Yes" && !bals[id].have) {
         eventStream.raiseEvent(`${id}GotBalEvent`);
       } else if (class1[2] === "No" && bals[id].have) {
         eventStream.raiseEvent(`${id}LostBalEvent`);
@@ -61,7 +63,9 @@ const setCharVitals = function (vitals) {
     const id = class1[1].toLowerCase();
     let val = "";
     if (["Yes", "No"].indexOf(class1[2]) > -1) {
-      if (class1[2] === "Yes" && !bals[id].have) {
+      if (!bals[id]) {
+        console.log(`${id} class balance is not in balances table but is provided in GMCP`);      
+      } else if (class1[2] === "Yes" && !bals[id].have) {
         eventStream.raiseEvent(`${id}GotBalEvent`);
       } else if (class1[2] === "No" && bals[id].have) {
         eventStream.raiseEvent(`${id}LostBalEvent`);
