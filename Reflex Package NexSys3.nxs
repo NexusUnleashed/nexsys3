@@ -7,7 +7,7 @@
             "type": "function",
             "name": "Version",
             "enabled": true,
-            "code": "//1.7.1"
+            "code": "//1.7.2"
         },
         {
             "type": "function",
@@ -19,7 +19,7 @@
             "type": "function",
             "name": "esLoad",
             "enabled": true,
-            "code": "// DEBUGGING\n//return;\n\nconst nexSysLoaded = () => {\n\tnexusclient.reflexes().run_function('ServersidePrioritySwapping', {}, 'nexSys3');\n  \t//nexusclient.reflexes().run_function('PrioSwapTrackables', {}, 'nexSys3');\n  \tnexusclient.reflexes().run_function('promptStyles', {}, 'nexSys3');\n  \tnexusclient.reflexes().run_function('promptString', {}, 'nexSys3');\n  \tnexusclient.reflexes().run_function('SystemLoaded', {}, 'ALL');\n  \tconsole.log('nexSys loaded: startup complete');\n    nexSys.say(`Welcome back ${GMCP.Char.Status.name}. Nexus has been loaded to your specifications`);\n}\n\nimport('https://unpkg.com/nexsys@1.7.1/nexsys.min.js')\n\t.then(() => {\n        if (!nexusclient.variables().vars.nexSysSettings.systemSettings.loadOnLogin) { return; }\n  \t\tconsole.log('nexSys loaded: beginning startup');\n        eventStream.registerEvent(\"ServersideSettingsCaptured\", nexSysLoaded);\n  \t\tnexSys.system_loaded = true;\n\t\tnexSys.loadCustomSettings();\n\t\teventStream.raiseEvent('SystemLoaded');\n\t});"
+            "code": "// DEBUGGING\n//return;\n\nconst nexSysLoaded = () => {\n\tnexusclient.reflexes().run_function('ServersidePrioritySwapping', {}, 'nexSys3');\n  \t//nexusclient.reflexes().run_function('PrioSwapTrackables', {}, 'nexSys3');\n  \tnexusclient.reflexes().run_function('promptStyles', {}, 'nexSys3');\n  \tnexusclient.reflexes().run_function('promptString', {}, 'nexSys3');\n  \tnexusclient.reflexes().run_function('SystemLoaded', {}, 'ALL');\n  \tconsole.log('nexSys loaded: startup complete');\n    nexSys.say(`Welcome back ${GMCP.Char.Status.name}. Nexus has been loaded to your specifications`);\n}\n\nimport('https://unpkg.com/nexsys@1.7.2/nexsys.min.js')\n\t.then(() => {\n        if (!nexusclient.variables().vars.nexSysSettings.systemSettings.loadOnLogin) { return; }\n  \t\tconsole.log('nexSys loaded: beginning startup');\n        eventStream.registerEvent(\"ServersideSettingsCaptured\", nexSysLoaded);\n  \t\tnexSys.system_loaded = true;\n\t\tnexSys.loadCustomSettings();\n\t\teventStream.raiseEvent('SystemLoaded');\n\t});"
         },
         {
             "type": "group",
