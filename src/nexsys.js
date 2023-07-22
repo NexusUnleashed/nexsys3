@@ -92,6 +92,9 @@ import {
 } from "./base/utilities/commonTable";
 import {
   checkForUpdate,
+  checkLine,
+  nextLine,
+  prevLine,
   replace,
   replaceHTML,
   replaceWord,
@@ -194,6 +197,9 @@ const nexSys = {
   replaceHTML: replaceHTML,
   replaceWord: replaceWord,
   say: say,
+  nextLine: nextLine,
+  prevLine: prevLine,
+  checkLine: checkLine,
   tabCompletion: tabCompletion,
 
   serversideSettings: serversideSettings,

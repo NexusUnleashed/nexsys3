@@ -42,7 +42,65 @@ export const replaceWord = (word, replaceWord, fg, bg) => {
 
   return true;
 };
+export const prevLine = (pattern) => {
+  const index = nexusclient.current_block.indexOf(nexusclient.current_line);
+  if (index === 0) {
+    return false;
+  }
 
+  let result = false;
+  const text = nexusclient.current_block[index - 1].parsed_line.text();
+
+  if (typeof pattern === "string") {
+    result = text.includes(pattern);
+  } else if (pattern instanceof RegExp) {
+    result = pattern.test(text);
+  }
+
+  return result;
+};
+
+export const nextLine = (pattern) => {
+  const index = nexusclient.current_block.indexOf(nexusclient.current_line);
+  if (index === nexusclient.current_block.length - 1) {
+    return false;
+  }
+
+  let result = false;
+  const text = nexusclient.current_block[index + 1].parsed_line.text();
+
+  if (typeof pattern === "string") {
+    result = text.includes(pattern);
+  } else if (pattern instanceof RegExp) {
+    result = pattern.test(text);
+  }
+
+  return result;
+};
+
+export const checkLine = (pattern, position) => {
+  const index = nexusclient.current_block.indexOf(nexusclient.current_line);
+  if (position > 0) {
+    if (index + position > nexusclient.current_block.length - 1) {
+      return false;
+    }
+  } else {
+    if (index + position < 0) {
+      return false;
+    }
+  }
+
+  let result = false;
+  const text = nexusclient.current_block[index + position].parsed_line.text();
+
+  if (typeof pattern === "string") {
+    result = text.includes(pattern);
+  } else if (pattern instanceof RegExp) {
+    result = pattern.test(text);
+  }
+
+  return result;
+};
 export const checkForUpdate = () => {
   fetch("https://registry.npmjs.org/nexsys/", { cache: "no-store" })
     .then((response) => response.json())
