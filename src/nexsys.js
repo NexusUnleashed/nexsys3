@@ -31,21 +31,24 @@ import {
 import { affTable } from "./base/affs/affTable";
 import { Balance, BalExtended } from "./base/balances/Balance";
 import { bals } from "./base/balances/balances";
+import { balanceTable } from "./base/balances/balanceTable";
 import { haveABal, haveBal, haveBals } from "./base/balances/balanceService";
 import { Cache } from "./base/cache/Cache";
 import { caches } from "./base/cache/caches";
 import { getCacheOutputs } from "./base/cache/cacheService";
 import { cacheTable } from "./base/cache/cacheTable";
-import Cure from "./base/cures/Cure";
 import Countable from "./base/classes/Countable";
 import Priority from "./base/classes/Priority";
 import Priorityqueue from "./base/classes/Priorityqueue";
 import Timer from "./base/classes/Timer";
 import Trackable from "./base/classes/Trackable";
 import { prompt } from "./base/clientOverrides/prompt";
+import Cure from "./base/cures/Cure";
 import { cures } from "./base/cures/cures";
+import { cureTable } from "./base/cures/cureTable";
 import { Def, DefServerside } from "./base/defs/Def";
 import { defs } from "./base/defs/defs";
+import { defTable } from "./base/defs/defTable";
 import {
   defoff,
   defPrioSwap,
@@ -146,6 +149,7 @@ const nexSys = {
   },
 
   cures: cures,
+  cureTable: cureTable,
 
   affs: affs,
   affTable: affTable,
@@ -159,11 +163,13 @@ const nexSys = {
   snapTrack: new Trackable("Snapped"),
 
   bals: bals,
+  balanceTable: balanceTable,
   haveABal: haveABal,
   haveBal: haveBal,
   haveBals: haveBals,
 
   defs: defs,
+  defTable: defTable,
   defPrios: defPrios,
   //defsCreate: defsCreate,
   getCurrentDefs: getCurrentDefs,
