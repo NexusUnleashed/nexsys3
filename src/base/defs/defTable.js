@@ -708,7 +708,7 @@ export const defTable = {
     command: "mastery on",
     bals_req: ["balance", "equilibrium"],
     bals_used: ["free"],
-    skills: ["Runewarden"],
+    skills: ["Runewarden", "Unnamable"],
     preempt: true,
     serverside: true,
   },
