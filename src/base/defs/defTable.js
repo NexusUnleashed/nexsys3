@@ -234,7 +234,7 @@ export const defTable = {
     bals_used: ["free"],
     blocks: ["death", "prone", "sleeping"],
     // This is a 2h-spec specific defence, so all the knight/warrior classes get it
-    skills: ["Runewarden", "Paladin", "Infernal", "Unnameable"],
+    skills: ["Runewarden", "Paladin", "Infernal", "Unnamable"],
     serverside: true,
     preempt: true,
   },
@@ -359,7 +359,7 @@ export const defTable = {
     command: "fury on",
     bals_req: ["balance"],
     bals_used: ["equilibrium"],
-    skills: ["Runewarden"],
+    skills: ["Runewarden", "Unnamable"],
     serverside: true,
   },
   // CUSTOM FLYING
@@ -395,7 +395,7 @@ export const defTable = {
       "Runewarden",
       "Paladin",
       "Infernal",
-      "Unnameable",
+      "Unnamable",
       "Monk",
       "Bard",
       "Blademaster",
@@ -1087,7 +1087,7 @@ export const defTable = {
     command: "resistance",
     bals_req: ["free"],
     bals_used: ["free"],
-    skills: ["Runewarden", "Monk"],
+    skills: ["Runewarden", "Monk", "Unnamable"],
     blocks: ["death", "sleeping"],
     serverside: true,
     preempt: true,
@@ -1294,7 +1294,7 @@ export const defTable = {
     skills: ["Air Elemental Lord"],
     serverside: true,
   },
-  tentacles: {
+  mutatetentacles: {
     command: "mutate tentacles",
     bals_req: ["anathema"],
     bals_used: ["anathema"],
@@ -1373,7 +1373,7 @@ export const defTable = {
     command: "weathering on",
     bals_req: ["free"],
     bals_used: ["free"],
-    skills: ["Runewarden", "Infernal", "Paladin", "Monk", "Blademaster"],
+    skills: ["Runewarden", "Infernal", "Paladin", "Monk", "Blademaster", "Unnamable"],
     blocks: ["death", "sleeping"],
     serverside: true,
     preempt: true,
