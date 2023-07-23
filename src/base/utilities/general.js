@@ -159,7 +159,7 @@ export const tabCompletion = {
     //this.vals ??= GMCP.WhoList.filter(e => e.name.match(this.re)).map(n => n.name);
     this.vals ??= [
       ...new Set([
-        ...(nexGui?.colors?.enemies || []),
+        ...(globalThis.nexGui?.colors?.enemies || []),
         ...GMCP.WhoList.filter((e) => e.name.match(this.re)).map((n) => n.name),
       ]),
     ];

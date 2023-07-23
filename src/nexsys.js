@@ -36,6 +36,7 @@ import { Cache } from "./base/cache/Cache";
 import { caches } from "./base/cache/caches";
 import { getCacheOutputs } from "./base/cache/cacheService";
 import { cacheTable } from "./base/cache/cacheTable";
+import Cure from "./base/cures/Cure";
 import Countable from "./base/classes/Countable";
 import Priority from "./base/classes/Priority";
 import Priorityqueue from "./base/classes/Priorityqueue";
@@ -56,6 +57,12 @@ import {
   parry,
 } from "./base/defs/defService";
 import { defPrios } from "./base/defs/defTable";
+import {
+  Echo,
+  EchoLine,
+  EchoLinePrefix,
+  EchoWithPrefix,
+} from "./base/echo/Echo";
 import { echo, echoInfoLine, echoLine } from "./base/echo/echos";
 import { createQueue } from "./base/queues/Queue";
 import { serversideSettings } from "./base/serverside/serverside";
@@ -118,6 +125,7 @@ const nexSys = {
 
   classes: {
     Countable,
+    Cure,
     Priority,
     Priorityqueue,
     Timer,
@@ -131,6 +139,10 @@ const nexSys = {
     Cache,
     Def,
     DefServerside,
+    Echo,
+    EchoLine,
+    EchoWithPrefix,
+    EchoLinePrefix,
   },
 
   cures: cures,
