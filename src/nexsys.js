@@ -94,6 +94,7 @@ import {
   checkForUpdate,
   checkLine,
   nextLine,
+  prepend_notice,
   prevLine,
   replace,
   replaceHTML,
@@ -193,6 +194,7 @@ const nexSys = {
   rsend: rsend,
   timeDiffNow: timeDiffNow,
 
+  // General QoL functions
   replace: replace,
   replaceHTML: replaceHTML,
   replaceWord: replaceWord,
@@ -200,6 +202,7 @@ const nexSys = {
   nextLine: nextLine,
   prevLine: prevLine,
   checkLine: checkLine,
+  prepend_notice: prepend_notice,
   tabCompletion: tabCompletion,
 
   serversideSettings: serversideSettings,

@@ -77,7 +77,6 @@ export const nextLine = (pattern) => {
 
   return result;
 };
-
 export const checkLine = (pattern, position) => {
   const index = nexusclient.current_block.indexOf(nexusclient.current_line);
   if (position > 0) {
@@ -101,6 +100,29 @@ export const checkLine = (pattern, position) => {
 
   return result;
 };
+
+export const prepend_notice = function (...args) {
+  let htmlLine = document.createElement("span");
+
+  for (let i = 0; i < args.length; i += 3) {
+    htmlLine.appendChild(generate_chunk(args[i], args[i + 1], args[i + 2]));
+  }
+
+  nexSys.prepend_line = {
+    timestamp: nexusclient.current_block[1].timestamp,
+    timestamp_ms: nexusclient.current_block[1].timestamp_ms,
+    parsed_line: {
+      text() {
+        return htmlLine.outerHTML;
+      },
+      formatted() {
+        return htmlLine.outerHTML;
+      },
+    },
+  };
+  return htmlLine.outerHTML;
+};
+
 export const checkForUpdate = () => {
   fetch("https://registry.npmjs.org/nexsys/", { cache: "no-store" })
     .then((response) => response.json())

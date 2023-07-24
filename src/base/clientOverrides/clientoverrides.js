@@ -9,8 +9,10 @@ const generate_chunk = (text, fg, bg) => {
   return result;
 };
 
+// DEPRECATED: This functionality was incorporated into Nexus.
 // Override display_notice() for multi color options.
 //nexusclient.display_notice()
+/*
 const display_notice = function (...args) {
   let htmlLine = document.createElement("span");
 
@@ -21,28 +23,7 @@ const display_notice = function (...args) {
   nexusclient.add_html_line(htmlLine.outerHTML);
   return htmlLine.outerHTML;
 };
-
-const prepend_notice = function (...args) {
-  let htmlLine = document.createElement("span");
-
-  for (let i = 0; i < args.length; i += 3) {
-    htmlLine.appendChild(generate_chunk(args[i], args[i + 1], args[i + 2]));
-  }
-
-  nexSys.prepend_line = {
-    timestamp: nexusclient.current_block[1].timestamp,
-    timestamp_ms: nexusclient.current_block[1].timestamp_ms,
-    parsed_line: {
-      text() {
-        return htmlLine.outerHTML;
-      },
-      formatted() {
-        return htmlLine.outerHTML;
-      },
-    },
-  };
-  return htmlLine.outerHTML;
-};
+*/
 
 // Override the add_block to substitute nexSys custom prompts in.
 //nexusclient.ui().buffer().add_block
@@ -203,8 +184,7 @@ const append_message_to_log = function (message) {
 };
 
 nexusclient.process_lines = process_lines;
-nexusclient.display_notice = display_notice;
+//nexusclient.display_notice = display_notice;
 nexusclient.ui().buffer().add_block = add_block;
-nexSys.prepend_notice = prepend_notice;
 nexusclient.platform().on_key_up = on_key_up;
 nexusclient._log.append_message_to_log = append_message_to_log;
