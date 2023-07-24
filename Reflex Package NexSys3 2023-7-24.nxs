@@ -7,13 +7,13 @@
             "type": "function",
             "name": "__meta",
             "enabled": true,
-            "code": "{\n\t\"description\": \"nexSys system\",\n    \"version\": \"1.7.3\",\n    \"website\": \"https://github.com/Log-Wall/nexsys3\",\n    \"dependencies\": [\n        \"eventStream3\"\n    ]\n}"
+            "code": "{\n\t\"description\": \"nexSys system\",\n    \"version\": \"1.7.4\",\n    \"website\": \"https://github.com/Log-Wall/nexsys3\",\n    \"dependencies\": [\n        \"eventStream3\"\n    ]\n}"
         },
         {
             "type": "function",
             "name": "Version",
             "enabled": true,
-            "code": "//1.7.3"
+            "code": "//1.7.4"
         },
         {
             "type": "function",
@@ -31,7 +31,7 @@
             "type": "function",
             "name": "esLoad",
             "enabled": true,
-            "code": "// DEBUGGING\n//return;\nif (\n  typeof nexusclient.variables().vars.nexSysSettings !== \"undefined\" &&\n  nexusclient.variables().vars.nexSysSettings.systemSettings?.loadOnLogin === false\n) { \n  console.log(`[nexSys]: esLoad function return. Load on login check.`)\n  return; \n}\n\nconst nexSysLoaded = () => {\n\tnexusclient.reflexes().run_function('ServersidePrioritySwapping', {}, 'nexSys3');\n  \t//nexusclient.reflexes().run_function('PrioSwapTrackables', {}, 'nexSys3');\n  \tnexusclient.reflexes().run_function('promptStyles', {}, 'nexSys3');\n  \tnexusclient.reflexes().run_function('promptString', {}, 'nexSys3');\n  \tnexusclient.reflexes().run_function('SystemLoaded', {}, 'ALL');\n  \tconsole.log('nexSys loaded: startup complete');\n    nexSys.say(`Welcome back ${GMCP.Char.Status.name}. Nexus has been loaded to your specifications`);\n}\n\nimport('https://unpkg.com/nexsys@1.7.3/nexsys.min.js')\n\t.then(() => {\n  \t\tnexusclient.packages().get('nexSys3').items.filter(item => item.type === 'group').forEach(group => group.enabled = true);\n  \t\tconsole.log('nexSys loaded: beginning startup');\n        eventStream.registerEvent(\"ServersideSettingsCaptured\", nexSysLoaded);\n  \t\tnexSys.system_loaded = true;\n\t\tnexSys.loadCustomSettings();\n\t\teventStream.raiseEvent('SystemLoaded');\n\t});"
+            "code": "// DEBUGGING\n//return;\nif (\n  typeof nexusclient.variables().vars.nexSysSettings !== \"undefined\" &&\n  nexusclient.variables().vars.nexSysSettings.systemSettings?.loadOnLogin === false\n) { \n  console.log(`[nexSys]: esLoad function return. Load on login check.`)\n  return; \n}\n\nconst nexSysLoaded = () => {\n\tnexusclient.reflexes().run_function('ServersidePrioritySwapping', {}, 'nexSys3');\n  \t//nexusclient.reflexes().run_function('PrioSwapTrackables', {}, 'nexSys3');\n  \tnexusclient.reflexes().run_function('promptStyles', {}, 'nexSys3');\n  \tnexusclient.reflexes().run_function('promptString', {}, 'nexSys3');\n  \tnexusclient.reflexes().run_function('SystemLoaded', {}, 'ALL');\n  \tconsole.log('nexSys loaded: startup complete');\n    nexSys.say(`Welcome back ${GMCP.Char.Status.name}. Nexus has been loaded to your specifications`);\n}\n\nimport('https://unpkg.com/nexsys@1.7.4/nexsys.min.js')\n\t.then(() => {\n  \t\tnexusclient.packages().get('nexSys3').items.filter(item => item.type === 'group').forEach(group => group.enabled = true);\n  \t\tconsole.log('nexSys loaded: beginning startup');\n        eventStream.registerEvent(\"ServersideSettingsCaptured\", nexSysLoaded);\n  \t\tnexSys.system_loaded = true;\n\t\tnexSys.loadCustomSettings();\n\t\teventStream.raiseEvent('SystemLoaded');\n\t});"
         },
         {
             "type": "group",
@@ -4202,7 +4202,7 @@
                 {
                     "type": "script",
                     "enabled": true,
-                    "script": "if (typeof eventStream === \"undefined\") { return; }\n\nif (\n  typeof nexSys !== 'undefined' && \n  nexSys.system_loaded\n) { return; }\n\n\nconst nexSysLoaded = () => {\n\tnexusclient.reflexes().run_function('ServersidePrioritySwapping', {}, 'nexSys3');\n  \t//nexusclient.reflexes().run_function('PrioSwapTrackables', {}, 'nexSys3');\n  \tnexusclient.reflexes().run_function('promptStyles', {}, 'nexSys3');\n  \tnexusclient.reflexes().run_function('promptString', {}, 'nexSys3');\n  \tnexusclient.reflexes().run_function('SystemLoaded', {}, 'ALL');\n  \tconsole.log('nexSys loaded: startup complete');\n    nexSys.say(`Welcome back ${GMCP.Char.Status.name}. Nexus has been loaded to your specifications`);\n}\n\nimport('https://unpkg.com/nexsys@1.7.3/nexsys.min.js')\n\t.then(() => {\n  \t\tnexusclient.packages().get('nexSys3').items.filter(item => item.type === 'group').forEach(group => group.enabled = true);\n  \t\tconsole.log('nexSys loaded: beginning startup');\n        eventStream.registerEvent(\"ServersideSettingsCaptured\", nexSysLoaded);\n  \t\tnexSys.system_loaded = true;\n\t\tnexSys.loadCustomSettings();\n\t\teventStream.raiseEvent('SystemLoaded');\n\t});"
+                    "script": "if (typeof eventStream === \"undefined\") { return; }\n\nif (\n  typeof nexSys !== 'undefined' && \n  nexSys.system_loaded\n) { return; }\n\n\nconst nexSysLoaded = () => {\n\tnexusclient.reflexes().run_function('ServersidePrioritySwapping', {}, 'nexSys3');\n  \t//nexusclient.reflexes().run_function('PrioSwapTrackables', {}, 'nexSys3');\n  \tnexusclient.reflexes().run_function('promptStyles', {}, 'nexSys3');\n  \tnexusclient.reflexes().run_function('promptString', {}, 'nexSys3');\n  \tnexusclient.reflexes().run_function('SystemLoaded', {}, 'ALL');\n  \tconsole.log('nexSys loaded: startup complete');\n    nexSys.say(`Welcome back ${GMCP.Char.Status.name}. Nexus has been loaded to your specifications`);\n}\n\nimport('https://unpkg.com/nexsys@1.7.4/nexsys.min.js')\n\t.then(() => {\n  \t\tnexusclient.packages().get('nexSys3').items.filter(item => item.type === 'group').forEach(group => group.enabled = true);\n  \t\tconsole.log('nexSys loaded: beginning startup');\n        eventStream.registerEvent(\"ServersideSettingsCaptured\", nexSysLoaded);\n  \t\tnexSys.system_loaded = true;\n\t\tnexSys.loadCustomSettings();\n\t\teventStream.raiseEvent('SystemLoaded');\n\t});"
                 }
             ],
             "text": "ns load",
