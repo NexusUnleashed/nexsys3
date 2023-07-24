@@ -31,6 +31,7 @@ import {
 import { affTable } from "./base/affs/affTable";
 import { Balance, BalExtended } from "./base/balances/Balance";
 import { bals } from "./base/balances/balances";
+import { balanceTable } from "./base/balances/balanceTable";
 import { haveABal, haveBal, haveBals } from "./base/balances/balanceService";
 import { Cache } from "./base/cache/Cache";
 import { caches } from "./base/cache/caches";
@@ -42,9 +43,12 @@ import Priorityqueue from "./base/classes/Priorityqueue";
 import Timer from "./base/classes/Timer";
 import Trackable from "./base/classes/Trackable";
 import { prompt } from "./base/clientOverrides/prompt";
+import Cure from "./base/cures/Cure";
 import { cures } from "./base/cures/cures";
+import { cureTable } from "./base/cures/cureTable";
 import { Def, DefServerside } from "./base/defs/Def";
 import { defs } from "./base/defs/defs";
+import { defTable } from "./base/defs/defTable";
 import {
   defoff,
   defPrioSwap,
@@ -56,6 +60,12 @@ import {
   parry,
 } from "./base/defs/defService";
 import { defPrios } from "./base/defs/defTable";
+import {
+  Echo,
+  EchoLine,
+  EchoLinePrefix,
+  EchoWithPrefix,
+} from "./base/echo/Echo";
 import { echo, echoInfoLine, echoLine } from "./base/echo/echos";
 import { createQueue } from "./base/queues/Queue";
 import { serversideSettings } from "./base/serverside/serverside";
@@ -119,6 +129,7 @@ const nexSys = {
 
   classes: {
     Countable,
+    Cure,
     Priority,
     Priorityqueue,
     Timer,
@@ -132,9 +143,14 @@ const nexSys = {
     Cache,
     Def,
     DefServerside,
+    Echo,
+    EchoLine,
+    EchoWithPrefix,
+    EchoLinePrefix,
   },
 
   cures: cures,
+  cureTable: cureTable,
 
   affs: affs,
   affTable: affTable,
@@ -148,11 +164,13 @@ const nexSys = {
   snapTrack: new Trackable("Snapped"),
 
   bals: bals,
+  balanceTable: balanceTable,
   haveABal: haveABal,
   haveBal: haveBal,
   haveBals: haveBals,
 
   defs: defs,
+  defTable: defTable,
   defPrios: defPrios,
   //defsCreate: defsCreate,
   getCurrentDefs: getCurrentDefs,
