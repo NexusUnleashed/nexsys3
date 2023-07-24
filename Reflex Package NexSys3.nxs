@@ -3660,7 +3660,7 @@
                         {
                             "type": "script",
                             "enabled": true,
-                            "script": "nexSys.classsQueue.clear();"
+                            "script": "nexSys.classQueue.clear();"
                         }
                     ],
                     "text": "Your class balance queue is already empty.",
