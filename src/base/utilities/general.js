@@ -136,7 +136,7 @@ export const updateNxs = () => {
   )
     .then((response) => response.json())
     .then((data) => {
-      const newPackage = JSON.parse(data);
+      const newPackage = typeof data === "string" ? JSON.parse(data) : data;
       nexusclient
         .reflexes()
         .packages()
