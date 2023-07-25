@@ -198,5 +198,10 @@ const systemOutputComplete = function () {
 };
 eventStream.registerEvent("SystemOutputCompleteEvent", systemOutputComplete);
 
-// TODO Hack because nexSys was getting "stuck" in output pending after dying.
-eventStream.registerEvent("aliveEvent", sendOutput);
+// TODO Hack because nexSys was getting "stuck" in output pending after dying and returning to life.
+// This could be caused by the output attempting to send JUST before the alive sequence completes ?
+const aliveUnstuckHack = () => {
+  nexusclient.send_commands("echo SystemEvent SystemOutputCompleteEvent");
+};
+//eventStream.registerEvent("aliveEvent", sendOutput);
+eventStream.registerEvent("aliveEvent", aliveUnstuckHack);
