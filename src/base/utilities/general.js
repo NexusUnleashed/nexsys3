@@ -131,17 +131,12 @@ export const checkForUpdate = () => {
 
 export const updateNxs = () => {
   fetch(
-    `https://unpkg.com/nexsys@${nexSys.currentVersion}/nexSys3encode.json`,
+    `https://unpkg.com/nexsys@${nexSys.currentVersion}/nexSys3.nxs`,
     { cache: "no-store" }
   )
     .then((response) => response.json())
     .then((data) => {
-      const newPackage = JSON.parse(data);
-      nexusclient
-        .reflexes()
-        .packages()
-        .get("nexSys3")
-        .apply(newPackage, nexusclient.reflexes());
+      nexusclient.packages().get('nexSys3').apply(data, nexusclient.reflexes());
     });
 };
 
