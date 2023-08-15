@@ -85,7 +85,7 @@ class Heap {
             // Determine the index of the smaller child.
             const smallerChildIndex =
                 rightChildIndex < count &&
-                nodes[rightChildIndex].key < nodes[leftChildIndex].key
+                    nodes[rightChildIndex].key < nodes[leftChildIndex].key
                     ? rightChildIndex
                     : leftChildIndex;
 
@@ -133,7 +133,7 @@ class Heap {
     }
 }
 
-export class PriorityQueue extends Heap {
+export default class PriorityQueue extends Heap {
     push(priority, value) {
         this.insert(priority, value);
     }

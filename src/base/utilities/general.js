@@ -137,6 +137,7 @@ export const updateNxs = () => {
     .then((response) => response.json())
     .then((data) => {
       nexusclient.packages().get('nexSys3').apply(data, nexusclient.reflexes());
+      nexusclient.packages().get('nexSys3').items.filter(item => item.type === 'group').forEach(group => group.enabled = true);
     });
 };
 

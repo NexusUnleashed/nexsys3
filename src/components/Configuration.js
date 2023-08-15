@@ -11,6 +11,7 @@ import { CssBaseline } from "@mui/material";
 import SystemSettings from "./SystemSettings";
 import DefencePriorities from "./DefencePriorities";
 import AffPriorities from "./AffPriorities";
+import ColorSettings from "./ColorSettings";
 
 const Configuration = ({
   nexSys,
@@ -56,6 +57,7 @@ const Configuration = ({
               <Tab label="Curing Priorities" value="2" />
               <Tab label="Defence Priorities" value="3" />
               <Tab label="Precache" value="4" />
+              <Tab label="Color Settings" value="5" />
             </TabList>
           </Box>
           <TabPanel value="1">
@@ -79,6 +81,9 @@ const Configuration = ({
           </TabPanel>
           <TabPanel value="4">
             <Precache cacheTable={cacheTable} setCacheTable={setCacheTable} />
+          </TabPanel>
+          <TabPanel value="5">
+            <ColorSettings />
           </TabPanel>
         </TabContext>
       </Box>
