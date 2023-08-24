@@ -18,7 +18,6 @@ const outputChunkSize = 20; // Needs to account for preQueue commands
 let eventOutput = [];
 let affPrioOutput = [];
 let defPrioOutput = [];
-const outputTrack = new Balance("SystemOutput", 1.0);
 
 const addToOutput = function (command) {
   if (Array.isArray(command)) {
@@ -32,9 +31,10 @@ const sendOutput = function () {
   if (output.length > 0) {
     eventStream.raiseEvent("OutputSentEvent", output);
     addToOutput(outputFeedbackCommand);
-    const chunks = parseInt((output.length - 1) / outputChunkSize) + 1; //CUSTOM
 
     /*
+    const chunks = parseInt((output.length - 1) / outputChunkSize) + 1; //CUSTOM
+
     for (let i = 0; i < chunks; i++) {
       const chunk = output.slice(
         i * outputChunkSize,
@@ -85,9 +85,6 @@ const populateOutput = function () {
       // loop affs repeatedly until no maybe cures happen, remove those affs, bals
       // TODO: This appears to be a relic from old curing logic. Not for serverside
       //addToOutput(getCureOutputs(affList, balList));
-
-      // TODO: Lust feels like too specialized of a feature for nexSys general
-      //addToOutput(getLustCommands());
 
       // loop defs
       addToOutput(getDefOutputs(affList, balList));
@@ -180,8 +177,6 @@ eventStream.registerEvent("PrioritySetEvent", flagPopulateOutput);
 eventStream.registerEvent("RealLustGotEvent", flagPopulateOutput);
 eventStream.registerEvent("RiftListCompleteEvent", forcePopulateOutput);
 
-/* CUSTOM
-Changed to fire off of the SystemOutputGotBalEvent rather than every event with a check */
 const outputComplete = function (balance) {
   eventStream.raiseEvent("OutputCompleteEvent", output);
   outputInProgress = false;
@@ -191,12 +186,19 @@ const outputComplete = function (balance) {
     forcePopulateOutput();
   }
 };
-eventStream.registerEvent("SystemOutputGotBalEvent", outputComplete); // CUSTOM
 
 const systemOutputComplete = function () {
+  outputComplete();
   eventStream.raiseEvent("SystemOutputGotBalEvent");
 };
 eventStream.registerEvent("SystemOutputCompleteEvent", systemOutputComplete);
+
+const systemOutputStuckCheck = () => {
+  if (outputInProgress) {
+    sendOutput();
+  }
+};
+eventStream.registerEvent("SystemOutputGotBalEvent", systemOutputStuckCheck); // CUSTOM
 
 // TODO Hack because nexSys was getting "stuck" in output pending after dying and returning to life.
 // This could be caused by the output attempting to send JUST before the alive sequence completes ?

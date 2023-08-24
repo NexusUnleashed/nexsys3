@@ -121,6 +121,9 @@ const balances = {
   anathema: {
     length: 5.0, // CUSTOM Unnamable
   },
+  systemOutput: {
+    length: 1.0,
+  },
 };
 
 export { balances as balanceTable };
