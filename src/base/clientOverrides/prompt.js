@@ -237,7 +237,7 @@ prompt.cureColors = {
   epidermal: { fg: "sienna", bg: "" }, // apply
   restoration: { fg: "darkviolet", bg: "" }, // apply
   health: { fg: "lightpink", bg: "" }, // sip
-  writhe: { fg: "paleyellow", bg: "darkslategray" }, // eat
+  writhe: { fg: "PaleGoldenRod", bg: "darkslategray" },
 };
 
 prompt.affAbbrev = {

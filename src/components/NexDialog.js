@@ -16,10 +16,10 @@ import Configuration from "./Configuration";
 let darkTheme = createTheme({
   palette: {
     mode: "dark",
-    /*text: {
+    text: {
       primary: "#FFF5D6",
       //secondary: 'green'
-    },*/
+    },
   },
   typography: {
     fontSize: 12 * (14 / 16), // conversion for px
@@ -161,7 +161,11 @@ const NexDialog = ({ evt, nexSys }) => {
           </DialogTitle>
           <DialogContent sx={{ background: "#121212" }}>
             <Collapse
-              in={typeof nexSys.currentVersion !== "undefined" && nexSys.version !== nexSys.currentVersion && !updateCheck}
+              in={
+                typeof nexSys.currentVersion !== "undefined" &&
+                nexSys.version !== nexSys.currentVersion &&
+                !updateCheck
+              }
             >
               <Alert
                 severity="info"

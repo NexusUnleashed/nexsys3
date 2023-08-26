@@ -15,21 +15,22 @@ const ListItem = styled.div`
 `;
 
 const AffItem = ({ aff, index, color }) => {
-    return (
-        <Draggable draggableId={aff} index={index}>
-            {(provided) => (
-                <ListItem
-                    fg={color?.fg}
-                    bg={color?.bg}
-                    ref={provided.innerRef}
-                    {...provided.draggableProps}
-                    {...provided.dragHandleProps}
-                >
-                    {aff.capitalize()}
-                </ListItem>
-            )}
-        </Draggable>
-    );
+  console.log(`${aff} ${color?.fg} ${color?.bg}`);
+  return (
+    <Draggable draggableId={aff} index={index}>
+      {(provided) => (
+        <ListItem
+          fg={color?.fg || "white"}
+          bg={color?.bg}
+          ref={provided.innerRef}
+          {...provided.draggableProps}
+          {...provided.dragHandleProps}
+        >
+          {aff.capitalize()}
+        </ListItem>
+      )}
+    </Draggable>
+  );
 };
 
 export default AffItem;
