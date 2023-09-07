@@ -101,6 +101,10 @@ export const sys = {
     shin: 0,
     stance: "",
     target: "",
+    wielded: {
+      left: false,
+      right: false,
+    },
   },
   target: "",
   lifevision: false,
@@ -209,6 +213,17 @@ export const sys = {
       sys.setSystemStatus(status, !sys.state[status]);
     }
   },
+
+  wielded(side) {
+    let res = sys.char.wielded;
+    if (side == "left") {
+      res = sys.char.wielded.left;
+    } else if (side == "right") {
+      res = sys.char.wielded.right;
+    }
+
+    return res;
+  }
 };
 
 export const system_loaded = false;

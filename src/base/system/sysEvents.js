@@ -46,7 +46,7 @@ const setCharVitals = function (vitals) {
     let val = "";
     if (["Yes", "No"].indexOf(class1[2]) > -1) {
       if (!bals[id]) {
-        console.log(`${id} class balance is not in balances table but is provided in GMCP`);      
+        console.log(`${id} class balance is not in balances table but is provided in GMCP`);
       } else if (class1[2] === "Yes" && !bals[id].have) {
         eventStream.raiseEvent(`${id}GotBalEvent`);
       } else if (class1[2] === "No" && bals[id].have) {
@@ -64,7 +64,7 @@ const setCharVitals = function (vitals) {
     let val = "";
     if (["Yes", "No"].indexOf(class1[2]) > -1) {
       if (!bals[id]) {
-        console.log(`${id} class balance is not in balances table but is provided in GMCP`);      
+        console.log(`${id} class balance is not in balances table but is provided in GMCP`);
       } else if (class1[2] === "Yes" && !bals[id].have) {
         eventStream.raiseEvent(`${id}GotBalEvent`);
       } else if (class1[2] === "No" && bals[id].have) {
@@ -191,6 +191,25 @@ const lifevisionCheck = function () {
 };
 eventStream.registerEvent("PromptEvent", lifevisionCheck);
 
+const wieldedEvent = (args) => {
+  if (args.item.id === sys.char.wielded.left.id) {
+    sys.char.wielded.left = false;
+  } else if (args.item.id === sys.char.wielded.right.id) {
+    sys.char.wielded.right = false;
+  }
+
+  if (args.item?.attrib === "l") {
+    sys.char.wielded.left = args.item;
+  } else if (args.item?.attrib === "L") {
+    sys.char.wielded.right = args.item;
+  }
+};
+eventStream.registerEvent("Char.Items.Update", wieldedEvent);
+const initialWielded = (args) => {
+  sys.char.wielded.left = args.find(e => e.attrib === "l") || false;
+  sys.char.wielded.right = args.find(e => e.attrib === "L") || false;
+};
+eventStream.registerEvent('ItemListForInv', initialWielded, true);
 /*
 const occultistStatsGmcpBalance = function (vitals) {
   if (!sys.isClass("Occultist")) {
