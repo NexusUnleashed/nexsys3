@@ -441,9 +441,9 @@ const affs = {
       // insulation: true  // TODO not an aff?
     },
     countable: {
-      // TODO: Is pressure a countable aff?
       // TODO: Are unweavings countable?
       // TODO: Is kkractlebrand countable?
+      pressure: { min: 0, max: 10 },
       bleeding: { min: 0, max: 15000 },
       burning: { min: 0, max: 5 },
       crackedribs: { min: 0, max: 7 },
