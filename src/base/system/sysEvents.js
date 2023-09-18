@@ -5,7 +5,7 @@ import { bals } from "../balances/balances";
 import { systemOutputDebug } from "./systemOutput";
 
 const valueRegex = /(\d+)/;
-const classSpecific = /(\w+): (\w+)/;
+const classSpecific = /(\w+): (\w+)?/;
 const setCharVitals = function (vitals) {
   const sysChar = sys.char;
   const oh = sysChar.h;
@@ -53,7 +53,11 @@ const setCharVitals = function (vitals) {
         eventStream.raiseEvent(`${id}LostBalEvent`);
       }
     } else {
-      val = parseInt(class1[2]);
+      if (typeof class1[2] === 'undefined') {
+        val = false;
+      } else {
+        val = parseInt(class1[2]) || class1[2];
+      }
       sysChar[id] = val;
     }
   }
@@ -71,7 +75,11 @@ const setCharVitals = function (vitals) {
         eventStream.raiseEvent(`${id}LostBalEvent`);
       }
     } else {
-      val = parseInt(class1[2]);
+      if (typeof class1[2] === 'undefined') {
+        val = false;
+      } else {
+        val = parseInt(class1[2]) || class1[2];
+      }
       sysChar[id] = val;
     }
   }
