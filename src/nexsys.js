@@ -32,7 +32,12 @@ import { affTable } from "./base/affs/affTable";
 import { Balance, BalExtended } from "./base/balances/Balance";
 import { bals } from "./base/balances/balances";
 import { balanceTable } from "./base/balances/balanceTable";
-import { haveABal, haveBal, haveBals } from "./base/balances/balanceService";
+import {
+  getCurrentBals,
+  haveABal,
+  haveBal,
+  haveBals,
+} from "./base/balances/balanceService";
 import { Cache } from "./base/cache/Cache";
 import { caches } from "./base/cache/caches";
 import { getCacheOutputs } from "./base/cache/cacheService";
@@ -165,6 +170,7 @@ const nexSys = {
 
   bals: bals,
   balanceTable: balanceTable,
+  getCurrentBals: getCurrentBals,
   haveABal: haveABal,
   haveBal: haveBal,
   haveBals: haveBals,

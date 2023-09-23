@@ -1,4 +1,4 @@
-import "./nexSys";
+import "./nexsys";
 import "./base/affs/affEvents";
 import "./base/balances/balanceEvents";
 import "./base/cache/cacheEvents";
