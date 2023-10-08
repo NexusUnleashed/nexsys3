@@ -220,6 +220,7 @@ prompt.cureColors = {
   arsenic: { fg: "", bg: "" }, // eat
   aurum: { fg: "ForestGreen", bg: "" }, // eat
   azurite: { fg: "", bg: "" }, // eat
+  bisemutum: { fg: "", bg: "" },
   calamine: { fg: "", bg: "" }, // eat
   calcite: { fg: "slategray", bg: "" }, // eat
   cinnabar: { fg: "greenyellow", bg: "" }, // smoke
@@ -228,6 +229,7 @@ prompt.cureColors = {
   gypsum: { fg: "", bg: "" },
   magnesium: { fg: "Red", bg: "" }, // eat
   plumbum: { fg: "Gold", bg: "" }, // eat
+  potash: { fg: "", bg: "" },
   quartz: { fg: "", bg: "" },
   quicksilver: { fg: "", bg: "" },
   realgar: { fg: "firebrick", bg: "" }, // smoke

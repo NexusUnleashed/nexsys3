@@ -166,6 +166,50 @@ export const herb_name_to_herb = {
   "cohosh roots": "cohosh",
 };
 
+export const mineral_to_herb = {
+  antimony: "ginger",
+  argentum: "lobelia",
+  arsenic: "bayberry",
+  aurum: "kelp",
+  azurite: "skullcap",
+  bisemutum: "myrrh",
+  calamine: "hawthorn",
+  calcite: "pear",
+  cinnabar: "elm",
+  cuprum: "bellwort",
+  ferrum: "ginseng",
+  gypsum: "cohosh",
+  magnesium: "bloodroot",
+  plumbum: "goldenseal",
+  potash: "moss",
+  quartz: "kola",
+  quicksilver: "sileris",
+  realgar: "valerian",
+  stannum: "ash",
+};
+
+export const herb_to_mineral = {
+  ash: "stannum",
+  bayberry: "arsenic",
+  bellwort: "cuprum",
+  bloodroot: "magnesium",
+  cohosh: "gypsum",
+  elm: "cinnabar",
+  ginseng: "ferrum",
+  ginger: "antimony",
+  goldenseal: "plumbum",
+  hawthorn: "calamine",
+  kelp: "aurum",
+  kola: "quartz",
+  lobelia: "argentum",
+  moss: "potash",
+  myrrh: "bisemutum",
+  pear: "calcite",
+  sileris: "quicksilver",
+  skullcap: "azurite",
+  valerian: "realgar",
+};
+
 export const cacheTable = {
   azurite: 0,
   bisemutum: 0,

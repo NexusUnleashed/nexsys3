@@ -41,7 +41,12 @@ import {
 import { Cache } from "./base/cache/Cache";
 import { caches } from "./base/cache/caches";
 import { getCacheOutputs } from "./base/cache/cacheService";
-import { cacheTable } from "./base/cache/cacheTable";
+import {
+  cacheTable,
+  herb_name_to_herb,
+  herb_to_mineral,
+  mineral_to_herb,
+} from "./base/cache/cacheTable";
 import Countable from "./base/classes/Countable";
 import Priority from "./base/classes/Priority";
 import Priorityqueue from "./base/classes/Priorityqueue";
@@ -123,7 +128,7 @@ import { startup } from "./base/utilities/startup";
 import NexDialog from "./components/NexDialog";
 
 const nexSys = {
-  version: "1.7.5",
+  version: "1.7.6",
   evt: new EventTarget(),
   component: NexDialog,
 
@@ -200,17 +205,17 @@ const nexSys = {
   curRoom: curRoom,
   curRoomArea: curRoomArea,
   curRoomName: curRoomName,
-
-  limbs: limbs,
-  dirs: dirs,
-  dirMap: dirMap,
-  oppdirs: oppDirs,
-  shortDirs: shortDirs,
-  classList: classList,
-
-  whiteList: whiteList,
-  rejectList: rejectList,
-  getLustCommands: getLustCommands,
+  tables: {
+    limbs: limbs,
+    dirs: dirs,
+    dirMap: dirMap,
+    oppdirs: oppDirs,
+    shortDirs: shortDirs,
+    classList: classList,
+    herb_name_to_herb: herb_name_to_herb,
+    mineral_to_herb: mineral_to_herb,
+    herb_to_mineral: herb_to_mineral,
+  },
 
   sendCmd: sendCmd,
   sendInline: sendInline,
