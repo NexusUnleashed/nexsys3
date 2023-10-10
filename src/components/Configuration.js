@@ -76,7 +76,7 @@ const Configuration = ({
               defs={nexSys.defs}
               defPrios={defPrios}
               setDefPrios={setDefPrios}
-              classList={nexSys.classList}
+              classList={nexSys.tables.classList}
             />
           </TabPanel>
           <TabPanel value="4">
