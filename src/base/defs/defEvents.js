@@ -93,7 +93,7 @@ eventStream.registerEvent("ClassChanged", repop);
 eventStream.registerEvent("ServersideSettingsCaptured", repop);
 
 const nexSysFlying = (args) => {
-  const flying = args.startsWith("Flying above ");
+  const flying = args.name.startsWith("Flying above ");
   const flyingDef = haveDef("flying");
 
   if (flying && !flyingDef) {
