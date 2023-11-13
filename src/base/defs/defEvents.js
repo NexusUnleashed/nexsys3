@@ -1,11 +1,6 @@
 /* global eventStream, nexSys */
 
-import { getCurrentDefs, parry } from "./defService";
-import { defs } from "./defs";
-import { sys } from "../system/sys";
-import { limbs } from "../utilities/commonTable";
-import { defPrios } from "./defTable";
-import { serversideSettings } from "../serverside/serverside";
+import { getCurrentDefs, haveDef } from "./defService";
 import { repop } from "./defService";
 
 let eventGmcpDefList = function (list) {
@@ -94,7 +89,17 @@ function repop(args) {
 }
 */
 
-
-
 eventStream.registerEvent("ClassChanged", repop);
 eventStream.registerEvent("ServersideSettingsCaptured", repop);
+
+const nexSysFlying = (args) => {
+  const flying = args.startsWith("Flying above ");
+  const flyingDef = haveDef("flying");
+
+  if (flying && !flyingDef) {
+    eventStream.raiseEvent("flyingGotDefEvent");
+  } else if (!flying && flyingDef) {
+    eventStream.raiseEvent("flyingLostDefEvent");
+  }
+};
+eventStream.registerEvent("Room.Info", nexSysFlying);
