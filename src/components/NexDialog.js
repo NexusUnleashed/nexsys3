@@ -75,6 +75,47 @@ darkTheme = createTheme(darkTheme, {
   },
 });
 
+const VersionAlert = ({ handleUpdateClick, version, currentVersion, update }) => {
+  if (update) {
+    return (
+      <Alert
+        severity="info"
+        sx={{ fontSize: "12px" }}
+        action={
+          <Button
+            variant="outlined"
+            color="inherit"
+            size="small"
+            onClick={handleUpdateClick}
+          >
+            UPDATE
+          </Button>
+        }
+      >
+        <AlertTitle sx={{ fontSize: "14px" }}>
+          nexSys Update Available
+        </AlertTitle>
+        You are using version <strong>{version}</strong> version{" "}
+        <strong>{currentVersion || "ERROR"}</strong> is available
+        now.
+      </Alert>
+    );
+  }
+  return (
+    <Alert
+      severity="success"
+      sx={{ fontSize: "12px" }}
+
+    >
+      <AlertTitle sx={{ fontSize: "14px" }}>
+        nexSys updated
+      </AlertTitle>
+      You are using the latest version of nexSys!
+      <strong>Congratulations!</strong>
+    </Alert>
+  );
+};
+
 const NexDialog = ({ evt, nexSys }) => {
   const [open, setOpen] = React.useState(false);
   const [_nexSys, setNexSys] = React.useState(nexSys);
@@ -82,14 +123,19 @@ const NexDialog = ({ evt, nexSys }) => {
   const [cacheTable, setCacheTable] = React.useState(nexSys.cacheTable);
   const [affTable, setAffTable] = React.useState(nexSys.affTable);
   const [defPrios, setDefPrios] = React.useState(nexSys.defPrios);
-  const [updateCheck, setUpdateCheck] = React.useState(false);
-  const [checkUpdate, setCheckUpdate] = React.useState(0);
+  const [currentVersion, setCurrentVersion] = React.useState(nexSys.currentVersion);
+  const [updateAvailable, setUpdateAvailable] = React.useState(false);
 
   evt.addEventListener("nexSys-config-dialog", ({ detail }) => {
     if (nexSys.system_loaded) {
       setOpen(detail);
+      setCurrentVersion(nexSys.checkForUpdate());
     }
   });
+
+  React.useEffect(() => {
+    setUpdateAvailable(nexSys.version !== currentVersion);
+  }, [currentVersion]);
 
   React.useEffect(() => {
     setNexSys((prev) => ({ ...prev, defPrios: { ...defPrios } }));
@@ -105,12 +151,9 @@ const NexDialog = ({ evt, nexSys }) => {
 
   const handleUpdateClick = () => {
     nexSys.updateNxs();
-    setUpdateCheck(true);
+    setCurrentVersion(nexSys.checkForUpdate());
   };
-  const handleCheckUpdateClick = () => {
-    nexSys.checkForUpdate();
-    setCheckUpdate((prev) => prev++);
-  };
+
   const handleClickClose = () => {
     setOpen(false);
     setTimeout(() => {
@@ -147,20 +190,11 @@ const NexDialog = ({ evt, nexSys }) => {
               <span>nexSys Configuration Options</span>
               <span>
                 version: {nexSys.version}{" "}
-                <Button
-                  variant="outlined"
-                  color="inherit"
-                  size="small"
-                  disabled={updateCheck}
-                  onClick={handleCheckUpdateClick}
-                >
-                  Check for Update
-                </Button>
               </span>
             </div>
           </DialogTitle>
           <DialogContent sx={{ background: "#121212" }}>
-            <Collapse
+            {/*<Collapse
               in={
                 typeof nexSys.currentVersion !== "undefined" &&
                 nexSys.version !== nexSys.currentVersion &&
@@ -188,7 +222,8 @@ const NexDialog = ({ evt, nexSys }) => {
                 <strong>{nexSys.currentVersion || "ERROR"}</strong> is available
                 now.
               </Alert>
-            </Collapse>
+              </Collapse>*/}
+            <VersionAlert update={updateAvailable} version={nexSys.version} currentVersion={currentVersion} handleUpdateClick={handleUpdateClick} />
             <Configuration
               theme={darkTheme}
               nexSys={_nexSys}

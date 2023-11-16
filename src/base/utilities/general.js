@@ -126,7 +126,10 @@ export const prepend_notice = function (...args) {
 export const checkForUpdate = () => {
   fetch("https://registry.npmjs.org/nexsys/", { cache: "no-store" })
     .then((response) => response.json())
-    .then((data) => (nexSys.currentVersion = data["dist-tags"].latest));
+    .then((data) => {
+      nexSys.currentVersion = data["dist-tags"].latest;
+      return nexSys.currentVersion;
+    });
 };
 
 export const updateNxs = () => {
@@ -138,6 +141,7 @@ export const updateNxs = () => {
     .then((data) => {
       nexusclient.packages().get('nexSys3').apply(data, nexusclient.reflexes());
       nexusclient.packages().get('nexSys3').items.filter(item => item.type === 'group').forEach(group => group.enabled = true);
+      nexSys.version = data["dist-tags"].latest;
     });
 };
 
