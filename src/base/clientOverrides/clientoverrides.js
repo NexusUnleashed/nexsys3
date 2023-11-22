@@ -188,3 +188,9 @@ nexusclient.process_lines = process_lines;
 nexusclient.ui().buffer().add_block = add_block;
 nexusclient.platform().on_key_up = on_key_up;
 nexusclient._log.append_message_to_log = append_message_to_log;
+nexusclient.datahandler().send_command = function (command) {
+  if (!this._socket) return;
+  nexSys.sentCommands.push(command);
+  this._socket.send(command + "\r\n");
+  this.last_send = new Date().getTime();
+};
