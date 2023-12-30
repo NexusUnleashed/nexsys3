@@ -21,14 +21,17 @@ export const createQueue = ({
     exclusions: exclusions,
     queue: [],
     prependQueue: [],
+    logging: false,
     add(cmd) {
       const newCommands = Array.isArray(cmd)
         ? cmd
         : cmd.split(sys.settings.sep);
       if (Array.equals(newCommands, this.queue)) {
-        console.log(
-          `${this.name}: Duplicate commands, not added ${newCommands}`
-        );
+        if (this.logging) {
+          console.log(
+            `${this.name}: Duplicate commands, not added ${newCommands}`
+          );
+        }
         return;
       }
 
