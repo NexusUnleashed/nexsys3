@@ -8,7 +8,6 @@ import { getCacheOutputs } from "../cache/cacheService";
 import { getCureOutputs } from "../cures/cureService";
 import { getDefOutputs } from "../defs/defService";
 import { Balance } from "../balances/Balance";
-import { getLustCommands } from "../utilities/lust";
 
 let outputInProgress = false;
 let outputPending = false;
@@ -174,7 +173,6 @@ eventStream.registerEvent("BalanceLost", flagPopulateOutput);
 eventStream.registerEvent("AffPrioritySetEvent", flagPopulateOutput);
 eventStream.registerEvent("DefPrioritySetEvent", flagPopulateOutput);
 eventStream.registerEvent("PrioritySetEvent", flagPopulateOutput);
-eventStream.registerEvent("RealLustGotEvent", flagPopulateOutput);
 eventStream.registerEvent("RiftListCompleteEvent", forcePopulateOutput);
 
 const outputComplete = function (balance) {
