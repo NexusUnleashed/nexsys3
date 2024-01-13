@@ -486,9 +486,11 @@ const affs = {
       numbedleftarm: { length: 7.5 },
       numbedrightarm: { length: 7.5 },
       petrified: { length: 10 }, // TODO: Made up number. Confirm duration
+      palpatarfeed: { length: 20 },
       phlogisticated: { length: 45 },
       pinshot: { length: 18 },
       revealed: { length: 60 },
+      scalded: { length: 20 },
       scrambledbrains: { length: 60 },
       silenced: { length: 20 }, // TODO: Made up number. Confirm duration
       silver: { length: 180 },
@@ -608,6 +610,7 @@ const affs = {
       mindisolation: true,
       palpatarfeed: true,
       penitence: true,
+      scalded: true,
       stun: true,
       weakenedmind: true,
     },
@@ -718,7 +721,6 @@ const defaultPrios = {
     "hypersomnia",
     "shivering",
     "frozen",
-    "scalded",
     "kkractlebrand",
     "pressure",
   ],
