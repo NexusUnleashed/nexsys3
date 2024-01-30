@@ -30,6 +30,7 @@ export const sys = {
     customPrompt: false,
     overrideTab: false,
     loadOnLogin: false,
+    queueWhilePaused: false,
     echoOutput: true,
     echoAffGot: false,
     echoAffLost: false,
@@ -59,6 +60,7 @@ export const sys = {
   },
   state: {
     paused: false,
+    queueWhilePaused: false,
     slowMode: false,
     overrideTab: false,
     loadOnLogin: false,
@@ -223,7 +225,7 @@ export const sys = {
     }
 
     return res;
-  }
+  },
 };
 
 export const system_loaded = false;

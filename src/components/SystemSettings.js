@@ -59,91 +59,106 @@ const SystemSettings = ({ settings, setSettings }) => {
       )}
       <div style={{ display: "flex", gap: "50px" }}>
         <div>
-          <FormLabel component="legend" sx={{ margin: 1 }}>
-            Nexsys Config
-          </FormLabel>
-          <FormGroup>
-            <ConfigSwitch
-              label="Load on login"
-              option={"loadOnLogin"}
-              handleCheck={handleCheck}
-              checked={stateSettings.loadOnLogin}
-            />
-            <ConfigSwitch
-              label="Override Tab target"
-              option={"overrideTab"}
-              handleCheck={handleCheck}
-              checked={stateSettings.overrideTab}
-            />
-            <ConfigSwitch
-              label="Custom Prompt"
-              option={"customPrompt"}
-              handleCheck={handleCheck}
-              checked={stateSettings["customPrompt"]}
-            />
-            <ConfigSwitch
-              label="Echo Priority Set"
-              option={"echoPrioritySet"}
-              handleCheck={handleCheck}
-              checked={stateSettings["echoPrioritySet"]}
-            />
-            <ConfigSwitch
-              label="Echo Aff Got"
-              option={"echoAffGot"}
-              handleCheck={handleCheck}
-              checked={stateSettings["echoAffGot"]}
-            />
-            <ConfigSwitch
-              label="Echo Aff Lost"
-              option={"echoAffLost"}
-              handleCheck={handleCheck}
-              checked={stateSettings["echoAffLost"]}
-            />
-            <ConfigSwitch
-              label="Echo Balance Got"
-              option={"echoBalanceGot"}
-              handleCheck={handleCheck}
-              checked={stateSettings["echoBalanceGot"]}
-            />
-            <ConfigSwitch
-              label="Echo Balance Lost"
-              option={"echoBalanceLost"}
-              handleCheck={handleCheck}
-              checked={stateSettings["echoBalanceLost"]}
-            />
-            <ConfigSwitch
-              label="Echo Def Got"
-              option={"echoDefGot"}
-              handleCheck={handleCheck}
-              checked={stateSettings["echoDefGot"]}
-            />
-            <ConfigSwitch
-              label="Echo Def Lost"
-              option={"echoDefLost"}
-              handleCheck={handleCheck}
-              checked={stateSettings["echoDefLost"]}
-            />
-            <ConfigSwitch
-              label="Echo Trackable Got"
-              option={"echoTrackableGot"}
-              handleCheck={handleCheck}
-              checked={stateSettings["echoTrackableGot"]}
-            />
-            <ConfigSwitch
-              label="Echo Trackable Lost"
-              option={"echoTrackableLost"}
-              handleCheck={handleCheck}
-              checked={stateSettings["echoTrackableLost"]}
-            />
-            <TextField
-              id="sep"
-              onChange={handleText}
-              value={stateSettings.sep}
-              size="small"
-              label="Command Separator"
-              style={{ width: "10em", margin: "10px 0 0 0" }}
-            />
-          </FormGroup>
+          <div>
+            <FormLabel component="legend" sx={{ margin: 1 }}>
+              Nexsys Config
+            </FormLabel>
+            <FormGroup>
+              <ConfigSwitch
+                label="Load on login"
+                option={"loadOnLogin"}
+                handleCheck={handleCheck}
+                checked={stateSettings.loadOnLogin}
+              />
+              <ConfigSwitch
+                label="Override Tab target"
+                option={"overrideTab"}
+                handleCheck={handleCheck}
+                checked={stateSettings.overrideTab}
+              />
+              <ConfigSwitch
+                label="Queue while paused"
+                option={"queueWhilePaused"}
+                handleCheck={handleCheck}
+                checked={stateSettings.queueWhilePaused}
+              />
+              <ConfigSwitch
+                label="Custom Prompt"
+                option={"customPrompt"}
+                handleCheck={handleCheck}
+                checked={stateSettings["customPrompt"]}
+              />
+              <TextField
+                id="sep"
+                onChange={handleText}
+                value={stateSettings.sep}
+                size="small"
+                label="Command Separator"
+                style={{ width: "10em", margin: "10px 0 0 0" }}
+              />
+            </FormGroup>
+          </div>
+          <div style={{ marginTop: "20px" }}>
+            <FormLabel component="legend" sx={{ margin: 1 }}>
+              Notices Config
+            </FormLabel>
+            <FormGroup>
+              <ConfigSwitch
+                label="Echo Priority Set"
+                option={"echoPrioritySet"}
+                handleCheck={handleCheck}
+                checked={stateSettings["echoPrioritySet"]}
+              />
+              <ConfigSwitch
+                label="Echo Aff Got"
+                option={"echoAffGot"}
+                handleCheck={handleCheck}
+                checked={stateSettings["echoAffGot"]}
+              />
+              <ConfigSwitch
+                label="Echo Aff Lost"
+                option={"echoAffLost"}
+                handleCheck={handleCheck}
+                checked={stateSettings["echoAffLost"]}
+              />
+              <ConfigSwitch
+                label="Echo Balance Got"
+                option={"echoBalanceGot"}
+                handleCheck={handleCheck}
+                checked={stateSettings["echoBalanceGot"]}
+              />
+              <ConfigSwitch
+                label="Echo Balance Lost"
+                option={"echoBalanceLost"}
+                handleCheck={handleCheck}
+                checked={stateSettings["echoBalanceLost"]}
+              />
+              <ConfigSwitch
+                label="Echo Def Got"
+                option={"echoDefGot"}
+                handleCheck={handleCheck}
+                checked={stateSettings["echoDefGot"]}
+              />
+              <ConfigSwitch
+                label="Echo Def Lost"
+                option={"echoDefLost"}
+                handleCheck={handleCheck}
+                checked={stateSettings["echoDefLost"]}
+              />
+              <ConfigSwitch
+                label="Echo Trackable Got"
+                option={"echoTrackableGot"}
+                handleCheck={handleCheck}
+                checked={stateSettings["echoTrackableGot"]}
+              />
+              <ConfigSwitch
+                label="Echo Trackable Lost"
+                option={"echoTrackableLost"}
+                handleCheck={handleCheck}
+                checked={stateSettings["echoTrackableLost"]}
+              />
+            </FormGroup>
+          </div>
         </div>
         <div>
           <FormLabel component="legend" sx={{ margin: 1 }}>

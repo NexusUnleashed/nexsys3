@@ -75,8 +75,13 @@ darkTheme = createTheme(darkTheme, {
   },
 });
 
-const VersionAlert = ({ handleUpdateClick, version, currentVersion, update }) => {
-  if (update) {
+const VersionAlert = ({
+  handleUpdateClick,
+  version,
+  currentVersion,
+  //update,
+}) => {
+  if (version !== currentVersion) {
     return (
       <Alert
         severity="info"
@@ -96,20 +101,13 @@ const VersionAlert = ({ handleUpdateClick, version, currentVersion, update }) =>
           nexSys Update Available
         </AlertTitle>
         You are using version <strong>{version}</strong> version{" "}
-        <strong>{currentVersion || "ERROR"}</strong> is available
-        now.
+        <strong>{currentVersion || "ERROR"}</strong> is available now.
       </Alert>
     );
   }
   return (
-    <Alert
-      severity="success"
-      sx={{ fontSize: "12px" }}
-
-    >
-      <AlertTitle sx={{ fontSize: "14px" }}>
-        nexSys updated
-      </AlertTitle>
+    <Alert severity="success" sx={{ fontSize: "12px" }}>
+      <AlertTitle sx={{ fontSize: "14px" }}>nexSys updated</AlertTitle>
       You are using the latest version of nexSys!
       <strong>Congratulations!</strong>
     </Alert>
@@ -123,8 +121,10 @@ const NexDialog = ({ evt, nexSys }) => {
   const [cacheTable, setCacheTable] = React.useState(nexSys.cacheTable);
   const [affTable, setAffTable] = React.useState(nexSys.affTable);
   const [defPrios, setDefPrios] = React.useState(nexSys.defPrios);
-  const [currentVersion, setCurrentVersion] = React.useState(nexSys.currentVersion);
-  const [updateAvailable, setUpdateAvailable] = React.useState(false);
+  /*const [currentVersion, setCurrentVersion] = React.useState(
+    nexSys.currentVersion
+  );*/
+  //const [updateAvailable, setUpdateAvailable] = React.useState(false);
 
   evt.addEventListener("nexSys-config-dialog", ({ detail }) => {
     if (nexSys.system_loaded) {
@@ -133,9 +133,9 @@ const NexDialog = ({ evt, nexSys }) => {
     }
   });
 
-  React.useEffect(() => {
+  /*React.useEffect(() => {
     setUpdateAvailable(nexSys.version !== currentVersion);
-  }, [currentVersion]);
+  }, [currentVersion]);*/
 
   React.useEffect(() => {
     setNexSys((prev) => ({ ...prev, defPrios: { ...defPrios } }));
@@ -151,7 +151,7 @@ const NexDialog = ({ evt, nexSys }) => {
 
   const handleUpdateClick = () => {
     nexSys.updateNxs();
-    setCurrentVersion(nexSys.checkForUpdate());
+    nexSys.checkForUpdate();
   };
 
   const handleClickClose = () => {
@@ -180,7 +180,7 @@ const NexDialog = ({ evt, nexSys }) => {
     <ThemeProvider theme={darkTheme}>
       <div>
         <Dialog
-          open={open}
+          open={true} //{open}
           onClose={handleClickClose}
           //hideBackdrop={true}
           maxWidth="md"
@@ -188,42 +188,25 @@ const NexDialog = ({ evt, nexSys }) => {
           <DialogTitle>
             <div style={{ display: "flex", justifyContent: "space-between" }}>
               <span>nexSys Configuration Options</span>
-              <span>
-                version: {nexSys.version}{" "}
-              </span>
+              <span>version: {nexSys.version} </span>
             </div>
           </DialogTitle>
           <DialogContent sx={{ background: "#121212" }}>
-            {/*<Collapse
-              in={
-                typeof nexSys.currentVersion !== "undefined" &&
-                nexSys.version !== nexSys.currentVersion &&
-                !updateCheck
-              }
-            >
-              <Alert
-                severity="info"
-                sx={{ fontSize: "12px" }}
-                action={
-                  <Button
-                    variant="outlined"
-                    color="inherit"
-                    size="small"
-                    onClick={handleUpdateClick}
-                  >
-                    UPDATE
-                  </Button>
+            {
+              <Collapse
+                in={
+                  typeof nexSys.currentVersion !== "undefined" &&
+                  nexSys.version !== nexSys.currentVersion
                 }
               >
-                <AlertTitle sx={{ fontSize: "14px" }}>
-                  nexSys Update Available
-                </AlertTitle>
-                You are using version <strong>{nexSys.version}</strong> version{" "}
-                <strong>{nexSys.currentVersion || "ERROR"}</strong> is available
-                now.
-              </Alert>
-              </Collapse>*/}
-            <VersionAlert update={updateAvailable} version={nexSys.version} currentVersion={currentVersion} handleUpdateClick={handleUpdateClick} />
+                <VersionAlert
+                  //update={updateAvailable}
+                  version={nexSys.version}
+                  currentVersion={nexSys.currentVersion}
+                  handleUpdateClick={handleUpdateClick}
+                />
+              </Collapse>
+            }
             <Configuration
               theme={darkTheme}
               nexSys={_nexSys}

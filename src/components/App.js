@@ -71,7 +71,8 @@ function App({ nexSys }) {
   const [defPrios, setDefPrios] = React.useState(nexSys.defPrios);
 
   return (
-    <div style={{ background: 'black' }}>
+    <div style={{ background: "black" }}>
+      <NexDialog evt={globalThis.nexSys.evt} nexSys={globalThis.nexSys} />
       <Configuration
         theme={darkTheme}
         nexSys={_nexSys}
@@ -85,7 +86,6 @@ function App({ nexSys }) {
         defPrios={defPrios}
         setDefPrios={setDefPrios}
       />
-      <NexDialog evt={globalThis.nexSys.evt} nexSys={globalThis.nexSys} />
     </div>
   );
 }

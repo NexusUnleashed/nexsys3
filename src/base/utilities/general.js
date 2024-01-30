@@ -123,8 +123,8 @@ export const prepend_notice = function (...args) {
   return htmlLine.outerHTML;
 };
 
-export const checkForUpdate = () => {
-  fetch("https://registry.npmjs.org/nexsys/", { cache: "no-store" })
+export const checkForUpdate = async () => {
+  await fetch("https://registry.npmjs.org/nexsys/", { cache: "no-store" })
     .then((response) => response.json())
     .then((data) => {
       nexSys.currentVersion = data["dist-tags"].latest;
@@ -133,14 +133,17 @@ export const checkForUpdate = () => {
 };
 
 export const updateNxs = () => {
-  fetch(
-    `https://unpkg.com/nexsys@${nexSys.currentVersion}/nexSys3.nxs`,
-    { cache: "no-store" }
-  )
+  fetch(`https://unpkg.com/nexsys@${nexSys.currentVersion}/nexSys3.nxs`, {
+    cache: "no-store",
+  })
     .then((response) => response.json())
     .then((data) => {
-      nexusclient.packages().get('nexSys3').apply(data, nexusclient.reflexes());
-      nexusclient.packages().get('nexSys3').items.filter(item => item.type === 'group').forEach(group => group.enabled = true);
+      nexusclient.packages().get("nexSys3").apply(data, nexusclient.reflexes());
+      nexusclient
+        .packages()
+        .get("nexSys3")
+        .items.filter((item) => item.type === "group")
+        .forEach((group) => (group.enabled = true));
       nexSys.version = data["dist-tags"].latest;
     });
 };

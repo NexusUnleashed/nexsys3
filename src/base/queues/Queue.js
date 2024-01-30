@@ -68,6 +68,10 @@ export const createQueue = ({
       return false;
     },
     send() {
+      if (sys.isPaused() && !sys.state.queueWhilePaused) {
+        console.log(`[nexSys]: Queue held while system is paused.`);
+        return;
+      }
       let cmds = this.pre.concat(this.prependQueue, this.queue);
 
       const output = [];
