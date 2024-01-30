@@ -287,5 +287,5 @@ const nexSys = {
 };
 
 globalThis.nexSys = nexSys;
-checkForUpdate();
+await checkForUpdate();
 startup();
