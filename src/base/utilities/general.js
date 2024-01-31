@@ -123,17 +123,9 @@ export const prepend_notice = function (...args) {
   return htmlLine.outerHTML;
 };
 
-export const checkForUpdate = async () => {
-  await fetch("https://registry.npmjs.org/nexsys/", { cache: "no-store" })
-    .then((response) => response.json())
-    .then((data) => {
-      nexSys.currentVersion = data["dist-tags"].latest;
-      return nexSys.currentVersion;
-    });
-};
-
 export const updateNxs = () => {
-  fetch(`https://unpkg.com/nexsys@${nexSys.currentVersion}/nexSys3.nxs`, {
+  //fetch(`https://unpkg.com/nexsys@${nexSys.currentVersion}/nexSys3.nxs`, {
+  fetch(`https://unpkg.com/nexsys/nexSys3.nxs`, {
     cache: "no-store",
   })
     .then((response) => response.json())
@@ -144,7 +136,6 @@ export const updateNxs = () => {
         .get("nexSys3")
         .items.filter((item) => item.type === "group")
         .forEach((group) => (group.enabled = true));
-      nexSys.version = data["dist-tags"].latest;
     });
 };
 

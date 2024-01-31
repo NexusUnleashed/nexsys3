@@ -108,8 +108,10 @@ const VersionAlert = ({
   return (
     <Alert severity="success" sx={{ fontSize: "12px" }}>
       <AlertTitle sx={{ fontSize: "14px" }}>nexSys updated</AlertTitle>
-      You are using the latest version of nexSys!
-      <strong>Congratulations!</strong>
+      <span>You are using the latest version of nexSys!</span>
+      <span>
+        <strong> Congratulations!</strong>
+      </span>
     </Alert>
   );
 };
@@ -121,9 +123,10 @@ const NexDialog = ({ evt, nexSys }) => {
   const [cacheTable, setCacheTable] = React.useState(nexSys.cacheTable);
   const [affTable, setAffTable] = React.useState(nexSys.affTable);
   const [defPrios, setDefPrios] = React.useState(nexSys.defPrios);
-  /*const [currentVersion, setCurrentVersion] = React.useState(
+  const [currentVersion, setCurrentVersion] = React.useState(
     nexSys.currentVersion
-  );*/
+  );
+  const [count, setCount] = React.useState(0);
   //const [updateAvailable, setUpdateAvailable] = React.useState(false);
 
   evt.addEventListener("nexSys-config-dialog", ({ detail }) => {
@@ -132,6 +135,14 @@ const NexDialog = ({ evt, nexSys }) => {
       setCurrentVersion(nexSys.checkForUpdate());
     }
   });
+
+  const checkForUpdate = async () => {
+    await fetch("https://registry.npmjs.org/nexsys/", { cache: "no-store" })
+      .then((response) => response.json())
+      .then((data) => {
+        setCurrentVersion(data["dist-tags"].latest);
+      });
+  };
 
   /*React.useEffect(() => {
     setUpdateAvailable(nexSys.version !== currentVersion);
@@ -149,9 +160,14 @@ const NexDialog = ({ evt, nexSys }) => {
     setNexSys((prev) => ({ ...prev, affTable: { ...affTable } }));
   }, [affTable]);
 
+  React.useEffect(() => {
+    checkForUpdate();
+  }, []);
+
   const handleUpdateClick = () => {
     nexSys.updateNxs();
-    nexSys.checkForUpdate();
+    nexSys.version = currentVersion;
+    setCount((prev) => prev + 1); // Hack way to force rerender on click
   };
 
   const handleClickClose = () => {
@@ -176,11 +192,13 @@ const NexDialog = ({ evt, nexSys }) => {
     handleClickClose();
   };
 
+  console.log(currentVersion);
+
   return (
     <ThemeProvider theme={darkTheme}>
       <div>
         <Dialog
-          open={true} //{open}
+          open={open}
           onClose={handleClickClose}
           //hideBackdrop={true}
           maxWidth="md"
@@ -195,14 +213,14 @@ const NexDialog = ({ evt, nexSys }) => {
             {
               <Collapse
                 in={
-                  typeof nexSys.currentVersion !== "undefined" &&
-                  nexSys.version !== nexSys.currentVersion
+                  typeof currentVersion !== "undefined" &&
+                  nexSys.version !== currentVersion
                 }
               >
                 <VersionAlert
                   //update={updateAvailable}
                   version={nexSys.version}
-                  currentVersion={nexSys.currentVersion}
+                  currentVersion={currentVersion}
                   handleUpdateClick={handleUpdateClick}
                 />
               </Collapse>
