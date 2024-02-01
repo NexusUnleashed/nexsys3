@@ -111,7 +111,6 @@ import {
   shortDirs,
 } from "./base/utilities/commonTable";
 import {
-  checkForUpdate,
   checkLine,
   nextLine,
   prepend_notice,
@@ -127,7 +126,7 @@ import { startup } from "./base/utilities/startup";
 import NexDialog from "./components/NexDialog";
 
 const nexSys = {
-  version: "1.7.9",
+  version: "1.8.0",
   evt: new EventTarget(),
   component: NexDialog,
 
