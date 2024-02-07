@@ -132,7 +132,7 @@ const NexDialog = ({ evt, nexSys }) => {
   evt.addEventListener("nexSys-config-dialog", ({ detail }) => {
     if (nexSys.system_loaded) {
       setOpen(detail);
-      setCurrentVersion(nexSys.checkForUpdate());
+      checkForUpdate();
     }
   });
 
