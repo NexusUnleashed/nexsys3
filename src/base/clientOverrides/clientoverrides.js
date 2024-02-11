@@ -190,7 +190,7 @@ nexusclient.platform().on_key_up = on_key_up;
 nexusclient._log.append_message_to_log = append_message_to_log;
 nexusclient.datahandler().send_command = function (command) {
   if (!this._socket) return;
-  nexSys.sentCommands.push(command);
+  nexSys.sentCommands = [...nexSys.sentCommands.slice(0, 49), command];
   this._socket.send(command + "\r\n");
   this.last_send = new Date().getTime();
 };
