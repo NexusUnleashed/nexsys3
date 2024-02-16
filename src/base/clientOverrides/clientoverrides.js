@@ -190,7 +190,12 @@ nexusclient.platform().on_key_up = on_key_up;
 nexusclient._log.append_message_to_log = append_message_to_log;
 nexusclient.datahandler().send_command = function (command) {
   if (!this._socket) return;
-  nexSys.sentCommands = [...nexSys.sentCommands.slice(0, 49), command];
+  const time = Date.now(); // Performance this is 2x as fast as new Date().getTime() in default Nexus
+  nexSys.sentCommands = [
+    ...nexSys.sentCommands.slice(0, 49),
+    { cmd: command, time: time },
+  ];
   this._socket.send(command + "\r\n");
-  this.last_send = new Date().getTime();
+  //this.last_send = new Date().getTime();
+  this.last_send = time;
 };
