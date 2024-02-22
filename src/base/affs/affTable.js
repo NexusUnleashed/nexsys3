@@ -460,6 +460,7 @@ const affs = {
       aeon: { length: 16 },
       airfisted: { length: 16 },
       blackout: { length: 10 },
+      blistered: { length: 20 },
       bruisedribs: { length: 30 },
       cadmuscurse: { length: 20 },
       condemned: { length: 20 },

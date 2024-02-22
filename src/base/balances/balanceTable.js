@@ -37,7 +37,7 @@ const balances = {
     aff_modifiers: { lethargy: { multiplier: 1.25, offset: 0.0 } },
   },
   salve: {
-    length: 1.0,
+    length: 4.0, //TODO set this to 4.0 for restoration as the worst case scenarion salve. Could we add logic to determine resto vs normal salve?
     aff_modifiers: { timeflux: { multiplier: 1.5, offset: 0.0 } },
   },
   immunity: {
