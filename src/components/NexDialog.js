@@ -129,12 +129,15 @@ const NexDialog = ({ evt, nexSys }) => {
   const [count, setCount] = React.useState(0);
   //const [updateAvailable, setUpdateAvailable] = React.useState(false);
 
+  /*
+  // Moved to useEffect lifecycle event
   evt.addEventListener("nexSys-config-dialog", ({ detail }) => {
     if (nexSys.system_loaded) {
       setOpen(detail);
       checkForUpdate();
     }
   });
+  */
 
   const checkForUpdate = async () => {
     await fetch("https://registry.npmjs.org/nexsys/", { cache: "no-store" })
@@ -143,6 +146,24 @@ const NexDialog = ({ evt, nexSys }) => {
         setCurrentVersion(data["dist-tags"].latest);
       });
   };
+
+  React.useEffect(() => {
+    //Open/closer function
+    const opener = ({ detail }) => {
+      if (nexSys.system_loaded) {
+        setOpen(detail);
+        checkForUpdate();
+      }
+    };
+
+    // Add event listener when component mounts
+    evt.addEventListener("nexSys-config-dialog", opener);
+
+    // Return a cleanup function to remove event listener when component unmounts
+    return () => {
+      evt.removeEventListener("nexSys-config-dialog", opener);
+    };
+  }, [evt]);
 
   /*React.useEffect(() => {
     setUpdateAvailable(nexSys.version !== currentVersion);
