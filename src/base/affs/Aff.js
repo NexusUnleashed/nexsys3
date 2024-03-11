@@ -2,7 +2,7 @@
 import Trackable from "../classes/Trackable.js";
 import Priority from "../classes/Priority.js";
 import Countable from "../classes/Countable.js";
-import Timer from "../classes/Timer.js";
+import createTimer from "../classes/Timer.js";
 
 class Aff extends Trackable {
   constructor(name, prio = 0, uncurable = false) {
@@ -156,7 +156,7 @@ class AffCountable extends Aff {
 class AffTimed extends Aff {
   constructor(name, prio, length = 0, uncurable = false) {
     super(name, prio, uncurable);
-    this._timer = new Timer(this._name, length);
+    this._timer = createTimer(this._name, length);
     this._timer.addCallback(this.lost.bind(this));
   }
 

@@ -1,83 +1,79 @@
 class Timer {
-  constructor(name, length = 0) {
-    this._name = name;
+  constructor(id, length = 0) {
+    this._id = id;
     this._enabled = false;
-    this._t_started = 0;
-    this._t_ended = 0;
+    this._startTime = 0;
+    this._endTime = 0;
     this._timerId = 0;
-    this._default_length = length;
+    this._defaultLength = length;
     this.setLength(length);
     this._callbacks = [];
   }
 
   get length() {
-    return this._t_length;
+    return this._length;
+  }
+
+  get id() {
+    return this._id;
+  }
+
+  get enabled() {
+    return this._enabled;
   }
 
   setLength(length) {
-    this._t_length = length;
-    this._t_length_ms = length * 1000;
+    if (length < 0) {
+      throw new Error("Timer length cannot be negative");
+    }
+    this._length = length;
   }
 
+  //Reset properties to default state.
   reset() {
-    this.setLength(this._default_length);
+    clearTimeout(this._timerId);
+    this._enabled = false;
+    this.setLength(this._defaultLength);
+    this._endTime = performance.now() / 1000;
+    eventStream.raiseEvent(`timerReset${this._id}`);
   }
 
   start() {
-    /*if (this._enabled) {
-      clearTimeout(this._timerId);
-    }*/
     clearTimeout(this._timerId);
-    this._timerId = setTimeout(this.stop.bind(this), this._t_length_ms);
-    this._t_started = performance.now() / 1000;
+    this._startTimer();
+    eventStream.raiseEvent(`timerStarted${this._id}`);
+  }
+
+  _startTimer() {
+    this._timerId = setTimeout(this.stop.bind(this), this._length * 1000);
     this._enabled = true;
+    this._startTime = performance.now() / 1000;
   }
 
   stop() {
     if (this._enabled) {
       clearTimeout(this._timerId);
-      this._t_ended = performance.now() / 1000;
+      this._endTime = performance.now() / 1000;
       this._enabled = false;
-      if (this._callbacks) {
-        for (let i = 0; i < this._callbacks.length; i++) {
-          this._callbacks[i](this._t_ended - this._t_started);
-          // add clear callback method so can set one time callbacks and clear them
-        }
-      }
+      eventStream.raiseEvent(`timerStopped${this._id}`);
     }
   }
 
   duration() {
-    if (this._enabled) {
-      return this.elapsed();
-    } else {
-      return this._t_ended - this._t_started;
-    }
+    return this._enabled ? this.elapsed() : this._endTime - this._startTime;
   }
 
   elapsed() {
-    if (this._enabled) {
-      return performance.now() / 1000 - this._t_started;
-    } else {
-      return 0;
-    }
+    return this._enabled ? performance.now() / 1000 - this._startTime : 0;
   }
 
   remaining() {
-    if (this._enabled) {
-      return this._t_length - performance.now() / 1000 - this._t_started;
-    } else {
-      return 0;
-    }
+    return this._enabled ? this._length - this.elapsed() : this._length;
   }
 
-  addCallback(callback) {
-    this._callbacks.push(callback);
-  }
-
-  clearCallbacks() {
-    this._callbacks = [];
+  static createTimer(name, length = 0) {
+    return new Timer(name, length);
   }
 }
 
-export default Timer;
+export default Timer.createTimer;
