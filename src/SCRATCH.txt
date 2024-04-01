@@ -18,3 +18,202 @@ asthma
 haemophilia
 
 */
+
+Atalkez Priorities
+afflictionPrioritiesDefault = {
+  ---------------------------------
+  --HERBS (+ a few focusables obv)
+  ---------------------------------
+
+  ["paralysis"] = 1,
+  ["pyre1"] = 6,
+  ["pyre2"] = 5,
+  ["pyre3"] = 4,
+  ["horror1"] = 26,
+  ["horror2"] = 26, 
+  ["horror3"] = 26,
+  ["horror4"] = 26,
+  ["horror5"] = 26,
+  ["timeloop"] = 2,
+  ["guilt"] = 3,
+  ["tenderskin"] = 3,
+  ["spiritburn"] = 3,
+  ["parasite"] = 3,
+	["pressure"] = 13,
+  ["retribution"] = 3,
+  ["depression"] = 3,
+  ["shadowmadness"] = 3,
+  ["healthleech"] = 4,
+  ["impatience"] = 5,
+  ["scytherus"] = 5,
+  ["hypochondria"] = 3,
+  ["asthma"] = 4,
+  ["dissonance"] = 6,
+  ["fulminated"] = 3,
+  ["sensitivity"] = 6,
+  ["darkshade"] = 5,
+  ["hypersomnia"] = 7,
+  ["hallucinations"] = 8,
+  ["unweavingmind"] = 2,
+  ["unweavingbody"] = 2,
+  ["unweavingspirit"] = 2,
+  ["pyramides"] = 3,
+  ["sandfever"] = 4,
+  ["mycalium"] = 4,
+  ["flushings"] = 4,
+  ["rebbies"] = 4,
+  --9 GAP FOR OFF-FOCUS BAL SHIFTS
+  ["nausea"] = 10,
+  ["haemophilia"] = 6,
+  ["lethargy"] = 6,
+  ["addiction"] = 10,
+  ["weariness"] = 2,
+  --12 GAP
+  ["temperedmelancholic"] = 13,
+  ["temperedcholeric"] = 13,
+  ["temperedsanguine"] = 13,
+  ["temperedphlegmatic"] = 13,
+  ["lovers"] = 13, 
+  ["pacified"] = 3, 
+  ["clumsiness"] = 5,
+  ["justice"] = 15,
+  --focus affs
+  ["dissonance"] = 14,
+  ["loneliness"] = 15,
+  ["claustrophobia"] = 15,
+  ["agoraphobia"] = 15,
+  ["vertigo"] = 15,
+
+
+  ["peace"] = 1, 
+  ["generosity"] = 15,
+
+  ["dementia"] = 5,
+  ["paranoia"] = 16,
+
+  ["stupidity"] = 12, --move to 9 if off focus balance
+  ["epilepsy"] = 17,
+  ["confusion"] = 3, --move to 2 if disrupted, move to 8 if off focus balance
+  ["recklessness"] = 5, --move up higher if off focus balance
+  ["masochism"] = 20,
+
+  ["dizziness"] = 22, --if off focus balance move this to 14? Seems too high honestly.
+  ["shyness"] = 22, --if off focus balance move this to 14?
+
+  --------------------------
+  --SALVE
+  --------------------------
+  ["heartseed"] = 3,
+  ["hypothermia"] = 10,
+  ["anorexia"] = 4,
+  ["itching"] = 5,
+  
+  --6 GAP: For resto leg breaks and prone
+
+  ["brokenleftleg"] = 8,
+  ["brokenrightleg"] = 8,
+  ["calcifiedskull"] = 9,
+  ["calcifiedtorso"] = 9,
+
+  ["damagedleftleg"] = 5, --move these up if prone so Sents can't screw me over.
+  ["tonguetied"] = 6,
+  ["damagedrightleg"] = 7,
+  ["mangledleftleg"] = 9,
+  ["mangledrightleg"] = 9,
+
+  ["mangledhead"] = 9,
+
+  ["brokenleftarm"] = 10,
+  ["brokenrightarm"] = 10,
+
+  ["damagedleftarm"] = 11,
+  
+  ["ablaze1"] = 12,
+  ["ablaze2"] = 12,
+  ["ablaze3"] = 12,
+  ["ablaze4"] = 12,
+  ["ablaze5"] = 12,
+
+  ["damagedhead"] = 12,
+  ["concussion"] = 12,
+
+  ["damagedrightarm"] = 13,
+
+  ["mangledleftarm"] = 14,
+  ["mangledrightarm"] = 14,
+
+  ["frozen"] = 10,
+  ["shivering"] =10, 
+    --same rank as frozen
+  --CALORIC(insulation) at 15 unless it's a damn sentinel, then move up to 2 along with frozen and shivering
+  ["scalded"] = 26,
+  ["mildtrauma"] = 10,
+  ["serioustrauma"] = 17,
+
+  --MASS at 18
+
+  ["burning"] = 8,
+  ["stuttering"] = 19,
+  ["slashedthroat"] = 19,
+  ["laceratedthroat"] = 19,
+  ["selarnia"] = 20,
+  
+
+  --broken = crippled
+  --damaged = broken
+  --mangled = mangled
+  --lvl1 torso = mildtrauma
+  --lvl2 torso = serioustrauma
+
+  ---------------------------
+  --PIPE
+  ---------------------------
+  ["aeon"] = 1,
+  ["slickness"] = 5, --huge gap so that asthma > slickness most days
+  ["whisperingmadness"] = 3,
+  ["dazed"] = 12,
+  ["hellsight"] = 3,
+  ["disloyalty"] = 11,
+  ["deadening"] = 10,
+  ["manaleech"] = 6,
+	["tension"] = 12,
+	
+  --["rebounding"] = 16, (DEFENCE QUEUE SLOT 16)
+
+  ------------------------
+  --HEALTH ELIXIR
+  ------------------------
+  ["skullfractures"] = 7,
+  ["crackedribs"] = 9,
+  ["torntendons"] = 8,
+  ["wristfractures"] = 11,
+  
+  -------------------------
+  --WRITHE
+  -------------------------
+  ["bound"] = 6,
+  ["transfixation"] = 6,
+  ["webbed"] = 6,
+  ["entangled"] = 6,
+  ["daeggerimpale"] = 6,
+  ["soulspear"] = 6,
+  ["impaled"] = 10,
+
+
+
+  -----------------------
+  --BAL FREE CURES
+  -----------------------
+  ["sleeping"] = 2,
+  ["voyria"] = 9,
+  ["prone"] = 2,
+  ["disrupted"] = 9,
+  ["fear"] = 20, --low for retardation/aeon curing
+
+------------------
+--Defenses
+------------------
+  ["blindness"] = 26,
+  ["deafness"] = 26,
+  ["insomnia"] = 26,
+}
