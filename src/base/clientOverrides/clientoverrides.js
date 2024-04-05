@@ -98,19 +98,6 @@ const process_lines = function (lines) {
   reflexes.run_function("onBlock", lines, "ALL");
 
   this.ui().buffer().add_block(lines);
-  // Logging - this is called after triggers so that we get the processed lines
-  // Nexsys: Moved logging after add_block for custom prompt capture.
-  // Nexsys: Added check for if logging here to avoid another loop.
-  // Nexsys: Added blank line check here.
-  if (this._log.logging) {
-    for (var idx = 0; idx < lines.length; ++idx) {
-      if (lines[idx].line === "\u001b[38;5;006m" || lines[idx].line === "") {
-        continue;
-      }
-
-      this.log().append(lines[idx]);
-    }
-  }
 
   this.current_line = undefined;
   this.current_block = undefined;

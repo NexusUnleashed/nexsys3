@@ -448,6 +448,7 @@ const affs = {
       burning: { min: 0, max: 5 },
       crackedribs: { min: 0, max: 7 },
       horror: { min: 0, max: 7 },
+      pyre: { min: 0, max: 3},
       skullfractures: { min: 0, max: 7 },
       temperedcholeric: { min: 0, max: 8 },
       temperedmelancholic: { min: 0, max: 8 },
