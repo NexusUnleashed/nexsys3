@@ -56,6 +56,9 @@ class Timer {
       this._endTime = performance.now() / 1000;
       this._enabled = false;
       eventStream.raiseEvent(`timerStopped${this._id}`);
+
+      // Execute callbacks
+      this._callbacks.forEach((callback) => callback());
     }
   }
 
@@ -69,6 +72,17 @@ class Timer {
 
   remaining() {
     return this._enabled ? this._length - this.elapsed() : this._length;
+  }
+
+  addCallback(callback) {
+    if (typeof callback !== "function") {
+      throw new Error("Callback must be a function");
+    }
+    this._callbacks.push(callback);
+  }
+
+  clearCallbacks() {
+    this._callbacks = [];
   }
 
   static createTimer(name, length = 0) {
