@@ -133,48 +133,11 @@ const on_key_up = function (key, isAlt, isCtrl, isShift) {
   return true;
 };
 
-const append_message_to_log = function (message) {
-  try {
-    localStorage.log += message;
-  } catch (e) {}
-
-  if (localStorage.log.length >= 4650000 && !this.current_log_warned) {
-    // Warn at 4.65 million characters (roughly 9.3MB) //
-
-    this.current_log_warned = true;
-
-    var l = this.logging;
-    this.logging = false;
-
-    this.nexus.display_notice(
-      "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++",
-      "red"
-    );
-    this.nexus.display_notice(
-      "   Your log is approaching the storage limit. Please",
-      "red"
-    );
-    this.nexus.display_notice(
-      "      stop the current log to avoid losing data.",
-      "red"
-    );
-    this.nexus.display_notice(
-      "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++",
-      "red"
-    );
-
-    this.logging = l;
-    this.download();
-    localStorage.log = "";
-    console.log(localStorage.log.length);
-  }
-};
-
 nexusclient.process_lines = process_lines;
 //nexusclient.display_notice = display_notice;
 nexusclient.ui().buffer().add_block = add_block;
 nexusclient.platform().on_key_up = on_key_up;
-nexusclient._log.append_message_to_log = append_message_to_log;
+
 nexusclient.datahandler().send_command = function (command) {
   if (!this._socket) return;
   const time = Date.now(); // Performance this is 2x as fast as new Date().getTime() in default Nexus

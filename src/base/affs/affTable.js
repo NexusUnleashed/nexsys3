@@ -411,6 +411,13 @@ const affs = {
     scalded: 20,
     dazed: 20,
 
+    //affs ignored
+    horror1: 26,
+    horror2: 26,
+    horror3: 26,
+    horror4: 26,
+    horror5: 26,
+
     // affs you can cure on your own, but no serverside, 30-49, 30=ignore
     bleeding: 30,
     amnesia: 30,
@@ -448,7 +455,7 @@ const affs = {
       burning: { min: 0, max: 5 },
       crackedribs: { min: 0, max: 7 },
       horror: { min: 0, max: 7 },
-      pyre: { min: 0, max: 3},
+      pyre: { min: 0, max: 3 },
       skullfractures: { min: 0, max: 7 },
       temperedcholeric: { min: 0, max: 8 },
       temperedmelancholic: { min: 0, max: 8 },
