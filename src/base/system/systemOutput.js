@@ -113,7 +113,6 @@ export const systemOutputDebug = () => {
   console.log(
     `getCureOutputs: ${getCureOutputs(getCurrentAffs(), getCurrentBals())}`
   );
-  console.log(`getLustCommands: ${getLustCommands()}`);
   console.log(
     `getDefOutputs: ${getDefOutputs(getCurrentAffs(), getCurrentBals())}`
   );
