@@ -1,13 +1,11 @@
 /* global eventStream */
-import { sys } from "./sys";
-import { sendCmd } from "./sysService";
-import { affs } from "../affs/affs";
 import { getCurrentAffs } from "../affs/affService";
+import { affs } from "../affs/affs";
 import { getCurrentBals } from "../balances/balanceService";
 import { getCacheOutputs } from "../cache/cacheService";
 import { getCureOutputs } from "../cures/cureService";
 import { getDefOutputs } from "../defs/defService";
-import { Balance } from "../balances/Balance";
+import { sys } from "./sys";
 
 let outputInProgress = false;
 let outputPending = false;
@@ -28,7 +26,6 @@ const addToOutput = function (command) {
 
 const sendOutput = function () {
   if (output.length > 0) {
-    eventStream.raiseEvent("OutputSentEvent", output);
     addToOutput(outputFeedbackCommand);
 
     /*
@@ -50,7 +47,8 @@ const sendOutput = function () {
     eventOutput = [];
     affPrioOutput = [];
     defPrioOutput = [];
-    eventStream.raiseEvent("SystemOutputLostBalEvent");
+    eventStream.raiseEvent("OutputSentEvent", output);
+    eventStream.raiseEvent("systemOutputLostBalEvent");
   }
 };
 
@@ -186,7 +184,7 @@ const outputComplete = function (balance) {
 
 const systemOutputComplete = function () {
   outputComplete();
-  eventStream.raiseEvent("SystemOutputGotBalEvent");
+  eventStream.raiseEvent("systemOutputGotBalEvent");
 };
 eventStream.registerEvent("SystemOutputCompleteEvent", systemOutputComplete);
 
@@ -195,7 +193,7 @@ const systemOutputStuckCheck = () => {
     sendOutput();
   }
 };
-eventStream.registerEvent("SystemOutputGotBalEvent", systemOutputStuckCheck); // CUSTOM
+eventStream.registerEvent("systemOutputGotBalEvent", systemOutputStuckCheck); // CUSTOM
 
 // TODO Hack because nexSys was getting "stuck" in output pending after dying and returning to life.
 // This could be caused by the output attempting to send JUST before the alive sequence completes ?
