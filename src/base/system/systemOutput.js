@@ -26,6 +26,8 @@ const addToOutput = function (command) {
 
 const sendOutput = function () {
   if (output.length > 0) {
+    eventStream.raiseEvent("OutputSentEvent", output);
+
     addToOutput(outputFeedbackCommand);
 
     /*
@@ -47,7 +49,7 @@ const sendOutput = function () {
     eventOutput = [];
     affPrioOutput = [];
     defPrioOutput = [];
-    eventStream.raiseEvent("OutputSentEvent", output);
+
     eventStream.raiseEvent("systemOutputLostBalEvent");
   }
 };
@@ -172,7 +174,7 @@ eventStream.registerEvent("DefPrioritySetEvent", flagPopulateOutput);
 eventStream.registerEvent("PrioritySetEvent", flagPopulateOutput);
 eventStream.registerEvent("RiftListCompleteEvent", forcePopulateOutput);
 
-const outputComplete = function (balance) {
+const outputComplete = function () {
   eventStream.raiseEvent("OutputCompleteEvent", output);
   outputInProgress = false;
   output = [];
@@ -187,13 +189,6 @@ const systemOutputComplete = function () {
   eventStream.raiseEvent("systemOutputGotBalEvent");
 };
 eventStream.registerEvent("SystemOutputCompleteEvent", systemOutputComplete);
-
-const systemOutputStuckCheck = () => {
-  if (outputInProgress) {
-    sendOutput();
-  }
-};
-eventStream.registerEvent("systemOutputGotBalEvent", systemOutputStuckCheck); // CUSTOM
 
 // TODO Hack because nexSys was getting "stuck" in output pending after dying and returning to life.
 // This could be caused by the output attempting to send JUST before the alive sequence completes ?
