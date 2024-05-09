@@ -15,7 +15,6 @@ const ListItem = styled.div`
 `;
 
 const AffItem = ({ aff, index, color }) => {
-  console.log(`${aff} ${color?.fg} ${color?.bg}`);
   return (
     <Draggable draggableId={aff} index={index}>
       {(provided) => (

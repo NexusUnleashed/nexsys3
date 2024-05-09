@@ -99,6 +99,7 @@ const AffPriorities = ({ colors, affTable, setAffTable, setPrioArrays }) => {
     columnOrder.forEach((col) => {
       setPrioArrays(columns[col].prio, columns[col].affs);
     });
+    console.log(prios);
   }, [prios]);
 
   return (
