@@ -142,7 +142,7 @@ nexusclient.datahandler().send_command = function (command) {
   if (!this._socket) return;
   const time = Date.now(); // Performance this is 2x as fast as new Date().getTime() in default Nexus
   nexSys.sentCommands = [
-    ...nexSys.sentCommands.slice(0, 49),
+    ...nexSys.sentCommands.slice(0, 199),
     { cmd: command, time: time },
   ];
   this._socket.send(command + "\r\n");
