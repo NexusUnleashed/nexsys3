@@ -176,7 +176,7 @@ export const defTable = {
     bals_req: ["balance", "equilibrium"],
     bals_used: ["equilibrium"],
     skills: ["Magi"],
-    serverside: true,
+    serverside: false,
   },
   coldresist: {
     command: "activate cold resistance",
@@ -258,7 +258,7 @@ export const defTable = {
     bals_req: ["balance", "equilibrium"],
     bals_used: ["equilibrium"],
     skills: ["Magi"],
-    serverside: true,
+    serverside: false,
   },
   distortedaura: {
     command: "distortaura",
@@ -679,7 +679,7 @@ export const defTable = {
     preempt: true,
   },
   lifevision: {
-    command: "astralvision",
+    command: "lifevision",
     bals_req: ["equilibrium"],
     bals_used: ["equilibrium"],
     //skills: ["Occultist"],
@@ -696,6 +696,7 @@ export const defTable = {
     command: "solicit locket for immortality",
     bals_req: ["free"],
     bals_used: ["free"],
+    serverside: false,
   },
   magicresist: {
     command: "activate magic resistance",
@@ -1237,14 +1238,14 @@ export const defTable = {
     bals_req: ["balance", "equilibrium"],
     bals_used: ["equilibrium"],
     skills: ["Magi"],
-    serverside: true,
+    serverside: false,
   },
   stoneskin: {
     command: "cast stoneskin",
     bals_req: ["balance", "equilibrium"],
     bals_used: ["equilibrium"],
     skills: ["Magi"],
-    serverside: true,
+    serverside: false,
   },
   sulphur: {
     command: "educe sulphur",

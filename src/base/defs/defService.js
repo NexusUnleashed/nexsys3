@@ -66,14 +66,14 @@ export function getDefOutputs(affList, balList) {
 
   for (let i = 0; i < missingDefs.length; i++) {
     const def = defs[missingDefs[i]];
+
     let canPerform = true;
+    // isn't blocked by an aff
     if (
       def.blocks === undefined ||
       def.blocks.length === 0 ||
       !Array.arraysIntersect(def.blocks, affList)
     ) {
-      // isn't blocked by an aff
-
       // if it's free to use, but requires certain bals, get those here
       if (def.balsUsed.length !== 0 && def.balsUsed[0] === "free") {
         for (let j = 0; j < def.balsReq.length && canPerform; j++) {
