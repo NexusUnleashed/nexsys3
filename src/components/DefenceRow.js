@@ -31,7 +31,7 @@ const DefenceRow = ({ def, defs, defPrios, setKeepup, setStaticDefs }) => {
   };
 
   const handleText = (e) => {
-    setPrio(parseInt(e.target.value));
+    setPrio(parseInt(e.target.value) || 0);
   };
 
   React.useEffect(() => {
