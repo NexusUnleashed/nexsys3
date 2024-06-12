@@ -171,7 +171,7 @@ export const tabCompletion = {
       .getElementsByTagName("textarea")[0]
       .value.split(" ")
       .at(-1);
-    this.re ??= new RegExp(`\\b${window._.capitalize(this.qry)}\\w*\\b`);
+    this.re ??= new RegExp(`\\b${this.qry.capitalize()}\\w*\\b`);
     //this.vals ??= GMCP.WhoList.filter(e => e.name.match(this.re)).map(n => n.name);
     this.vals ??= [
       ...new Set([
