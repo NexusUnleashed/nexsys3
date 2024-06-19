@@ -29,11 +29,17 @@ const createColumnOrder = () => {
   return columnOrder;
 };
 
-const AffPriorities = ({ colors, affTable, setAffTable, setPrioArrays }) => {
+const AffPriorities = ({
+  colors,
+  affTable,
+  affTablePrios,
+  setAffTable,
+  setPrioArrays,
+}) => {
   const [columns, setColumns] = React.useState({
     ...createColumns(affTable.prioArrays),
   });
-  const [prios, setPrios] = React.useState({ ...affTable.prios });
+  const [prios, setPrios] = React.useState({ ...affTablePrios });
   const [columnOrder, setColumnOrder] = React.useState([
     ...createColumnOrder(),
   ]);

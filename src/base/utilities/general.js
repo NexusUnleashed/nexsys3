@@ -170,13 +170,24 @@ export const tabCompletion = {
     this.qry ??= document
       .getElementsByTagName("textarea")[0]
       .value.split(" ")
-      .at(-1);
+      .at(-1)
+      .capitalize();
+    /* Regex version
     this.re ??= new RegExp(`\\b${this.qry.capitalize()}\\w*\\b`);
     //this.vals ??= GMCP.WhoList.filter(e => e.name.match(this.re)).map(n => n.name);
     this.vals ??= [
       ...new Set([
         ...(globalThis.nexGui?.colors?.enemies || []),
         ...GMCP.WhoList.filter((e) => e.name.match(this.re)).map((n) => n.name),
+      ]),
+    ];
+    */
+    this.vals ??= [
+      ...new Set([
+        ...(globalThis.nexGui?.colors?.enemies || []),
+        ...GMCP.WhoList.filter((e) => e.name.startsWith(qry)).map(
+          (n) => n.name
+        ),
       ]),
     ];
     if (this.vals.length === 0) {

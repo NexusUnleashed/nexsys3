@@ -1,4 +1,4 @@
-import * as React from "react";
+import { useState, useEffect } from "react";
 import { Select, MenuItem, InputLabel, FormControl } from "@mui/material";
 import DefenceTable from "./DefenceTable";
 
@@ -15,11 +15,17 @@ const getClass = () => {
   return res;
 };
 
-const DefencePriorities = ({ defs, defPrios, setDefPrios, classList }) => {
-  const [keepup, setKeepup] = React.useState({ ...defPrios.keepup });
-  const [staticDefs, setStaticDefs] = React.useState({ ...defPrios.static });
-  const [skill, setSkill] = React.useState(getClass());
-  const [defList, setDefList] = React.useState(
+const DefencePriorities = ({
+  defs,
+  defPriosKeepup,
+  defPriosStatic,
+  setDefPrios,
+  classList,
+}) => {
+  const [keepup, setKeepup] = useState({ ...defPriosKeepup });
+  const [staticDefs, setStaticDefs] = useState({ ...defPriosStatic });
+  const [skill, setSkill] = useState(getClass());
+  const [defList, setDefList] = useState(
     Object.keys(defs).filter(
       (def) =>
         (skill === "all" ||
@@ -44,7 +50,7 @@ const DefencePriorities = ({ defs, defPrios, setDefPrios, classList }) => {
     );
   };
 
-  React.useEffect(() => {
+  useEffect(() => {
     setDefPrios((prev) => ({
       ...prev,
       keepup: { ...keepup },

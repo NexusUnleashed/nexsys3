@@ -1,4 +1,4 @@
-import * as React from "react";
+import { useState, useEffect } from "react";
 import Box from "@mui/material/Box";
 import Tab from "@mui/material/Tab";
 import TabContext from "@mui/lab/TabContext";
@@ -17,27 +17,31 @@ const Configuration = ({
   nexSys,
   setNexSys,
   theme,
-  defPrios,
-  setDefPrios,
-  affTable,
-  setAffTable,
+  defPriosKeepup,
+  setDefPriosKeepup,
+  defPriosStatic,
+  setDefPriosStatic,
+  affTablePrios,
+  setAffTablePrios,
+  affTablePrioArrays,
+  setAffTablePrioArrays,
   sys,
   setSys,
 }) => {
-  const [value, setValue] = React.useState("1");
-  //const [_nexSys, setNexSys] = React.useState({ ...nexSys });
-  const [settings, setSettings] = React.useState({ ...sys.settings });
-  const [cacheTable, setCacheTable] = React.useState({ ...nexSys.cacheTable });
+  const [value, setValue] = useState("1");
+  //const [_nexSys, setNexSys] = useState({ ...nexSys });
+  const [settings, setSettings] = useState({ ...sys.settings });
+  const [cacheTable, setCacheTable] = useState({ ...nexSys.cacheTable });
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
 
-  React.useEffect(() => {
+  useEffect(() => {
     setSys((prev) => ({ ...prev, settings: { ...settings } }));
   }, [settings]);
 
-  React.useEffect(() => {
+  useEffect(() => {
     setNexSys((prev) => ({ ...prev, cacheTable: cacheTable }));
   }, [cacheTable]);
 
@@ -66,16 +70,18 @@ const Configuration = ({
           <TabPanel value="2">
             <AffPriorities
               colors={nexSys.prompt.affAbbrev}
-              affTable={affTable}
-              setAffTable={setAffTable}
+              affTablePrios={affTablePrios}
+              setAffTablePrios={setAffTablePrios}
               setPrioArrays={nexSys.setPrioArrays}
             />
           </TabPanel>
           <TabPanel value="3">
             <DefencePriorities
               defs={nexSys.defs}
-              defPrios={defPrios}
-              setDefPrios={setDefPrios}
+              defPriosKeepup={defPriosKeepup}
+              setDefPriosKeepup={setDefPriosKeepup}
+              defPriosStatic={defPriosStatic}
+              setDefPriosStatic={setDefPriosStatic}
               classList={nexSys.tables.classList}
             />
           </TabPanel>
