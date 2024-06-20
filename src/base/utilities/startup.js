@@ -7,6 +7,8 @@ export const startup = () => {
     return;
   }
 
+  //Check if the universal modal parent for Nex packages is present
+  //If not present, create it
   if (!document.getElementById("modal-root")) {
     document
       .getElementsByTagName("body")[0]
@@ -15,6 +17,7 @@ export const startup = () => {
       );
   }
 
+  //Safety check. If the nexsys-modal already exists, remove it and start fresh
   document.getElementById("nexsys-modal")?.remove();
   document
     .getElementById("modal-root")
@@ -22,10 +25,19 @@ export const startup = () => {
       Object.assign(document.createElement("div"), { id: "nexsys-modal" })
     );
 
+  //Mount the nexSys modal to the previously created div
+  const container = document.getElementById("nexsys-modal");
+  const root = ReactDOM.createRoot(container);
+  root.render(
+    React.createElement(nexSys.component, { evt: nexSys.evt, nexSys: nexSys })
+  );
+
+  /* ReactDOM.render is deprecated in v18
   ReactDOM.render(
     React.createElement(nexSys.component, { evt: nexSys.evt, nexSys: nexSys }),
     document.getElementById("nexsys-modal")
   );
+*/
 
   if (typeof nexusclient.variables().vars.nexSysSettings === "undefined") {
     nexusclient.variables().vars.nexSysSettings = {};
@@ -45,48 +57,45 @@ export const startup = () => {
     "https://fonts.googleapis.com/css?family=Roboto%20Mono:300,400,500,700&display=swap";
   document.getElementsByTagName("head")[0].appendChild(robotoMonoFont);
 
-  // Add Roboto, Roboto Mono, and Consolas as selectable fonts
-  nexusclient.settings().font_stacks = function () {
-    return [
-      { name: "Roboto", stack: "Roboto,Montserrat,Helvetica,Arial,sans-serif" },
-      {
-        name: "RobotoMono",
-        stack: "Roboto Mono,Consolas,monospace",
-      },
-      {
-        name: "Consolas",
-        stack: "Consolas,RobotoMono,monospace",
-      },
-      { name: "Verdana", stack: "Verdana, Geneva, sans-serif" },
-      {
-        name: "Lucida",
-        stack:
-          "'Lucida Grande', 'Lucida Sans Unicode', 'Lucida Sans', Geneva, Verdana, sans-serif",
-      },
-      {
-        name: "Arial",
-        stack: "Arial, 'Helvetica Neue', Helvetica, sans-serif",
-      },
-      { name: "Futura", stack: "Futura, 'Trebuchet MS', Arial, sans-serif" },
-      {
-        name: "Book Antiqua",
-        stack:
-          "'Book Antiqua', Palatino, 'Palatino Linotype', 'Palatino LT STD', Georgia, serif",
-      },
-      {
-        name: "Garamond",
-        stack:
-          "Garamond, Baskerville, 'Baskerville Old Face', 'Hoefler Text', 'Times New Roman', serif",
-      },
-      //{name: 'Monospace (Traditional)', stack: 'monospace'}
-      { name: "Monospace (Traditional)", stack: "'LiberationMono', monospace" },
-    ];
-  };
-
-  // CSS override of Nexus timestamp font.
-  // TODO: Make this a function to match the selected font.
-  const sty = document.createElement("style");
-  sty.id = "nexSysCSS";
-  sty.textContent = `.mono {font-family: Roboto Mono}`;
-  document.getElementsByTagName("head")[0].appendChild(sty);
+  if (typeof nexusclient.settings().font_stacks_original === "undefined") {
+    // CSS override of Nexus timestamp font.
+    const sty = document.createElement("style");
+    sty.id = "nexSysCSS";
+    // Add Roboto, Roboto Mono, and Consolas as selectable fonts
+    nexusclient.settings().font_stacks_original =
+      nexusclient.settings().font_stacks;
+    nexusclient.settings().font_stacks = function () {
+      sty.textContent = `.timestamp {font-family: ${
+        nexusclient.settings().font_stack
+      }}`;
+      document.getElementsByTagName("head")[0].appendChild(sty);
+      return [
+        {
+          name: "RobotoMono",
+          stack: "Roboto Mono,Consolas,monospace",
+        },
+        {
+          name: "Consolas",
+          stack: "Consolas,RobotoMono,monospace",
+        },
+        { name: "Verdana", stack: "Verdana, Geneva, sans-serif" },
+        {
+          name: "Lucida",
+          stack:
+            "'Lucida Grande', 'Lucida Sans Unicode', 'Lucida Sans', Geneva, Verdana, sans-serif",
+        },
+        {
+          name: "Arial",
+          stack: "Arial, 'Helvetica Neue', Helvetica, sans-serif",
+        },
+        { name: "Futura", stack: "Futura, 'Trebuchet MS', Arial, sans-serif" },
+        {
+          name: "Book Antiqua",
+          stack:
+            "'Book Antiqua', Palatino, 'Palatino Linotype', 'Palatino LT STD', Georgia, serif",
+        },
+        ...nexusclient.settings().font_stacks_original(),
+      ];
+    };
+  }
 };

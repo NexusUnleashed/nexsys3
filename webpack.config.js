@@ -1,11 +1,14 @@
-const path = require('path');
-const TerserPlugin = require('terser-webpack-plugin');
+const path = require("path");
+const TerserPlugin = require("terser-webpack-plugin");
 
 module.exports = {
-  mode: 'production',
-  entry: path.join(__dirname, 'src/bundle.js'),
+  mode: "production",
+  entry: path.join(__dirname, "src/bundle.js"),
+  resolve: {
+    extensions: [".js", ".jsx", ".json", ".wasm"],
+  },
   output: {
-    path: path.join(__dirname, 'dist'),
+    path: path.join(__dirname, "dist"),
     filename: `nexsys.min.js`,
   },
   module: {
@@ -15,12 +18,9 @@ module.exports = {
         exclude: /node_modules/,
         options: {
           cacheDirectory: true,
-          presets: [
-            '@babel/preset-env',
-            "@babel/preset-react"
-          ],
+          presets: ["@babel/preset-env", "@babel/preset-react"],
         },
-        loader: 'babel-loader',
+        loader: "babel-loader",
       },
     ],
   },
@@ -38,8 +38,8 @@ module.exports = {
     ],
   },
   externals: {
-    'nexevent': 'eventStream', // Case matters here 
-    'react': 'React', 
-    'react-dom': 'ReactDOM'
-   }
+    nexevent: "eventStream", // Case matters here
+    react: "React",
+    "react-dom": "ReactDOM",
+  },
 };

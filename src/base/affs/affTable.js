@@ -630,11 +630,16 @@ const affs = {
 // EXPERIMENTAL: Code snippet added to maintain prio arrays for the purpose
 // of potentially sorting affs within the same priority.
 affs.prioArrays = {};
-[...new Set(Object.values(affs.prios))].forEach((prio) => {
-  affs.prioArrays[prio] = Object.keys(affs.prios).filter(
-    (aff) => affs.prios[aff] === prio
-  );
-});
+for (const aff in affs.prios) {
+  const prio = affs.prios[aff];
+  if (Array.isArray(affs.prioArrays[prio])) {
+    // If it exists, push the value to the array
+    affs.prioArrays[prio].push(aff);
+  } else {
+    // If it doesn't exist, create an array with the value
+    affs.prioArrays[prio] = [aff];
+  }
+}
 
 export { affs as affTable };
 

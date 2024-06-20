@@ -10,7 +10,7 @@ import {
   Collapse,
 } from "@mui/material";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import Configuration from "./Configuration";
 
 let darkTheme = createTheme({
@@ -120,13 +120,9 @@ const NexDialog = ({ evt, nexSys }) => {
   const [open, setOpen] = useState(false);
   const [_nexSys, setNexSys] = useState(nexSys);
   const [sys, setSys] = useState(nexSys.sys);
+  const [affTable, setAffTable] = useState(nexSys.affTable);
+  const [defPrios, setDefPrios] = useState(nexSys.defPrios);
   const [cacheTable, setCacheTable] = useState(nexSys.cacheTable);
-  const [defPriosStatic, setDefPriosStatic] = useState(nexSys.defPrios.static);
-  const [defPriosKeepup, setDefPriosKeepup] = useState(nexSys.defPrios.keepup);
-  const [affTablePrios, setAffTablePrios] = useState(nexSys.affTable.prios);
-  const [affTablePrioArrays, setAffTablePrioArrays] = useState(
-    nexSys.affTable.prioArrays
-  );
   const [currentVersion, setCurrentVersion] = useState(nexSys.currentVersion);
   const [count, setCount] = useState(0);
   //const [updateAvailable, setUpdateAvailable] = useState(false);
@@ -153,11 +149,38 @@ const NexDialog = ({ evt, nexSys }) => {
     //Open/closer function
     const opener = ({ detail }) => {
       if (nexSys.system_loaded) {
+        setAffTable((prev) => {
+          //Update the column priority arrays for any user changes that may have been made
+          //since last open.
+          nexSys.affTable.prioArrays = {};
+          for (const aff in nexSys.affTable.prios) {
+            const prio = nexSys.affTable.prios[aff];
+            if (Array.isArray(nexSys.affTable.prioArrays[prio])) {
+              // If it exists, push the value to the array
+              nexSys.affTable.prioArrays[prio].push(aff);
+            } else {
+              // If it doesn't exist, create an array with the value
+              nexSys.affTable.prioArrays[prio] = [aff];
+            }
+          }
+          return {
+            ...prev,
+            prioArrays: { ...nexSys.affTable.prioArrays },
+            prios: { ...nexSys.affTable.prios },
+          };
+        });
+
+        setSys((prev) => ({ ...prev, ...nexSys.sys }));
+        setDefPrios((prev) => ({
+          ...prev,
+          keepup: nexSys.defPrios.keepup,
+          static: nexSys.defPrios.static,
+        }));
         setOpen(detail);
         checkForUpdate();
-        setAffTable({ ...nexSys.affTable });
-        setDefPrios({ ...nexSys.defPrios });
-        setSys({ ...nexSys.sys });
+
+        console.log("opener");
+        console.log(nexSys.affTable.prioArrays);
       }
     };
 
@@ -184,6 +207,7 @@ const NexDialog = ({ evt, nexSys }) => {
 
   useEffect(() => {
     setNexSys((prev) => ({ ...prev, affTable: { ...affTable } }));
+    console.log("affTable useEffect");
   }, [affTable]);
 
   useEffect(() => {
@@ -259,14 +283,10 @@ const NexDialog = ({ evt, nexSys }) => {
               setSys={setSys}
               cacheTable={cacheTable}
               setCacheTable={setCacheTable}
-              affTablePrios={affTablePrios}
-              setAffTablePrios={setAffTablePrios}
-              affTablePrioArrays={affTablePrioArrays}
-              setAffTablePrioArrays={setAffTablePrioArrays}
-              defPriosKeepup={defPriosKeepup}
-              setDefPriosKeepup={setDefPriosKeepup}
-              defPriosStatic={defPriosStatic}
-              setDefPriosStatic={setDefPriosStatic}
+              affTable={affTable}
+              setAffTable={setAffTable}
+              defPrios={defPrios}
+              setDefPrios={setDefPrios}
             />
           </DialogContent>
           <DialogActions>

@@ -70,6 +70,7 @@ function App({ nexSys }) {
   const [affTable, setAffTable] = React.useState(nexSys.affTable);
   const [defPrios, setDefPrios] = React.useState(nexSys.defPrios);
 
+  nexSys.system_loaded = true;
   return (
     <div style={{ background: "black" }}>
       <NexDialog evt={globalThis.nexSys.evt} nexSys={globalThis.nexSys} />

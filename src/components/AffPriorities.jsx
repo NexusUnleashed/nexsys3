@@ -1,5 +1,5 @@
 import { DragDropContext } from "react-beautiful-dnd";
-import * as React from "react";
+import { useState, useEffect, useCallback } from "react";
 import AffColumn from "./AffColumn";
 
 const createColumn = ({ id, affs }) => {
@@ -29,20 +29,12 @@ const createColumnOrder = () => {
   return columnOrder;
 };
 
-const AffPriorities = ({
-  colors,
-  affTable,
-  affTablePrios,
-  setAffTable,
-  setPrioArrays,
-}) => {
-  const [columns, setColumns] = React.useState({
+const AffPriorities = ({ colors, affTable, setAffTable, setPrioArrays }) => {
+  const [columns, setColumns] = useState({
     ...createColumns(affTable.prioArrays),
   });
-  const [prios, setPrios] = React.useState({ ...affTablePrios });
-  const [columnOrder, setColumnOrder] = React.useState([
-    ...createColumnOrder(),
-  ]);
+  const [prios, setPrios] = useState({ ...affTable.prios });
+  const [columnOrder, setColumnOrder] = useState([...createColumnOrder()]);
 
   const onDragEnd = (result) => {
     const { destination, source, draggableId } = result;
@@ -97,7 +89,7 @@ const AffPriorities = ({
     setPrios({ ...newPrios });
   };
 
-  React.useEffect(() => {
+  useEffect(() => {
     setAffTable((prev) => ({
       ...prev,
       prios: { ...prios },

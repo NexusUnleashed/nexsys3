@@ -280,6 +280,32 @@ const nexSys = {
 
   // DEBUG Functions
   systemOutputDebug: systemOutputDebug,
+  testRun() {
+    const nexSysLoaded = () => {
+      nexusclient
+        .reflexes()
+        .run_function("ServersidePrioritySwapping", {}, "nexSys3");
+      //nexusclient.reflexes().run_function('PrioSwapTrackables', {}, 'nexSys3');
+      nexusclient.reflexes().run_function("promptStyles", {}, "nexSys3");
+      nexusclient.reflexes().run_function("promptString", {}, "nexSys3");
+      nexusclient.reflexes().run_function("SystemLoaded", {}, "ALL");
+      console.log("nexSys loaded: startup complete");
+      nexSys.say(
+        `Welcome back ${GMCP.Char.Status.name}. Nexus has been loaded to your specifications`
+      );
+    };
+
+    nexusclient
+      .packages()
+      .get("nexSys3")
+      .items.filter((item) => item.type === "group")
+      .forEach((group) => (group.enabled = true));
+    console.log("nexSys loaded: beginning startup");
+    eventStream.registerEvent("ServersideSettingsCaptured", nexSysLoaded);
+    nexSys.system_loaded = true;
+    nexSys.loadCustomSettings();
+    eventStream.raiseEvent("SystemLoaded");
+  },
 };
 
 globalThis.nexSys = nexSys;

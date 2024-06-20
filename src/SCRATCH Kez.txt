@@ -25,7 +25,7 @@ afflictionPrioritiesDefault = {
   --HERBS (+ a few focusables obv)
   ---------------------------------
 
- 
+  ["paralysis"] = 1,
   ["pyre1"] = 6,
   ["pyre2"] = 5,
   ["pyre3"] = 4,
@@ -34,8 +34,14 @@ afflictionPrioritiesDefault = {
   ["horror3"] = 26,
   ["horror4"] = 26,
   ["horror5"] = 26,
-
+  ["timeloop"] = 2,
+  ["guilt"] = 3,
+  ["tenderskin"] = 3,
+  ["spiritburn"] = 3,
+  ["parasite"] = 3,
 	["pressure"] = 13,
+  ["retribution"] = 3,
+  ["depression"] = 3,
   ["shadowmadness"] = 3,
   ["healthleech"] = 4,
   ["impatience"] = 5,

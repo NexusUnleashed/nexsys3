@@ -17,18 +17,14 @@ const Configuration = ({
   nexSys,
   setNexSys,
   theme,
-  defPriosKeepup,
-  setDefPriosKeepup,
-  defPriosStatic,
-  setDefPriosStatic,
-  affTablePrios,
-  setAffTablePrios,
-  affTablePrioArrays,
-  setAffTablePrioArrays,
+  affTable,
+  setAffTable,
+  defPrios,
+  setDefPrios,
   sys,
   setSys,
 }) => {
-  const [value, setValue] = useState("1");
+  const [value, setValue] = useState("2");
   //const [_nexSys, setNexSys] = useState({ ...nexSys });
   const [settings, setSettings] = useState({ ...sys.settings });
   const [cacheTable, setCacheTable] = useState({ ...nexSys.cacheTable });
@@ -70,18 +66,16 @@ const Configuration = ({
           <TabPanel value="2">
             <AffPriorities
               colors={nexSys.prompt.affAbbrev}
-              affTablePrios={affTablePrios}
-              setAffTablePrios={setAffTablePrios}
+              affTable={affTable}
+              setAffTable={setAffTable}
               setPrioArrays={nexSys.setPrioArrays}
             />
           </TabPanel>
           <TabPanel value="3">
             <DefencePriorities
               defs={nexSys.defs}
-              defPriosKeepup={defPriosKeepup}
-              setDefPriosKeepup={setDefPriosKeepup}
-              defPriosStatic={defPriosStatic}
-              setDefPriosStatic={setDefPriosStatic}
+              defPrios={defPrios}
+              setDefPrios={setDefPrios}
               classList={nexSys.tables.classList}
             />
           </TabPanel>
