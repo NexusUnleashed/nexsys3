@@ -185,7 +185,7 @@ export const tabCompletion = {
     this.vals ??= [
       ...new Set([
         ...(globalThis.nexGui?.colors?.enemies || []),
-        ...GMCP.WhoList.filter((e) => e.name.startsWith(qry)).map(
+        ...GMCP.WhoList.filter((e) => e.name.startsWith(this.qry)).map(
           (n) => n.name
         ),
       ]),
