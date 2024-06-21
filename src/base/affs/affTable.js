@@ -302,6 +302,7 @@ const affs = {
     weariness: 3,
     prone: 3,
     timeloop: 3,
+    fulminated: 3,
 
     spiritburn: 4,
     heartseed: 4,
@@ -357,7 +358,6 @@ const affs = {
     earworm: 8, // TODO new aff added with random prio 8
     crescendo: 8, // TODO new aff added with random prio 8
     diminished: 8, // TODO new aff added with random prio 8
-    fulminated: 8, // TODO new aff added with random prio 8
 
     torntendons: 9,
     brokenleftleg: 9,
