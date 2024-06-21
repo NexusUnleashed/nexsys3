@@ -24,7 +24,7 @@ const Configuration = ({
   sys,
   setSys,
 }) => {
-  const [value, setValue] = useState("2");
+  const [value, setValue] = useState("1");
   //const [_nexSys, setNexSys] = useState({ ...nexSys });
   const [settings, setSettings] = useState({ ...sys.settings });
   const [cacheTable, setCacheTable] = useState({ ...nexSys.cacheTable });

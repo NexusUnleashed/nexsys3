@@ -627,6 +627,14 @@ const affs = {
   },
 };
 
+//Capture the settings from the client server variable here, before intializing the affs
+if (nexusclient?.variables().vars?.nexSysSettings) {
+  affs.prios = {
+    ...affs.prios,
+    ...nexusclient.variables().vars.nexSysSettings.affSettings.prios,
+  };
+}
+
 // EXPERIMENTAL: Code snippet added to maintain prio arrays for the purpose
 // of potentially sorting affs within the same priority.
 affs.prioArrays = {};
