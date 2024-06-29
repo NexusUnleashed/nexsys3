@@ -1605,7 +1605,10 @@ defPrios.static = Object.keys(defTable).reduce(
 );
 
 //Update the priorities with the server variable if available
-if (nexusclient?.variables().vars?.nexSysSettings) {
+if (
+  typeof nexusclient !== "undefined" &&
+  nexusclient?.variables().vars?.nexSysSettings
+) {
   defPrios.keepup = {
     ...defPrios.keepup,
     ...nexusclient.variables().vars.nexSysSettings.defSettings.keepup,

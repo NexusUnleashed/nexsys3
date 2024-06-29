@@ -87,6 +87,7 @@ const process_lines = function (lines) {
 
     // this is for custom functions/scripts
     this.current_line = lines[idx];
+    this.current_line.index = idx;
 
     if (lines[idx].line && lines[idx].line.indexOf(String.fromCharCode(7)) >= 0)
       // line contains the beep char
