@@ -15,15 +15,9 @@ const getClass = () => {
   return res;
 };
 
-const DefencePriorities = ({
-  defs,
-  defPriosKeepup,
-  defPriosStatic,
-  setDefPrios,
-  classList,
-}) => {
-  const [keepup, setKeepup] = useState({ ...defPriosKeepup });
-  const [staticDefs, setStaticDefs] = useState({ ...defPriosStatic });
+const DefencePriorities = ({ defs, defPrios, setDefPrios, classList }) => {
+  const [keepup, setKeepup] = useState({ ...defPrios.keepup });
+  const [staticDefs, setStaticDefs] = useState({ ...defPrios.static });
   const [skill, setSkill] = useState(getClass());
   const [defList, setDefList] = useState(
     Object.keys(defs).filter(
