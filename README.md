@@ -1,6 +1,6 @@
 # nexSys for Nexus 3.0
 
-Documentation:
+## Documentation
 
 https://nexusunleashed.github.io/nex-files/
 
