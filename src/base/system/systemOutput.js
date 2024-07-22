@@ -101,6 +101,16 @@ const populateOutput = function () {
   }
 };
 
+const forcePopulateOutput = function () {
+  populateOutputFlag = true;
+  // outputInProgress = false; // CUSTOM
+  populateOutput();
+};
+
+const flagPopulateOutput = function () {
+  populateOutputFlag = true;
+};
+
 export const systemOutputDebug = () => {
   console.log(`outputInProgress: ${outputInProgress}`);
   console.log(`sys.isPaused(): ${sys.isPaused()}`);
@@ -142,16 +152,6 @@ const addToEventOutput = function (command) {
 };
 
 eventStream.registerEvent("SystemOutputAdd", addToEventOutput);
-
-const forcePopulateOutput = function () {
-  populateOutputFlag = true;
-  // outputInProgress = false; // CUSTOM
-  populateOutput();
-};
-
-const flagPopulateOutput = function () {
-  populateOutputFlag = true;
-};
 
 /* CUSTOM: This will allow custom class queues to operate off of GMCP recovering balance instead of prompt.
    this is slightly faster. And will allow the System defenses to preempt the class moves. Most importantly
