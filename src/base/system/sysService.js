@@ -5,8 +5,8 @@ import { sys } from "./sys";
 export function sendCmd(cmd) {
   if (cmd) {
     globalThis.nexusclient.send_commands(cmd);
+    eventStream.raiseEvent("SendCommandEvent", cmd);
   }
-  eventStream.raiseEvent("SendCommandEvent", cmd);
 }
 
 export function psend(what) {
@@ -27,6 +27,7 @@ export function timeDiffNow(prev) {
 }
 
 export function sendInline(cmd) {
-  if (Array.isArray(cmd)) sendCmd(cmd.join(sys.settings.sep));
-  eventStream.raiseEvent("SendCommandEvent", cmd);
+  if (Array.isArray(cmd)) {
+    sendCmd(cmd.join(sys.settings.sep));
+  }
 }
