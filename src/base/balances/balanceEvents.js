@@ -5,7 +5,7 @@ let eventGmcpBalances = function (vitals) {
   if (vitals.bal === "1" && !haveBal("balance")) {
     eventStream.raiseEvent("balanceGotBalEvent");
     // CUSTOM event for recovering eqbal tracking
-    if (!haveBal("balance") && haveBal("equilibrium")) {
+    if (haveBal("equilibrium")) {
       eventStream.raiseEvent("eqBalRecoveredEvent");
     }
   } else if (vitals.bal === "0" && haveBal("balance")) {
@@ -16,7 +16,7 @@ let eventGmcpBalances = function (vitals) {
     eventStream.raiseEvent("equilibriumGotBalEvent");
 
     // CUSTOM event for recovering eqbal tracking
-    if (!haveBal("equilibrium") && haveBal("balance")) {
+    if (haveBal("balance")) {
       eventStream.raiseEvent("eqBalRecoveredEvent");
     }
   } else if (vitals.eq === "0" && haveBal("equilibrium")) {
