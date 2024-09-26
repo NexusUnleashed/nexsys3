@@ -103,3 +103,8 @@ const nexSysFlying = (args) => {
   }
 };
 eventStream.registerEvent("Room.Info", nexSysFlying);
+
+const nexSysMount = function (args) {
+  nexSysFlying.defs.mounted.mount = args;
+};
+eventStream.registerEvent("mountedGotDefEvent", nexSysMount);
