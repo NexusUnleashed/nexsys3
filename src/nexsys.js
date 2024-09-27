@@ -77,7 +77,7 @@ import {
   EchoWithPrefix,
 } from "./base/echo/Echo";
 import { echo, echoInfoLine, echoLine } from "./base/echo/echos";
-import { createQueue } from "./base/queues/Queue";
+import { Queue } from "./base/queues/Queue";
 import { serversideSettings } from "./base/serverside/serverside";
 import {
   loadCustomSettings,
@@ -243,37 +243,37 @@ const nexSys = {
   updatePriorities: updatePriorities,
   //saveCustomSettings: saveCustomSettings,
 
-  classQueue: createQueue({
+  classQueue: new Queue({
     name: "class",
     type: "c!p!t!w",
     pre: ["touch soul", "stand"],
     exclusions: ["fullQueue"],
   }),
-  freeQueue: createQueue({
+  freeQueue: new Queue({
     name: "free",
     type: "free",
     pre: ["touch soul", "stand"],
     exclusions: ["fullQueue", "shieldQueue"],
   }),
-  fullQueue: createQueue({
+  fullQueue: new Queue({
     name: "full",
     type: "ebc!w!p!t",
     pre: ["touch soul", "stand"],
     exclusions: ["freeQueue", "shieldQueue", "classQueue"],
   }),
-  shieldQueue: createQueue({
+  shieldQueue: new Queue({
     name: "shield",
     type: "ebc!w!t",
     pre: ["touch soul", "stand"],
     exclusions: ["freeQueue", "fullQueue"],
   }),
-  shipQueue: createQueue({
+  shipQueue: new Queue({
     name: "ship",
     type: "s!w!t",
     pre: ["touch soul", "stand"],
     exclusions: [],
   }),
-  stunQueue: createQueue({ name: "stun", type: "!t", pre: ["touch soul"] }),
+  stunQueue: new Queue({ name: "stun", type: "!t", pre: ["touch soul"] }),
 
   prompt: prompt,
   sentCommands: [],
