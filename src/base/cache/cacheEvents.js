@@ -1,5 +1,6 @@
 /* global eventStream */
 import { herb_name_to_herb } from "./cacheTable";
+import { caches } from "./caches";
 
 let filterHerbAndAmount = function (herb) {
   if (herb.location === "inv") {
@@ -45,6 +46,18 @@ let eventGmcpInvRemove = function (herb) {
 };
 
 eventStream.registerEvent("Char.Items.Remove", eventGmcpInvRemove);
+
+const eventGmcpHerbUpdate = function (herb) {
+  let herbAmt = filterHerbAndAmount(herb);
+  if (herbAmt) {
+    const cached = caches[herbAmt.name];
+    const sum = cached.count - cached.amount;
+    if (sum > 0) {
+      eventStream.raiseEvent(herbAmt.name + "CacheCountSubtractEvent", sum);
+    }
+  }
+};
+eventStream.registerEvent("Char.Items.Update", eventGmcpHerbUpdate);
 
 let eventGmcpIreRiftChange = function (args) {
   let herb = args.name;

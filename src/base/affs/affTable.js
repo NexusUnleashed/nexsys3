@@ -10,7 +10,7 @@ const affs = {
     "asthma",
     "betrayal" /*6-20-24*/,
     "blackout",
-    "bleeding",
+    //"bleeding", // Do we need this?
     "blindness",
     "blistered" /**/,
     "bloodfire" /**/,
@@ -326,6 +326,7 @@ const affs = {
     sandfever: 5,
     asthma: 5,
     healthleech: 5,
+    pyre3: 5,
 
     impatience: 6,
     itching: 6,
@@ -337,6 +338,7 @@ const affs = {
     slickness: 6,
     recklessness: 6,
     dementia: 6,
+    pyre2: 6,
 
     bound: 7,
     daeggerimpale: 7,
@@ -344,13 +346,14 @@ const affs = {
     sensitivity: 7,
     transfixation: 7,
     webbed: 7,
-    horror: 7,
-    pyre: 7,
+    //horror: 7, //countable
+    //pyre: 7, //countable
     tonguetied: 7,
     haemophilia: 7,
     lethargy: 7,
     manaleech: 7,
     dissonance: 7,
+    pyre1: 7,
 
     skullfractures: 8,
     damagedrightleg: 8,
@@ -363,7 +366,7 @@ const affs = {
     brokenleftleg: 9,
     brokenrightleg: 9,
     hallucinations: 9,
-    burning: 9,
+    //burning: 9, //countable
 
     calcifiedskull: 10,
     calcifiedtorso: 10,
@@ -394,6 +397,11 @@ const affs = {
     tension: 13,
     damagedhead: 13,
     dazed: 13,
+    burning1: 13,
+    burning2: 13,
+    burning3: 13,
+    burning4: 13,
+    burning5: 13,
 
     lovers: 14,
     pressure: 14,
@@ -469,7 +477,7 @@ const affs = {
       // TODO: Are unweavings countable?
       // TODO: Is kkractlebrand countable?
       pressure: { min: 0, max: 10 },
-      bleeding: { min: 0, max: 15000 },
+      //bleeding: { min: 0, max: 15000 },
       burning: { min: 0, max: 5 },
       crackedribs: { min: 0, max: 7 },
       horror: { min: 0, max: 7 },

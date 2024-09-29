@@ -7,7 +7,6 @@ import TabPanel from "@mui/lab/TabPanel";
 import { ThemeProvider } from "@mui/material/styles";
 
 import Precache from "./Precache";
-import { CssBaseline } from "@mui/material";
 import SystemSettings from "./SystemSettings";
 import DefencePriorities from "./DefencePriorities";
 import AffPriorities from "./AffPriorities";
@@ -24,7 +23,7 @@ const Configuration = ({
   sys,
   setSys,
 }) => {
-  const [value, setValue] = useState("1");
+  const [value, setValue] = useState("2");
   //const [_nexSys, setNexSys] = useState({ ...nexSys });
   const [settings, setSettings] = useState({ ...sys.settings });
   const [cacheTable, setCacheTable] = useState({ ...nexSys.cacheTable });
