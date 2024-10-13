@@ -241,7 +241,8 @@ const curingStatus = function (args) {
 
 const curingPriorityAffs = function (args) {
   const prio = args.prio === 26 ? 0 : args.prio;
-  const affs = args.affs.split(", ");
+  //const prio = args.prio;
+  const affs = args.affs.replaceAll("(", "").replaceAll(")", "").split(", ");
   for (let i = 0; i < affs.length; i++) {
     const aff = affs[i];
     if (aff !== "") {
@@ -278,7 +279,9 @@ const serversideCuringStatusSet = function (args) {
 };
 
 const serversideAffPrioSet = function (args) {
-  serversideSettings.affs[args.aff] = args.prio;
+  const aff = args.aff.replaceAll("(", "").replaceAll(")", "");
+  //serversideSettings.affs[aff] = args.prio === 26 ? 0 : args.prio;
+  serversideSettings.affs[aff] = args.prio;
 };
 
 const serversideDefPrioSet = function (args) {

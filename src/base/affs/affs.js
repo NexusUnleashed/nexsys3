@@ -24,7 +24,7 @@ for (let i = 0; i < affTable.list.length; i++) {
 
     //Snipped added to work with countable affs
     for (let i = 1; i < count.max + 1; i++) {
-      affs[`${affname}${i}`] = new Aff(affname, prio, uncurable);
+      affs[`${affname}${i}`] = new Aff(`${affname}${i}`, prio, uncurable);
     }
   } else if (timed) {
     affs[affname] = new AffTimed(affname, prio, timed.length, uncurable);
