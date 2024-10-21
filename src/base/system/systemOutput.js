@@ -80,7 +80,15 @@ const populateOutput = function () {
           addToOutput(
             `curing priority ${affPrioOutput.slice(0, 140).join(" ")}`
           );
-          addToOutput(`curing priority ${affPrioOutput.slice(140).join(" ")}`);
+          const prioSplit = affPrioOutput.slice(140);
+          eventStream.registerEvent(
+            "systemOutputLostBalEvent",
+            () => {
+              affPrioOutput = [...prioSplit];
+              forcePopulateOutput();
+            },
+            true
+          );
         }
       }
       if (defPrioOutput.length > 0) {

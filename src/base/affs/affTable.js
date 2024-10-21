@@ -425,6 +425,7 @@ const affs = {
     wristfractures3: 12,
     wristfractures4: 12,
     wristfractures5: 12,
+    wristfractures6: 12,
     damagedleftarm: 12,
     disloyalty: 12,
 
