@@ -6,6 +6,7 @@ import { getCacheOutputs } from "../cache/cacheService";
 import { getCureOutputs } from "../cures/cureService";
 import { getDefOutputs } from "../defs/defService";
 import { sys } from "./sys";
+import { sendCmd } from "./sysService";
 
 let outputInProgress = false;
 let outputPending = false;
@@ -30,7 +31,6 @@ const sendOutput = function () {
 
     addToOutput(outputFeedbackCommand);
 
-    /*
     const chunks = parseInt((output.length - 1) / outputChunkSize) + 1; //CUSTOM
 
     for (let i = 0; i < chunks; i++) {
@@ -41,9 +41,9 @@ const sendOutput = function () {
       const cmd = chunk.join(sys.settings.sep);
       sendCmd(cmd);
     }
-    */
+
     // TODO Is this working to use the stunQueue instead of send?
-    nexSys.stunQueue.add(output);
+    //nexSys.stunQueue.add(output);
 
     outputInProgress = true;
     eventOutput = [];
@@ -74,7 +74,14 @@ const populateOutput = function () {
       const balList = getCurrentBals();
 
       if (affPrioOutput.length > 0) {
-        addToOutput(`curing priority ${affPrioOutput.join(" ")}`);
+        if (affPrioOutput.length <= 140) {
+          addToOutput(`curing priority ${affPrioOutput.join(" ")}`);
+        } else {
+          addToOutput(
+            `curing priority ${affPrioOutput.slice(0, 140).join(" ")}`
+          );
+          addToOutput(`curing priority ${affPrioOutput.slice(140).join(" ")}`);
+        }
       }
       if (defPrioOutput.length > 0) {
         addToOutput(`curing priority defence ${defPrioOutput.join(" ")}`);
@@ -138,7 +145,6 @@ eventStream.registerEvent("PriorityDefOutputAdd", addDefPrioEventOutput);
 
 let addAffPrioEventOutput = function (command) {
   affPrioOutput.push(command);
-  //forcePopulateOutput();
 };
 eventStream.registerEvent("PriorityAffOutputAdd", addAffPrioEventOutput);
 

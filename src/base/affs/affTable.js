@@ -218,7 +218,6 @@ const affs = {
   ],
 
   prios: {
-    // TODO: How should we handle prios for countable affs? horror4 etc?
     // affs that don't have serverside prio because can't be 'cured', set as 0
     airfisted: 0,
     asphyxiating: 0,
@@ -376,7 +375,11 @@ const affs = {
     damagedrightleg: 8,
     hypersomnia: 8,
     earworm: 8, // TODO new aff added with random prio 8
-    crescendo: 8, // TODO new aff added with random prio 8
+    crescendo1: 8, // TODO new aff added with random prio 8
+    crescendo2: 8, // TODO new aff added with random prio 8
+    crescendo3: 8, // TODO new aff added with random prio 8
+    crescendo4: 8, // TODO new aff added with random prio 8
+    crescendo5: 8, // TODO new aff added with random prio 8
     diminished: 8, // TODO new aff added with random prio 8
 
     torntendons1: 9,
@@ -487,6 +490,7 @@ const affs = {
     unweavingspirit: 26,
     horror: 26,
     pyre: 26,
+    crescendo: 26,
     torntendons: 26,
     crackedribs: 26,
     skullfractures: 26,
@@ -525,6 +529,7 @@ const affs = {
       // TODO: Is kkractlebrand countable?
       pressure: { min: 0, max: 5 },
       //bleeding: { min: 0, max: 15000 },
+      crescendo: { min: 0, max: 5 },
       unweavingbody: { min: 0, max: 5 },
       unweavingspirit: { min: 0, max: 5 },
       unweavingmind: { min: 0, max: 5 },

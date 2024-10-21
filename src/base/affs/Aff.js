@@ -10,7 +10,7 @@ class Aff extends Trackable {
     this._prio = new Priority(this._name, prio);
     this._cures = [];
     this._serverside = false;
-    if (prio >= 0 && prio <= 26) {
+    if (prio > 0 && prio <= 26) {
       this._serverside = true;
     }
     this._uncurable = uncurable;

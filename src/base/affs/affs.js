@@ -22,9 +22,19 @@ for (let i = 0; i < affTable.list.length; i++) {
       uncurable
     );
 
-    //Snipped added to work with countable affs
-    for (let i = 1; i < count.max + 1; i++) {
-      affs[`${affname}${i}`] = new Aff(`${affname}${i}`, prio, uncurable);
+    //Snippet added to work with countable affs
+    //Tempers don't allow stacking in serverside
+    if (
+      ![
+        "temperedcholeric",
+        "temperedmelancholic",
+        "temperedphlegmatic",
+        "temperedsanguine",
+      ].includes(affname)
+    ) {
+      for (let i = 1; i < count.max + 1; i++) {
+        affs[`${affname}${i}`] = new Aff(`${affname}${i}`, prio, uncurable);
+      }
     }
   } else if (timed) {
     affs[affname] = new AffTimed(affname, prio, timed.length, uncurable);
