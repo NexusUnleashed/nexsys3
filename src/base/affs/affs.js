@@ -33,6 +33,7 @@ for (let i = 0; i < affTable.list.length; i++) {
       ].includes(affname)
     ) {
       for (let i = 1; i < count.max + 1; i++) {
+        const prio = i === 1 ? 0 : prio;
         affs[`${affname}${i}`] = new Aff(`${affname}${i}`, prio, uncurable);
       }
     }

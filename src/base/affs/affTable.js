@@ -295,17 +295,17 @@ const affs = {
     grievouswounds: 3,
     latched: 3,
     dazzled: 3,
-    unweavingbody1: 3,
+    unweavingbody: 3,
     unweavingbody2: 3,
     unweavingbody3: 3,
     unweavingbody4: 3,
     unweavingbody5: 3,
-    unweavingmind1: 3,
+    unweavingmind: 3,
     unweavingmind2: 3,
     unweavingmind3: 3,
     unweavingmind4: 3,
     unweavingmind5: 3,
-    unweavingspirit1: 3,
+    unweavingspirit: 3,
     unweavingspirit2: 3,
     unweavingspirit3: 3,
     unweavingspirit4: 3,
@@ -357,16 +357,14 @@ const affs = {
     sensitivity: 7,
     transfixation: 7,
     webbed: 7,
-    //horror: 7, //countable
-    //pyre: 7, //countable
     tonguetied: 7,
     haemophilia: 7,
     lethargy: 7,
     manaleech: 7,
     dissonance: 7,
-    pyre1: 7,
+    pyre: 7,
 
-    skullfractures1: 8,
+    skullfractures: 8,
     skullfractures2: 8,
     skullfractures3: 8,
     skullfractures4: 8,
@@ -375,14 +373,14 @@ const affs = {
     damagedrightleg: 8,
     hypersomnia: 8,
     earworm: 8, // TODO new aff added with random prio 8
-    crescendo1: 8, // TODO new aff added with random prio 8
+    crescendo: 8, // TODO new aff added with random prio 8
     crescendo2: 8, // TODO new aff added with random prio 8
     crescendo3: 8, // TODO new aff added with random prio 8
     crescendo4: 8, // TODO new aff added with random prio 8
     crescendo5: 8, // TODO new aff added with random prio 8
     diminished: 8, // TODO new aff added with random prio 8
 
-    torntendons1: 9,
+    torntendons: 9,
     torntendons2: 9,
     torntendons3: 9,
     torntendons4: 9,
@@ -400,7 +398,7 @@ const affs = {
     disrupted: 10,
     mangledhead: 10,
     voyria: 10,
-    crackedribs1: 10,
+    crackedribs: 10,
     crackedribs2: 10,
     crackedribs3: 10,
     crackedribs4: 10,
@@ -420,7 +418,7 @@ const affs = {
     mildtrauma: 11,
 
     stupidity: 12,
-    wristfractures1: 12,
+    wristfractures: 12,
     wristfractures2: 12,
     wristfractures3: 12,
     wristfractures4: 12,
@@ -432,14 +430,14 @@ const affs = {
     tension: 13,
     damagedhead: 13,
     dazed: 13,
-    burning1: 13,
+    burning: 13,
     burning2: 13,
     burning3: 13,
     burning4: 13,
     burning5: 13,
 
     lovers: 14,
-    pressure1: 14,
+    pressure: 14,
     pressure2: 14,
     pressure3: 14,
     pressure4: 14,
@@ -477,25 +475,11 @@ const affs = {
     shyness: 23,
 
     //affs ignored
-    horror1: 26,
+    horror: 26,
     horror2: 26,
     horror3: 26,
     horror4: 26,
     horror5: 26,
-    //countable ignores
-    burning: 26,
-    crackedribs: 26,
-    pressure: 26,
-    unweavingbody: 26,
-    unweavingmind: 26,
-    unweavingspirit: 26,
-    horror: 26,
-    pyre: 26,
-    crescendo: 26,
-    torntendons: 26,
-    crackedribs: 26,
-    skullfractures: 26,
-    wristfractures: 26,
 
     // affs you can cure on your own, but no serverside, 30-49, 30=ignore
     bleeding: 30,
