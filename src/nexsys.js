@@ -77,7 +77,7 @@ import {
   EchoWithPrefix,
 } from "./base/echo/Echo";
 import { echo, echoInfoLine, echoLine } from "./base/echo/echos";
-import { createQueue } from "./base/queues/Queue";
+import { Queue } from "./base/queues/Queue";
 import { serversideSettings } from "./base/serverside/serverside";
 import {
   loadCustomSettings,
@@ -126,14 +126,14 @@ import { startup } from "./base/utilities/startup";
 import NexDialog from "./components/NexDialog";
 
 const nexSys = {
-  version: "1.8.8",
+  version: "1.9.6",
   evt: new EventTarget(),
   component: NexDialog,
 
-  sys: sys,
-  sysLogging: sysLogging,
-  sysLog: sysLog,
-  sysLoggingToggle: sysLoggingToggle,
+  sys,
+  sysLogging,
+  sysLog,
+  sysLoggingToggle,
 
   classes: {
     Countable,
@@ -157,52 +157,52 @@ const nexSys = {
     EchoLinePrefix,
   },
 
-  cures: cures,
-  cureTable: cureTable,
+  cures,
+  cureTable,
 
-  affs: affs,
-  affTable: affTable,
-  getCurrentAffs: getCurrentAffs,
-  haveAff: haveAff,
-  haveAffs: haveAffs,
-  haveAnAff: haveAnAff,
-  affPrioSwap: affPrioSwap,
-  setPrioArrays: setPrioArrays,
+  affs,
+  affTable,
+  getCurrentAffs,
+  haveAff,
+  haveAffs,
+  haveAnAff,
+  affPrioSwap,
+  setPrioArrays,
 
   snapTrack: new Trackable("Snapped"),
 
-  bals: bals,
-  balanceTable: balanceTable,
-  getCurrentBals: getCurrentBals,
-  haveABal: haveABal,
-  haveBal: haveBal,
-  haveBals: haveBals,
+  bals,
+  balanceTable,
+  getCurrentBals,
+  haveABal,
+  haveBal,
+  haveBals,
 
-  defs: defs,
-  defTable: defTable,
-  defPrios: defPrios,
+  defs,
+  defTable,
+  defPrios,
   //defsCreate: defsCreate,
-  getCurrentDefs: getCurrentDefs,
-  getDefOutputs: getDefOutputs,
-  getMissingDefs: getMissingDefs,
-  haveDef: haveDef,
-  defPrioSwap: defPrioSwap,
-  defup: defup,
-  defoff: defoff,
-  parry: parry,
+  getCurrentDefs,
+  getDefOutputs,
+  getMissingDefs,
+  haveDef,
+  defPrioSwap,
+  defup,
+  defoff,
+  parry,
 
-  caches: caches,
-  cacheTable: cacheTable,
-  getCacheOutputs: getCacheOutputs,
+  caches,
+  cacheTable,
+  getCacheOutputs,
 
-  echo: echo,
-  echoLine: echoLine,
-  echoInfoLine: echoInfoLine,
+  echo,
+  echoLine,
+  echoInfoLine,
 
-  curArea: curArea,
-  curRoom: curRoom,
-  curRoomArea: curRoomArea,
-  curRoomName: curRoomName,
+  curArea,
+  curRoom,
+  curRoomArea,
+  curRoomName,
   tables: {
     limbs: limbs,
     dirs: dirs,
@@ -215,71 +215,71 @@ const nexSys = {
     herb_to_mineral: herb_to_mineral,
   },
 
-  sendCmd: sendCmd,
-  sendInline: sendInline,
-  psend: psend,
-  rsend: rsend,
-  timeDiffNow: timeDiffNow,
+  sendCmd,
+  sendInline,
+  psend,
+  rsend,
+  timeDiffNow,
 
   // General QoL functions
-  replace: replace,
-  replaceHTML: replaceHTML,
-  replaceWord: replaceWord,
-  say: say,
-  nextLine: nextLine,
-  prevLine: prevLine,
-  checkLine: checkLine,
-  prepend_notice: prepend_notice,
-  tabCompletion: tabCompletion,
+  replace,
+  replaceHTML,
+  replaceWord,
+  say,
+  nextLine,
+  prevLine,
+  checkLine,
+  prepend_notice,
+  tabCompletion,
 
-  serversideSettings: serversideSettings,
+  serversideSettings,
 
-  updateModel: updateModel,
-  updateList: updateList,
-  updateNxs: updateNxs,
-  saveModel: saveModel,
-  updateAndSaveModel: updateAndSaveModel,
-  loadCustomSettings: loadCustomSettings,
-  updatePriorities: updatePriorities,
+  updateModel,
+  updateList,
+  updateNxs,
+  saveModel,
+  updateAndSaveModel,
+  loadCustomSettings,
+  updatePriorities,
   //saveCustomSettings: saveCustomSettings,
 
-  classQueue: createQueue({
+  classQueue: new Queue({
     name: "class",
     type: "c!p!t!w",
     pre: ["touch soul", "stand"],
     exclusions: ["fullQueue"],
   }),
-  freeQueue: createQueue({
+  freeQueue: new Queue({
     name: "free",
     type: "free",
     pre: ["touch soul", "stand"],
     exclusions: ["fullQueue", "shieldQueue"],
   }),
-  fullQueue: createQueue({
+  fullQueue: new Queue({
     name: "full",
     type: "ebc!w!p!t",
     pre: ["touch soul", "stand"],
     exclusions: ["freeQueue", "shieldQueue", "classQueue"],
   }),
-  shieldQueue: createQueue({
+  shieldQueue: new Queue({
     name: "shield",
     type: "ebc!w!t",
     pre: ["touch soul", "stand"],
     exclusions: ["freeQueue", "fullQueue"],
   }),
-  shipQueue: createQueue({
+  shipQueue: new Queue({
     name: "ship",
     type: "s!w!t",
     pre: ["touch soul", "stand"],
     exclusions: [],
   }),
-  stunQueue: createQueue({ name: "stun", type: "!t", pre: ["touch soul"] }),
+  stunQueue: new Queue({ name: "stun", type: "!t", pre: ["touch soul"] }),
 
   prompt: prompt,
   sentCommands: [],
 
   // DEBUG Functions
-  systemOutputDebug: systemOutputDebug,
+  systemOutputDebug,
   testRun() {
     const nexSysLoaded = () => {
       nexusclient

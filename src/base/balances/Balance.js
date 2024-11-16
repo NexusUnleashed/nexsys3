@@ -22,10 +22,12 @@ export class Balance extends Trackable {
 
   raiseEventGot() {
     eventStream.raiseEvent("BalanceGot", this);
+    eventStream.raiseEvent(`${this.name}GotBalEvent`);
   }
 
   raiseEventLost() {
     eventStream.raiseEvent("BalanceLost", this);
+    eventStream.raiseEvent(`${this.name}LostBalEvent`);
   }
 
   got() {

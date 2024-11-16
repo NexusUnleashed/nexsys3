@@ -103,3 +103,24 @@ const nexSysFlying = (args) => {
   }
 };
 eventStream.registerEvent("Room.Info", nexSysFlying);
+
+const nexSysMount = function (args) {
+  if (args) {
+    nexSys.defs.mounted.mount = args;
+  }
+};
+eventStream.registerEvent("mountedGotDefEvent", nexSysMount);
+const nexSysMount2 = function (args) {
+  if (
+    [
+      "dragon",
+      "fire elemental lord",
+      "water elemental lord",
+      "air elemental lord",
+      "earth elemental lord",
+    ].includes(args.new.toLowerCase())
+  ) {
+    nexSys.defs.mounted.lost();
+  }
+};
+eventStream.registerEvent("ClassChanged", nexSysMount2);

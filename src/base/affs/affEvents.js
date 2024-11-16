@@ -85,3 +85,16 @@ let setAffPrios = function () {
 };
 
 eventStream.registerEvent("ServersideSettingsCaptured", setAffPrios);
+
+/*
+//Initial
+10:42:25.426 [GMCP]: Char.Afflictions.Add {"name":"burning (1)","cure":"APPLY MENDING TO TORSO","desc":"When your body is completely wrapped in flames, you will unsuprisingly find it quite painful."}
+//Additional
+10:42:27.860 [GMCP]: Char.Afflictions.Remove ["burning (1)"]
+10:42:27.860 [GMCP]: Char.Afflictions.Add {"name":"burning (2)","cure":"APPLY MENDING TO TORSO","desc":"When your body is completely wrapped in flames, you will unsuprisingly find it quite painful."}
+//Cure
+10:42:33.847 [GMCP]: Char.Afflictions.Remove ["burning (2)"]
+10:42:33.847 [GMCP]: Char.Afflictions.Add {"name":"burning (1)","cure":"APPLY MENDING TO TORSO","desc":"When your body is completely wrapped in flames, you will unsuprisingly find it quite painful."}
+//Cure
+10:42:35.415 [GMCP]: Char.Afflictions.Remove ["burning (1)"]
+*/

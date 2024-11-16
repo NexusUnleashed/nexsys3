@@ -6,6 +6,7 @@ import { getCacheOutputs } from "../cache/cacheService";
 import { getCureOutputs } from "../cures/cureService";
 import { getDefOutputs } from "../defs/defService";
 import { sys } from "./sys";
+import { sendCmd } from "./sysService";
 
 let outputInProgress = false;
 let outputPending = false;
@@ -30,7 +31,6 @@ const sendOutput = function () {
 
     addToOutput(outputFeedbackCommand);
 
-    /*
     const chunks = parseInt((output.length - 1) / outputChunkSize) + 1; //CUSTOM
 
     for (let i = 0; i < chunks; i++) {
@@ -41,9 +41,9 @@ const sendOutput = function () {
       const cmd = chunk.join(sys.settings.sep);
       sendCmd(cmd);
     }
-    */
+
     // TODO Is this working to use the stunQueue instead of send?
-    nexSys.stunQueue.add(output);
+    //nexSys.stunQueue.add(output);
 
     outputInProgress = true;
     eventOutput = [];
@@ -74,7 +74,22 @@ const populateOutput = function () {
       const balList = getCurrentBals();
 
       if (affPrioOutput.length > 0) {
-        addToOutput(`curing priority ${affPrioOutput.join(" ")}`);
+        if (affPrioOutput.length <= 140) {
+          addToOutput(`curing priority ${affPrioOutput.join(" ")}`);
+        } else {
+          addToOutput(
+            `curing priority ${affPrioOutput.slice(0, 140).join(" ")}`
+          );
+          const prioSplit = affPrioOutput.slice(140);
+          eventStream.registerEvent(
+            "systemOutputLostBalEvent",
+            () => {
+              affPrioOutput = [...prioSplit];
+              forcePopulateOutput();
+            },
+            true
+          );
+        }
       }
       if (defPrioOutput.length > 0) {
         addToOutput(`curing priority defence ${defPrioOutput.join(" ")}`);
@@ -99,6 +114,16 @@ const populateOutput = function () {
       sendOutput();
     }
   }
+};
+
+const forcePopulateOutput = function () {
+  populateOutputFlag = true;
+  // outputInProgress = false; // CUSTOM
+  populateOutput();
+};
+
+const flagPopulateOutput = function () {
+  populateOutputFlag = true;
 };
 
 export const systemOutputDebug = () => {
@@ -128,7 +153,6 @@ eventStream.registerEvent("PriorityDefOutputAdd", addDefPrioEventOutput);
 
 let addAffPrioEventOutput = function (command) {
   affPrioOutput.push(command);
-  //forcePopulateOutput();
 };
 eventStream.registerEvent("PriorityAffOutputAdd", addAffPrioEventOutput);
 
@@ -142,16 +166,6 @@ const addToEventOutput = function (command) {
 };
 
 eventStream.registerEvent("SystemOutputAdd", addToEventOutput);
-
-const forcePopulateOutput = function () {
-  populateOutputFlag = true;
-  // outputInProgress = false; // CUSTOM
-  populateOutput();
-};
-
-const flagPopulateOutput = function () {
-  populateOutputFlag = true;
-};
 
 /* CUSTOM: This will allow custom class queues to operate off of GMCP recovering balance instead of prompt.
    this is slightly faster. And will allow the System defenses to preempt the class moves. Most importantly
@@ -190,10 +204,12 @@ const systemOutputComplete = function () {
 };
 eventStream.registerEvent("SystemOutputCompleteEvent", systemOutputComplete);
 
-const systemOutputStuck = function () {
-  sendOutput();
+const systemOutputBalanceCheck = () => {
+  if (outputInProgress) {
+    outputComplete();
+  }
 };
-eventStream.registerEvent("systemOutputGotBalEvent", systemOutputStuck);
+eventStream.registerEvent("systemOutputGotBalEvent", systemOutputBalanceCheck);
 
 // TODO Hack because nexSys was getting "stuck" in output pending after dying and returning to life.
 // This could be caused by the output attempting to send JUST before the alive sequence completes ?

@@ -85,8 +85,8 @@ const loadSystemSettings = function () {
 const loadAffSettings = function () {
   const model = nexusclient.variables().get("nexSysSettings").affSettings; //nexusclient.variables().get('CustomAffSettings')
   if (model) {
-    affTable.prios = { ...model.prios };
-    affTable.prioArrays = { ...model.prioArrays };
+    affTable.prios = { ...affTable.prios, ...model.prios };
+    //affTable.prioArrays = { ...model.prioArrays };
   }
 
   //saveModel("affSettings", affTable);

@@ -10,7 +10,7 @@ const affs = {
     "asthma",
     "betrayal" /*6-20-24*/,
     "blackout",
-    "bleeding",
+    //"bleeding", // Do we need this?
     "blindness",
     "blistered" /**/,
     "bloodfire" /**/,
@@ -218,7 +218,6 @@ const affs = {
   ],
 
   prios: {
-    // TODO: How should we handle prios for countable affs? horror4 etc?
     // affs that don't have serverside prio because can't be 'cured', set as 0
     airfisted: 0,
     asphyxiating: 0,
@@ -297,8 +296,20 @@ const affs = {
     latched: 3,
     dazzled: 3,
     unweavingbody: 3,
+    unweavingbody2: 3,
+    unweavingbody3: 3,
+    unweavingbody4: 3,
+    unweavingbody5: 3,
     unweavingmind: 3,
+    unweavingmind2: 3,
+    unweavingmind3: 3,
+    unweavingmind4: 3,
+    unweavingmind5: 3,
     unweavingspirit: 3,
+    unweavingspirit2: 3,
+    unweavingspirit3: 3,
+    unweavingspirit4: 3,
+    unweavingspirit5: 3,
     weariness: 3,
     prone: 3,
     timeloop: 3,
@@ -326,6 +337,7 @@ const affs = {
     sandfever: 5,
     asthma: 5,
     healthleech: 5,
+    pyre3: 5,
 
     impatience: 6,
     itching: 6,
@@ -337,6 +349,7 @@ const affs = {
     slickness: 6,
     recklessness: 6,
     dementia: 6,
+    pyre2: 6,
 
     bound: 7,
     daeggerimpale: 7,
@@ -344,26 +357,39 @@ const affs = {
     sensitivity: 7,
     transfixation: 7,
     webbed: 7,
-    horror: 7,
-    pyre: 7,
     tonguetied: 7,
     haemophilia: 7,
     lethargy: 7,
     manaleech: 7,
     dissonance: 7,
+    pyre: 7,
 
     skullfractures: 8,
+    skullfractures2: 8,
+    skullfractures3: 8,
+    skullfractures4: 8,
+    skullfractures5: 8,
+    skullfractures6: 8,
     damagedrightleg: 8,
     hypersomnia: 8,
     earworm: 8, // TODO new aff added with random prio 8
     crescendo: 8, // TODO new aff added with random prio 8
+    crescendo2: 8, // TODO new aff added with random prio 8
+    crescendo3: 8, // TODO new aff added with random prio 8
+    crescendo4: 8, // TODO new aff added with random prio 8
+    crescendo5: 8, // TODO new aff added with random prio 8
     diminished: 8, // TODO new aff added with random prio 8
 
     torntendons: 9,
+    torntendons2: 9,
+    torntendons3: 9,
+    torntendons4: 9,
+    torntendons5: 9,
+    torntendons6: 9,
     brokenleftleg: 9,
     brokenrightleg: 9,
     hallucinations: 9,
-    burning: 9,
+    //burning: 9, //countable
 
     calcifiedskull: 10,
     calcifiedtorso: 10,
@@ -373,6 +399,11 @@ const affs = {
     mangledhead: 10,
     voyria: 10,
     crackedribs: 10,
+    crackedribs2: 10,
+    crackedribs3: 10,
+    crackedribs4: 10,
+    crackedribs5: 10,
+    crackedribs6: 10,
 
     hypothermia: 11,
     impaled: 11,
@@ -388,15 +419,29 @@ const affs = {
 
     stupidity: 12,
     wristfractures: 12,
+    wristfractures2: 12,
+    wristfractures3: 12,
+    wristfractures4: 12,
+    wristfractures5: 12,
+    wristfractures6: 12,
     damagedleftarm: 12,
     disloyalty: 12,
 
     tension: 13,
     damagedhead: 13,
     dazed: 13,
+    burning: 13,
+    burning2: 13,
+    burning3: 13,
+    burning4: 13,
+    burning5: 13,
 
     lovers: 14,
     pressure: 14,
+    pressure2: 14,
+    pressure3: 14,
+    pressure4: 14,
+    pressure5: 14,
     damagedrightarm: 14,
     temperedcholeric: 14,
     temperedmelancholic: 14,
@@ -430,7 +475,7 @@ const affs = {
     shyness: 23,
 
     //affs ignored
-    horror1: 26,
+    horror: 26,
     horror2: 26,
     horror3: 26,
     horror4: 26,
@@ -466,21 +511,24 @@ const affs = {
       // insulation: true  // TODO not an aff?
     },
     countable: {
-      // TODO: Are unweavings countable?
       // TODO: Is kkractlebrand countable?
-      pressure: { min: 0, max: 10 },
-      bleeding: { min: 0, max: 15000 },
+      pressure: { min: 0, max: 5 },
+      //bleeding: { min: 0, max: 15000 },
+      crescendo: { min: 0, max: 5 },
+      unweavingbody: { min: 0, max: 5 },
+      unweavingspirit: { min: 0, max: 5 },
+      unweavingmind: { min: 0, max: 5 },
       burning: { min: 0, max: 5 },
-      crackedribs: { min: 0, max: 7 },
-      horror: { min: 0, max: 7 },
+      horror: { min: 0, max: 5 },
       pyre: { min: 0, max: 3 },
-      skullfractures: { min: 0, max: 7 },
       temperedcholeric: { min: 0, max: 8 },
       temperedmelancholic: { min: 0, max: 8 },
       temperedphlegmatic: { min: 0, max: 8 },
       temperedsanguine: { min: 0, max: 8 },
-      torntendons: { min: 0, max: 7 },
-      wristfractures: { min: 0, max: 7 },
+      torntendons: { min: 0, max: 6 },
+      crackedribs: { min: 0, max: 6 },
+      skullfractures: { min: 0, max: 6 },
+      wristfractures: { min: 0, max: 6 },
     },
     timed: {
       aeon: { length: 16 },

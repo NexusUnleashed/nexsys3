@@ -780,6 +780,15 @@ export const defTable = {
     ],
     serverside: true,
   },
+  morimbuul: {
+    command: "ldeck draw morimbuul",
+    bals_req: ["balance", "equilibrium"],
+    bals_used: ["free"],
+    blocks: ["death", "sleeping"],
+    //skills: [],
+    serverside: false,
+    preempt: false,
+  },
   mounted: {
     command: "", // ** CUSTOM ** This should be set by the user in a separate package. Not universal.
     bals_req: ["balance", "equilibrium"],

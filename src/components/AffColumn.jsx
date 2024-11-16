@@ -23,21 +23,26 @@ const Container = styled.div`
 `;
 
 const AffColumn = ({ column, colors }) => {
-    return (
-        <Container>
-            <Title>{column.title}</Title>
-            <Droppable droppableId={column.id}>
-                {(provided) => (
-                    <AffList ref={provided.innerRef} {...provided.droppableProps}>
-                        {column.affs.map((aff, i) => (
-                            <AffItem key={aff} aff={aff} index={i} color={colors[aff]} />
-                        ))}
-                        {provided.placeholder}
-                    </AffList>
-                )}
-            </Droppable>
-        </Container>
-    );
+  return (
+    <Container>
+      <Title>{column.title}</Title>
+      <Droppable droppableId={column.id}>
+        {(provided) => (
+          <AffList ref={provided.innerRef} {...provided.droppableProps}>
+            {column.affs.map((aff, i) => (
+              <AffItem
+                key={aff}
+                aff={aff}
+                index={i}
+                color={colors[aff.replace(/\d+$/, "")]}
+              />
+            ))}
+            {provided.placeholder}
+          </AffList>
+        )}
+      </Droppable>
+    </Container>
+  );
 };
 
 export default AffColumn;
