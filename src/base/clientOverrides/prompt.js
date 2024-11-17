@@ -377,7 +377,7 @@ prompt.affAbbrev = {
   tonguetied: { text: "tngt", ...prompt.cureColors.restoration },
   torntendons: { text: "tt", ...prompt.cureColors.health },
   transfixation: { text: "trfx", ...prompt.cureColors.writhe },
-  unweavingbody: { text: "unwM", ...prompt.cureColors.ferrum },
+  unweavingbody: { text: "unwB", ...prompt.cureColors.ferrum },
   unweavingspirit: { text: "unwS", ...prompt.cureColors.cinnabar },
   unweavingmind: { text: "unwM", ...prompt.cureColors.plumbum },
   vertigo: { text: "vert", ...prompt.cureColors.argentum },
