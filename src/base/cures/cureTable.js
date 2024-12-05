@@ -83,6 +83,8 @@ const treeList = [
   "mycalium",
   "sandfever",
   "crescendo",
+  "fulminated",
+  "frostbite",
 ];
 
 const cures = {
@@ -470,7 +472,7 @@ const cures = {
     bals_req: ["salve"],
     blocks: ["death", "slickness", "sleeping"],
     command: "apply caloric",
-    order: ["frozen", "shivering" /* , 'insulation'*/],
+    order: ["frozen", "shivering", "frostbite" /* , 'insulation'*/],
     prio: 0,
   },
   "epidermal to body": {

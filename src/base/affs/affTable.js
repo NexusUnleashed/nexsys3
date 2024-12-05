@@ -74,6 +74,7 @@ const affs = {
     "fear",
     "flamefisted",
     "flushings" /* pariah */,
+    "frostbite" /* 12-4-24 */,
     "frozen",
     "fulminated" /* 6-20-24 */,
     "generosity",
