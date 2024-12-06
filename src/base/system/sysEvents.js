@@ -40,6 +40,28 @@ const setCharVitals = function (vitals) {
   sysChar.rage = rage;
   sysChar.bleed = bleed;
 
+  const tempStats = vitals.charstats.map((e) =>
+    e.toLowerCase().trim().split(": ")
+  );
+  //[ "Bleed: 0", "Rage: 37", "Channels: F W A E ", "rair: none", "rearth: none", "rfire: none", "rwater: none"]
+
+  tempStats.forEach((e) => {
+    if (["yes", "no"].includes(e[1])) {
+      if (!bals[e[0]]) {
+        console.log(
+          `${id} class balance is not in balances table but is provided in GMCP`
+        );
+      } else if (e[1] === "yes" && !bals[e[0]].have) {
+        eventStream.raiseEvent(`${id}GotBalEvent`);
+      } else if (e[1] === "no" && bals[e[0]].have) {
+        eventStream.raiseEvent(`${id}LostBalEvent`);
+      }
+    } else {
+      sysChar[e[0]] = parseInt(e[1]) || e[1];
+    }
+  });
+
+  /*
   if (vitals.charstats.length > 2) {
     const class1 = vitals.charstats[2].match(classSpecific);
     const id = class1[1].toLowerCase();
@@ -87,6 +109,7 @@ const setCharVitals = function (vitals) {
       sysChar[id] = val;
     }
   }
+*/
 
   if (sysChar.h !== oh) {
     eventStream.raiseEvent("HealthUpdated", {
