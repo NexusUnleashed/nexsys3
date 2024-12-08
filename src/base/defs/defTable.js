@@ -111,6 +111,14 @@ export const defTable = {
     serverside: false,
     preempt: true,
   },
+  bloodshield: {
+    command: "activate bloodshield",
+    bals_req: ["balance", "equilibrium"],
+    bals_used: ["equilbrium"],
+    blocks: ["death", "sleeping"],
+    serverside: false,
+    preempt: false,
+  },
   bodyaugment: {
     command: "intone mainaas",
     bals_req: ["balance", "equilibrium"],
