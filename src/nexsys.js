@@ -275,7 +275,7 @@ const nexSys = {
   }),
   stunQueue: new Queue({ name: "stun", type: "!t", pre: ["touch soul"] }),
 
-  prompt: prompt,
+  prompt,
   sentCommands: [],
 
   // DEBUG Functions

@@ -145,6 +145,14 @@ const setManaDiffPrompt = function (args) {
   nexSys.prompt.vars.diffmp.fg = nexSys.prompt.vars.diffm.fg;
 };
 
+const setTargetId = function (args) {
+  nexSys.prompt.vars.target = args;
+};
+
+const setTargetHP = function (args) {
+  nexSys.prompt.vars.targetHP = args;
+};
+
 eventStream.registerEvent("AffGot", gotPromptAff);
 eventStream.registerEvent("AffLost", lostPromptAff);
 eventStream.registerEvent("SystemLoaded", setPromptDefs);

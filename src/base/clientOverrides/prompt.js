@@ -155,13 +155,13 @@ const addAffArray = function (affs) {
 
 export const prompt = {
   promptLine: {},
-  generate_chunk: generate_chunk,
-  add: add,
-  addHTML: addHTML,
-  colorPercentage: colorPercentage,
-  colorGradation: colorGradation,
-  getCustomPrompt: getCustomPrompt,
-  addAffArray: addAffArray,
+  generate_chunk,
+  add,
+  addHTML,
+  colorPercentage,
+  colorGradation,
+  getCustomPrompt,
+  addAffArray,
 };
 
 prompt.vars = {
