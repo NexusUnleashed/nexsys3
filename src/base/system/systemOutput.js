@@ -31,6 +31,8 @@ const sendOutput = function () {
 
     addToOutput(outputFeedbackCommand);
 
+    /*
+    // CUSTOM: This is to break up the output into chunks to send to the server
     const chunks = parseInt((output.length - 1) / outputChunkSize) + 1; //CUSTOM
 
     for (let i = 0; i < chunks; i++) {
@@ -41,9 +43,9 @@ const sendOutput = function () {
       const cmd = chunk.join(sys.settings.sep);
       sendCmd(cmd);
     }
-
+    */
     // TODO Is this working to use the stunQueue instead of send?
-    //nexSys.stunQueue.add(output);
+    nexSys.stunQueue.add(output);
 
     outputInProgress = true;
     eventOutput = [];

@@ -2,6 +2,7 @@ import { caches } from "./caches";
 import { cacheTable } from "./cacheTable";
 import { affs } from "../affs/affs";
 import { defs } from "../defs/defs";
+import { haveAnAff } from "../affs/affService";
 
 function getMissingCache() {
   const current_cache = [];
@@ -19,6 +20,13 @@ export function getCacheOutputs(affList) {
     return [];
   }
   if (defs.blindness.have && !defs.mindseye.have) {
+    return [];
+  }
+  // Rift locked, don't outr. Need one working arm
+  if (
+    haveAnAff(["brokenleftarm", "damagedleftarm", "mangledleftarm"]) &&
+    haveAnAff(["brokenrightarm", "damagedrightarm", "mangledrightarm"])
+  ) {
     return [];
   }
 
