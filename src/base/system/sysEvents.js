@@ -195,7 +195,7 @@ const setCharStatus = function (status) {
   sysChar.race = curRace;
   sysChar.color = curColor;
   sysChar.xp = xp;
-  sysChar.gold = gold;
+  sysChar.gold = parseInt(gold);
 
   if (otarget !== curTarget) {
     sys.target = curTarget;
