@@ -155,6 +155,7 @@ const nexSys = {
     EchoLine,
     EchoWithPrefix,
     EchoLinePrefix,
+    Queue,
   },
 
   cures,
