@@ -44,7 +44,9 @@ const sendOutput = function () {
       sendCmd(cmd);
     }
     */
-    // TODO Is this working to use the stunQueue instead of send?
+
+    // TODO Is this working to use the stunQueue instead of sendCmd(cmd)?
+    nexSys.stunQueue.clear();
     nexSys.stunQueue.add(output);
 
     outputInProgress = true;
