@@ -20,7 +20,9 @@ export class Queue {
   }
 
   add(cmd) {
-    const newCommands = Array.isArray(cmd) ? cmd : cmd.split(sys.settings.sep);
+    const newCommands = Array.isArray(cmd)
+      ? cmd.map((str) => str.toLowerCase())
+      : cmd.split(sys.settings.sep);
     if (Array.equals(newCommands, this.queue)) {
       if (this.logging) {
         console.log(
@@ -35,7 +37,9 @@ export class Queue {
   }
 
   prepend(cmd) {
-    const newCommands = Array.isArray(cmd) ? cmd : cmd.split(sys.settings.sep);
+    const newCommands = Array.isArray(cmd)
+      ? cmd.map((str) => str.toLowerCase())
+      : cmd.split(sys.settings.sep);
     if (newCommands.every((e) => this.prependQueue.indexOf(e) > -1)) {
       return;
     }
