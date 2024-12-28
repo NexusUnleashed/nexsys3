@@ -126,7 +126,7 @@ import { startup } from "./base/utilities/startup";
 import NexDialog from "./components/NexDialog";
 
 const nexSys = {
-  version: "2.0.2",
+  version: "2.0.3",
   evt: new EventTarget(),
   component: NexDialog,
 
@@ -310,4 +310,39 @@ const nexSys = {
 };
 
 globalThis.nexSys = nexSys;
+
+/**Starup sequences and initialization */
 startup();
+
+/**These functions are required because consecutive queuing
+ * does not refresh the GMCP balance feedback
+ * do we need one for every queue that uses balance?
+ */
+const queueFiredBalance = function () {
+  if (
+    nexSys.bals.balance.duration > 0.25 &&
+    nexSys.haveBal("balance") == false
+  ) {
+    eventStream.raiseEvent("balanceGotBalEvent");
+    eventStream.raiseEvent("balanceLostBalEvent");
+  }
+  if (
+    nexSys.bals.equilibrium.duration > 0.25 &&
+    nexSys.haveBal("equilibrium") == false
+  ) {
+    eventStream.raiseEvent("equilibriumGotBalEvent");
+    eventStream.raiseEvent("equilibriumLostBalEvent");
+  }
+};
+eventStream.registerEvent("freeQueueFired", queueFiredBalance);
+eventStream.registerEvent("fullQueueFired", queueFiredBalance);
+eventStream.registerEvent("shieldQueueFired", queueFiredBalance);
+eventStream.registerEvent("bloodcloakQueueFired", queueFiredBalance);
+
+const entityQueueBalance = function () {
+  if (nexSys.bals.entity.duration > 0.5 && nexSys.haveBal("entity") == false) {
+    eventStream.raiseEvent("entityGotBalEvent");
+    eventStream.raiseEvent("entityLostBalEvent");
+  }
+};
+eventStream.registerEvent("classQueueFired", entityQueueBalance);

@@ -13,11 +13,12 @@ export class Queue {
     this.prependQueue = [];
     this.logging = false;
     this.queuedCmds = [];
+    this.confirmMsg = `echo SystemEvent ${name}QueueFired`;
 
     const queueFired = () => {
       this.clear();
     };
-    eventStream.registerEvent(name + "QueueFired", queueFired);
+    eventStream.registerEvent(`${name}QueueFired`, queueFired);
   }
 
   add(cmd) {
@@ -65,8 +66,10 @@ export class Queue {
       return;
     }
     this.queuedCmds = this.pre.concat(this.prependQueue, this.queue);
+    this.queuedCmds.unshift(this.confirmMsg);
 
     const output = [];
+
     if (this.exclusions.length > 0) {
       this.exclusions.forEach((element) => {
         const q = globalThis.nexSys[element];
