@@ -12,6 +12,7 @@ export class Queue {
     this.queue = [];
     this.prependQueue = [];
     this.logging = false;
+    this.queuedCmds = [];
 
     const queueFired = () => {
       this.clear();
@@ -63,7 +64,7 @@ export class Queue {
       console.log(`[nexSys]: Queue held while system is paused.`);
       return;
     }
-    const cmds = this.pre.concat(this.prependQueue, this.queue);
+    this.queuedCmds = this.pre.concat(this.prependQueue, this.queue);
 
     const output = [];
     if (this.exclusions.length > 0) {
@@ -77,11 +78,14 @@ export class Queue {
     }
 
     const chunkSize = 20 - output.length;
-    const chunks = Math.ceil(cmds.length / chunkSize);
+    const chunks = Math.ceil(this.queuedCmds.length / chunkSize);
 
     if (chunks > 1) {
       for (let i = 0; i < chunks; i++) {
-        const chunk = cmds.slice(i * chunkSize, i * chunkSize + chunkSize);
+        const chunk = this.queuedCmds.slice(
+          i * chunkSize,
+          i * chunkSize + chunkSize
+        );
         const cmdString = `queue ${i > 0 ? "add" : "addclear"} ${
           this.type
         } ${chunk.join(sys.settings.sep)}`;
@@ -90,7 +94,7 @@ export class Queue {
         output.length = 0;
       }
     } else {
-      const cmdString = `queue addclear ${this.type} ${cmds.join(
+      const cmdString = `queue addclear ${this.type} ${this.queuedCmds.join(
         sys.settings.sep
       )}`;
       output.push(cmdString);
@@ -101,6 +105,7 @@ export class Queue {
   clear() {
     this.queue.length = 0;
     this.prependQueue.length = 0;
+    this.queuedCmds.length = 0;
   }
 
   clearQueue() {
