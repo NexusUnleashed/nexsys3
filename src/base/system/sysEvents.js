@@ -242,7 +242,7 @@ const initialWielded = (args) => {
   sys.char.wielded.left = args.find((e) => e.attrib === "l") || false;
   sys.char.wielded.right = args.find((e) => e.attrib === "L") || false;
 };
-eventStream.registerEvent("ItemListForInv", initialWielded, true);
+eventStream.registerEvent("ItemListForInv", initialWielded, { once: true });
 /*
 const occultistStatsGmcpBalance = function (vitals) {
   if (!sys.isClass("Occultist")) {

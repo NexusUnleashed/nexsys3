@@ -183,7 +183,9 @@ const initiateStartup = function (args) {
     const mountStartUpGag = () => {
       eventStream.registerEvent("PromptEvent", startUpGag);
     };
-    eventStream.registerEvent("CuringStartupBeginEvent", mountStartUpGag, true);
+    eventStream.registerEvent("CuringStartupBeginEvent", mountStartUpGag, {
+      once: true,
+    });
 
     eventStream.registerEvent(
       "CuringStartupCompleteEvent",
@@ -191,7 +193,7 @@ const initiateStartup = function (args) {
         eventStream.removeListener("PromptEvent", "startUpGag");
         nexSys.echoInfoLine(`nexSys loaded using startup spam gag.`);
       },
-      true
+      { once: true }
     );
 
     for (let i = 0; i < startupCommands.length; i++) {
