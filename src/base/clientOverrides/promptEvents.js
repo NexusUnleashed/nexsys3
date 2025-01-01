@@ -145,12 +145,14 @@ const setManaDiffPrompt = function (args) {
   nexSys.prompt.vars.diffmp.fg = nexSys.prompt.vars.diffm.fg;
 };
 
-const setTargetId = function (args) {
-  nexSys.prompt.vars.target = args;
-};
-
-const setTargetHP = function (args) {
-  nexSys.prompt.vars.targetHP = args;
+const setTargetVars = function () {
+  nexSys.prompt.vars.target.text = GMCP.Target.Text ? GMCP.Target.Text : "";
+  nexSys.prompt.vars.targetHP.text = GMCP.Target.hpperc
+    ? GMCP.Target.hpperc
+    : "";
+  nexSys.prompt.vars.targetHP.fg = nexSys.prompt.colorGradation(
+    parseInt(GMCP.Target.hpperc)
+  );
 };
 
 eventStream.registerEvent("AffGot", gotPromptAff);
@@ -164,21 +166,23 @@ eventStream.registerEvent("BalanceLost", setPromptBals);
 eventStream.registerEvent("SystemCharVitalsUpdated", setPromptVitals);
 eventStream.registerEvent("HealthUpdated", setHealthDiffPrompt);
 eventStream.registerEvent("ManaUpdated", setManaDiffPrompt);
-eventStream.registerEvent("SystemPaused", function (args) {
+eventStream.registerEvent("IRE.Target.Info", setTargetVars);
+
+eventStream.registerEvent("SystemPaused", function () {
   nexSys.prompt.vars.paused.text = "(p)";
 });
-eventStream.registerEvent("SystemUnpaused", function (args) {
+eventStream.registerEvent("SystemUnpaused", function () {
   nexSys.prompt.vars.paused.text = "";
 });
-eventStream.registerEvent("aeonLostAffEvent", function (args) {
+eventStream.registerEvent("aeonLostAffEvent", function () {
   nexSys.prompt.vars.aeon.text = "";
 });
-eventStream.registerEvent("aeonGotAffEvent", function (args) {
+eventStream.registerEvent("aeonGotAffEvent", function () {
   nexSys.prompt.vars.aeon.text = "(a)";
 });
-eventStream.registerEvent("SystemSlowModeOn", function (args) {
+eventStream.registerEvent("SystemSlowModeOn", function () {
   nexSys.prompt.vars.retard.text = "(r)";
 });
-eventStream.registerEvent("SystemSlowModeOff", function (args) {
+eventStream.registerEvent("SystemSlowModeOff", function () {
   nexSys.prompt.vars.retard.text = "";
 });

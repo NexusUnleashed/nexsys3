@@ -188,7 +188,8 @@ prompt.vars = {
   diffhp: { text: "", fg: "green", bg: "" },
   diffmp: { text: "", fg: "green", bg: "" },
   diffxp: { text: "", fg: "", bg: "" },
-  target: { text: "", fg: "red", bg: "" },
+
+  target: { text: "", fg: "pink", bg: "" },
   targetHP: { text: "", fg: "green", bg: "" },
 
   eq: { text: "", fg: "", bg: "" },
