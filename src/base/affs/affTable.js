@@ -251,7 +251,6 @@ const affs = {
     hindered: 0,
     homunculusmercury: 0,
     icefisted: 0,
-    internalbleeding: 0,
     inquisition: 0,
     isolation: 0,
     kaisurge: 0,
@@ -417,6 +416,7 @@ const affs = {
     frozen: 11,
     shivering: 11,
     mildtrauma: 11,
+    internalbleeding: 11,
 
     stupidity: 12,
     wristfractures: 12,
@@ -555,7 +555,6 @@ const affs = {
       heartseed: { length: 11 },
       hecatecurse: { length: 16 },
       icefisted: { length: 30 },
-      internalbleeding: { length: 30 },
       inquisition: { length: 30 },
       kaisurge: { length: 15 }, // TODO: Made up number. Confirm duration
       lightbind: { length: 22 },
