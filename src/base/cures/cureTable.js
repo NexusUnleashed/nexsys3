@@ -557,6 +557,7 @@ const cures = {
       "serioustrauma",
       "mildtrauma",
       "calcifiedtorso",
+      "internalbleeding",
     ],
     delay: 4.0,
     prio: 0,
