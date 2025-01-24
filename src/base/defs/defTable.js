@@ -1192,7 +1192,7 @@ export const defTable = {
     command: "shroud",
     bals_req: ["balance", "equilibrium"],
     bals_used: ["equilibrium"],
-    skills: ["Occultist"],
+    skills: ["Occultist", "Serpent"],
     serverside: true,
   },
   softfocusing: {
