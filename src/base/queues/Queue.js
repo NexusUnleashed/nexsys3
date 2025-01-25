@@ -4,10 +4,11 @@ import { sendCmd, sendInline } from "../system/sysService.js";
 import { sys } from "../system/sys.js";
 
 export class Queue {
-  constructor({ name, type, pre = false, exclusions = false }) {
+  constructor({ name, type, pre = false, post = false, exclusions = false }) {
     this.name = name;
     this.type = type;
     this.pre = pre || [];
+    this.post = post || [];
     this.exclusions = exclusions || [];
     this.queue = [];
     this.prependQueue = [];
@@ -65,8 +66,9 @@ export class Queue {
       console.log(`[nexSys]: Queue held while system is paused.`);
       return;
     }
-    this.queuedCmds = this.pre.concat(this.prependQueue, this.queue);
-    this.queuedCmds.unshift(this.confirmMsg);
+    this.queuedCmds.push(this.confirmMsg);
+    this.queuedCmds = this.pre.concat(this.prependQueue, this.queue, this.post);
+    //this.queuedCmds.unshift(this.confirmMsg);
 
     const output = [];
 
