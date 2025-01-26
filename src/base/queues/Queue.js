@@ -69,7 +69,7 @@ export class Queue {
     //this.queuedCmds = this.pre.concat(this.prependQueue, this.queue, this.post);
     //this.queuedCmds.unshift(this.confirmMsg);
     this.queuedCmds = [
-      this.this.confirmMsg,
+      this.confirmMsg,
       ...this.pre,
       ...this.prependQueue,
       ...this.queue,
