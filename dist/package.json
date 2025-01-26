@@ -1,6 +1,6 @@
 {
   "name": "nexsys",
-  "version": "2.0.8",
+  "version": "2.0.9",
   "description": "nexSys for nexus",
   "main": "nexsys.min.js",
   "scripts": {

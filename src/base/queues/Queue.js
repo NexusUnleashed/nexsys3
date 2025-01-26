@@ -66,9 +66,15 @@ export class Queue {
       console.log(`[nexSys]: Queue held while system is paused.`);
       return;
     }
-    this.queuedCmds.push(this.confirmMsg);
-    this.queuedCmds = this.pre.concat(this.prependQueue, this.queue, this.post);
+    //this.queuedCmds = this.pre.concat(this.prependQueue, this.queue, this.post);
     //this.queuedCmds.unshift(this.confirmMsg);
+    this.queuedCmds = [
+      this.this.confirmMsg,
+      ...this.pre,
+      ...this.prependQueue,
+      ...this.queue,
+      ...this.post,
+    ];
 
     const output = [];
 
