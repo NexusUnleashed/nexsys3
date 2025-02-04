@@ -264,7 +264,7 @@ const nexSys = {
   }),
   shieldQueue: new Queue({
     name: "shield",
-    type: "ebc!w!t",
+    type: "eb!w!t",
     pre: ["touch soul", "stand"],
     exclusions: ["freeQueue", "fullQueue"],
   }),
