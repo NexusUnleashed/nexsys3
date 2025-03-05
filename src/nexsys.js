@@ -119,6 +119,7 @@ import {
   replaceHTML,
   replaceWord,
   say,
+  speech,
   tabCompletion,
   updateNxs,
 } from "./base/utilities/general";
@@ -226,6 +227,7 @@ const nexSys = {
   replace,
   replaceHTML,
   replaceWord,
+  speech,
   say,
   nextLine,
   prevLine,

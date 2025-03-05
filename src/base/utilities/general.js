@@ -139,7 +139,7 @@ export const updateNxs = () => {
     });
 };
 
-const speech = new SpeechSynthesisUtterance();
+export const speech = new SpeechSynthesisUtterance();
 speech.voice =
   globalThis.speechSynthesis
     .getVoices()
