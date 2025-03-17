@@ -26,8 +26,8 @@ const setCharVitals = function (vitals) {
   const maxm = vitals.maxmp || omaxm;
   const maxe = vitals.maxep || omaxe;
   const maxw = vitals.maxwp || omaxw;
-  const bleed = parseInt(vitals.charstats[0].match(valueRegex)[0]);
-  const rage = parseInt(vitals.charstats[1].match(valueRegex)[0]);
+  //const bleed = parseInt(vitals.charstats[0].match(valueRegex)[0]);
+  //const rage = parseInt(vitals.charstats[1].match(valueRegex)[0]);
 
   sysChar.h = parseInt(h);
   sysChar.m = parseInt(m);
@@ -51,10 +51,10 @@ const setCharVitals = function (vitals) {
         console.log(
           `${e[0]} class balance is not in balances table but is provided in GMCP`
         );
-      } else if (e[1] === "yes" && !bals[e[0]].have) {
-        eventStream.raiseEvent(`${e[0]}GotBalEvent`);
-      } else if (e[1] === "no" && bals[e[0]].have) {
-        eventStream.raiseEvent(`${e[0]}LostBalEvent`);
+      } else if (e[1] === "no") {
+        bals[e[0]].lost();
+      } else {
+        bals[e[0]].got();
       }
     } else {
       sysChar[e[0]] = parseInt(e[1]) || e[1];
