@@ -49,12 +49,12 @@ const setCharVitals = function (vitals) {
     if (["yes", "no"].includes(e[1])) {
       if (!bals[e[0]]) {
         console.log(
-          `${id} class balance is not in balances table but is provided in GMCP`
+          `${e[0]} class balance is not in balances table but is provided in GMCP`
         );
       } else if (e[1] === "yes" && !bals[e[0]].have) {
-        eventStream.raiseEvent(`${id}GotBalEvent`);
+        eventStream.raiseEvent(`${e[0]}GotBalEvent`);
       } else if (e[1] === "no" && bals[e[0]].have) {
-        eventStream.raiseEvent(`${id}LostBalEvent`);
+        eventStream.raiseEvent(`${e[0]}LostBalEvent`);
       }
     } else {
       sysChar[e[0]] = parseInt(e[1]) || e[1];
