@@ -52,7 +52,7 @@ const setCharVitals = function (vitals) {
           `${e[0]} class balance is not in balances table but is provided in GMCP`
         );
       } else if (e[1] === "no") {
-        bals[e[0]].lost();
+        bals[e[0]].lost(); // eventStream.raiseEvent(`${e[0]}LostBalEvent`);
       } else {
         bals[e[0]].got();
       }
