@@ -4,8 +4,8 @@ import { sys } from "./sys";
 import { bals } from "../balances/balances";
 import { systemOutputDebug } from "./systemOutput";
 
-const valueRegex = /(\d+)/;
-const classSpecific = /(\w+): (\w+)?/;
+//const valueRegex = /(\d+)/;
+//const classSpecific = /(\w+): (\w+)?/;
 const setCharVitals = function (vitals) {
   const sysChar = sys.char;
   const oh = sysChar.h;
