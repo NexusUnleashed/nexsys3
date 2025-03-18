@@ -37,8 +37,8 @@ const setCharVitals = function (vitals) {
   sysChar.maxm = parseInt(maxm);
   sysChar.maxe = parseInt(maxe);
   sysChar.maxw = parseInt(maxw);
-  sysChar.rage = rage;
-  sysChar.bleed = bleed;
+  //sysChar.rage = rage;
+  //sysChar.bleed = bleed;
 
   const tempStats = vitals.charstats.map((e) =>
     e.toLowerCase().trim().split(": ")
