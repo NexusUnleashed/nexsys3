@@ -149,6 +149,7 @@ speech.rate = 1.1;
 speech.pitch = 1.3;
 export const say = (txt) => {
   speech.text = txt;
+  globalThis.speechSynthesis.cancel();
   globalThis.speechSynthesis.speak(speech);
 };
 
