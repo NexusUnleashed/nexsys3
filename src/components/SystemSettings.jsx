@@ -103,6 +103,12 @@ const SystemSettings = ({ settings, setSettings }) => {
               Notices Config
             </FormLabel>
             <FormGroup>
+            <ConfigSwitch
+                label="Echo Output"
+                option={"echoOutput"}
+                handleCheck={handleCheck}
+                checked={stateSettings["echoOutput"]}
+              />
               <ConfigSwitch
                 label="Echo Priority Set"
                 option={"echoPrioritySet"}
