@@ -293,6 +293,7 @@ prompt.affAbbrev = {
   epilepsy: { text: "epi", ...prompt.cureColors.plumbum },
   fear: { text: "fear", fg: "", bg: "" },
   flushings: { text: "flush", ...prompt.cureColors.ferrum },
+  fratricide: { text: "frat", ...prompt.cureColors.ferrum },
   frozen: { text: "frz", ...prompt.cureColors.caloric },
   generosity: { text: "gen", ...prompt.cureColors.cuprum },
   grievouswounds: { text: "grv", ...prompt.cureColors.health },

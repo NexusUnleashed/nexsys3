@@ -72,6 +72,7 @@ let myAffPrios = {
   pacified: 5,
   peace: 5,
   scytherus: 5,
+  fratricide: 5,
 
   asthma: 6,
   bound: 6,

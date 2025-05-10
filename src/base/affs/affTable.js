@@ -74,6 +74,7 @@ const affs = {
     "fear",
     "flamefisted",
     "flushings" /* pariah */,
+    "fratricide" /* 5-9-25 */,
     "frostbite" /* 12-4-24 */,
     "frozen",
     "fulminated" /* 6-20-24 */,
@@ -341,6 +342,7 @@ const affs = {
 
     impatience: 6,
     itching: 6,
+    fratricide: 6,
     scytherus: 6,
     clumsiness: 6,
     kkractlebrand: 6,
@@ -734,6 +736,7 @@ const defaultPrios = {
     "aeon",
     "peace",
     "scytherus",
+    "fratricide",
     "anorexia",
     "bound",
     "whisperingmadness",
