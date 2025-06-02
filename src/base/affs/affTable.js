@@ -537,7 +537,7 @@ const affs = {
       aeon: { length: 16 },
       airfisted: { length: 16 },
       betrayal: { length: 15 },
-      blackout: { length: 10 },
+      blackout: { length: 20 },
       blistered: { length: 20 },
       breathless: { length: 3 },
       bruisedribs: { length: 30 },
