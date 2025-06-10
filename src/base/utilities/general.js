@@ -139,18 +139,23 @@ export const updateNxs = () => {
     });
 };
 
-export const speech = new SpeechSynthesisUtterance();
-speech.voice =
-  globalThis.speechSynthesis
-    .getVoices()
-    .find((e) => e.voiceURI === "Google UK English Female") ||
-  globalThis.speechSynthesis.getVoices().find((e) => e.lang === "en-US");
-speech.rate = 1.1;
-speech.pitch = 1.3;
 export const say = (txt) => {
+  const speech = new SpeechSynthesisUtterance();
+  speech.voice =
+    globalThis.speechSynthesis
+      .getVoices()
+      .find((e) => e.voiceURI === "Google UK English Female") ||
+    globalThis.speechSynthesis.getVoices().find((e) => e.lang === "en-US");
+  speech.rate = 1.1;
+  speech.pitch = 1.3;
   speech.text = txt;
-  globalThis.speechSynthesis.cancel();
-  globalThis.speechSynthesis.speak(speech);
+
+  if (globalThis.speechSynthesis.speaking) {
+    globalThis.speechSynthesis.cancel();
+  }
+  setTimeout(() => {
+    globalThis.speechSynthesis.speak(speech);
+  }, 10);
 };
 
 export const tabCompletion = {
