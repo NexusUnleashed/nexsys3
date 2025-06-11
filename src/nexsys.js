@@ -106,7 +106,7 @@ import {
   classList,
   dirMap,
   dirs,
-  limbs,
+  limbs as limbTable,
   oppDirs,
   shortDirs,
 } from "./base/utilities/commonTable";
@@ -119,12 +119,13 @@ import {
   replaceHTML,
   replaceWord,
   say,
-  speech,
   tabCompletion,
   updateNxs,
 } from "./base/utilities/general";
 import { startup } from "./base/utilities/startup";
 import NexDialog from "./components/NexDialog";
+import { Limb } from "./base/selfLimbcounter/Limb";
+import { limbs } from "./base/selfLimbcounter/limbs";
 
 const nexSys = {
   version: "2.1.5",
@@ -157,6 +158,7 @@ const nexSys = {
     EchoWithPrefix,
     EchoLinePrefix,
     Queue,
+    Limb,
   },
 
   cures,
@@ -170,6 +172,8 @@ const nexSys = {
   haveAnAff,
   affPrioSwap,
   setPrioArrays,
+
+  limbs,
 
   snapTrack: new Trackable("Snapped"),
 
@@ -206,7 +210,7 @@ const nexSys = {
   curRoomArea,
   curRoomName,
   tables: {
-    limbs: limbs,
+    limbs: limbTable,
     dirs: dirs,
     dirMap: dirMap,
     oppdirs: oppDirs,
@@ -227,7 +231,6 @@ const nexSys = {
   replace,
   replaceHTML,
   replaceWord,
-  speech,
   say,
   nextLine,
   prevLine,

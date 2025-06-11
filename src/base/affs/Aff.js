@@ -42,6 +42,10 @@ class Aff extends Trackable {
     return this._prio.prio;
   }
 
+  get id() {
+    return this.name;
+  }
+
   raiseEventGot() {
     eventStream.raiseEvent("AffGot", this);
   }
