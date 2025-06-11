@@ -15,8 +15,7 @@ const breakLimb = function ({ id }) {
   limbs[id].break();
 };
 
-const cureLimb = function (args) {
-  console.log(args);
+const cureLimb = function ({ id }) {
   limbs[id].reset();
 };
 
@@ -30,14 +29,21 @@ limbLocations.forEach((limb) => {
   eventStream.registerEvent(`mangled${limb}LostAffEvent`, cureLimb);
 });
 
+const cureTorso = function () {
+  limbs.torso.reset();
+};
 limbs["torso"] = new Limb({ id: "torso" });
+eventStream.registerEvent(`mildtraumaLostAffEvent`, cureTorso);
+eventStream.registerEvent(`serioustraumaLostAffEvent`, cureTorso);
 
-const nexSysBreakTorso = function (args) {
+const nexSysBreakTorso = function () {
   if (nexSys.haveAff("mildtrauma")) {
     nexSys.affs.mildtrauma.lost();
     nexSys.affs.serioustrauma.got();
+    nexusclient.send_commands(`curing predict serioustrauma`);
   } else if (!nexSys.haveAff(`serioustrauma`)) {
     nexSys.affs.mildtrauma.got();
+    nexusclient.send_commands(`curing predict mildtrauma`);
   }
 };
 eventStream.registerEvent(`nexSysLimbBreaktorso`, nexSysBreakTorso);
