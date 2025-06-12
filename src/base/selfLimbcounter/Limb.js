@@ -5,7 +5,7 @@ export class Limb {
     this.id = id;
     this.percent = 0;
     this.hits = 0;
-    this.timer = createTimer(`nexSysLimbTimer${id}`, 180);
+    this.timer = createTimer(`nexSysLimbTimer${id}`, 180 + 5);
     this.timer.addCallback(this.reset.bind(this));
   }
 

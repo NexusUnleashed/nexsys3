@@ -38,11 +38,11 @@ eventStream.registerEvent(`serioustraumaLostAffEvent`, cureTorso);
 
 const nexSysBreakTorso = function () {
   if (nexSys.haveAff("mildtrauma")) {
-    nexSys.affs.mildtrauma.lost();
-    nexSys.affs.serioustrauma.got();
+    eventStream.raiseEvent("mildtraumaLostAffEvent");
+    eventStream.raiseEvent("serioustraumaGotAffEvent");
     nexusclient.send_commands(`curing predict serioustrauma`);
   } else if (!nexSys.haveAff(`serioustrauma`)) {
-    nexSys.affs.mildtrauma.got();
+    eventStream.raiseEvent("mildtraumaGotAffEvent");
     nexusclient.send_commands(`curing predict mildtrauma`);
   }
 };
