@@ -236,6 +236,8 @@ export const sysLogging = {
 };
 
 export function sysLog(text) {
+  if (!sysLogging) { return; }
+  
   if (sysLogging.locations === "console") {
     console.log(text);
   }

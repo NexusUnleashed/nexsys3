@@ -206,7 +206,7 @@ export function repop() {
         cur_def.skills.length === 0
       ) {
         if (keepupPrios[def]) {
-          console.log("1 + " + def);
+          sysLog("1 + " + def);
           cur_def.set_default_prio(keepupPrios[def]);
         } else {
           cur_def.set_default_prio(0);

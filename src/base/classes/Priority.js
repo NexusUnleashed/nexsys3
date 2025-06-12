@@ -1,5 +1,7 @@
 /*global eventStream */
 
+import { sysLog } from "../system/sys";
+
 class Priority {
     constructor(name, prio = 0) {
         this._name = name;
@@ -32,7 +34,7 @@ class Priority {
         this._prev = this.prio;
         this._current = prio;
         if (this._current !== this._prev) {
-            console.log(`${this._name} ${this._current} ${this._prev}`);
+            sysLog(`${this._name} ${this._current} ${this._prev}`);
             this.raiseEventPrioSet();
         }
     }
