@@ -49,7 +49,7 @@ let eventGmcpAffAdd = function (obj) {
     eventStream.raiseEvent(aff + "AffCountAddEvent", count);
   }
 
-  eventStream.raiseEvent(aff + "GotAffEvent");
+  eventStream.raiseEvent(aff + "GotAffEvent", aff);
 
   /*if(count > 0) {
       eventStream.raiseEvent(aff+'AffCountAddEvent', count);
@@ -68,7 +68,7 @@ let eventGmcpAffRemove = function (obj) {
     aff = aff.substr(0, index - 2);
   }
 
-  eventStream.raiseEvent(aff + "LostAffEvent");
+  eventStream.raiseEvent(aff + "LostAffEvent", aff);
 
   if (count > 0) {
     eventStream.raiseEvent(aff + "AffCountSubtractEvent", count);

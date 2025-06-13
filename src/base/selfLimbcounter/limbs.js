@@ -11,19 +11,19 @@ const limbLocations = [
 
 export const limbs = {};
 
-const breakLimb = function ({ id }) {
+const breakLimb = function (id) {
   limbs[id].break();
 };
 
-const cureLimb = function ({ id }) {
+const cureLimb = function (id) {
   limbs[id].reset();
 };
 
 limbLocations.forEach((limb) => {
   limbs[limb] = new Limb({ id: limb });
   // Damaged and Mangled afflictions GOT should be shown by GMCP under *most* situations.
-  //eventStream.registerEvent(`damaged${limb}GotAffEvent`, breakLimb);
-  //eventStream.registerEvent(`mangled${limb}GotAffEvent`, breakLimb);
+  eventStream.registerEvent(`damaged${limb}GotAffEvent`, breakLimb);
+  eventStream.registerEvent(`mangled${limb}GotAffEvent`, breakLimb);
 
   eventStream.registerEvent(`damaged${limb}LostAffEvent`, cureLimb);
   eventStream.registerEvent(`mangled${limb}LostAffEvent`, cureLimb);
