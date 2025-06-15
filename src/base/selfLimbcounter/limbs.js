@@ -12,11 +12,13 @@ const limbLocations = [
 export const limbs = {};
 
 const breakLimb = function (id) {
-  limbs[id].break();
+  const limbId = id.replace(/^(?:damaged|mangled)/, "");
+  limbs[limbId].break();
 };
 
 const cureLimb = function (id) {
-  limbs[id].reset();
+  const limbId = id.replace(/^(?:damaged|mangled)/, "");
+  limbs[limbId].reset();
 };
 
 limbLocations.forEach((limb) => {
