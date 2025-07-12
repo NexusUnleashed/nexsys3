@@ -1,3 +1,4 @@
+// webpack.config.js
 const path = require("path");
 const TerserPlugin = require("terser-webpack-plugin");
 
@@ -14,14 +15,25 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.js/,
+        // 1) match .js AND .jsx
+        test: /\.(js|jsx)$/,
         exclude: /node_modules/,
-        options: {
-          cacheDirectory: true,
-          presets: ["@babel/preset-env", "@babel/preset-react"],
+        use: {
+          loader: "babel-loader",
+          options: {
+            // 2) ignore any .babelrc or babel.config.js
+            babelrc: false,
+            configFile: false,
+            cacheDirectory: true,
+            // 3) classic runtime replaces all JSX with React.createElement
+            presets: [
+              "@babel/preset-env",
+              ["@babel/preset-react", { runtime: "classic" }],
+            ],
+          },
         },
-        loader: "babel-loader",
       },
+      // …your other rules (e.g. CSS loader)…
     ],
   },
   optimization: {
@@ -38,7 +50,7 @@ module.exports = {
     ],
   },
   externals: {
-    nexevent: "eventStream", // Case matters here
+    nexevent: "eventStream",
     react: "React",
     "react-dom": "ReactDOM",
   },
