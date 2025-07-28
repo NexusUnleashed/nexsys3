@@ -101,7 +101,6 @@ const cures = {
       "lethargy",
       "addiction",
       "scytherus",
-      "fratricide",
       "nausea",
       "flushings",
       "unweavingbody",
@@ -148,6 +147,7 @@ const cures = {
     blocks: ["death", "anorexia", "sleeping"],
     command: "eat argentum",
     order: [
+      "fratricide",
       "masochism",
       "loneliness",
       "vertigo",
@@ -258,7 +258,6 @@ const cures = {
       "lethargy",
       "addiction",
       "scytherus",
-      "fratricide",
       "nausea",
       "flushings",
       "unweavingbody",
@@ -305,6 +304,7 @@ const cures = {
     blocks: ["death", "anorexia", "sleeping"],
     command: "eat lobelia",
     order: [
+      "fratricide",
       "masochism",
       "loneliness",
       "vertigo",
