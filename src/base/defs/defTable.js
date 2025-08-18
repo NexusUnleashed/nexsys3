@@ -116,8 +116,8 @@ export const defTable = {
     bals_req: ["balance", "equilibrium"],
     bals_used: ["equilbrium"],
     blocks: ["death", "sleeping"],
-    serverside: false,
-    preempt: false,
+    serverside: true,
+    preempt: true,
   },
   bodyaugment: {
     command: "intone mainaas",
