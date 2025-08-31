@@ -579,7 +579,7 @@ const affs = {
       solarburn: { length: 5 },
       snared: { length: 20 },
       speechless: { length: 300 },
-      stridulating: { length: 6 },
+      stridulating: { length: 15 },
       stun: { length: 3 },
       succumbed: { length: 30 },
       timeflux: { length: 60 },
