@@ -184,7 +184,7 @@ export const defTable = {
     bals_req: ["balance", "equilibrium"],
     bals_used: ["equilibrium"],
     skills: ["Magi"],
-    serverside: false,
+    serverside: true,
   },
   coldresist: {
     command: "activate cold resistance",
@@ -266,7 +266,7 @@ export const defTable = {
     bals_req: ["balance", "equilibrium"],
     bals_used: ["equilibrium"],
     skills: ["Magi"],
-    serverside: false,
+    serverside: true,
   },
   distortedaura: {
     command: "distortaura",
@@ -1255,14 +1255,14 @@ export const defTable = {
     bals_req: ["balance", "equilibrium"],
     bals_used: ["equilibrium"],
     skills: ["Magi"],
-    serverside: false,
+    serverside: true,
   },
   stoneskin: {
     command: "cast stoneskin",
     bals_req: ["balance", "equilibrium"],
     bals_used: ["equilibrium"],
     skills: ["Magi"],
-    serverside: false,
+    serverside: true,
   },
   sulphur: {
     command: "educe sulphur",
