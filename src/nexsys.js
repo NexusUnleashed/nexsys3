@@ -128,7 +128,7 @@ import { Limb } from "./base/selfLimbcounter/Limb";
 import { limbs } from "./base/selfLimbcounter/limbs";
 
 const nexSys = {
-  version: "2.1.9",
+  version: "2.2.0",
   evt: new EventTarget(),
   component: NexDialog,
 
