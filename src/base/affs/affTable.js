@@ -706,7 +706,7 @@ const affs = {
 //Capture the settings from the client server variable here, before intializing the affs
 if (
   typeof nexusclient !== "undefined" &&
-  nexusclient?.variables().vars?.nexSysSettings
+  nexusclient?.variables().vars?.nexSysSettings?.affSettings
 ) {
   affs.prios = {
     ...affs.prios,
