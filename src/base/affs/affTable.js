@@ -1,5 +1,6 @@
 const affs = {
   list: [
+    "accentato" /*9-7-25*/,
     "addiction",
     "aeon",
     "agoraphobia",
@@ -33,6 +34,7 @@ const affs = {
     "conflagration",
     "confusion",
     "constricted" /**/,
+    "convergence" /*9-7-25*/,
     "corruption",
     "crackedribs",
     "cremated" /**/,
@@ -95,6 +97,7 @@ const affs = {
     "hypersomnia",
     "hypochondria",
     "hypothermia",
+    "icebound" /*9-7-25*/,
     "icefisted",
     "impaled",
     "impatience",
@@ -218,9 +221,10 @@ const affs = {
     "dragoncurse",
     "swiftcurse",
   ],
-
+  //accentato, covergence, icebound
   prios: {
     // affs that don't have serverside prio because can't be 'cured', set as 0
+    accentato: 0,
     airfisted: 0,
     asphyxiating: 0,
     blistered: 0,
@@ -231,6 +235,7 @@ const affs = {
     condemned: 0,
     conflagration: 0,
     constricted: 0,
+    convergence: 0,
     corruption: 0,
     cremated: 0,
     death: 0,
@@ -352,6 +357,7 @@ const affs = {
     recklessness: 6,
     dementia: 6,
     pyre2: 6,
+    icebound: 6,
 
     bound: 7,
     daeggerimpale: 7,
@@ -534,6 +540,7 @@ const affs = {
       wristfractures: { min: 0, max: 6 },
     },
     timed: {
+      accentato: { length: 20 },
       aeon: { length: 16 },
       airfisted: { length: 16 },
       betrayal: { length: 15 },
