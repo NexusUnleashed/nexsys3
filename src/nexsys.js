@@ -18,8 +18,8 @@
     set_current_target() > nexusclient.datahandler().set_current_target()
 */
 /* global globalThis */
+import { Aff, AffCountable, AffDef, AffTimed } from "./base/affs/Aff";
 import { affs } from "./base/affs/affs";
-import { Aff, AffCountable, AffTimed, AffDef } from "./base/affs/Aff";
 import {
   affPrioSwap,
   getCurrentAffs,
@@ -31,13 +31,13 @@ import {
 import { affTable } from "./base/affs/affTable";
 import { Balance, BalExtended } from "./base/balances/Balance";
 import { bals } from "./base/balances/balances";
-import { balanceTable } from "./base/balances/balanceTable";
 import {
   getCurrentBals,
   haveABal,
   haveBal,
   haveBals,
 } from "./base/balances/balanceService";
+import { balanceTable } from "./base/balances/balanceTable";
 import { Cache } from "./base/cache/Cache";
 import { caches } from "./base/cache/caches";
 import { getCacheOutputs } from "./base/cache/cacheService";
@@ -58,7 +58,6 @@ import { cures } from "./base/cures/cures";
 import { cureTable } from "./base/cures/cureTable";
 import { Def, DefServerside } from "./base/defs/Def";
 import { defs } from "./base/defs/defs";
-import { defTable } from "./base/defs/defTable";
 import {
   defoff,
   defPrioSwap,
@@ -69,7 +68,7 @@ import {
   haveDef,
   parry,
 } from "./base/defs/defService";
-import { defPrios } from "./base/defs/defTable";
+import { defPrios, defTable } from "./base/defs/defTable";
 import {
   Echo,
   EchoLine,
@@ -78,6 +77,8 @@ import {
 } from "./base/echo/Echo";
 import { echo, echoInfoLine, echoLine } from "./base/echo/echos";
 import { Queue } from "./base/queues/Queue";
+import { Limb } from "./base/selfLimbCounter/Limb.js";
+import { limbs } from "./base/selfLimbCounter/limbs.js";
 import { serversideSettings } from "./base/serverside/serverside";
 import {
   loadCustomSettings,
@@ -124,11 +125,9 @@ import {
 } from "./base/utilities/general";
 import { startup } from "./base/utilities/startup";
 import NexDialog from "./components/NexDialog";
-import { Limb } from "./base/selfLimbcounter/Limb";
-import { limbs } from "./base/selfLimbcounter/limbs";
 
 const nexSys = {
-  version: "2.2.0",
+  version: "2.2.1",
   evt: new EventTarget(),
   component: NexDialog,
 
