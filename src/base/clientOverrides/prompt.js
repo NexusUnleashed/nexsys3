@@ -306,7 +306,7 @@ prompt.affAbbrev = {
   hellsight: { text: "hell", ...prompt.cureColors.realgar },
   horror: { text: "hor", ...prompt.cureColors.plumbum },
   hypersomnia: { text: "hypers", ...prompt.cureColors.stannum },
-  hypochondria: { text: "hypoch", ...prompt.cureColors.aurum },
+  hypochondria: { text: "hypoch", ...prompt.cureColors.lobelia },
   hypothermia: { text: "hypoth", ...prompt.cureColors.restoration },
   icefisted: { text: "ice", fg: "", bg: "" },
   impaled: { text: "impl", ...prompt.cureColors.writhe },

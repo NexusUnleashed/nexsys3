@@ -126,7 +126,6 @@ const cures = {
       "sensitivity",
       "weariness",
       "asthma",
-      "hypochondria",
       "rebbies",
       "parasite",
     ],
@@ -157,6 +156,7 @@ const cures = {
       "whisperingmadness",
       "spiritburn",
       "tenderskin",
+      "hypochondria",
     ], // CUSTOM
     prio: 0,
   },
@@ -284,7 +284,6 @@ const cures = {
       "sensitivity",
       "weariness",
       "asthma",
-      "hypochondria",
       "rebbies",
       "parasite",
     ],
@@ -315,6 +314,7 @@ const cures = {
       "whisperingmadness",
       "spiritburn",
       "tenderskin",
+      "hypochondria",
     ], // CUSTOM
     prio: 0,
   },
