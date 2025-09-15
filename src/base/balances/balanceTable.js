@@ -98,7 +98,7 @@ const balances = {
     length: 10.0,
   },
   shrugging: {
-    length: 12.0,
+    length: 10.0,
   },
   slough: {
     length: 10.0,
