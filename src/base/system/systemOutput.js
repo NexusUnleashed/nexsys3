@@ -25,8 +25,25 @@ const addToOutput = function (command) {
   }
 };
 
+// Debounce config for priority accumulation
+const prioAccumulationDelay = 150; // ms (adjust 100-200 as desired)
+let deferredPopulateTimer = null;
+
+const scheduleDeferredPopulate = (delay = prioAccumulationDelay) => {
+  if (deferredPopulateTimer) return;
+  deferredPopulateTimer = setTimeout(() => {
+    deferredPopulateTimer = null;
+    forcePopulateOutput();
+  }, delay);
+};
+
 const sendOutput = function () {
   if (output.length > 0) {
+    // Clear any pending deferred populate (we're sending now)
+    if (deferredPopulateTimer) {
+      clearTimeout(deferredPopulateTimer);
+      deferredPopulateTimer = null;
+    }
     eventStream.raiseEvent("OutputSentEvent", output);
 
     addToOutput(outputFeedbackCommand);
@@ -121,6 +138,10 @@ const populateOutput = function () {
 };
 
 const forcePopulateOutput = function () {
+  if (deferredPopulateTimer) {
+    clearTimeout(deferredPopulateTimer);
+    deferredPopulateTimer = null;
+  }
   populateOutputFlag = true;
   // outputInProgress = false; // CUSTOM
   populateOutput();
@@ -151,12 +172,13 @@ export const systemOutputDebug = () => {
 
 let addDefPrioEventOutput = function (command) {
   defPrioOutput.push(command);
-  //forcePopulateOutput();
+  scheduleDeferredPopulate();
 };
 eventStream.registerEvent("PriorityDefOutputAdd", addDefPrioEventOutput);
 
 let addAffPrioEventOutput = function (command) {
   affPrioOutput.push(command);
+  scheduleDeferredPopulate();
 };
 eventStream.registerEvent("PriorityAffOutputAdd", addAffPrioEventOutput);
 
