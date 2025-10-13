@@ -278,6 +278,17 @@ const nexSys = {
     pre: ["touch soul", "stand"],
     exclusions: [],
   }),
+  bloodcloakQueue: new Queue({
+    name: "bloodcloak",
+    type: "!teb",
+    pre: ["touch soul"],
+    exclusions: ["fullQueue", "freeQueue"],
+  }),
+  battlerageQueue: new Queue({
+    name: "battlerage",
+    type: "!p!t!wu",
+    pre: ["touch soul"],
+  }),
   stunQueue: new Queue({ name: "stun", type: "!t", pre: ["touch soul"] }),
 
   prompt,
