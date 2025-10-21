@@ -98,7 +98,7 @@ const process_lines = function (lines) {
 
   reflexes.run_function("onBlock", lines, "ALL");
 
-  this.ui().buffer().add_block(lines);
+  this.buffer().add_block(lines);
 
   this.current_line = undefined;
   this.current_block = undefined;
@@ -136,7 +136,7 @@ const on_key_up = function (key, isAlt, isCtrl, isShift) {
 
 nexusclient.process_lines = process_lines;
 //nexusclient.display_notice = display_notice;
-nexusclient.ui().buffer().add_block = add_block;
+nexusclient.buffer().add_block = add_block;
 nexusclient.platform().on_key_up = on_key_up;
 
 nexusclient.datahandler().send_command = function (command) {
