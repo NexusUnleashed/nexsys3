@@ -24,10 +24,19 @@ export const updateList = function (list, newList) {
 };
 
 export const updateModel = function (name, newModel) {
+  if (!newModel) {
+    return;
+  }
+
+  const replaceObject = (target, next) => {
+    Object.keys(target).forEach((key) => delete target[key]);
+    Object.assign(target, next);
+  };
+
   if (newModel) {
     switch (name) {
       case "cacheSettings":
-        cacheTable = { ...newModel };
+        replaceObject(cacheTable, newModel);
         break;
       case "systemSettings":
         sys.settings = { ...newModel };
