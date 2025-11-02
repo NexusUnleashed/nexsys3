@@ -19,7 +19,9 @@ export class Queue {
     const queueFired = () => {
       this.clear();
     };
-    eventStream.registerEvent(`${name}QueueFired`, queueFired);
+    eventStream.registerEvent(`${name}QueueFired`, queueFired, {
+      id: `${name}QueueFired`,
+    });
   }
 
   add(cmd) {
