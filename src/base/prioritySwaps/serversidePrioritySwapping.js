@@ -233,6 +233,7 @@ let checkPrioritySwaps = function (arg) {
       isClass([
         "Runewarden",
         "Monk",
+        "Shikudo",
         "Blademaster",
         "Infernal",
         "Paladin",

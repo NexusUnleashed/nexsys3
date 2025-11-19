@@ -760,7 +760,7 @@ const cures = {
     bals_req: ["equilibrium", "balance", "fitness"],
     bals_used: ["balance", "fitness"],
     blocks: ["death", "weariness", "sleeping"],
-    skills: ["Monk", "Runewarden"],
+    skills: ["Monk", "Shikudo", "Runewarden"],
     command: "fitness",
     order: ["asthma"],
     prio: 0,
