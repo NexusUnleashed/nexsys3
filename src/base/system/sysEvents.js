@@ -187,7 +187,7 @@ const setCharStatus = function (status) {
     curClass = "Dragon";
     curColor = curRace.split(" ")[0];
   }
-  if (GMCP.SkillGroups.Shikudo) {
+  if (GMCP.SkillGroups.some((e) => e.name === "Shikudo")) {
     curClass = "Shikudo";
   }
   const xp = status.xp || oxp;

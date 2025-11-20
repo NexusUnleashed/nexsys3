@@ -133,7 +133,7 @@ export const defTable = {
     bals_req: ["balance", "equilibrium"],
     bals_used: ["balance"],
     blocks: ["death", "sleeping"],
-    skills: ["Monk", "Shikudo"],
+    skills: ["Monk"],
     serverside: true,
   },
   boostedregeneration: {
@@ -330,7 +330,7 @@ export const defTable = {
     bals_req: ["balance", "equilibrium"],
     bals_used: ["balance"],
     blocks: ["death", "sleeping"],
-    skills: ["Monk", "Shikudo"],
+    skills: ["Monk"],
     serverside: true,
   },
   eyes: {
@@ -398,7 +398,6 @@ export const defTable = {
     command: "grip",
     bals_req: ["balance", "equilibrium"],
     bals_used: ["free"],
-    // Only Shikudo has gripping, Tekura doesn't. Not sure nexSys distinguishes between the two somehow
     skills: [
       "Runewarden",
       "Paladin",
@@ -1043,7 +1042,7 @@ export const defTable = {
     bals_req: ["balance", "equilibrium"],
     bals_used: ["balance"],
     blocks: ["death", "sleeping"],
-    skills: ["Monk", "Shikudo"],
+    skills: ["Monk"],
     serverside: true,
   },
   projectiles: {
