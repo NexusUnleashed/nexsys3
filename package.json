@@ -68,7 +68,7 @@
     "eslint-plugin-react": "^7.31.11",
     "gh-pages": "^6.3.0",
     "jest": "^30.0.3",
-    "nexevent": "^1.0.5",
+    "nexevent": "^1.5.6",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
     "react-scripts": "5.0.1",

@@ -18,6 +18,8 @@ globalThis.nexusclient = {
   },
 };
 
+nexSys.sys.settings.sep = "|";
+
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   //<React.StrictMode>

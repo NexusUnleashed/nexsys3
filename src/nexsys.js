@@ -77,8 +77,8 @@ import {
 } from "./base/echo/Echo";
 import { echo, echoInfoLine, echoLine } from "./base/echo/echos";
 import { Queue } from "./base/queues/Queue";
-import { Limb } from "./base/selfLimbCounter/Limb.js";
-import { limbs } from "./base/selfLimbCounter/limbs.js";
+import { Limb } from "./base/selfLimbCounter/Limb";
+import { limbs } from "./base/selfLimbCounter/limbs";
 import { serversideSettings } from "./base/serverside/serverside";
 import {
   loadCustomSettings,
