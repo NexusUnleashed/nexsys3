@@ -110,20 +110,29 @@ export class Queue {
           i * chunkSize,
           i * chunkSize + chunkSize
         );
-        const cmdString = `setalias nexsys${this.name}queue${i} ${chunk.join("/")}`;
+        const aliasId = `nexsys${this.name}queue${i}`;
+        const cmdString = `setalias ${aliasId} ${chunk.join("/")}`;
         output.push(cmdString);
-        output.push(
-          `queue ${i > 0 ? "add" : "addclear"} ${this.type} nexsys${this.name}queue${i}`
-        );
-        sendInline(output);
-        output.length = 0;
+
+        if (!this.serverQueue.includes(aliasId)) {
+          output.push(
+            `queue ${i > 0 ? "add" : "addclear"} ${this.type} ${aliasId}`
+          );
+        }
+        //sendInline(output);
+        //output.length = 0;
       }
     } else {
-      const cmdString = `setalias nexsys${this.name}queue0 ${this.cmdsToQueue.join("/")}`;
+      const aliasId = `nexsys${this.name}queue0`;
+      const cmdString = `setalias ${aliasId} ${this.cmdsToQueue.join("/")}`;
       output.push(cmdString);
-      output.push(`queue addclear ${this.type} nexsys${this.name}queue0`);
-      sendInline(output);
+
+      if (!this.serverQueue.includes(aliasId)) {
+        output.push(`queue addclear ${this.type} ${aliasId}`);
+      }
     }
+
+    sendInline(output);
   }
 
   clear() {
