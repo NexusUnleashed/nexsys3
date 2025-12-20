@@ -1,6 +1,16 @@
-import { DragDropContext } from "react-beautiful-dnd";
-import { useState, useEffect, useCallback } from "react";
+import {
+  DndContext,
+  PointerSensor,
+  KeyboardSensor,
+  DragOverlay,
+  closestCorners,
+  useSensor,
+  useSensors,
+} from "@dnd-kit/core";
+import { arrayMove, sortableKeyboardCoordinates } from "@dnd-kit/sortable";
+import { useState, useEffect, useRef } from "react";
 import AffColumn from "./AffColumn";
+import { AffItemOverlay } from "./AffItem";
 
 const createColumn = ({ id, affs }) => {
   return {
@@ -29,64 +39,187 @@ const createColumnOrder = () => {
   return columnOrder;
 };
 
+const findContainer = (id, columnState) => {
+  if (columnState[id]) {
+    return id;
+  }
+  return Object.keys(columnState).find((key) =>
+    columnState[key].affs.includes(id)
+  );
+};
+
 const AffPriorities = ({ colors, affTable, setAffTable, setPrioArrays }) => {
   const [columns, setColumns] = useState({
     ...createColumns(affTable.prioArrays),
   });
   const [prios, setPrios] = useState({ ...affTable.prios });
-  const [columnOrder, setColumnOrder] = useState([...createColumnOrder()]);
+  const [columnOrder] = useState([...createColumnOrder()]);
+  const [activeId, setActiveId] = useState(null);
+  const activeContainerRef = useRef(null);
+  const clonedColumnsRef = useRef(null);
 
-  const onDragEnd = (result) => {
-    const { destination, source, draggableId } = result;
+  const sensors = useSensors(
+    useSensor(PointerSensor),
+    useSensor(KeyboardSensor, {
+      coordinateGetter: sortableKeyboardCoordinates,
+    })
+  );
 
-    //If there is no destination, the user dropped the item outside of the context
-    if (!destination) {
+  const onDragStart = ({ active }) => {
+    setActiveId(active.id);
+    activeContainerRef.current = findContainer(active.id, columns);
+    clonedColumnsRef.current = columns;
+  };
+
+  const onDragCancel = () => {
+    if (clonedColumnsRef.current) {
+      setColumns(clonedColumnsRef.current);
+    }
+    setActiveId(null);
+    activeContainerRef.current = null;
+    clonedColumnsRef.current = null;
+  };
+
+  const onDragOver = ({ active, over }) => {
+    if (!over) return;
+
+    const activeId = active.id;
+    const overId = over.id;
+
+    setColumns((prevColumns) => {
+      const activeContainer = findContainer(activeId, prevColumns);
+      const overContainer = findContainer(overId, prevColumns);
+
+      if (!activeContainer || !overContainer) {
+        return prevColumns;
+      }
+
+      if (activeContainer === overContainer) {
+        return prevColumns;
+      }
+
+      const sourceItems = prevColumns[activeContainer].affs;
+      const destItems = prevColumns[overContainer].affs;
+      const activeIndex = sourceItems.indexOf(activeId);
+
+      if (activeIndex === -1) {
+        return prevColumns;
+      }
+
+      const overIndex = destItems.indexOf(overId);
+      const translated = active.rect.current?.translated;
+      const isBelowOverItem =
+        overIndex !== -1 &&
+        translated &&
+        translated.top > over.rect.top + over.rect.height;
+      const insertIndex =
+        overIndex === -1
+          ? destItems.length
+          : overIndex + (isBelowOverItem ? 1 : 0);
+
+      return {
+        ...prevColumns,
+        [activeContainer]: {
+          ...prevColumns[activeContainer],
+          affs: sourceItems.filter((item) => item !== activeId),
+        },
+        [overContainer]: {
+          ...prevColumns[overContainer],
+          affs: [
+            ...destItems.slice(0, insertIndex),
+            activeId,
+            ...destItems.slice(insertIndex),
+          ],
+        },
+      };
+    });
+  };
+
+  const onDragEnd = ({ active, over }) => {
+    if (!over) {
+      onDragCancel();
       return;
     }
 
-    //Was the item moved to the same location?
-    if (
-      destination.droppableId === source.droppableId &&
-      destination.index === source.index
-    ) {
-      return;
+    const activeId = active.id;
+    const overId = over.id;
+
+    setColumns((prevColumns) => {
+      const activeContainer = findContainer(activeId, prevColumns);
+      const overContainer = findContainer(overId, prevColumns);
+
+      if (!activeContainer || !overContainer) {
+        return prevColumns;
+      }
+
+      if (activeContainer === overContainer) {
+        const items = prevColumns[activeContainer].affs;
+        const activeIndex = items.indexOf(activeId);
+        const overIndex = items.indexOf(overId);
+        const targetIndex = overIndex === -1 ? items.length - 1 : overIndex;
+
+        if (activeIndex === -1 || activeIndex === targetIndex) {
+          return prevColumns;
+        }
+
+        return {
+          ...prevColumns,
+          [activeContainer]: {
+            ...prevColumns[activeContainer],
+            affs: arrayMove(items, activeIndex, targetIndex),
+          },
+        };
+      }
+
+      const sourceItems = prevColumns[activeContainer].affs;
+      const destItems = prevColumns[overContainer].affs;
+      const activeIndex = sourceItems.indexOf(activeId);
+
+      if (activeIndex === -1) {
+        return prevColumns;
+      }
+
+      const overIndex = destItems.indexOf(overId);
+      const translated = active.rect.current?.translated;
+      const isBelowOverItem =
+        overIndex !== -1 &&
+        translated &&
+        translated.top > over.rect.top + over.rect.height;
+      const insertIndex =
+        overIndex === -1
+          ? destItems.length
+          : overIndex + (isBelowOverItem ? 1 : 0);
+
+      return {
+        ...prevColumns,
+        [activeContainer]: {
+          ...prevColumns[activeContainer],
+          affs: sourceItems.filter((item) => item !== activeId),
+        },
+        [overContainer]: {
+          ...prevColumns[overContainer],
+          affs: [
+            ...destItems.slice(0, insertIndex),
+            activeId,
+            ...destItems.slice(insertIndex),
+          ],
+        },
+      };
+    });
+
+    const originContainer = activeContainerRef.current;
+    const overContainer = findContainer(overId, columns);
+    if (originContainer && overContainer && originContainer !== overContainer) {
+      const nextPrio = columns[overContainer]?.prio;
+      setPrios((prev) => ({
+        ...prev,
+        [activeId]: nextPrio,
+      }));
     }
 
-    // If the item was dropped into the same priority, in a new order.
-    // TODO: do we care about the order? We should update all items in
-    // a column; I don't remember if that impacts serverside selection or not.
-    if (destination.droppableId === source.droppableId) {
-      const sourceColumn = columns[source.droppableId];
-      const sourceAffs = [...sourceColumn.affs];
-      sourceAffs.splice(source.index, 1);
-      sourceAffs.splice(destination.index, 0, draggableId);
-
-      const newSourceColumn = { ...sourceColumn, affs: sourceAffs };
-      setColumns({
-        ...columns,
-        [newSourceColumn.id]: newSourceColumn,
-      });
-    } else {
-      const sourceColumn = columns[source.droppableId];
-      const targetColumn = columns[destination.droppableId];
-      const sourceAffs = [...sourceColumn.affs];
-      const targetAffs = [...targetColumn.affs];
-      sourceAffs.splice(source.index, 1);
-      targetAffs.splice(destination.index, 0, draggableId);
-
-      const newSourceColumn = { ...sourceColumn, affs: sourceAffs };
-      const newTargetColumn = { ...targetColumn, affs: targetAffs };
-      setColumns({
-        ...columns,
-        [newSourceColumn.id]: newSourceColumn,
-        [newTargetColumn.id]: newTargetColumn,
-      });
-    }
-
-    //update prios based on the location of the moved affliction.
-    const newPrios = { ...prios };
-    newPrios[draggableId] = columns[destination.droppableId].prio;
-    setPrios({ ...newPrios });
+    setActiveId(null);
+    activeContainerRef.current = null;
+    clonedColumnsRef.current = null;
   };
 
   useEffect(() => {
@@ -101,7 +234,14 @@ const AffPriorities = ({ colors, affTable, setAffTable, setPrioArrays }) => {
   }, [prios]);
 
   return (
-    <DragDropContext onDragEnd={onDragEnd}>
+    <DndContext
+      sensors={sensors}
+      collisionDetection={closestCorners}
+      onDragStart={onDragStart}
+      onDragOver={onDragOver}
+      onDragCancel={onDragCancel}
+      onDragEnd={onDragEnd}
+    >
       <div
         style={{
           height: "auto",
@@ -114,7 +254,15 @@ const AffPriorities = ({ colors, affTable, setAffTable, setPrioArrays }) => {
           <AffColumn key={col} column={columns[col]} colors={colors} />
         ))}
       </div>
-    </DragDropContext>
+      <DragOverlay>
+        {activeId ? (
+          <AffItemOverlay
+            aff={activeId}
+            color={colors[activeId.replace(/\d+$/, "")]}
+          />
+        ) : null}
+      </DragOverlay>
+    </DndContext>
   );
 };
 

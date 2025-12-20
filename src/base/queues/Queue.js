@@ -104,6 +104,7 @@ export class Queue {
     const chunkSize = 20 - output.length;
     const chunks = Math.ceil(this.cmdsToQueue.length / chunkSize);
 
+    output.push(`clearqueue ${this.type}`);
     if (chunks > 1) {
       for (let i = 0; i < chunks; i++) {
         const chunk = this.cmdsToQueue.slice(
@@ -115,9 +116,7 @@ export class Queue {
         output.push(cmdString);
 
         if (!this.serverQueue.includes(aliasId)) {
-          output.push(
-            `queue ${i > 0 ? "add" : "addclear"} ${this.type} ${aliasId}`
-          );
+          output.push(`queue add ${this.type} ${aliasId}`);
         }
         //sendInline(output);
         //output.length = 0;
@@ -128,7 +127,7 @@ export class Queue {
       output.push(cmdString);
 
       if (!this.serverQueue.includes(aliasId)) {
-        output.push(`queue addclear ${this.type} ${aliasId}`);
+        output.push(`queue add ${this.type} ${aliasId}`);
       }
     }
 

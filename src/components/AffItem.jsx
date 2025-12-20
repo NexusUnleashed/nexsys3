@@ -1,5 +1,6 @@
 import styled from "@emotion/styled";
-import { Draggable } from "react-beautiful-dnd";
+import { useSortable } from "@dnd-kit/sortable";
+import { CSS } from "@dnd-kit/utilities";
 import * as React from "react";
 
 const ListItem = styled.div`
@@ -14,21 +15,46 @@ const ListItem = styled.div`
   ${(props) => `background:${props.bg}`};
 `;
 
-const AffItem = ({ aff, index, color }) => {
+const AffItem = ({ aff, color }) => {
+  const {
+    attributes,
+    listeners,
+    setNodeRef,
+    transform,
+    transition,
+    isDragging,
+  } = useSortable({ id: aff });
+
+  const style = {
+    transform: CSS.Transform.toString(transform),
+    transition,
+    opacity: isDragging ? 0.35 : undefined,
+    cursor: isDragging ? "grabbing" : "grab",
+  };
+
   return (
-    <Draggable draggableId={aff} index={index}>
-      {(provided) => (
-        <ListItem
-          fg={color?.fg || "white"}
-          bg={color?.bg}
-          ref={provided.innerRef}
-          {...provided.draggableProps}
-          {...provided.dragHandleProps}
-        >
-          {aff.capitalize()}
-        </ListItem>
-      )}
-    </Draggable>
+    <ListItem
+      fg={color?.fg || "white"}
+      bg={color?.bg}
+      ref={setNodeRef}
+      style={style}
+      {...attributes}
+      {...listeners}
+    >
+      {aff.capitalize()}
+    </ListItem>
+  );
+};
+
+export const AffItemOverlay = ({ aff, color }) => {
+  return (
+    <ListItem
+      fg={color?.fg || "white"}
+      bg={color?.bg}
+      style={{ cursor: "grabbing" }}
+    >
+      {aff.capitalize()}
+    </ListItem>
   );
 };
 

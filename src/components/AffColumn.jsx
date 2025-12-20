@@ -1,5 +1,6 @@
 import styled from "@emotion/styled";
-import { Droppable } from "react-beautiful-dnd";
+import { useDroppable } from "@dnd-kit/core";
+import { SortableContext, verticalListSortingStrategy } from "@dnd-kit/sortable";
 import * as React from "react";
 import AffItem from "./AffItem";
 
@@ -23,24 +24,25 @@ const Container = styled.div`
 `;
 
 const AffColumn = ({ column, colors }) => {
+  const { setNodeRef } = useDroppable({ id: column.id });
+
   return (
     <Container>
       <Title>{column.title}</Title>
-      <Droppable droppableId={column.id}>
-        {(provided) => (
-          <AffList ref={provided.innerRef} {...provided.droppableProps}>
-            {column.affs.map((aff, i) => (
-              <AffItem
-                key={aff}
-                aff={aff}
-                index={i}
-                color={colors[aff.replace(/\d+$/, "")]}
-              />
-            ))}
-            {provided.placeholder}
-          </AffList>
-        )}
-      </Droppable>
+      <AffList ref={setNodeRef}>
+        <SortableContext
+          items={column.affs}
+          strategy={verticalListSortingStrategy}
+        >
+          {column.affs.map((aff) => (
+            <AffItem
+              key={aff}
+              aff={aff}
+              color={colors[aff.replace(/\d+$/, "")]}
+            />
+          ))}
+        </SortableContext>
+      </AffList>
     </Container>
   );
 };
