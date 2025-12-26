@@ -183,12 +183,18 @@ export function parry(arg) {
 
   if (sys.isClass(defs["guarding " + limb].skills)) {
     defs["guarding " + limb].set_default_prio(25);
+    // CUSTOM
+    nexSys.freeQueue.prepend("guard " + limb);
   } else {
     defs["parrying " + limb].set_default_prio(25);
     if (sys.isClass("Dragon")) {
       defs["parrying " + limb].set_command("clawparry " + limb);
+      // CUSTOM
+      nexSys.freeQueue.prepend("clawparry " + limb);
     } else {
       defs["parrying " + limb].set_command("parry " + limb);
+      // CUSTOM
+      nexSys.freeQueue.prepend("parry " + limb);
     }
   }
   eventStream.raiseEvent("ForcePopulateEvent");
