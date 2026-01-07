@@ -16,6 +16,73 @@ export const createCore = ({ config, tables, rules, time }) => {
 
   const getState = store.getState;
 
+  const applyRulePatch = (patch, state) => {
+    let changed = false;
+    const statusPatch = patch?.status || {};
+    Object.keys(statusPatch).forEach((key) => {
+      const value = statusPatch[key];
+      if (typeof value === "undefined") {
+        return;
+      }
+      if (state.system.state[key] !== value) {
+        store.dispatch({
+          type: EVENT_TYPES.SYSTEM_STATUS_SET,
+          payload: { status: key, arg: value },
+        });
+        changed = true;
+      }
+    });
+
+    const affPatch = patch?.affs || {};
+    Object.keys(affPatch).forEach((id) => {
+      const prio = affPatch[id];
+      const aff = state.affs[id];
+      if (!aff || typeof prio !== "number") {
+        return;
+      }
+      if (aff.prio !== prio) {
+        store.dispatch({
+          type: EVENT_TYPES.AFF_PRIO_SET,
+          payload: { id, prio },
+        });
+        changed = true;
+      }
+    });
+
+    const defPatch = patch?.defs || {};
+    Object.keys(defPatch).forEach((id) => {
+      const entry = defPatch[id];
+      const def = state.defs[id];
+      const prio = typeof entry === "object" ? entry.prio : entry;
+      if (!def || typeof prio !== "number") {
+        return;
+      }
+      const preempt =
+        typeof entry === "object" ? entry.preempt : undefined;
+      const changedPrio = def.prio !== prio;
+      const changedPreempt =
+        typeof preempt === "boolean" && def.preempt !== preempt;
+      if (!changedPrio && !changedPreempt) {
+        return;
+      }
+      const payload = { id, prio };
+      if (typeof preempt === "boolean") {
+        payload.preempt = preempt;
+      }
+      store.dispatch({ type: EVENT_TYPES.DEF_PRIO_SET, payload });
+      changed = true;
+    });
+
+    return changed;
+  };
+
+  const applyRules = (reason) => {
+    const state = getState();
+    const patch = ruleEngine.evaluate(state);
+    const changed = applyRulePatch(patch, state);
+    return { patch, changed, reason };
+  };
+
   const requestServersideOutput = (reason) => {
     const state = getState();
     if (!state.runtime.serversidePendingOutput && reason !== "force") {
@@ -24,8 +91,7 @@ export const createCore = ({ config, tables, rules, time }) => {
     if (state.system.state.paused) {
       return { raw: [], commands: [] };
     }
-    const patch = ruleEngine.evaluate(state);
-    const serverside = serversideEngine.compute(state, patch);
+    const serverside = serversideEngine.compute(state);
     const plan = outputPlanner.planServerside(state, serverside);
     if (plan.raw.length) {
       store.dispatch({
@@ -140,6 +206,15 @@ export const createCore = ({ config, tables, rules, time }) => {
     dispatch: store.dispatch,
     getState,
     subscribe: store.subscribe,
+    applyRules,
+    addRule: ruleEngine.addRule,
+    removeRule: ruleEngine.removeRule,
+    hasRule: ruleEngine.hasRule,
+    setRules: ruleEngine.setRules,
+    clearRules: ruleEngine.clearRules,
+    getRules: ruleEngine.getRules,
+    enableRule: ruleEngine.enableRule,
+    disableRule: ruleEngine.disableRule,
     requestServersideOutput,
     requestPrecacheOutput,
     requestNexSysOutput,

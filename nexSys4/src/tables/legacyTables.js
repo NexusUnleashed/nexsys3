@@ -1,7 +1,7 @@
 import { affTable } from "../../../src/base/affs/affTable";
 import { defTable, defPrios } from "../../../src/base/defs/defTable";
 import { balanceTable } from "../../../src/base/balances/balanceTable";
-import { cacheTable } from "../../../src/base/cache/cacheTable";
+import { cacheTable } from "./cacheTables";
 import { queueTable } from "./queueTable";
 
 const normalizeCaches = (table) => {

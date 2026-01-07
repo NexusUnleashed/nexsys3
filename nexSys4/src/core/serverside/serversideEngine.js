@@ -70,7 +70,7 @@ export const createServersideEngine = (config) => {
     return desired;
   };
 
-  const compute = (state, patch) => {
+  const compute = (state, patch = {}) => {
     const snapshot = state.serverside.snapshot;
     const desired = buildDesired(state, patch);
     const statusChanges = [];

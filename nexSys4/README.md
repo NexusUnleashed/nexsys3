@@ -23,6 +23,7 @@ Usage (in Nexus)
 Notes
 - `legacyTables` currently sources tables from nexSys3 for parity. Replace with static nexSys4 tables as you fully decouple.
 - `defaultRules` includes a small starter set of priority swap rules; extend for class-specific logic.
+- Rules can be managed at runtime via `nexSys4.rules.add/remove/enable/disable/list` (and root helpers like `nexSys4.addRule()`); use this for class- or target-specific priority swaps.
 - Output streams are split into serverside (curing/prios/status), precache, and nexSys commands. Pause blocks all streams; slow mode only blocks precache and nexSys streams.
 - Queues are immediate and independent of output streams, but still respect pause/slow mode. When paused or slowed, queued items are cached and flushed on resume.
 - The Nexus adapter includes an event bridge that emits legacy eventStream events as nexSys4 state changes (aff/def/bal got/lost, count changes, priorities, vitals/status updates, pause/slow toggles).
@@ -30,3 +31,4 @@ Notes
 - Default priorities are stored on aff/def entries as `defaultPrio`. Helpers like `resetAffPrio`/`resetDefPrio` and `setAffDefaultPrio`/`setDefDefaultPrio` manage them.
 - Output evaluation is prompt-gated, with a 150ms debounce fallback (`outputDebounceMs`) to send pending output when no prompt arrives.
 - Echo output is handled by the echo adapter and controlled via `system.settings.echo*` flags.
+- TODO: Explore GMCP batching in the adapter. Proposal is to buffer safe patch/list tags during a block (Char.Status/Vitals, Aff/Def Lists), batch Add/Remove deltas into a single dispatch, and flush on PromptEvent (or debounce). Avoid subscribing to high-volume tags not used by nexSys4.

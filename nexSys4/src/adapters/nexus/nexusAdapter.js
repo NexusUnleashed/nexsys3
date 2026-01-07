@@ -1,6 +1,7 @@
 import { EVENT_TYPES } from "../../core/events/eventTypes";
 import { chunkCommands } from "../../core/planner/chunking";
 import { createEventBridge } from "./eventBridge";
+import { herb_name_to_herb } from "../../tables/cacheTables";
 
 const parseAffName = (raw) => {
   if (!raw) {
@@ -36,6 +37,53 @@ const parseDefList = (list) => {
   return list
     .map((entry) => normalizeDefName(entry.name || entry))
     .filter((id) => id);
+};
+
+const parseCacheItemName = (rawName) => {
+  const name = String(rawName || "").trim();
+  if (!name) {
+    return { name: "", amountFromName: null };
+  }
+  const match = name.match(/^(\d+)\s+(.+)/);
+  if (match) {
+    return { name: match[2].trim(), amountFromName: parseInt(match[1], 10) };
+  }
+  return { name, amountFromName: null };
+};
+
+const parseCacheItemAmount = (item, amountFromName) => {
+  const amount =
+    item?.amount ?? item?.qty ?? item?.count ?? item?.stack ?? item?.quantity;
+  const parsed = parseInt(amount, 10);
+  if (Number.isFinite(parsed) && parsed > 0) {
+    return parsed;
+  }
+  if (typeof amountFromName === "number" && amountFromName > 0) {
+    return amountFromName;
+  }
+  return 1;
+};
+
+const parseCacheItem = (item, location) => {
+  if (location && location !== "inv") {
+    return null;
+  }
+  if (!item || typeof item !== "object") {
+    return null;
+  }
+  if (item.icon !== "notes-medical") {
+    return null;
+  }
+  const { name, amountFromName } = parseCacheItemName(item.name);
+  if (!name) {
+    return null;
+  }
+  const id = herb_name_to_herb[name];
+  if (!id) {
+    return null;
+  }
+  const amount = parseCacheItemAmount(item, amountFromName);
+  return { id, amount };
 };
 
 export const createNexusAdapter = ({ core, config, eventStream, nexusclient }) => {
@@ -160,6 +208,9 @@ export const createNexusAdapter = ({ core, config, eventStream, nexusclient }) =
     const triggerPrecache = (reason) => core.requestPrecacheOutput(reason);
     const triggerNexSys = (reason) => core.requestNexSysOutput(reason);
     const flushOutput = (reason) => {
+      if (reason === "prompt" || reason === "force") {
+        core.applyRules(reason);
+      }
       const serversidePlan = triggerServerside(reason);
       const precachePlan = triggerPrecache(reason);
       const nexsysPlan = triggerNexSys(reason);
@@ -298,6 +349,75 @@ export const createNexusAdapter = ({ core, config, eventStream, nexusclient }) =
       if (id) {
         core.dispatch({ type: EVENT_TYPES.DEF_LOST, payload: id });
       }
+    });
+
+    const applyCacheCountDelta = (id, delta) => {
+      if (!id || delta === 0) {
+        return;
+      }
+      if (delta > 0) {
+        core.dispatch({
+          type: EVENT_TYPES.CACHE_COUNT_ADD,
+          payload: { id, value: delta },
+        });
+      } else {
+        core.dispatch({
+          type: EVENT_TYPES.CACHE_COUNT_SUB,
+          payload: { id, value: Math.abs(delta) },
+        });
+      }
+    };
+
+    on("Char.Items.Add", (payload) => {
+      const entry = parseCacheItem(payload?.item, payload?.location);
+      if (!entry) {
+        return;
+      }
+      core.dispatch({
+        type: EVENT_TYPES.CACHE_COUNT_ADD,
+        payload: { id: entry.id, value: entry.amount },
+      });
+    });
+
+    on("Char.Items.Remove", (payload) => {
+      const entry = parseCacheItem(payload?.item, payload?.location);
+      if (!entry) {
+        return;
+      }
+      core.dispatch({
+        type: EVENT_TYPES.CACHE_COUNT_SUB,
+        payload: { id: entry.id, value: entry.amount },
+      });
+    });
+
+    on("Char.Items.Update", (payload) => {
+      const entry = parseCacheItem(payload?.item, payload?.location);
+      if (!entry) {
+        return;
+      }
+      const current = core.getState().caches[entry.id]?.count ?? 0;
+      const delta = entry.amount - current;
+      applyCacheCountDelta(entry.id, delta);
+    });
+
+    on("Char.Items.List", (payload) => {
+      if (payload?.location !== "inv" || !Array.isArray(payload.items)) {
+        return;
+      }
+      const counts = {};
+      payload.items.forEach((item) => {
+        const entry = parseCacheItem(item, payload.location);
+        if (!entry) {
+          return;
+        }
+        counts[entry.id] = (counts[entry.id] || 0) + entry.amount;
+      });
+      const caches = core.getState().caches;
+      Object.keys(caches).forEach((id) => {
+        const current = caches[id]?.count ?? 0;
+        const next = counts[id] || 0;
+        applyCacheCountDelta(id, next - current);
+      });
     });
 
     on("IRE.Rift.Change", (payload) => {

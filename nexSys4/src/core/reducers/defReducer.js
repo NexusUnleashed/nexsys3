@@ -49,16 +49,20 @@ export const defReducer = (defs, event) => {
       return { ...defs, [def.id]: { ...def, have: false } };
     }
     case EVENT_TYPES.DEF_PRIO_SET: {
-      const { id, prio, defaultPrio } = event.payload || {};
+      const { id, prio, defaultPrio, preempt } = event.payload || {};
       const def = defs[id];
       if (!def || typeof prio !== "number") {
         return defs;
       }
       const nextDefault =
         typeof defaultPrio === "number" ? defaultPrio : def.defaultPrio;
+      const nextDef = { ...def, prio, defaultPrio: nextDefault };
+      if (typeof preempt === "boolean") {
+        nextDef.preempt = preempt;
+      }
       return {
         ...defs,
-        [id]: { ...def, prio, defaultPrio: nextDefault },
+        [id]: nextDef,
       };
     }
     default:

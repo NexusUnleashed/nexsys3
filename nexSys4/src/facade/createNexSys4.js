@@ -9,7 +9,7 @@ import { EVENT_TYPES } from "../core/events/eventTypes";
 export const createNexSys4 = (options = {}) => {
   const config = { ...defaultConfig, ...(options.config || {}) };
   const tables = options.tables || legacyTables;
-  const rules = options.rules || defaultRules;
+  const initialRules = options.rules || defaultRules;
   const evt = options.eventStream || (typeof globalThis !== "undefined"
     ? globalThis.eventStream
     : null);
@@ -17,7 +17,7 @@ export const createNexSys4 = (options = {}) => {
   const core = createCore({
     config,
     tables,
-    rules,
+    rules: initialRules,
     time: options.time,
   });
 
@@ -274,12 +274,30 @@ export const createNexSys4 = (options = {}) => {
     emit: (name, payload) => emitEvent(name, payload),
   };
 
+  const ruleApi = {
+    add: (rule, options = {}) => {
+      const id = core.addRule(rule);
+      if (options.apply) {
+        core.applyRules("rule-add");
+      }
+      return id;
+    },
+    remove: (id) => core.removeRule(id),
+    has: (id) => core.hasRule(id),
+    list: () => core.getRules(),
+    setAll: (rules) => core.setRules(rules),
+    clear: () => core.clearRules(),
+    enable: (id) => core.enableRule(id),
+    disable: (id) => core.disableRule(id),
+    apply: () => core.applyRules("rules-apply"),
+  };
+
   return {
     core,
     adapter,
     config,
     tables,
-    rules,
+    rules: ruleApi,
     start: () => {
       adapter.start();
       echoAdapter.start();
@@ -295,6 +313,10 @@ export const createNexSys4 = (options = {}) => {
     requestPrecacheOutput: core.requestPrecacheOutput,
     requestNexSysOutput: core.requestNexSysOutput,
     queue: queueApi,
+    addRule: ruleApi.add,
+    removeRule: ruleApi.remove,
+    listRules: ruleApi.list,
+    applyRules: ruleApi.apply,
     ...api,
     api,
     echoAdapter,
