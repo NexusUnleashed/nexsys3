@@ -13,9 +13,9 @@ export default defineConfig({
     copyPublicDir: false,
     cssCodeSplit: false, // single CSS file
     lib: {
-      entry: "src/bundle.js", // same entry
-      name: "nexSys", // global var in IIFE build
-      fileName: () => "nexsys.min.js",
+      entry: "nexSys4/src/index.js", // same entry
+      name: "nexSys4", // global var in IIFE build
+      fileName: () => "nexsys4.min.js",
       formats: ["iife"], // one self‑executing <script>
     },
 
