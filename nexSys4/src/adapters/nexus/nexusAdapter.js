@@ -86,13 +86,40 @@ const parseCacheItem = (item, location) => {
   return { id, amount };
 };
 
-export const createNexusAdapter = ({ core, config, eventStream, nexusclient }) => {
+const parseBooleanFlag = (value) => {
+  if (typeof value === "boolean") {
+    return value;
+  }
+  if (typeof value === "number") {
+    return value !== 0;
+  }
+  const normalized = String(value ?? "").trim().toLowerCase();
+  if (!normalized) {
+    return null;
+  }
+  if (["1", "yes", "true", "on"].includes(normalized)) {
+    return true;
+  }
+  if (["0", "no", "false", "off"].includes(normalized)) {
+    return false;
+  }
+  return null;
+};
+
+export const createNexusAdapter = ({
+  core,
+  config,
+  eventStream,
+  nexusclient,
+  onSettingsUpdate,
+}) => {
   const evt = eventStream || globalThis.eventStream;
   const client = nexusclient || globalThis.nexusclient;
   const handlers = [];
   let bridgeStop = null;
   let pendingTimerId = null;
   let pendingUnsubscribe = null;
+  let suppressAffCountEvents = false;
 
   const isBridgeEvent = (payload) => payload?.__source === "nexSys4";
 
@@ -173,7 +200,13 @@ export const createNexusAdapter = ({ core, config, eventStream, nexusclient }) =
       return;
     }
     const state = core.getState();
-    if (state.system.state.paused || state.system.state.slowMode) {
+    const allowQueueWhilePaused =
+      state.system.settings.queueWhilePaused ??
+      state.system.state.queueWhilePaused;
+    if (state.system.state.paused && !allowQueueWhilePaused) {
+      return;
+    }
+    if (state.system.state.slowMode) {
       return;
     }
     if (plan.queuesToClear?.length) {
@@ -186,6 +219,97 @@ export const createNexusAdapter = ({ core, config, eventStream, nexusclient }) =
     }
     sendImmediate(plan.commands);
     core.dispatch({ type: EVENT_TYPES.QUEUE_SENT, payload: { id: plan.queueId } });
+  };
+
+  const updateBalState = (id, have) => {
+    const bal = core.getState().bals[id];
+    if (!bal || bal.have === have) {
+      return;
+    }
+    core.dispatch({
+      type: have ? EVENT_TYPES.BAL_GOT : EVENT_TYPES.BAL_LOST,
+      payload: id,
+    });
+  };
+
+  const updateAffState = (id, have) => {
+    const aff = core.getState().affs[id];
+    if (!aff || aff.have === have) {
+      return;
+    }
+    core.dispatch({
+      type: have ? EVENT_TYPES.AFF_GOT : EVENT_TYPES.AFF_LOST,
+      payload: id,
+    });
+  };
+
+  const updateDefState = (id, have) => {
+    const def = core.getState().defs[id];
+    if (!def || def.have === have) {
+      return;
+    }
+    core.dispatch({
+      type: have ? EVENT_TYPES.DEF_GOT : EVENT_TYPES.DEF_LOST,
+      payload: id,
+    });
+  };
+
+  const applyVitalsBalances = (payload) => {
+    const balanceFlag = parseBooleanFlag(payload?.bal ?? payload?.balance);
+    if (balanceFlag !== null) {
+      updateBalState("balance", balanceFlag);
+    }
+    const eqFlag = parseBooleanFlag(payload?.eq ?? payload?.equilibrium);
+    if (eqFlag !== null) {
+      updateBalState("equilibrium", eqFlag);
+    }
+    if (!Array.isArray(payload?.charstats)) {
+      return;
+    }
+    payload.charstats.forEach((entry) => {
+      if (typeof entry !== "string") {
+        return;
+      }
+      const parts = entry.split(":");
+      if (parts.length < 2) {
+        return;
+      }
+      const name = parts[0].trim().toLowerCase();
+      if (!name) {
+        return;
+      }
+      const value = parts.slice(1).join(":").trim();
+      const flag = parseBooleanFlag(value);
+      if (flag === null) {
+        return;
+      }
+      updateBalState(name, flag);
+    });
+  };
+
+  const registerLegacyStateEvents = () => {
+    const state = core.getState();
+    Object.keys(state.affs).forEach((id) => {
+      on(`${id}GotAffEvent`, () => updateAffState(id, true));
+      on(`${id}LostAffEvent`, () => updateAffState(id, false));
+    });
+    Object.keys(state.defs).forEach((id) => {
+      on(`${id}GotDefEvent`, () => updateDefState(id, true));
+      on(`${id}LostDefEvent`, () => updateDefState(id, false));
+    });
+    Object.keys(state.bals).forEach((id) => {
+      on(`${id}GotBalEvent`, () => updateBalState(id, true));
+      on(`${id}LostBalEvent`, () => updateBalState(id, false));
+    });
+  };
+
+  const withSuppressedAffCountEvents = (fn) => {
+    suppressAffCountEvents = true;
+    try {
+      return fn();
+    } finally {
+      suppressAffCountEvents = false;
+    }
   };
 
   const start = () => {
@@ -290,31 +414,36 @@ export const createNexusAdapter = ({ core, config, eventStream, nexusclient }) =
       flushOutput("force");
     });
 
-    on("Char.Vitals", (payload) =>
-      core.dispatch({ type: EVENT_TYPES.CHAR_VITALS, payload })
-    );
+    on("Char.Vitals", (payload) => {
+      core.dispatch({ type: EVENT_TYPES.CHAR_VITALS, payload });
+      applyVitalsBalances(payload);
+    });
     on("Char.Status", (payload) =>
       core.dispatch({ type: EVENT_TYPES.CHAR_STATUS, payload })
     );
 
     on("Char.Afflictions.List", (payload) =>
-      core.dispatch({
-        type: EVENT_TYPES.AFF_LIST,
-        payload: parseAffList(payload),
-      })
+      withSuppressedAffCountEvents(() =>
+        core.dispatch({
+          type: EVENT_TYPES.AFF_LIST,
+          payload: parseAffList(payload),
+        })
+      )
     );
     on("Char.Afflictions.Add", (payload) => {
       const { id, count } = parseAffName(payload.name || payload);
       if (!id) {
         return;
       }
-      core.dispatch({ type: EVENT_TYPES.AFF_GOT, payload: id });
-      if (typeof count === "number") {
-        core.dispatch({
-          type: EVENT_TYPES.AFF_COUNT_SET,
-          payload: { id, value: count },
-        });
-      }
+      withSuppressedAffCountEvents(() => {
+        core.dispatch({ type: EVENT_TYPES.AFF_GOT, payload: id });
+        if (typeof count === "number") {
+          core.dispatch({
+            type: EVENT_TYPES.AFF_COUNT_SET,
+            payload: { id, value: count },
+          });
+        }
+      });
     });
     on("Char.Afflictions.Remove", (payload) => {
       const raw = Array.isArray(payload) ? payload[0] : payload;
@@ -322,13 +451,15 @@ export const createNexusAdapter = ({ core, config, eventStream, nexusclient }) =
       if (!id) {
         return;
       }
-      core.dispatch({ type: EVENT_TYPES.AFF_LOST, payload: id });
-      if (typeof count === "number") {
-        core.dispatch({
-          type: EVENT_TYPES.AFF_COUNT_SUB,
-          payload: { id, value: count },
-        });
-      }
+      withSuppressedAffCountEvents(() => {
+        core.dispatch({ type: EVENT_TYPES.AFF_LOST, payload: id });
+        if (typeof count === "number") {
+          core.dispatch({
+            type: EVENT_TYPES.AFF_COUNT_SUB,
+            payload: { id, value: count },
+          });
+        }
+      });
     });
 
     on("Char.Defences.List", (payload) =>
@@ -571,6 +702,23 @@ export const createNexusAdapter = ({ core, config, eventStream, nexusclient }) =
       flushOutput("force");
     });
 
+    on("burningAffCountSubtractEvent", (payload) => {
+      if (suppressAffCountEvents) {
+        return;
+      }
+      const value =
+        typeof payload === "number" ? payload : parseInt(payload, 10);
+      if (!Number.isFinite(value) || value <= 0) {
+        return;
+      }
+      withSuppressedAffCountEvents(() => {
+        core.dispatch({
+          type: EVENT_TYPES.AFF_COUNT_SUB,
+          payload: { id: "burning", value },
+        });
+      });
+    });
+
     Object.values(core.getState().queues).forEach((queue) => {
       const eventName = `${queue.name}QueueFired`;
       on(eventName, () => {
@@ -586,7 +734,15 @@ export const createNexusAdapter = ({ core, config, eventStream, nexusclient }) =
         type: EVENT_TYPES.SYSTEM_SETTINGS_UPDATE,
         payload: { sep: payload },
       });
+      if (payload) {
+        config.commandSeparator = payload;
+      }
+      if (typeof onSettingsUpdate === "function") {
+        onSettingsUpdate({ sep: payload });
+      }
     });
+
+    registerLegacyStateEvents();
   };
 
   const stop = () => {

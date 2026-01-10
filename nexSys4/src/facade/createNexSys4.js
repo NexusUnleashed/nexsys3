@@ -7,7 +7,67 @@ import { legacyTables } from "../tables/legacyTables";
 import { EVENT_TYPES } from "../core/events/eventTypes";
 
 export const createNexSys4 = (options = {}) => {
+  const client =
+    options.nexusclient ||
+    (typeof globalThis !== "undefined" ? globalThis.nexusclient : null);
+
+  const loadStoredSettings = () => {
+    if (!client?.variables) {
+      return null;
+    }
+    const vars = client.variables();
+    if (!vars?.get) {
+      return null;
+    }
+    let stored = vars.get("nexSysSettings");
+    if (!stored || typeof stored !== "object") {
+      stored = {};
+      if (vars.set) {
+        vars.set("nexSysSettings", stored);
+      }
+    }
+    return stored;
+  };
+
+  const persistSettings = (patch) => {
+    if (!patch || typeof patch !== "object") {
+      return;
+    }
+    if (!client?.variables) {
+      return;
+    }
+    const vars = client.variables();
+    if (!vars?.get || !vars?.set) {
+      return;
+    }
+    const stored = loadStoredSettings() || {};
+    stored.systemSettings = { ...(stored.systemSettings || {}), ...patch };
+    if (patch.sep) {
+      stored.commandSeparator = patch.sep;
+    }
+    vars.set("nexSysSettings", stored);
+  };
+
+  const storedSettings = loadStoredSettings();
+  const storedSystemSettings =
+    storedSettings?.systemSettings && typeof storedSettings.systemSettings === "object"
+      ? storedSettings.systemSettings
+      : {};
+
   const config = { ...defaultConfig, ...(options.config || {}) };
+  const storedSep =
+    storedSystemSettings.sep ?? storedSettings?.commandSeparator;
+  if (storedSep) {
+    config.commandSeparator = storedSep;
+  }
+  const systemDefaults = {
+    ...config.systemDefaults,
+    ...storedSystemSettings,
+  };
+  if ("sep" in systemDefaults) {
+    delete systemDefaults.sep;
+  }
+  config.systemDefaults = systemDefaults;
   const tables = options.tables || legacyTables;
   const initialRules = options.rules || defaultRules;
   const evt = options.eventStream || (typeof globalThis !== "undefined"
@@ -26,6 +86,7 @@ export const createNexSys4 = (options = {}) => {
     config,
     eventStream: options.eventStream,
     nexusclient: options.nexusclient,
+    onSettingsUpdate: persistSettings,
   });
   const echoAdapter = createEchoAdapter({
     core,
@@ -34,8 +95,25 @@ export const createNexSys4 = (options = {}) => {
     displayNotice: options.displayNotice,
   });
 
-  const updateSettings = (patch) =>
+  const updateSettings = (patch = {}) => {
+    if (!patch || typeof patch !== "object") {
+      return;
+    }
     core.dispatch({ type: EVENT_TYPES.SYSTEM_SETTINGS_UPDATE, payload: patch });
+    const state = core.getState();
+    Object.keys(patch).forEach((key) => {
+      if (Object.prototype.hasOwnProperty.call(state.system.state, key)) {
+        core.dispatch({
+          type: EVENT_TYPES.SYSTEM_STATUS_SET,
+          payload: { status: key, arg: patch[key] },
+        });
+      }
+    });
+    if (patch.sep) {
+      config.commandSeparator = patch.sep;
+    }
+    persistSettings(patch);
+  };
 
   const normalizeCommands = (commands) => {
     const currentSep =
@@ -56,7 +134,16 @@ export const createNexSys4 = (options = {}) => {
 
   const canSendQueue = () => {
     const state = core.getState();
-    return !state.system.state.paused && !state.system.state.slowMode;
+    const allowQueueWhilePaused =
+      state.system.settings.queueWhilePaused ??
+      state.system.state.queueWhilePaused;
+    if (state.system.state.slowMode) {
+      return false;
+    }
+    if (state.system.state.paused && !allowQueueWhilePaused) {
+      return false;
+    }
+    return true;
   };
 
   const sendQueuePlan = (plan) => {

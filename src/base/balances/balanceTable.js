@@ -79,6 +79,9 @@ const balances = {
   tremolo: {
     length: 6.0,
   },
+  alleviate: {
+    length: 10.0,
+  },
   homunculus: {
     length: 12.0, // CUSTOM Alchemist
   },
