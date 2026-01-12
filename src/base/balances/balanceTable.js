@@ -124,6 +124,9 @@ const balances = {
   anathema: {
     length: 5.0, // CUSTOM Unnamable
   },
+  prayer: {
+    length: 8.0, // CUSTOM Priest
+  },
   systemOutput: {
     length: 1.0,
   },
