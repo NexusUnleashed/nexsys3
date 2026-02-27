@@ -1,0 +1,137 @@
+Achaea's combat system offers an unprecedented level of depth, providing multiple layers of afflictions and ailments. While this makes it enjoyable, it can also make it difficult to get started in.
+To aide in this endeavour, we provide a server-side system to aide in the curing of these ailments. This should allow all adventurers to partake in player-vs-player combat at all levels.
+The following commands are available with the system:
+CURING
+   - Brings up a list of commands available in the system.
+CURING STATUS
+   - Shows the status of your curing.
+CURING ON|OFF
+   - Enables and disables the core of the system.
+CURING AFFLICTIONS ON|OFF
+   - Enables and disables affliction curing.
+CURING DEFENCES ON|OFF
+   - Enables or disables defence upkeep.
+CURING SIPPING ON|OFF
+   - Enables or disables health/mana sipping.
+CURING TRANSMUTATION ON|OFF
+   - Enables or disables the use of Transmutation cures.
+CURING SIPHEALTH|SIPMANA <percent>
+   - What percentage of maximum health/mana to sip health/mana at.
+CURING MOSSHEALTH|MOSSMANA <percent>
+   - What percentage of maximum health/mana to eat moss/potash at.
+CURING PRIORITY HEALTH|MANA
+   - Prioritise health or mana regeneration.
+CURING FOCUS ON|OFF
+   - Toggle the use of the FOCUS ability in survival.
+CURING FOCUS FIRST|SECOND
+   - Toggle whether to use the focus ability before herb cures or after.
+CURING TREE ON|OFF [CUSTOM]
+   - Toggle the use of the TREE tattoo to cure afflictions.
+CURING MOUNT <mount>
+   - Set a mount for serverside curing to use.
+CURING USEVAULT ON|OFF
+   - Toggle usage of the vault ability.
+CURING USECLOT ON|OFF
+   - Toggle the use of the CLOT ability to mitigate bleeding.
+CURING CLOTAT <amount>
+   - Configure how much bleeding is needed before the system will CLOT.
+CURING TREE SCENARIO
+   - Customise when your TREE tattoo will be used.
+CURING FALLBACK ON|OFF
+   - Allow curing to use alternate cures when you run out of your primary.
+CURING KAIDOTRANSMUTE
+   - Permit curing to use transmute automatically (for Kaido havers.)
+   - This will not transmute if you know you have recklessness.
+Advanced options
+----------------
+While the default curing priority should be suitable in most cases, we've
+provided a way to adjust the order in which you cure afflictions and keep
+defences active.
+CURING PRIORITY LIST
+   - List the affliction cure priority.
+CURING PRIORITY <aff1> <priority1> <aff2> <priority 2>
+   - Move an affliction or list of affliction's cure priority.
+CURING PRIORITY INSERT <aff> <priority> [all]
+   - Inserts a priority.
+CURING PRIORITY RESET
+   - Reset the cure priority to the default.
+For more information on the various afflictions, please be sure to look at
+AFFLICTION LIST.
+CURING PRIORITY DEFENCE LIST
+   - List the defence upkeep priority.
+CURING PRIORITY DEFENCE <name> <1-25>
+   - Move an defence's upkeep priority.
+CURING PRIORITY DEFENCE <name> RESET
+   - Reset a defence's upkeep priority.
+No default priority for defence upkeep is provided. For more information on the various defences, please be sure to look at DEFENCE LIST.
+CURINGSETs allow multiple pre-configured curing and defence priority lists.
+These can be changed between quickly and easily without having to manually reconfigure the priorities.
+CURINGSET NEW <name>
+   - Create a new curingset.
+CURINGSET LIST
+   - List curingsets.
+CURINGSET SWITCH <name>
+   - Switch to a curingset.
+CURINGSET DELETE <name>
+   - Delete a curingset.
+CURINGSET RENAME <oldname> <newname>
+   - Rename a curingset.
+CURINGSET EXPAND
+   - Purchase an additional curing set. Costs 25 credits and is non-refundable.
+CURINGSET CLONE <from>
+   - Clone a set into your current setup
+Custom conditions for TREE tattoo usage can be setup with the CURING TREE SCENARIO command:
+CURING TREE SCENARIO NEW <name>
+   - Create a new Tree Scenario
+CURING TREE SCENARIO DELETE <name>
+   - Delete a custom Tree Scenario
+CURING TREE SCENARIO LIST
+   - List your custom Tree Scenarios
+CURING TREE SCENARIO SHOW <name>
+   - Show the details of a custom Tree Scenario
+CURING TREE SCENARIO ENABLE <name>
+   - Enable a custom Tree Scenario
+CURING TREE SCENARIO DISABLE <name>
+   - Disable a custom Tree Scenario
+CURING TREE SCENARIO AFFLICTIONS <name> <aff1> [aff2] [...]
+   - Add afflictions you wish to apply to the Scenario.
+CURING TREE SCENARIO NOBAL <name> <SALVE|HERB|SIP|FOCUS|SMOKE>
+   - Set TREE tattoo to be used if off a certain curing balance.
+CURING TREE SCENARIO AFFCOUNT <scenario> <count>
+   - Set TREE tattoo to be used when you have a specific number of afflictions or more.
+      Use CURING TREE ON CUSTOM to enable any custom scenarios.
+Manual manipulation
+-------------------
+Situations can change in the blink of an eye, and there may be times when you
+wish to force a command to take precedence over any other curing priority. To
+do this, simply add it to the queue, and it will be done before any other
+scheduled commands.
+CURING QUEUE ADD <cure>
+   - Add a manual cure into the queue.
+CURING QUEUE LIST
+   - List what is in your queue.
+CURING QUEUE INSERT <1-20> <cure>
+   - Insert a manual cure in a specific place.
+CURING QUEUE REMOVE <cure>
+   - Remove a cure from the queue.
+CURING QUEUE RESET
+   - Reset the queue.
+CURING PREDICT <affliction>
+   - Tell the system that you think you have an affliction.
+CURING UNPREDICT <affliction>
+   - Remove a predicted affliction.
+CURING PREDICTIONS
+   - List predicted afflictions.
+CURING BATCH ON|OFF
+   - Attempt to send multiple cures at once where possible.
+CURING HEALTHAFFSABOVE <value>
+   - Set the health threshold above which you will apply health elixir for curing.
+CURING PRIOAFF <affliction>
+   - Temporarily prioritise an affliction until said affliction is cured.
+CURING PRIOAFF NONE
+   - Remove a temporarily prioritised affliction.
+About the system and latency
+----------------------------
+The system is designed to cure your afflictions at a rate that simulates average latency, so the time it would have normally taken for Achaea to send the message to your computer and back to the game. This means:
+Most people will see no noticeable difference in curing efficiency using server-side or client-side... it's a matter of preference, much like which internet browser to use.
+For people with very high latency (if you are on dial-up internet, for instance), using Achaea's server-side curing may be much faster than using a third-party client.
